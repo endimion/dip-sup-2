@@ -9,8 +9,15 @@
   "author": "Nikos Triantafyllou",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.17.2",
+    "connect-timeout": "^1.9.0",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.3",
+    "express-session": "^1.15.4",
     "fabric-ca-client": ">=1.0.0-rc1 <1.0.0-rc1.10",
     "fabric-client": ">=1.0.0-rc1 <1.0.0-rc1.10",
-    "log4js": "^2.0.1"
+    "log4js": "^2.0.1",
+    "morgan": "^1.8.2",
+    "session-file-store": "^1.1.1"
   }
 }
