@@ -1,0 +1,7 @@
+# NPM Dependencies
+node_modules
+
+studentApp/node_modules
+univApp/node_modules
+studentApp/artifacts/channel
+univApp/artifacts/channel
