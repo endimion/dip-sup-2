@@ -2,7 +2,7 @@
 'use strict';
 
 const basic = require('../model/hlf/basic.js');
-let evHelper = require('../utils/eventHub.js');
+let evHelper = require('../utils/eventHelper.js');
 
 //
 // evHelper.registerEventHubForOrg("org1",'dipSup_cc4','evtsender', event =>
@@ -55,13 +55,13 @@ let evHelper = require('../utils/eventHub.js');
 //
 // basic.invokeChaincode(["localhost:7051"], "mychannel", "dipSup_cc4", "requestSupplementPublication",
 // 														["nikos3","Nikos Tr", "nikos3","NTUA_ID","test@test.gr","nikos3","ntua_name"],
-// 														"nikos3", "org1", test =>{})
+// 														"nikos3", "org1")
 // .then(function(message) {
 // 	console.log(message);
 // });
-
+//
 // basic.invokeChaincode(["localhost:7051"], "mychannel", "dipSup_cc4", "publish",
-// 														['{"Owner": "nikos3", "University":"ntua_name","Authorized":[],"Id":"123"}','ntua_name'],
+// 														['{"Owner": "nikos3", "University":"ntua_name","Authorized":[],"Id":"1234"}','ntua_name'],
 // 												"nikos3", "org1")
 // .then(function(message) {
 // 	console.log(message);

@@ -15,7 +15,7 @@ const createChannel = require('../../utils/create-channel.js') ;
 const instantiate = require('../../utils/instantiate-chaincode.js');
 const query = require('../../utils/query.js');
 const invoke = require('../../utils/invoke-transaction.js');
-
+const evHelper = require('../../utils/eventHelper.js');
 
 
 exports.installChaincode = function(peers, chaincodeName, chaincodePath,chaincodeVersion, username, org) {
@@ -108,6 +108,10 @@ exports.queryChaincode = function(peer, channelName, chaincodeName, args, fcn, u
   return query.queryChaincode(peer, channelName, chaincodeName, args, fcn, username, org);
 };
 
-exports.invokeChaincode = function(peersUrls, channelName, chaincodeName, fcn, args, username, org,eventHandler) {
-  return invoke.invokeChaincode(peersUrls, channelName, chaincodeName, fcn, args, username, org,eventHandler) ;
+/**
+  Invoke transaction and listen to custom DS events
+**/
+exports.invokeChaincode = function(peersUrls, channelName, chaincodeName, fcn, args, username, org) {
+  return invoke.invokeChaincode(peersUrls, channelName, chaincodeName, fcn, args,
+                                  username, org,evHelper.txDetectionEvent) ;
 };
