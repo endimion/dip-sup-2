@@ -73,42 +73,42 @@ let evHelper = require('../utils/eventHelper.js');
 
 
 
-// basic.installChaincode(["localhost:7051"],"dipSup_cc7","github.com/dipSup_cc","0.1.3", "nikos", "org1");
+// basic.installChaincode(["localhost:7051"],"dipSup_cc9","github.com/dipSup_cc","0.1.8", "nikos", "org1");
 
-// basic.instantiateChaincode("mychannel", "dipSup_cc7", "0.1.3", "init", [],"nikos", "org1");
+// basic.instantiateChaincode("mychannel", "dipSup_cc9", "0.1.8", "init", [],"nikos", "org1");
 
 
 // TEST INVOKES
 //
-// basic.invokeChaincode(["localhost:7051"], "mychannel", "dipSup_cc7", "requestSupplementPublication",
+// basic.invokeChaincode(["localhost:7051"], "mychannel", "dipSup_cc9", "requestSupplementPublication",
 // 														["nikos3","Nikos Tr", "nikos3","NTUA_ID","test@test.gr","nikos3","ntua_name"],
 // 														"nikos3", "org1")
 // .then(function(message) {
 // 	console.log("requestSupplementPublication::");
 // 	console.log(message);
-// 	basic.invokeChaincode(["localhost:7051"], "mychannel", "dipSup_cc7", "publish",
+// 	basic.invokeChaincode(["localhost:7051"], "mychannel", "dipSup_cc9", "publish",
 // 															['{"Owner": "nikos3", "University":"ntua_name","Authorized":[],"Id":"1234"}','ntua_name'],
 // 													"nikos3", "org1")
 // 	.then(function(message) {
 // 		console.log("publish::");
 // 		console.log(message);
-// 		basic.invokeChaincode(["localhost:7051"], "mychannel", "dipSup_cc7", "addDiplomaSupplementInvite",
+// 		basic.invokeChaincode(["localhost:7051"], "mychannel", "dipSup_cc9", "addDiplomaSupplementInvite",
 // 																['{"DSHash":"hash", "DSId":"1234","Email":"test@test.gr"}','nikos3'],
 // 														"nikos3", "org1")
 // 		.then(m =>{
 // 			console.log("addDiplomaSupplementInvite::");
 // 			console.log(m);
-// 			basic.invokeChaincode(["localhost:7051"], "mychannel", "dipSup_cc7", "addCodeForDSInvite",
+// 			basic.invokeChaincode(["localhost:7051"], "mychannel", "dipSup_cc9", "addCodeForDSInvite",
 // 																	["hash","code"],"nikos3", "org1")
 // 			.then (m =>{
 // 				console.log("addCodeForDSInvite::");
 // 				console.log(m);
-// 				basic.invokeChaincode(["localhost:7051"], "mychannel", "dipSup_cc7", "addRecepientToDSInvite",
+// 				basic.invokeChaincode(["localhost:7051"], "mychannel", "dipSup_cc9", "addRecepientToDSInvite",
 // 																		["hash","receipientEid","code"],"nikos3", "org1")
 // 				.then(m =>{
 // 					console.log("addRecepientToDSInvite::");
 // 					console.log(m);
-// 					basic.invokeChaincode(["localhost:7051"], "mychannel", "dipSup_cc7", "uninvite",
+// 					basic.invokeChaincode(["localhost:7051"], "mychannel", "dipSup_cc9", "uninvite",
 // 																			["1234","test@test.gr","nikos3"],"nikos3", "org1")
 // 					.then( m=>{
 // 						console.log("uninvite::");
@@ -128,17 +128,17 @@ let evHelper = require('../utils/eventHelper.js');
 
 //TEST QUERIES
 
-
-basic.queryChaincode("peer1", "mychannel", "dipSup_cc7", ["ntua_name"], "getSupplements", "nikos3", "org1")
+//
+basic.queryChaincode("peer1", "mychannel", "dipSup_cc9", ["ntua_name"], "getSupplements", "nikos3", "org1")
 .then(function(message) {
 		console.log("getSupplements");
 		console.log(message);
-		basic.queryChaincode("peer1", "mychannel", "dipSup_cc7", ["1234","nikos3"], "getSupplementById", "nikos3", "org1")
+		basic.queryChaincode("peer1", "mychannel", "dipSup_cc9", ["1234","nikos3"], "getSupplementById", "nikos3", "org1")
 		.then( m => {
 					console.log("getSupplementById");
 					console.log(m);
 					//getDiplomaSupplementInvitesByHash
-					basic.queryChaincode("peer1", "mychannel", "dipSup_cc7", ["hash"],
+					basic.queryChaincode("peer1", "mychannel", "dipSup_cc9", ["hash"],
 									"getDiplomaSupplementInvitesByHash", "nikos3", "org1")
 					.then(m => {
 						console.log("getDiplomaSupplementInvitesByHash");
