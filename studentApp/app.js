@@ -15,9 +15,9 @@ const timeout = require('connect-timeout');
 const cookieParser = require('cookie-parser')
 const morgan  = require('morgan');
 /**** routes **/
-let loginRoutes = require('./routes/loginRoutes');
-let supplementRoutes = require('./routes/supplementRoutes');
-let qr = require('./routes/qrCodeRoutes');
+let loginRoutes = require('./routes/rest/loginRoutes');
+let supplementRoutes = require('./routes/rest/supplementRoutes');
+let qr = require('./routes/rest/qrCodeRoutes');
 
 // view engine setup
 app.set('views', path.join(__dirname,'views'));
