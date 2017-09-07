@@ -127,33 +127,34 @@ let evHelper = require('../utils/eventHelper.js');
 
 
 //TEST QUERIES
-
 //
-basic.queryChaincode("peer1", "mychannel", "dipSup_cc9", ["ntua_name"], "getSupplements", "nikos3", "org1")
-.then(function(message) {
-		console.log("getSupplements");
-		console.log(message);
-		basic.queryChaincode("peer1", "mychannel", "dipSup_cc9", ["1234","nikos3"], "getSupplementById", "nikos3", "org1")
-		.then( m => {
-					console.log("getSupplementById");
-					console.log(m);
-					//getDiplomaSupplementInvitesByHash
-					basic.queryChaincode("peer1", "mychannel", "dipSup_cc9", ["hash"],
-									"getDiplomaSupplementInvitesByHash", "nikos3", "org1")
-					.then(m => {
-						console.log("getDiplomaSupplementInvitesByHash");
-						console.log(m);
-
-
-					})
-		});
-});
-// // getDiplomaSupplementInvitesByHash
-
-
+// basic.queryChaincode("peer1", "mychannel", "dipSup_cc9", ["ntua_name"], "getSupplements", "nikos3", "org1")
+// .then(function(message) {
+// 		console.log("getSupplements");
+// 		console.log(message);
+// 		basic.queryChaincode("peer1", "mychannel", "dipSup_cc9", ["1234","nikos3"], "getSupplementById", "nikos3", "org1")
+// 		.then( m => {
+// 					console.log("getSupplementById");
+// 					console.log(m);
+// 					//getDiplomaSupplementInvitesByHash
+// 					basic.queryChaincode("peer1", "mychannel", "dipSup_cc9", ["hash"],
+// 									"getDiplomaSupplementInvitesByHash", "nikos3", "org1")
+// 					.then(m => {
+// 						console.log("getDiplomaSupplementInvitesByHash");
+// 						console.log(m);
+//
+//
+// 					})
+// 		});
+// });
 
 
 
+
+
+basic.invokeChaincode(["localhost:7051"], "mychannel", "dipSup_cc9", "publish",
+															['{"Owner": "CACA12345", "University":"ntua","Authorized":[],"Id":"1234"}','ntua'],
+													"nikos3", "org1");
 
 
 // // name := args[0]

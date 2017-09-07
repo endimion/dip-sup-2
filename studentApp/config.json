@@ -12,5 +12,9 @@
          "username":"admin",
          "secret":"adminpw"
       }
-   ]
+   ],
+   "peer": "peer1",
+   "chaincode": "dipSup_cc9",
+    "org":"org1",
+    "peerAddress":"localhost:7051"
 }
