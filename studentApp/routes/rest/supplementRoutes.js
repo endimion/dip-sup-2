@@ -79,6 +79,33 @@ router.get('/view/:supId',authorizeAll,(req,res) =>{
 });
 
 
+
+/*
+  returns a JSON of the  DS with the given ID provided loggedin user
+  can retrieve it
+*/
+router.get('/download/:supId',authorizeAll,(req,res) =>{
+  getUserDetails(req,res).then( details =>{
+      let userEid = details.eid;
+      let supId = req.params.supId;
+      basic.queryChaincode(peer, channel, chaincode, [supId,userEid], "getSupplementById", userEid, org)
+      .then( resp =>{
+        if(resp.indexOf("error") != -1){
+          res.status(401).json(resp);
+        }
+        res.status(200).json(resp);
+      }).catch(err =>{
+          console.log("ERROR::");
+          console.log(err);
+          res.status(500);
+      });
+    }).catch(err =>{
+        console.log(err);
+        res.status(500);
+    });
+});
+
+
 /*
   returns the DS invite that contains the given hash
 */

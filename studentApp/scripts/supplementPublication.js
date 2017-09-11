@@ -3,7 +3,7 @@
 
 function requestPublication(evt){
   evt.preventDefault();
-  let universityName = $("#uniId").val();
+  let universityName = $("#uniName").val();
   let universityId = $("#uniId").val();
   let email = $("#email").val();
 

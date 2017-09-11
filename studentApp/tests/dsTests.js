@@ -73,9 +73,9 @@ let evHelper = require('../utils/eventHelper.js');
 
 
 
-// basic.installChaincode(["localhost:7051"],"dipSup_cc9","github.com/dipSup_cc","0.1.8", "nikos", "org1");
+// basic.installChaincode(["localhost:7051"],"dipSup_cc10","github.com/dipSup_cc","0.1.8", "nikos", "org1");
 
-// basic.instantiateChaincode("mychannel", "dipSup_cc9", "0.1.8", "init", [],"nikos", "org1");
+// basic.instantiateChaincode("mychannel", "dipSup_cc10", "0.1.8", "init", [],"nikos", "org1");
 
 
 // TEST INVOKES
@@ -150,11 +150,11 @@ let evHelper = require('../utils/eventHelper.js');
 
 
 
-
-
-basic.invokeChaincode(["localhost:7051"], "mychannel", "dipSup_cc9", "publish",
-															['{"Owner": "CACA12345", "University":"ntua","Authorized":[],"Id":"1234"}','ntua'],
-													"nikos3", "org1");
+//
+//
+// basic.invokeChaincode(["localhost:7051"], "mychannel", "dipSup_cc9", "publish",
+// 															['{"Owner": "CACA12345", "University":"ntua","Authorized":[],"Id":"1234"}','ntua'],
+// 													"nikos3", "org1");
 
 
 // // name := args[0]

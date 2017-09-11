@@ -17,4 +17,5 @@
    "chaincode": "dipSup_cc10",
     "org":"org1",
     "peerAddress":"localhost:7051"
+
 }

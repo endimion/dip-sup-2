@@ -25,7 +25,7 @@ var logger = helper.getLogger('invoke-chaincode');
 var EventHub = require('fabric-client/lib/EventHub.js');
 hfc.addConfigFile(path.join(__dirname, 'network-config.json'));
 var ORGS = hfc.getConfigSetting('network-config');
-let evHelper = require('../utils/eventHub.js');
+let evHelper = require('../utils/eventHelper.js');
 
 
 /**
@@ -120,22 +120,19 @@ var invokeChaincode = function(peersUrls, channelName, chaincodeName, fcn, args,
 
 
 				//In case the eventHandler is provided
+				// we will listen for custom events and only when they are
+				// detected will the promise resove
 				if ( eventHandler !== undefined){
 
 							let txEventPromise = new Promise( (resolve, reject) => {
 									//peersUrls, channelName, chaincodeName, fcn, args, username, org, eventHandler
-									evHelper.registerEventHubForOrg(org,chaincodeName,'evtsender', (event,hub,obj) =>
-																							{ console.log("event");
-																								console.log(event);
-																								hub.unregisterChaincodeEvent(obj);
-																								hub.disconnect();;
-																								resolve();
-																							});
+									evHelper.registerEventHubForOrg(org,chaincodeName,'evtsender',
+														(event,hub,obj) =>{
+															eventHandler(reject,resolve,event,hub,obj,transactionID);
+														});
 							});
 							eventPromises.push(txEventPromise);
 				}
-
-
 			};
 
 			var sendPromise = channel.sendTransaction(request);

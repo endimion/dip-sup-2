@@ -110,7 +110,7 @@ func (t *SimpleChaincode) GetSupplements(stub shim.ChaincodeStubInterface, args 
       // eid, err := stub.GetCreator()
       // eidString := string(eid)
 
-      if userEid == supplement.Owner || userEid == supplement.University{
+      if userEid == supplement.Owner{
         isAllowed = true
         }	else{
           for _,element := range authorizedUsers {

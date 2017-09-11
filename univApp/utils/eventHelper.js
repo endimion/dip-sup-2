@@ -4,7 +4,7 @@
 const helper = require('./helper.js');
 const fs = require('fs');
 const path = require('path');
-
+const util = require('util');
 
 /**
   registers an event hub for the given organisation
@@ -41,26 +41,31 @@ exports.registerEventHubForOrg = function(org,chaincodeName,eventName, successCa
   });
 }
 
-
-exports.txDetectionEvent = function(reject,resolve){
-  console.log(util.format("Custom event received, payload: %j\n", event.payload.toString()));
-  let eventJSON = JSON.parse(event.payload.toString());
+/**
+  function that can be used as a callback (eventHandler) at the
+  invokeChaincode = function(peersUrls, channelName, chaincodeName, fcn, args, username, org, eventHandler)
+  of the invoke-transaction.js module
+  to detect custom events as they are submitted by the DS app
+*/
+exports.txDetectionEvent = function(reject,resolve,payload,ehub,listenerHandle,txHash){
+  console.log(util.format("Custom event received, payload: %j\n", payload));
+  let eventJSON = JSON.parse(payload);
   let eventMessage = eventJSON.Message;
   let eventBODY = eventJSON.Body;
   let eventTXID = eventJSON.TxId;
 
   if(eventMessage.indexOf("Error") >= 0){
     if(eventTXID === txHash){ //resolve promise only when the current transaction has finished
-      eh.unregisterChaincodeEvent(regid);
+      ehub.unregisterChaincodeEvent(listenerHandle);
+      ehub.disconnect();
       reject(eventMessage);
     }
   }
   if(eventMessage.indexOf("Tx chaincode finished OK") >= 0){
       if(eventTXID === txHash){ //resolve promise only when the current transaction has finished
-        eh.unregisterChaincodeEvent(regid);
+        ehub.unregisterChaincodeEvent(listenerHandle);
+        ehub.disconnect();
         resolve(eventMessage);
       }
-      networkConfig.chain.setInvokeWaitTime(20);
   }
-
 }
