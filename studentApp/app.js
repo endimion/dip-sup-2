@@ -16,6 +16,7 @@ const cookieParser = require('cookie-parser')
 const morgan  = require('morgan');
 /**** routes **/
 let loginRoutes = require('./routes/rest/loginRoutes');
+let loginViewRoutes = require('./routes/view/loginViewRoutes');
 let supplementRoutes = require('./routes/rest/supplementRoutes');
 let supViewRoutes = require('./routes/view/supViewRoutes');
 let qr = require('./routes/rest/qrCodeRoutes');
@@ -40,8 +41,8 @@ app.use(session({
 })); //set up middleware for session handling
 app.use(morgan('tiny')); //http request logger
 app.use(timeout(120000));
-app.use('/',loginRoutes);
-app.use('/login',loginRoutes);
+app.use('/',[loginRoutes,loginViewRoutes]);
+app.use('/login',[loginRoutes,loginViewRoutes]);
 app.use('/supplement/rest',supplementRoutes);
 app.use('/supplement/',supViewRoutes);
 app.use('/qr',qr);

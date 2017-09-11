@@ -9,6 +9,7 @@ const secretKey = process.env.SECRET_KEY?process.env.SECRET_KEY:"testSecret"; //
 const request = require('request');
 const authorizeAll = require('../../utils/authUtils').authorizeAll;
 const authorizeAdmin = require('../../utils/authUtils').authorizeAdmin;
+const getUserDetails = require('../../utils/authUtils').userDetailsFromToken;
 
 module.exports = router;
 
@@ -22,9 +23,8 @@ router.post('/register', (req,res) =>{
 });
 
 
-router.get('/', (req,res) =>{
-  res.render('landing',{ title: 'Login', message: 'Login to the DiplomaSupplement WebApp' });
-});
+
+
 
 
 
@@ -99,7 +99,7 @@ router.get('/logout',(req,res) =>{
     if(err) {
       console.log(err);
     } else {
-      res.redirect(303,"/login");
+      res.redirect(303,"/login/landing");
     }
   });
 });
