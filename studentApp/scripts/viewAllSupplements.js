@@ -5,9 +5,9 @@ $( document ).ready(function() {
       .then(resp =>{
         console.log(resp);
         JSON.parse(resp).forEach(sup =>{
-          $("#supPreloader").hide();
           makeSupplementCard(sup);
         });
+        $("#supPreloader").hide();
 
         let onModalHide = function() {
           $(".sendEmail").show();

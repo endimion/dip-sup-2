@@ -63,8 +63,12 @@ router.get('/view/:supId',authorizeAll,(req,res) =>{
       let supId = req.params.supId;
       basic.queryChaincode(peer, channel, chaincode, [supId,userEid], "getSupplementById", userEid, org)
       .then( resp =>{
+        if(resp.indexOf("error") != -1){
+          res.status(401).json(resp);
+        }
         res.status(200).json(resp);
       }).catch(err =>{
+          console.log("ERROR::");
           console.log(err);
           res.status(500);
       });
@@ -110,12 +114,14 @@ router.get('/invite/:invHash',authorizeAll,(req,res) =>{
   @university (the name of the university)
   @email (the user contact email)
 */
-router.post('/reqPub',authorizeAll,(req,res) =>{
+router.post('/request',authorizeAll,(req,res) =>{
     let userDetails = getUserDetails(req,res);
-    let universityName = req.body.university;
-    let universityId = req.body.university;
+    let universityName = req.body.uniName;
+    let universityId = req.body.univId; //user univesrity ID (e.g. ge01117)
     let userEmail = req.body.email;
 
+    console.log("uniname" + universityName + "email " + userEmail
+                  + "universityId"+universityId);
     userDetails.then( details =>{
       let userEid = details.eid;
       let userFullName = details.firstName + " " + details.lastName;
@@ -151,7 +157,7 @@ router.post('/inviteByMail',authorizeAll,(req,res) =>{
       basic.invokeChaincode([peerAddr], channel, chaincode, "addDiplomaSupplementInvite",
 														['{"DSHash":"'+inviteHash+'", "DSId":"'+supId+'","Email":"'+email+'"}',eid],eid, org)
       .then(resp => {
-        let emailBody = '<p>Click<a href="http://' + process.env.SRV_ADDR + '/supplement/view/'
+        let emailBody = '<p>Click<a href="http://' + process.env.SRV_ADDR + '/supplement/view/invite/'
                           +inviteHash +'"> here</a> to view the shared diploma supplement </p>';
         emailUtil.sendEmail(email,emailBody);
         res.status(200).json(resp);
@@ -263,4 +269,29 @@ router.post('/invite/:inviteHash/authorize',authorizeAll,(req,res) =>{
             res.status(500).send(err);
         });
     });
+});
+
+
+
+/*
+  takes as input an  array  of emails
+  and a supplement Id and removes those emails from the supplement invites
+*/
+router.post('/removeInvites',(req,res) =>{
+  let invitesEmails = req.body.emails.join(";");
+  let supId = req.body.supId;
+  getUserDetails(req,res).then(details =>{
+    let eid = details.eid;
+    basic.invokeChaincode([peerAddr], channel, chaincode,"uninvite",
+    																			[supId,invitesEmails,eid],eid, org)
+    .then(resp =>{
+      res.status(200).send("ok");
+    })
+    .catch(err =>{
+        console.log(err);
+        res.status(400).send(err);
+    });
+  });
+
+
 });

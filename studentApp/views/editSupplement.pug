@@ -10,6 +10,11 @@ block content
       .col.l12.md12.col-md-offset-3
         div.col-m-12=message
     .row
+      .col.s12.m6#preloader( style="display:none;float: left;left: 0;clear: both;")
+        #meassageDiv Saving changes... 
+        .progress
+            <div class="indeterminate"></div>
+    .row
       .col.s12.m6
         .card
           .card-content#textContent

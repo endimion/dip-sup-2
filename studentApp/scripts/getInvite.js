@@ -14,6 +14,7 @@ $( document ).ready(function() {
               paintSupplement(JSON.parse(resp));
           }).fail(err =>{
             $("#headerMessage").text("UnAuthorized Access!");
+            $("#supPreloader").hide();
             console.log(err);
           });
         }else{

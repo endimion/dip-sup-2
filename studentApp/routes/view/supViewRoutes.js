@@ -58,7 +58,7 @@ router.get('/view',authorizeAll,(req,res) =>{
 
 
 
-//TODO finalize the flow
+
 /*
   Allows the user to view a DS based on an invite.
   If the user is not logged in they are asked to login.
@@ -114,5 +114,23 @@ router.get('/edit/:supId',authorizeAll,(req,res) =>{
                     message: error.toString(),
                     stdId: ""});
       });
+    });
+});
+
+
+
+router.get('/request',authorizeAll,(req,res) =>{
+  getUserDetails(req,res).then( details =>{
+    res.render('requestPublication',{ title: 'Published Supplements',
+              message: "" ,
+              eID: details.eid,
+              firstName: details.firstName,
+              lastName: details.lastName,
+              userName: details.userName,
+              eIDHash: details.eid
+              });
+
+    }).catch(err =>{
+        console.log(err);
     });
 });
