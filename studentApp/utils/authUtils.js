@@ -18,7 +18,8 @@ exports.authorizeAll =  (req, res, next) =>{
     if(err){
       // respond to request with error
       console.log(err);
-      res.status(401).json({"message":"User not authorized"});
+      // res.status(401).json({"message":"User not authorized"});
+      res.redirect("/login");
     }else{
       next();
     }

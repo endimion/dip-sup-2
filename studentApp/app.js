@@ -17,6 +17,7 @@ const morgan  = require('morgan');
 /**** routes **/
 let loginRoutes = require('./routes/rest/loginRoutes');
 let supplementRoutes = require('./routes/rest/supplementRoutes');
+let supViewRoutes = require('./routes/view/supViewRoutes');
 let qr = require('./routes/rest/qrCodeRoutes');
 
 // view engine setup
@@ -41,7 +42,8 @@ app.use(morgan('tiny')); //http request logger
 app.use(timeout(120000));
 app.use('/',loginRoutes);
 app.use('/login',loginRoutes);
-app.use('/supplement',supplementRoutes);
+app.use('/supplement/rest',supplementRoutes);
+app.use('/supplement/',supViewRoutes);
 app.use('/qr',qr);
 
 app.use(haltOnTimedout);//the following timeout middleware has to be the last middleware

@@ -12,6 +12,7 @@ const basic = require('../../model/hlf/basic.js');
 const supUtils = require('../../utils/supplementUtils.js');
 const emailUtil = require('../../utils/emailClient.js');
 const randomstring = require("randomstring");
+const qr = require('qr-image');
 
 /* configuration */
 const config = require('../../config.json');
@@ -166,6 +167,7 @@ router.post('/inviteByMail',authorizeAll,(req,res) =>{
 /*
   sends an invite to view a specific DS to a user
   identified by his email address by generating a QR code
+  and returns the svg generated QR code
 */
 router.post('/inviteByQR',authorizeAll,(req,res) =>{
     let userDetails = getUserDetails(req,res);
@@ -179,7 +181,9 @@ router.post('/inviteByQR',authorizeAll,(req,res) =>{
       basic.invokeChaincode([peerAddr], channel, chaincode, "addDiplomaSupplementInvite",
 														['{"DSHash":"'+inviteHash+'", "DSId":"'+supId+'","Email":"'+email+'"}',eid],eid, org)
       .then(resp => {
-        res.status(200).json(resp);
+        let code = qr.image('http://'+process.env.SRV_ADDR+'supplement/view/invite/'+inviteHash, { type: 'svg' });
+        res.type('svg');
+        code.pipe(res);
       }).catch(err =>{
         res.status(500);
       });
@@ -212,7 +216,7 @@ router.post('/invite/:inviteHash/sendMail',authorizeAll,(req,res) =>{
                     .then(resp =>{
                       res.status(200).json(resp);
                     }).catch(err =>{
-                        res.status(500).json(err);
+                        res.status(500).send(err);
                     });
                   });
                 }).catch(err =>{
@@ -230,15 +234,33 @@ router.post('/invite/:inviteHash/sendMail',authorizeAll,(req,res) =>{
 /*
   checks the given validation code, and if it is contained within
   the invte, updates the invite to include the current user eid (and puts the eid in the allowed set of the ds)
-  Finally, returns the ds contained in the invite
-  TODO
+  Finally, redirects to the endpoint to retrieve  the ds contained in the invite
 */
 router.post('/invite/:inviteHash/authorize',authorizeAll,(req,res) =>{
     let inviteHash = req.params.inviteHash;
     let validationCode = req.body.validationCode;
+    let dsId ="";
+    getUserDetails(req,res).then(details =>{
+        let eid = details.eid;
+        basic.queryChaincode(peer, channel, chaincode, [inviteHash], "getDiplomaSupplementInvitesByHash", eid, org)
+        .then( resp =>{
+          let dsInvite = JSON.parse(resp);
 
-
-
-
-
+          if (dsInvite.Code === validationCode){
+            dsId = dsInvite.DSId;
+            basic.invokeChaincode([peerAddr], channel, chaincode, "addRecepientToDSInvite",
+            																		[inviteHash,eid,validationCode],eid, org)
+          .then(resp=>{
+              console.log(dsInvite);
+              res.redirect("../../view/"+dsId);
+          }).catch(err =>{
+              res.status(500).send(err);
+          });
+          }else{
+            res.status(401).json({"message":"wrong validation code"});
+          }
+        }).catch(err =>{
+            res.status(500).send(err);
+        });
+    });
 });

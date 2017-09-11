@@ -22,6 +22,12 @@ router.post('/register', (req,res) =>{
 });
 
 
+router.get('/', (req,res) =>{
+  res.render('landing',{ title: 'Login', message: 'Login to the DiplomaSupplement WebApp' });
+});
+
+
+
 /**
   TODO
   This should be part of teh eIDAS-login webapp. For dev purposes we leave it here
@@ -29,7 +35,7 @@ router.post('/register', (req,res) =>{
   jwt token and adds it to the http header. Then this token is used to retreive the attributes
   of the logged in user
 **/
-router.post('/signin/:token', (req,res) =>{
+router.get('/authenticate/:token', (req,res) =>{
   let token = req.params.token;
   //get user details form eIDAS webapp based on token
   let siteURL = 'http://community.mastihawonder.com:8080/testISSsp-0.0.1-SNAPSHOT/'
@@ -63,11 +69,37 @@ router.post('/signin/:token', (req,res) =>{
           httpOnly: true
           // secure: true      // for your production environment
         });
-        res.json({"result":"ok"});
+        // res.json({"result":"ok"});
+
+        let cookie = req.cookies.dsHash;
+        console.log("dsHashCookie: " + cookie);
+        if (cookie === undefined)
+        {
+          res.redirect(303,"/supplement/view");
+        }else{
+          res.redirect(303,"/supplement/view/invite/"+cookie);
+        }
+
       }else{
         res.json({"error_resp": response});
       }
   }).catch(err =>{
         res.json({"error_int":err.toString()});
+  });
+
+
+
+});
+
+
+
+
+router.get('/logout',(req,res) =>{
+  req.session.destroy(function(err) {
+    if(err) {
+      console.log(err);
+    } else {
+      res.redirect(303,"/login");
+    }
   });
 });
