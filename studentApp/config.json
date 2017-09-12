@@ -14,7 +14,7 @@
       }
    ],
    "peer": "peer1",
-   "chaincode": "dipSup_cc10",
+   "chaincode": "dipSup_cc11",
     "org":"org1",
     "peerAddress":"localhost:7051"
 }

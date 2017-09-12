@@ -27,24 +27,31 @@ $( document ).ready(function() {
 
 function makeSupplementCard(supplement){
 
+
+
   let card = $("<div>", {"class": "card"});
   let cardContent = $("<div>", {"class": "card-content","id":"textContent"});
   card.append(cardContent);
   let cardTitle = $("<span>", {"class": "card-title"});
   cardContent.append(cardTitle);
-  let alumni = $("<p>");
-  alumni.text("Alumni:" + supplement.Name);
-  let eID = $("<p>");
-  eID.text("eID: " + supplement.Owner);
-  let univ = $("<p>");
-  univ.text("University: "+supplement.University);
-  let id = $("<p>");
-  id.text("SupplementID: " + supplement.Id);
+  // let alumni = $("<p>");
+  // alumni.text("Alumni:" + supplement.Name);
+  // let eID = $("<p>");
+  // eID.text("eID: " + supplement.Owner);
+  // let univ = $("<p>");
+  // univ.text("University: "+supplement.University);
+  // let id = $("<p>");
+  // id.text("SupplementID: " + supplement.Id);
 
-  cardContent.append(alumni);
-  cardContent.append(eID);
-  cardContent.append(univ);
-  cardContent.append(id);
+  for (var name in supplement) {
+    cardContent.append(displaySupAttribute(name,supplement[name]));
+  }
+
+
+  // cardContent.append(alumni);
+  // cardContent.append(eID);
+  // cardContent.append(univ);
+  // cardContent.append(id);
 
   let cardContentSvg = $("div",{"id":"svgContent","display":"none","background":"white","width":"16em"});
   card.append(cardContentSvg);
@@ -177,19 +184,34 @@ function makeSupplementCard(supplement){
   modalQrContent.append(qrContainer);
 
 
-
-
-
   card.append(modalMailWrapper); //modalQrWrapper
   card.append(modalQrWrapper);
   card.append(cardAction);
 
-
-
-
-
-
-
   $("#supplements").append(card);
 
+}
+
+
+function displaySupAttribute(name, value,node="<p>", properties={}){
+  if(name !== "Signature" && name !== "Authorized"){
+    if(typeof(value) === "string"){
+
+        let result = $(node,properties);
+        result.text(name+": " + value);
+        return result;
+    }else{
+      let result = $(node);
+      // result.text(name+": ");
+      let list = $("<ul>",{"class":"collection with-header"});
+      result.append(list);
+      let header = $("<li>",{"class":"collection-header","style":"font-weight: bold;"});
+      header.text(name);
+      list.append(header);
+      for (var name in value) {
+        list.append(displaySupAttribute(name,value[name],"<li>",{"class":"collection-item"}));
+      }
+      return result;
+    }
+ }
 }

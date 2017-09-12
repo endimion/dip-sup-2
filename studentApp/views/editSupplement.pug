@@ -17,7 +17,8 @@ block content
     .row
       .col.s12.m6
         .card
-          .card-content#textContent
+          .card-content
+            div#supInfo
             span.card-title Supplement #{supplement.Id}
             p Alumni: #{supplement.Name} #{supplement.Surname}
             p(style="word-break: break-all;") eID:  #{supplement.Owner}
@@ -48,4 +49,4 @@ block content
     script
       include ../scripts/editSupplement.js  
       include ../scripts/qrScript.js
-      
+  

@@ -38,6 +38,66 @@ type DiplomaSupplement struct {
 	Authorized []AuthorizedUser
 	Id string
 	Signature string
+	Holder_Info HolderInfo
+	Qualification_Info QualificationInfo
+	Qualification_Level QualificationLevel
+	Content_Info ContentInfo
+	Qualification_Function QualificationFunction
+	Additional_Info AdditionalInfo
+	Supplement_Certification SupplementCertification
+	HigherEducationSystem_Info HigherEducationSystemInfo
+}
+
+
+type HolderInfo struct{
+	Name string
+	DateOfBirth string
+	StudentId string
+}
+
+
+type QualificationInfo struct{
+	Name string
+	FieldsOfStudy string
+	InstitutionName string
+	InstitutionStatus string
+	InstructionLanguage string
+}
+
+type QualificationLevel struct{
+	Level string
+	ProgrammeLength string
+	AccecssRequirements string
+}
+
+type ContentInfo struct{
+	ModeOfStudy string
+	ProgrammeRequirements string
+	ProgrammeDetails string
+	GradingScheme string
+	OverallClassificationOfQualification string
+}
+
+type QualificationFunction struct{
+	AccessToFurtherStudy string
+	ProfessionalStatus string
+}
+
+type AdditionalInfo struct{
+	AdditionalInfo string
+	InfoSources string
+}
+
+type SupplementCertification struct{
+	Date string
+	Name string
+	Capacity string
+	Signature string
+	Stamp string
+}
+
+type HigherEducationSystemInfo struct{
+	HigherEductaionSystemInfo string
 }
 
 
