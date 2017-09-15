@@ -10,6 +10,8 @@ const request = require('request');
 const authorizeAll = require('../../utils/authUtils').authorizeAll;
 const authorizeAdmin = require('../../utils/authUtils').authorizeAdmin;
 const getUserDetails = require('../../utils/authUtils').userDetailsFromToken;
+const fs = require('fs');
+const path = require('path');
 
 module.exports = router;
 
@@ -56,6 +58,12 @@ router.get('/authenticate/:token', (req,res) =>{
   });
 
   eIDASResponsePromise.then( response =>{
+
+      //read the private key:
+      let certName = "private_key.pem";
+      let keyPath = path.join(__dirname, '..','..', 'resources',  certName);
+      let cert = fs.readFileSync(keyPath);
+
       if(response.status == 200 && response.user && response.user.eid && response.user.userName){
         // console.log(response.user);
         let  claims = {
@@ -63,7 +71,8 @@ router.get('/authenticate/:token', (req,res) =>{
           iss: 'https://mytestapp.com',
           scope: "self, admins"
         }
-        let access_token = jwt.sign(claims,secretKey);
+        let access_token = jwt.sign(claims,secretKey); //
+        // let access_token = jwt.sign(claims,cert, { algorithm: 'RS512'});
         // console.log(access_token);
         res.cookie('access_token',access_token,{
           httpOnly: true
