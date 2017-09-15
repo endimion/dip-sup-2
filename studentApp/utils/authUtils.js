@@ -25,7 +25,8 @@ exports.authorizeAll =  (req, res, next) =>{
   jwt.verify(token,"secret",{ algorithms: ['HS256'] }, function(err,token){
     if(err){
     console.log("ERRORRRR");
-      console.log(err); // Token has expired, has been tampered with, etc
+        // res.status(401).json({"message":"User not authorized"});
+        res.redirect("/login/landing");
     }else{
       console.log(token); // Will contain the header and body
       next();
