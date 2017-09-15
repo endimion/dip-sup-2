@@ -4,9 +4,11 @@
 
 const bcrypt = require('bcrypt');
 const  jwt = require('jsonwebtoken');
-const secretKey = process.env.SECRET_KEY?process.env.SECRET_KEY:"testSecret"; //the secret comes from an enviroment variable
+const secretKey = process.env.SECRET_KEY?process.env.SECRET_KEY:"secret"; //the secret comes from an enviroment variable
 const stripchar = require('stripchar').StripChar;
-
+const fs = require('fs');
+const path = require('path');
+const  nJwt = require('njwt');
 /**
   check if a user eID exists on teh session,
   if not verify the existance of a jwt token and its validity
@@ -14,22 +16,43 @@ const stripchar = require('stripchar').StripChar;
 **/
 exports.authorizeAll =  (req, res, next) =>{
   let  token = req.cookies.access_token;
-  jwt.verify(token,secretKey,function(err,token){
+
+  // let certName = "public_key.pem";
+  // let keyPath = path.join(__dirname, '..', 'resources',  certName);
+  // let cert = fs.readFileSync(keyPath);
+  console.log(token);
+  // var secret = new Buffer("testSecret", "base64");
+  jwt.verify(token,"secret",{ algorithms: ['HS256'] }, function(err,token){
     if(err){
-      // respond to request with error
-      console.log(err);
-      // res.status(401).json({"message":"User not authorized"});
-      res.redirect("/login/landing");
+    console.log("ERRORRRR");
+      console.log(err); // Token has expired, has been tampered with, etc
     }else{
+      console.log(token); // Will contain the header and body
       next();
     }
-  });
+  }) ;
+
+
+  // jwt.verify(token,secretKey,function(err,token){
+  //   if(err){
+  //     // respond to request with error
+  //     console.log(err);
+  //     // res.status(401).json({"message":"User not authorized"});
+  //     res.redirect("/login/landing");
+  //   }else{
+  //     next();
+  //   }
+  // });
 };
 
 
 exports.authorizeAdmin =  (req, res, next) =>{
   let  token = req.cookies.access_token;
-  jwt.verify(token,secretKey,function(err,token){
+  //read the private key:
+  let cert = fs.readFileSync('../../resources/publicDScert.pem');
+
+
+  jwt.verify(token,cert,function(err,token){
     if(err){
       console.log(err);
       res.status(401).json({"message":"User not authorized"});
@@ -53,7 +76,7 @@ exports.authorizeAdmin =  (req, res, next) =>{
 exports.userDetailsFromToken = (req,res) =>{
   let  token = req.cookies.access_token;
   return new Promise( (resolve,reject) =>{
-    jwt.verify(token,secretKey,function(err,token){
+    jwt.verify(token,secretKey,{ algorithms: ['HS256']},function(err,token){
       if(err){
         console.log(err);
         reject(err);
@@ -61,7 +84,7 @@ exports.userDetailsFromToken = (req,res) =>{
       }else{
         console.log(token);
         console.log(token.sub);
-        let result = token.sub;
+        let result = JSON.parse(token.sub);
         result.eid = stripchar.RSExceptUnsAlpNum(result.eid);
         resolve(result);
       }
