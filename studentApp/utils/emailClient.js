@@ -43,7 +43,7 @@ function sendEmail(receiverAddress,body){
                 resolve(result);
         })
         .catch(err => {
-                console.log(error);
+                console.log(err);
                 reject(err)
         });
     })
