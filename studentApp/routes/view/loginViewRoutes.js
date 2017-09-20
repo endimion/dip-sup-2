@@ -23,7 +23,7 @@ router.get(['/','/home'],authorizeAll,(req,res) =>{
       eID: details.eid,
       userName: details.userName,
       firstName: details.firstName,
-      lastName: details.lastName});
+      lastName: details.familyName});
   }).catch(err =>{
     res.render('landing',{ title: 'Login', message: 'Login to the DiplomaSupplement WebApp' });
   });
