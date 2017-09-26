@@ -45,7 +45,7 @@ func (t *SimpleChaincode) RequestSupplementPublication(stub shim.ChaincodeStubIn
 				UniId : uniId,
 				EidHash : eidHash,
 				University : university,
- 				DateOfBirth: dateOfBirth}
+ 				DateOfBirth: dateOfBirth }
 			pubRequestsSlice = append(pubRequestsSlice,request)
 			assets.PublishRequests = pubRequestsSlice
 
