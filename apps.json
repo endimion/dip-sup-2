@@ -1,0 +1,29 @@
+{"apps": [
+  {
+    "name": "studentClient",
+    "script": "app.js",
+    "cwd":"./studentApp",
+    //"watch": true,
+    "env": {"ENV_VARIABLE":123, "SRV_ADDR":"127.0.0.1:8000",
+                                      "NODE_ENV": "development",
+                                      "BASE_URL":"/"},
+    "env_production": {"ENV_VARIABLE":123,
+                        "SRV_ADDR":"207.154.206.196",
+                        "NODE_ENV": "production",
+                        "BASE_URL":"/"}
+  },
+  {
+    "name": "univMonitor",
+    "script": "app.js",
+    "cwd": "./univApp",
+    //"watch": true,
+    "env": {"ENV_VARIABLE":123, "SRV_ADDR":"127.0.0.1:8001",
+                                      "NODE_ENV": "development",
+                                    "BASE_URL":"/"},
+    "env_production": {"ENV_VARIABLE":123,
+                        "SRV_ADDR":"207.154.206.196",
+                        "NODE_ENV": "production",
+                        "BASE_URL":"/univ/"}
+  }
+]}
+
