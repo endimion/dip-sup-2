@@ -11,8 +11,8 @@ import (
 
 //Adds a request by a user to the university to publish his DS
 func (t *SimpleChaincode) RequestSupplementPublication(stub shim.ChaincodeStubInterface, args []string)  pb.Response {
-		if len(args) != 7 {
-			return SendErrorEvent(stub,"Incorrect number of arguments. Expecting 7, the first is the userEid")
+		if len(args) != 8 {
+			return SendErrorEvent(stub,"Incorrect number of arguments. Expecting 8, the first is the userEid")
 		}
 
 		userEid := args[0]
@@ -23,6 +23,7 @@ func (t *SimpleChaincode) RequestSupplementPublication(stub shim.ChaincodeStubIn
 		email  := args[4]
 		eidHash := args[5]
 		university := args[6]
+		dateOfBirth := args[7]
 
 		//get the assets from the state
 		assetBytes, err := stub.GetState("assets")
@@ -43,7 +44,8 @@ func (t *SimpleChaincode) RequestSupplementPublication(stub shim.ChaincodeStubIn
 				Email : email,
 				UniId : uniId,
 				EidHash : eidHash,
-				University : university }
+				University : university,
+ 				DateOfBirth: dateOfBirth}
 			pubRequestsSlice = append(pubRequestsSlice,request)
 			assets.PublishRequests = pubRequestsSlice
 
