@@ -21,12 +21,21 @@ function sendEmail(receiverAddress,body){
       // console.log("pass" + pass);
       // create reusable transporter object using the default SMTP transport
       let transporter = nodemailer.createTransport({
-        service: 'gmail',
+//        service: 'gmail',
+        host: 'localhost',
+        port: '25',
+//      secure: false,
+        tls:{
+          rejectUnauthorized: false
+        },
         auth: {
-          user: 'triantafyllou.ni@gmail.com',
-          pass: _pass
+          //user: 'triantafyllou.ni@gmail.com',
+          //pass: _pass
+          user: 'user@mail.example.com',
+          pass: 'pwd'
         }
       });
+
 
       console.log( 'Email Body ' + body );
       // setup email data with unicode symbols

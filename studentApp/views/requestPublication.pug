@@ -39,6 +39,8 @@ block content
                         class="validate" required="" aria-required="true" name='email')
           div.form-group
             input#eIDHash.form-control(type='hidden', name='eIDHash', value=eIDHash)
+          div.form-group
+            input#DateOfBirth.form-control(type='hidden', name='DateOfBirth', value=dateOfBirth)
 
           button.btn.btn-primary(onclick='requestPublication(event)') Send Request
 

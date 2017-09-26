@@ -47,7 +47,7 @@ router.get('/view',authorizeAll,(req,res) =>{
           eID: userEid,
           userName: details.userName,
           firstName: details.firstName,
-          lastName: details.lastName});
+          lastName: details.familyName});
     }).catch(err =>{
       res.render('errorMessage',{ title: 'Ooops... an error occured!',
                   message: err,
@@ -108,7 +108,7 @@ router.get('/edit/:supId',authorizeAll,(req,res) =>{
                 eID: userEid,
                 userName: details.userName,
                 firstName: details.firstName,
-                lastName:  details.lastName});
+                lastName:  details.familyName});
       }).catch(err=>{
         res.render('errorMessage',{ title: 'Ooops... an error occured!',
                     message: error.toString(),
@@ -121,12 +121,13 @@ router.get('/edit/:supId',authorizeAll,(req,res) =>{
 
 router.get('/request',authorizeAll,(req,res) =>{
   getUserDetails(req,res).then( details =>{
-    res.render('requestPublication',{ title: 'Published Supplements',
+    res.render('requestPublication',{ title: 'Request DS Publication',
               message: "" ,
               eID: details.eid,
-              firstName: details.firstName,
-              lastName: details.lastName,
               userName: details.userName,
+              firstName: details.firstName,
+              lastName: details.familyName,
+              dateOfBirth: details.dateOfBirth,
               eIDHash: details.eid
               });
 
