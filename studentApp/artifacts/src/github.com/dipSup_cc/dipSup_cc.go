@@ -148,6 +148,7 @@ type PublishRequest struct{  //name,eid,uniId,email,userEid
 	UniId string
 	EidHash string
 	University string
+	DateOfBirth string
 }
 
 type PubRequestsAsset struct{
