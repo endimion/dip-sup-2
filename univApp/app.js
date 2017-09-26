@@ -18,7 +18,7 @@ const chaincode = config.chaincode;
 evHelper.registerEventHubForOrg(org,chaincode,'evtsender', event => {
     console.log("event");
 		console.log(event);
-    //TODO search db for DS based on eid, name,  and universityId
+    
     let pubReq = JSON.parse(event).Body;
     console.log(pubReq);
     let univName = process.env.universityName||"UAgean";
