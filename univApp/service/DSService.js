@@ -13,7 +13,7 @@ module.exports.findAllDiplomaByCriterria = function(criteria){
   console.log("By " + criteria)  ;
   return DiplomaSupplement.find({
     'Holder_Info.StudentId':criteria.UniId,
-    'Holder_Info.Name':criteria.name,
+    'Holder_Info.Name':criteria.Name,
     'Holder_Info.DateOfBirth':criteria.DateOfBirth
   }).exec();
 };
