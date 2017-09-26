@@ -146,6 +146,7 @@ router.post('/request',authorizeAll,(req,res) =>{
     let universityName = req.body.uniName;
     let universityId = req.body.univId; //user univesrity ID (e.g. ge01117)
     let userEmail = req.body.email;
+    let dateOfBirth = req.body.DateOfBirth;
 
     // console.log("uniname" + universityName + "email " + userEmail
     //               + "universityId"+universityId);
@@ -154,7 +155,7 @@ router.post('/request',authorizeAll,(req,res) =>{
       let userFullName = details.firstName + " " + details.familyName;
 
       basic.invokeChaincode([peerAddr],channel, chaincode, "requestSupplementPublication",
-								[userEid,userFullName, userEid,universityId,userEmail,userEid,universityName],
+								[userEid,userFullName, userEid,universityId,userEmail,userEid,universityName,dateOfBirth],
 								userEid, org)
       .then( resp =>{
         res.status(200).json(resp);
