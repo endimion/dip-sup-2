@@ -158,6 +158,8 @@ router.post('/request',authorizeAll,(req,res) =>{
 								[userEid,userFullName, userEid,universityId,userEmail,userEid,universityName,dateOfBirth],
 								userEid, org)
       .then( resp =>{
+        console.log("response");
+        console.log(resp);
         res.status(200).json(resp);
       }).catch(err =>{
         res.status(500);
