@@ -23,7 +23,7 @@ func (t *SimpleChaincode) RequestSupplementPublication(stub shim.ChaincodeStubIn
 		email  := args[4]
 		eidHash := args[5]
 		university := args[6]
-		dateOfBirth := args[7]
+		bday := args[7]
 
 		//get the assets from the state
 		assetBytes, err := stub.GetState("assets")
@@ -45,7 +45,7 @@ func (t *SimpleChaincode) RequestSupplementPublication(stub shim.ChaincodeStubIn
 				UniId : uniId,
 				EidHash : eidHash,
 				University : university,
- 				DateOfBirth: dateOfBirth }
+ 				DateOfBirth: bday }
 			pubRequestsSlice = append(pubRequestsSlice,request)
 			assets.PublishRequests = pubRequestsSlice
 
