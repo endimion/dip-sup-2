@@ -18,7 +18,7 @@ const chaincode = config.chaincode;
 evHelper.registerEventHubForOrg(org,chaincode,'evtsender', event => {
     console.log("event");
 		console.log(event);
-    
+
     let pubReq = JSON.parse(event).Body;
     console.log(pubReq);
     let univName = process.env.universityName||"UAgean";
@@ -36,9 +36,9 @@ evHelper.registerEventHubForOrg(org,chaincode,'evtsender', event => {
 
              let supplement =  {
                "Owner" : pubReq.EidHash,
-               "Name" : dbDipSup.name,
-               "Surname" : dbDipSup.surname,
-               "University" : univName,
+              //  "Name" : dbDipSup.name,
+              //  "Surname" : dbDipSup.surname,
+              //  "University" : univName,
                "Authorized" : [],
                "Id" :  dbDipSup._id.valueOf(),
                "Holder_Info": dbDipSup.Holder_Info,
@@ -48,7 +48,7 @@ evHelper.registerEventHubForOrg(org,chaincode,'evtsender', event => {
                "Qualification_Function":dbDipSup.Qualification_Function,
                "Additional_Info": dbDipSup.Additional_Info,
                "Supplement_Certification":dbDipSup.Supplement_Certification,
-               "HigherEducationSystem_Info":dbDipSup.HigherEducationSystem_Info     
+               "HigherEducationSystem_Info":dbDipSup.HigherEducationSystem_Info
             };
             let supHash = hash.sha256().update(JSON.stringify(supplement)).digest('hex');
             supplement.signature =signService.signHash(supHash);
@@ -64,8 +64,8 @@ evHelper.registerEventHubForOrg(org,chaincode,'evtsender', event => {
           .then( resp =>{
             // console.log("RESponse");
             // console.log(resp);
-	    // 
-            console.log("STRINGIFIED");
+	    //
+            // console.log("STRINGIFIED");
            console.log(JSON.stringify(dsResult));
             if(resp.indexOf("error") !== -1){ //if not sup with given Id is found
                 console.log("will publish");
