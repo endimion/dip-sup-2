@@ -34,7 +34,7 @@ type DiplomaSupplement struct {
 	Owner string
 	// Name string
 	// Surname string
-	// University string
+	University string
 	Authorized []AuthorizedUser
 	Id string
 	Signature string
