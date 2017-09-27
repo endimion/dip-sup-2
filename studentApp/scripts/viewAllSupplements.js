@@ -194,8 +194,7 @@ function makeSupplementCard(supplement){
 
 
 function displaySupAttribute(name, value,node="<p>", properties={}){
-  if(name !== "Signature" && name !== "Authorized"
-          && name = !== "Name" && name != "Surname"){
+  if(name !== "Signature" && name !== "Authorized"){
     if(typeof(value) === "string"){
 
         let result = $(node,properties);
