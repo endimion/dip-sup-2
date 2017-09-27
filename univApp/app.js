@@ -40,7 +40,15 @@ evHelper.registerEventHubForOrg(org,chaincode,'evtsender', event => {
                "Surname" : dbDipSup.surname,
                "University" : univName,
                "Authorized" : [],
-               "Id" :  dbDipSup._id.valueOf()
+               "Id" :  dbDipSup._id.valueOf(),
+               "Holder_Info": dbDipSup.Holder_Info,
+               "Qualification_Info": dbDipSup.Qualification_Info,
+               "Qualification_Level": dbDipSup.Qualification_Level,
+               "Content_Info": dbDipSup.Content_Info,
+               "Qualification_Function":dbDipSup.Qualification_Function,
+               "Additional_Info": dbDipSup.Additional_Info,
+               "Supplement_Certification":dbDipSup.Supplement_Certification,
+               "HigherEducationSystem_Info":dbDipSup.HigherEducationSystem_Info     
             };
             let supHash = hash.sha256().update(JSON.stringify(supplement)).digest('hex');
             supplement.signature =signService.signHash(supHash);
@@ -51,13 +59,17 @@ evHelper.registerEventHubForOrg(org,chaincode,'evtsender', event => {
      .then(results =>{
         // console.log(results);
         results.forEach(dsResult =>{
-          // console.log(dsResult);
+          //console.log(dsResult);
           basic.queryChaincode(peer, channel, chaincode, [dsResult.Id.toString(),'UAgean'], "getSupplementById", 'UAgean', org)
           .then( resp =>{
             // console.log("RESponse");
             // console.log(resp);
+	    // 
+            console.log("STRINGIFIED");
+           console.log(JSON.stringify(dsResult));
             if(resp.indexOf("error") !== -1){ //if not sup with given Id is found
-              basic.invokeChaincode([peerAddr], channel, chaincode, "publish",
+                console.log("will publish");
+                basic.invokeChaincode([peerAddr], channel, chaincode, "publish",
       							[JSON.stringify(dsResult),'UAgean'],'UAgean', org)
             }
 
