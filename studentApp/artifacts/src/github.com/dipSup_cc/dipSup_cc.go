@@ -32,8 +32,8 @@ type SimpleChaincode struct {
 //Diploma Suplement Structure
 type DiplomaSupplement struct {
 	Owner string
-	// Name string
-	// Surname string
+	Name string
+	Surname string
 	University string
 	Authorized []AuthorizedUser
 	Id string
