@@ -69,7 +69,7 @@ router.get('/view',authorizeAll,(req,res) =>{
 router.get('/view/invite/:inviteHash',(req,res) =>{
     let  token = req.cookies.access_token;
     let inviteHash = req.params.inviteHash;
-    jwt.verify(token,secretKey,function(err,token){
+    jwt.verify(token,"secret",{ algorithms: ['HS256'] },function(err,token){
       if(err){
         res.cookie('dsHash',inviteHash,{ maxAge: 900000, httpOnly: true });
         res.render('loginEIDAS',{ title: 'Login with eIDAS',
