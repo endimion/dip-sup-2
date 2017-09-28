@@ -38,7 +38,7 @@ evHelper.registerEventHubForOrg(org,chaincode,'evtsender', event => {
                "Owner" : pubReq.EidHash,
               //  "Name" : dbDipSup.name,
               //  "Surname" : dbDipSup.surname,
-              //  "University" : univName,
+               "University" : univName,
                "Authorized" : [],
                "Id" :  dbDipSup._id.valueOf(),
                "Holder_Info": dbDipSup.Holder_Info,
