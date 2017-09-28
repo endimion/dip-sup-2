@@ -75,6 +75,7 @@ router.get('/view/invite/:inviteHash',(req,res) =>{
         res.render('loginEIDAS',{ title: 'Login with eIDAS',
         message: 'Login with the eIDAS system to view this Diploma Supplement',
         token: uuid() });
+        console.log(err);
     }else{
         //jwt token found.
         getUserDetails(req,res).then( details =>{
