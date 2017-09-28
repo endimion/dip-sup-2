@@ -187,7 +187,7 @@ router.post('/inviteByMail',authorizeAll,(req,res) =>{
       basic.invokeChaincode([peerAddr], channel, chaincode, "addDiplomaSupplementInvite",
 														['{"DSHash":"'+inviteHash+'", "DSId":"'+supId+'","Email":"'+email+'"}',eid],eid, org)
       .then(resp => {
-        let emailBody = '<p>Click<a href="http://' + process.env.SRV_ADDR + '/supplement/view/invite/'
+        let emailBody = '<p>Click<a href="'+ process.env.SRV_ADDR + '/supplement/view/invite/'
                           +inviteHash +'"> here</a> to view the shared diploma supplement </p>';
         emailUtil.sendEmail(email,emailBody);
         res.status(200).json(resp);
