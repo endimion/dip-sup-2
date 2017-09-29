@@ -5,5 +5,5 @@ studentApp/node_modules
 studentApp/sessions
 univApp/node_modules
 univApp/sessions
-studentApp/artifacts/channel
-univApp/artifacts/channel
+#studentApp/artifacts/channel
+#univApp/artifacts/channel
