@@ -196,20 +196,20 @@ function makeSupplementCard(supplement){
 
 
 function displaySupAttribute(name, value,node="<p>", properties={}){
-  let headerCSS = {
-    "display": "block",
-    "cursor": "pointer",
-    "min-height": "3rem",
-    "line-height": "3rem",
-    "padding": "0 1rem",
-    "background-color": "#fff",
-    "border-bottom": "1px solid #ddd"
-  }
+  // let headerCSS = {
+  //   "display": "block",
+  //   "cursor": "pointer",
+  //   "min-height": "3rem",
+  //   "line-height": "3rem",
+  //   "padding": "0 1rem",
+  //   "background-color": "#fff",
+  //   "border-bottom": "1px solid #ddd"
+  // }
   if(name !== "Signature" && name !== "Authorized"){
     if(typeof(value) === "string"){
 
         let result = $(node);
-        result.css(headerCSS);
+        // result.css(headerCSS);
         result.text(name+": " + value);
         return result;
     }else{
