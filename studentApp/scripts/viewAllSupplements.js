@@ -42,9 +42,9 @@ function makeSupplementCard(supplement){
   // univ.text("University: "+supplement.University);
   // let id = $("<p>");
   // id.text("SupplementID: " + supplement.Id);
-
+  let accordionList = $("<ul>",{"class":"collapsible","data-collapsible":"accordion"});
   for (var name in supplement) {
-    cardContent.append(displaySupAttribute(name,supplement[name]));
+    cardContent.append(displaySupAttribute(name,supplement[name], undefined, undefined,accordionList));
   }
 
 
@@ -195,7 +195,7 @@ function makeSupplementCard(supplement){
 }
 
 
-function displaySupAttribute(name, value,node="<p>", properties={}){
+function displaySupAttribute(name, value,node="<p>", properties={},accordionList){
   if(name !== "Signature" && name !== "Authorized"){
     if(typeof(value) === "string"){
 
@@ -206,7 +206,7 @@ function displaySupAttribute(name, value,node="<p>", properties={}){
       let result = $(node);
       // result.text(name+": ");
      //class="collapsible" data-collapsible="accordion"
-      let list = $("<ul>",{"class":"collapsible","data-collapsible":"accordion"});
+      // let list = $("<ul>",{"class":"collapsible","data-collapsible":"accordion"});
       result.append(list);
       let listItem = $("<li>");
       //let header = $("<li>",{"class":"collection-header","style":"font-weight: bold;"});
@@ -214,10 +214,11 @@ function displaySupAttribute(name, value,node="<p>", properties={}){
       header.text(name);
       listItem.append(header);
       for (var name in value) {
-        listItem.append(displaySupAttribute(name,value[name],"<div>",{"class":"collapsible-body"}));
+        listItem.append(displaySupAttribute(name,value[name],"<div>",
+                            {"class":"collapsible-body"},accordionList));
       }
 
-      list.append(listItem);
+      accordionList.append(listItem);
       return result;
     }
  }
