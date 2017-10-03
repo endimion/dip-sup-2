@@ -197,13 +197,13 @@ function makeSupplementCard(supplement){
 
 function displaySupAttribute(name, value,node="<p>", properties={}){
   let headerCSS = {
-    display: "block";
-    cursor: "pointer";
-    min-height: "3rem";
-    line-height: "3rem";
-    padding: "0 1rem";
-    background-color: "#fff";
-    border-bottom: "1px solid #ddd";
+    display: "block",
+    cursor: "pointer",
+    min-height: "3rem",
+    line-height: "3rem",
+    padding: "0 1rem",
+    background-color: "#fff",
+    border-bottom: "1px solid #ddd"
   }
   if(name !== "Signature" && name !== "Authorized"){
     if(typeof(value) === "string"){
