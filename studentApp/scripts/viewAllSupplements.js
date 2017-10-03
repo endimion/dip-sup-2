@@ -199,7 +199,7 @@ function displaySupAttribute(name, value,node="<p>", properties={}){
   if(name !== "Signature" && name !== "Authorized"){
     if(typeof(value) === "string"){
 
-        let result = $(node,properties);
+        let result = $(node,{"class":"collapsible-header"});
         result.text(name+": " + value);
         return result;
     }else{
@@ -210,7 +210,7 @@ function displaySupAttribute(name, value,node="<p>", properties={}){
       // result.append(list);
       let listItem = $("<li>");
       //let header = $("<li>",{"class":"collection-header","style":"font-weight: bold;"});
-      let header = $("<div>",{"class":"collapsible-header"});
+      let header = $("<div>",{"class":"collapsible-header", "background-color": "whitesmoke"});
       header.text(name);
       listItem.append(header);
       for (var name in value) {
