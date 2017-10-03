@@ -204,10 +204,7 @@ function displaySupAttribute(name, value,node="<p>", properties={}){
     padding: "0 1rem";
     background-color: "#fff";
     border-bottom: "1px solid #ddd";
-  };
-
-
-
+  }
   if(name !== "Signature" && name !== "Authorized"){
     if(typeof(value) === "string"){
 
