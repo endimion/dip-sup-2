@@ -203,14 +203,19 @@ function displaySupAttribute(name, value,node="<p>", properties={}){
     }else{
       let result = $(node);
       // result.text(name+": ");
-      let list = $("<ul>",{"class":"collection with-header"});
+     //class="collapsible" data-collapsible="accordion"
+      let list = $("<ul>",{"class":"collapsible","data-collapsible":"accordion"});
       result.append(list);
-      let header = $("<li>",{"class":"collection-header","style":"font-weight: bold;"});
+      let listItem = $("<li>");
+      //let header = $("<li>",{"class":"collection-header","style":"font-weight: bold;"});
+      let header = $("<div>","class":"collapsible-header");
       header.text(name);
-      list.append(header);
+      listItem.append(header);
       for (var name in value) {
-        list.append(displaySupAttribute(name,value[name],"<li>",{"class":"collection-item"}));
+        listItem.append(displaySupAttribute(name,value[name],"<div>",{"class":"collapsible-body"}));
       }
+
+      list.append(listItem);
       return result;
     }
  }
