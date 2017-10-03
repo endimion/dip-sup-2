@@ -68,15 +68,14 @@ let evHelper = require('../utils/eventHelper.js');
 
 
 
- basic.createChannel();
+// basic.createChannel();
 //  basic.joinAllOrgsOnChannel("mychannel");
 
 
 
 // basic.installChaincode(["localhost:7051"],"dipSup_cc13","github.com/dipSup_cc","0.1", "nikos", "org1");
 
-//
-//  basic.instantiateChaincode("mychannel", "dipSup_cc13", "0.1", "init", [],"nikos", "org1");
+  basic.instantiateChaincode("mychannel", "dipSup_cc13", "0.1", "init", [],"nikos", "org1");
 
 
 // TEST INVOKES
