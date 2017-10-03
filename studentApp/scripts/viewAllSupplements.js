@@ -208,7 +208,7 @@ function displaySupAttribute(name, value,node="<p>", properties={}){
   if(name !== "Signature" && name !== "Authorized"){
     if(typeof(value) === "string"){
 
-        let result = $(node,{"class":"collapsible-header"});
+        let result = $(node);
         result.css(headerCSS);
         result.text(name+": " + value);
         return result;
