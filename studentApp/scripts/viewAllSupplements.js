@@ -210,7 +210,7 @@ function displaySupAttribute(name, value,node="<p>", properties={}){
       result.append(list);
       let listItem = $("<li>");
       //let header = $("<li>",{"class":"collection-header","style":"font-weight: bold;"});
-      let header = $("<div>","class":"collapsible-header");
+      let header = $("<div>",{"class":"collapsible-header"});
       header.text(name);
       listItem.append(header);
       for (var name in value) {
