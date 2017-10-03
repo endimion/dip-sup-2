@@ -275,6 +275,7 @@ var getRegisteredUsers = function(username, userOrg, isJson) {
 					});
 				}, (err) => {
 					console.log(username + ' failed to register');
+					console.log(err);
 					return '' + err;
 					//return 'Failed to register '+username+'. Error: ' + err.stack ? err.stack : err;
 				}).then((message) => {
