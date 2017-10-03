@@ -196,11 +196,28 @@ function makeSupplementCard(supplement){
 
 
 function displaySupAttribute(name, value,node="<p>", properties={}){
+  let entryCSS = {
+        "display": "block",
+        "cursor": "pointer",
+        "min-height": "3rem",
+        "line-height": "3rem",
+        "padding": "0 1rem",
+        "background-color": "#fff",
+        "border-bottom": "1px solid #ddd"
+  }
+
+  let headerCSS = {
+    "background-color": "aliceblue"
+  }
+
   if(name !== "Signature" && name !== "Authorized"){
     if(typeof(value) === "string"){
 
         let result = $(node,properties);
         result.text(name+": " + value);
+        if(node =="<p>"){
+          result.css(entryCSS);
+        }
         return result;
     }else{
       let result = $(node);
@@ -212,6 +229,7 @@ function displaySupAttribute(name, value,node="<p>", properties={}){
       //let header = $("<li>",{"class":"collection-header","style":"font-weight: bold;"});
       let header = $("<div>",{"class":"collapsible-header"});
       header.text(name);
+      header.css(headerCSS);
       listItem.append(header);
       for (var name in value) {
         listItem.append(displaySupAttribute(name,value[name],"<div>",
