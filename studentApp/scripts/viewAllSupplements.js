@@ -215,7 +215,7 @@ function displaySupAttribute(name, value,node="<p>", properties={}){
       listItem.append(header);
       for (var name in value) {
         listItem.append(displaySupAttribute(name,value[name],"<div>",
-                            {"class":"collapsible-body"},accordionList));
+                            {"class":"collapsible-body"}));
       }
 
       // accordionList.append(listItem);
