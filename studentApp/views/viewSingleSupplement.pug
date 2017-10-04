@@ -14,9 +14,46 @@ block content
         .card
           .row.card-content#textContent
             span.card-title Supplement #{supplement.Id}
-            p Alumni: #{supplement.Name} #{supplement.Surname}
-            p(style="word-break: break-all;") eID:  #{supplement.Owner}
-            p University:#{supplement.University}
+            span HolderInfo  
+              ul#HolderInfo
+                li Name: #{supplement.Holder_Info.Name}
+                li DateOfBirth: #{supplement.Holder_Info.DateOfBirth}
+                li StudentId: #{supplement.Holder_Info.StudentId}
+            span Qualification_Info  
+              ul#Qualification_Info
+                li Name: #{supplement.Qualification_Info.Name}
+                li FieldsOfStudy: #{supplement.Qualification_Info.FieldsOfStudy}
+                li InstitutionName: #{supplement.Qualification_Info.InstitutionName}
+                li InstitutionStatus: #{supplement.Qualification_Info.InstitutionStatus}
+                li InstructionLanguage: #{supplement.Qualification_Info.InstructionLanguage}
+            span Qualification_Level  
+              ul#Qualification_Level
+                li Qualification_Level: #{supplement.Qualification_Level.Level}
+                li Programme Length: #{supplement.Qualification_Level.ProgrammeLength}
+                li AccecssRequirements: #{supplement.Qualification_Level.AccecssRequirements}
+            span Content_Info  
+              ul#Content_Info
+                li Qualification_Level: #{supplement.Content_Info.ModeOfStudy}
+                li ProgrammeRequirements: #{supplement.Content_Info.ProgrammeRequirements}
+                li ProgrammeDetails: #{supplement.Content_Info.ProgrammeDetails}
+                li GradingScheme: #{supplement.Content_Info.GradingScheme}
+                li OverallClassificationOfQualification: #{supplement.Content_Info.OverallClassificationOfQualification}
+            span Qualification_Function  
+              ul#Qualification_Function
+                li AccessToFurtherStudy: #{supplement.Qualification_Function.AccessToFurtherStudy}
+                li ProfessionalStatus: #{supplement.Qualification_Function.ProfessionalStatus}
+            span Additional_Info  
+              ul#Additional_Info
+                li AdditionalInfo: #{supplement.Additional_Info.AdditionalInfo}
+                li InfoSources: #{supplement.Additional_Info.InfoSources}
+            span Supplement_Certification  
+              ul#Supplement_Certification
+                li Date: #{supplement.Supplement_Certification.Date}
+                li Capacity: #{supplement.Supplement_Certification.Capacity}
+                li Stamp: #{supplement.Supplement_Certification.Stamp}
+            span HigherEducationSystem_Info  
+              ul#HigherEducationSystem_Info
+                li HigherEductaionSystemInfo: #{supplement.HigherEducationSystem_Info.HigherEductaionSystemInfo}
           .row.card-content#buttons
             div.col.s6.m3.l3(style="position: relative; ")
               a.btn-floating.btn-large.waves-effect.waves-light.blue.darken-3(
