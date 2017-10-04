@@ -148,7 +148,7 @@ function makeSupplementCard(supplement){
 
   let downloadWrapper = $("<div>", {"class": "col s3 m3 l3"});
   actionContent.append(downloadWrapper);
-  let download = $("<a>", {"class": "btn-floating btn-medium waves-effect waves-light blue darken-3","href":"rest/download/"+supplement.Id});
+  let download = $("<a>", {"class": "btn-floating btn-medium waves-effect waves-light blue darken-3","href":"/supplement/rest/download/"+supplement.Id});
   let downloadIcon = $("<i>",{"class":"material-icons"});
   downloadIcon.text("file_download");
   download.append(downloadIcon);
