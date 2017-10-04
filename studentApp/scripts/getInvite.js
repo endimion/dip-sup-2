@@ -11,7 +11,7 @@ $( document ).ready(function() {
         $("#meassageDiv").text("Checking constraints...");
         if(invite.Recipient !== ""){
           $.get("/supplement/rest/view/"+invite.DSId).done(resp=>{
-              paintSupplement(JSON.parse(resp));
+              makeSupplementCard(JSON.parse(resp));
           }).fail(err =>{
             $("#headerMessage").text("UnAuthorized Access!");
             $("#supPreloader").hide();
@@ -138,7 +138,7 @@ function makeSupplementCard(supplement){
     accordionList.append(displaySupAttribute(name,supplement[name]));
   }
   cardContent.append(accordionList);
- 
+
   let cardContentSvg = $("div",{"id":"svgContent","display":"none","background":"white","width":"16em"});
   card.append(cardContentSvg);
 
