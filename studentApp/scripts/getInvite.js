@@ -65,7 +65,7 @@ function validateDS(){
   $.post("/supplement/rest/invite/"+inviteHash+"/authorize",{inviteHash:inviteHash,validationCode:code}).then(resp =>{
     console.log(resp);
     console.log(resp.status);
-    paintSupplement(JSON.parse(resp));
+    makeSupplementCard(JSON.parse(resp));
 
   }).fail(err =>{
       $("#headerMessage").text("validation failed");
@@ -114,4 +114,113 @@ function paintSupplement(supplement){
   $("#validationForm").hide();
   $("#supplementView").append(card);
 
+}
+
+
+
+
+
+
+
+
+
+
+
+function makeSupplementCard(supplement){
+  let card = $("<div>", {"class": "card"});
+  let cardContent = $("<div>", {"class": "card-content","id":"textContent"});
+  card.append(cardContent);
+  let cardTitle = $("<span>", {"class": "card-title"});
+  cardContent.append(cardTitle);
+
+  let accordionList = $("<ul>",{"class":"collapsible","data-collapsible":"accordion"});
+  for (var name in supplement) {
+    accordionList.append(displaySupAttribute(name,supplement[name]));
+  }
+  cardContent.append(accordionList);
+ 
+  let cardContentSvg = $("div",{"id":"svgContent","display":"none","background":"white","width":"16em"});
+  card.append(cardContentSvg);
+
+  let cardAction = $("<div>", {"class": "card-action"});
+  let actionContent = $("<div>", {"class": "row card-content"});
+  cardAction.append(actionContent);
+
+  let downloadWrapper = $("<div>", {"class": "col s3 m3 l3"});
+  actionContent.append(downloadWrapper);
+  let download = $("<a>", {"class": "btn-floating btn-medium waves-effect waves-light blue darken-3","href":"rest/download/"+supplement.Id});
+  let downloadIcon = $("<i>",{"class":"material-icons"});
+  downloadIcon.text("file_download");
+  download.append(downloadIcon);
+  downloadWrapper.append(download);
+
+
+
+
+
+
+
+
+  card.append(cardAction);
+
+  $("#supPreloader").hide();
+  $("#validationForm").hide();
+  $("#supplementView").append(card);
+
+
+  $('.collapsible').collapsible();
+}
+
+
+
+
+
+
+
+
+
+function displaySupAttribute(name, value,node="<p>", properties={}){
+  let entryCSS = {
+        "display": "block",
+        "cursor": "pointer",
+        "min-height": "3rem",
+        "line-height": "3rem",
+        "padding": "0 1rem",
+        "background-color": "#fff",
+        "border-bottom": "1px solid #ddd"
+  }
+
+  let headerCSS = {
+    "background-color": "aliceblue"
+  }
+
+  if(name !== "Signature" && name !== "Authorized"  && value !== "" && value){
+    if(typeof(value) === "string"){
+        let result = $(node,properties);
+        result.text(name+": " + value);
+        if(node =="<p>"){
+          result.css(entryCSS);
+        }
+        return result;
+    }else{
+      let result = $(node);
+      // result.text(name+": ");
+     //class="collapsible" data-collapsible="accordion"
+      // let list = $("<ul>",{"class":"collapsible","data-collapsible":"accordion"});
+      // result.append(list);
+      let listItem = $("<li>");
+      //let header = $("<li>",{"class":"collection-header","style":"font-weight: bold;"});
+      let header = $("<div>",{"class":"collapsible-header"});
+      header.text(name);
+      header.css(headerCSS);
+      listItem.append(header);
+      for (var name in value) {
+        listItem.append(displaySupAttribute(name,value[name],"<div>",
+                            {"class":"collapsible-body"}));
+      }
+
+      // accordionList.append(listItem);
+      return listItem;
+    }
+ }
 }
