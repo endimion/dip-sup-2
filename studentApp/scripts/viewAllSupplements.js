@@ -210,8 +210,8 @@ function displaySupAttribute(name, value,node="<p>", properties={}){
     "background-color": "aliceblue"
   }
 
-  if(name !== "Signature" && name !== "Authorized"){
-    if(typeof(value) === "string" && value !== "" && value){
+  if(name !== "Signature" && name !== "Authorized"  && value !== "" && value){
+    if(typeof(value) === "string"){
         let result = $(node,properties);
         result.text(name+": " + value);
         if(node =="<p>"){
