@@ -5,15 +5,15 @@ $( document ).ready(function() {
       $.get("rest/view")
         .then(resp =>{
           console.log(resp);
-          JSON.parse(resp).forEach(sup =>{
-            if(typeof(sup)=== "string" && sup.indexOf("Timeout") >= 0){
-                  getSupplements();
-            }else{
-                makeSupplementCard(sup);
-            }
-          });
-          $("#supPreloader").hide();
+          if(typeof(resp) === "string" && resp.indexOf("Timeout") >= 0){
+              getSupplements();
+          }else{
+            JSON.parse(resp).forEach(sup =>{
+                  makeSupplementCard(sup);
+            });
+          }
 
+          $("#supPreloader").hide();
           let onModalHide = function() {
             $(".sendEmail").show();
             $(".modalMessage").show();
