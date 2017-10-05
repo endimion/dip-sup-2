@@ -219,7 +219,7 @@ router.post('/inviteByQR',authorizeAll,(req,res) =>{
       basic.invokeChaincode([peerAddr], channel, chaincode, "addDiplomaSupplementInvite",
 														['{"DSHash":"'+inviteHash+'", "DSId":"'+supId+'","Email":"'+email+'"}',eid],eid, org)
       .then(resp => {
-        let code = qr.image('http://'+process.env.SRV_ADDR+'supplement/view/invite/'+inviteHash, { type: 'svg' });
+        let code = qr.image('http://'+process.env.SRV_ADDR+'/supplement/view/invite/'+inviteHash, { type: 'svg' });
         res.type('svg');
         code.pipe(res);
       }).catch(err =>{

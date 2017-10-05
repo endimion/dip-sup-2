@@ -1,24 +1,33 @@
 
 $( document ).ready(function() {
 
-    $.get("rest/view")
-      .then(resp =>{
-        console.log(resp);
-        JSON.parse(resp).forEach(sup =>{
-          makeSupplementCard(sup);
-        });
-        $("#supPreloader").hide();
+    let getSupplements = function(){
+      $.get("rest/view")
+        .then(resp =>{
+          console.log(resp);
+          JSON.parse(resp).forEach(sup =>{
+            if(sup instanceof string && sup.indexOf("time") >= 0){
+                  getSupplements();
+            }else{
+                makeSupplementCard(sup);
+            }
+          });
+          $("#supPreloader").hide();
 
-        let onModalHide = function() {
-          $(".sendEmail").show();
-          $(".modalMessage").show();
-          $(".preloader").hide();
-          $(".qrCode").hide();
-        };
-        $('.modal').modal({
-            complete : onModalHide
-        });
-       });
+          let onModalHide = function() {
+            $(".sendEmail").show();
+            $(".modalMessage").show();
+            $(".preloader").hide();
+            $(".qrCode").hide();
+          };
+          $('.modal').modal({
+              complete : onModalHide
+          });
+         });
+      }
+
+      getSupplements();
+
 });
 
 
