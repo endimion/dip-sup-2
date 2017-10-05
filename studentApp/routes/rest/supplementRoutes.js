@@ -38,8 +38,10 @@ router.get('/view',authorizeAll,(req,res) =>{
     let userDetails = getUserDetails(req,res);
     userDetails.then( details =>{
       let userEid = details.eid;
+      console.log("getSupplements userEid " + userEid);
       basic.queryChaincode(peer, channel, chaincode, [userEid], "getSupplements", userEid, org)
       .then( resp =>{
+        console.log(resp);
         res.status(200).json(resp);
       }).catch(err =>{
           console.log(err);

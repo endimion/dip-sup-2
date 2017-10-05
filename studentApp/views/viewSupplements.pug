@@ -23,16 +23,16 @@ block content
         a.btn.btn-primary(href="/login") Back 
 
   block scripts
-    script(type="text/javascript" src="http://canvg.github.io/canvg/rgbcolor.js")
-    script(type="text/javascript" src="http://canvg.github.io/canvg/StackBlur.js")
-    script(type="text/javascript" src="http://canvg.github.io/canvg/canvg.js")
-    script
+    script(async, defer, type="text/javascript" src="http://canvg.github.io/canvg/rgbcolor.js")
+    script(async, defer, type="text/javascript" src="http://canvg.github.io/canvg/StackBlur.js")
+    script(async, defer, type="text/javascript" src="http://canvg.github.io/canvg/canvg.js")
+    script(async, defer)
       include ../scripts/qrScript.js
-    script
+    script(async, defer)
       include ../scripts/emailScript.js
-    script
+    script(async, defer)
       include ../scripts/viewAllSupplements.js
-    script.
+    script(async, defer).
       var onModalHide = function() {
         $(".sendEmail").show();
         $(".modalMessage").show();
