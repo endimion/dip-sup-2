@@ -6,7 +6,7 @@ $( document ).ready(function() {
         .then(resp =>{
           console.log(resp);
           JSON.parse(resp).forEach(sup =>{
-            if(sup.indexOf("Timeout") >= 0){
+            if(typeof(sup)=== "string" && sup.indexOf("Timeout") >= 0){
                   getSupplements();
             }else{
                 makeSupplementCard(sup);
