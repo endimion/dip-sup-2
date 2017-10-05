@@ -26,10 +26,8 @@ block content
     script(defer, type="text/javascript" src="http://canvg.github.io/canvg/rgbcolor.js")
     script(defer, type="text/javascript" src="http://canvg.github.io/canvg/StackBlur.js")
     script(defer, type="text/javascript" src="http://canvg.github.io/canvg/canvg.js")
-    script
-      include ../scripts/qrScript.js
-    script
-      include ../scripts/emailScript.js
+    script(src="../scripts/qrScript.js")
+    script(src="../scripts/emailScript.js")
     script(src="../scripts/viewAllSupplements.js")
     script.
       var onModalHide = function() {
@@ -37,7 +35,6 @@ block content
         $(".modalMessage").show();
         $(".preloader").hide();
         $(".qrCode").hide();
-        
       };
       $(document).ready(function(){
           $('.modal').modal({
