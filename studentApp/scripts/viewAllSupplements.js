@@ -6,7 +6,7 @@ $( document ).ready(function() {
         .then(resp =>{
           console.log(resp);
           if(typeof(resp) === "string"
-              && (resp.indexOf("Timeout") >= 0 || resp.indexOf("Error: Endpoint read failed") >= 0 )){
+              && (resp.indexOf("Timeout") >= 0 || resp.indexOf("Endpoint read failed") >= 0 )){
               getSupplements();
           }else{
             JSON.parse(resp).forEach(sup =>{
