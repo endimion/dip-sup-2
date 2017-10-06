@@ -12,9 +12,8 @@ $( document ).ready(function() {
             JSON.parse(resp).forEach(sup =>{
                   makeSupplementCard(sup);
             });
+            $("#supPreloader").hide();
           }
-
-          $("#supPreloader").hide();
           let onModalHide = function() {
             $(".sendEmail").show();
             $(".modalMessage").show();
