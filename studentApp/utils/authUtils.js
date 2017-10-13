@@ -87,6 +87,12 @@ exports.userDetailsFromToken = (req,res) =>{
         console.log(token.sub);
         let result = JSON.parse(token.sub);
         result.eid = stripchar.RSExceptUnsAlpNum(result.eid);
+        if(!result.firstName){
+          result.firstName = result.currentFirstName;
+        }
+        if(!result.familyName){
+          result.firstName = result.currentfamilyName;
+        }
         result.userName = result.firstName+"_"+result.familyName;
         resolve(result);
       }
