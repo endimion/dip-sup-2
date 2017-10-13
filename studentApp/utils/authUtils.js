@@ -91,7 +91,7 @@ exports.userDetailsFromToken = (req,res) =>{
           result.firstName = result.currentGivenName;
         }
         if(!result.familyName){
-          result.firstName = result.currentFamilyName;
+          result.familyName = result.currentFamilyName;
         }
         result.userName = result.firstName+"_"+result.familyName;
         resolve(result);
