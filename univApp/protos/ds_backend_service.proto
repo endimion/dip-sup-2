@@ -17,10 +17,14 @@ service DsBackend {
 // university DataBase
 //date format dd-MM-yyyy
 message DSCriteria {
-  string uniId = 1;
-  string name = 2;
-  string dateOfBirth = 3;
+  string Name = 1;
+  string Eid = 2;
+  string UniId =3;
+  string EidHash = 4;
+  string University = 5;
+  string DateOfBirth = 6;
 }
+
 
 // The Diploma Supplement received from
 // the University Backend
