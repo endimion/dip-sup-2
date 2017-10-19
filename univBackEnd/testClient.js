@@ -13,8 +13,9 @@ var client = new dsBackend.DsBackend('localhost:50051',
 var COORD_FACTOR = 1e7;
 
 
-// client.GetDiplomaSupplements("test1");
-let call = client.getDiplomaSupplements({"uniId":"uniid","name":"name","dateOfBirth":"dob"});
+// client.GetDiplomaSupplements("test1");message DSCriteria {
+let call = client.getDiplomaSupplements({"Name":"n","Eid":"e",
+"UniId":"u","EidHash":"eh","University":"uni","DateOfBirht":"dob"});
 call.on('data', function(ds) {
   console.log("received DS");
   console.log(ds);

@@ -16,9 +16,12 @@ service DsBackend {
 // The criteria by which to search for a diplomaSupplement in the
 // university DataBase
 message DSCriteria {
-  string uniId = 1;
-  string name = 2;
-  string dateOfBirth = 3;
+  string Name = 1;
+  string Eid = 2;
+  string UniId =3;
+  string EidHash = 4;
+  string University = 5;
+  string DateOfBirth = 6;
 }
 
 // The Diploma Supplement received from
