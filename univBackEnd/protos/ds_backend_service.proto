@@ -18,10 +18,11 @@ service DsBackend {
 message DSCriteria {
   string Name = 1;
   string Eid = 2;
-  string UniId =3;
-  string EidHash = 4;
-  string University = 5;
-  string DateOfBirth = 6;
+  string Email = 3;
+  string UniId =4;
+  string EidHash = 5;
+  string University = 6;
+  string DateOfBirth = 7;
 }
 
 // The Diploma Supplement received from
