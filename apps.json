@@ -24,6 +24,19 @@
                         "SRV_ADDR":"http://138.68.103.237",
                         "NODE_ENV": "production",
                         "BASE_URL":"/univ/"}
-  }
+  },
+  
+  {"name": "univBackend",
+    "script": "testServer.js",
+    "cwd": "./univBackEnd",
+    //"watch": true,
+    "env": {"ENV_VARIABLE":123, "SRV_ADDR":"127.0.0.1:8001",
+                                      "NODE_ENV": "development",
+                                    "BASE_URL":"/"},
+    "env_production": {"ENV_VARIABLE":123,
+                        "SRV_ADDR":"http://138.68.103.237",
+                        "NODE_ENV": "production",
+                        "BASE_URL":"/univ/"}
+  } 
 ]}
 
