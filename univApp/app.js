@@ -42,7 +42,7 @@ evHelper.registerEventHubForOrg(org,chaincode,'evtsender', event => {
               //  "Surname" : dbDipSup.surname,
                "University" : univName,
                "Authorized" : [],
-               "Id" :  dbDipSup._id.valueOf(),
+               "Id" :  dbDipSup.id, //_id.valueOf(),
                "Holder_Info": dbDipSup.Holder_Info,
                "Qualification_Info": dbDipSup.Qualification_Info,
                "Qualification_Level": dbDipSup.Qualification_Level,

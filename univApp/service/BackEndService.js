@@ -21,6 +21,7 @@ module.exports.findAllDiplomaByCriterria = function(criteria){
         results.push(ds);
       });
       call.on('end',function(){
+        console.log(results);
         resolve(results);
       });
   });
