@@ -1,0 +1,91 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.dsbackend";
+option java_outer_classname = "DsBackendProto";
+option objc_class_prefix = "DS";
+
+package dsbackend;
+
+
+// Interface exported by the server.
+service DsBackend {
+  rpc GetDiplomaSupplements(DSCriteria) returns (stream DiplomaSupplement){}
+}
+
+// The criteria by which to search for a diplomaSupplement in the
+// university DataBase
+//date format dd-MM-yyyy
+message DSCriteria {
+  string uniId = 1;
+  string name = 2;
+  string dateOfBirth = 3;
+}
+
+// The Diploma Supplement received from
+// the University Backend
+message DiplomaSupplement{
+  string university = 1;
+  HolderInfo  Holder_Info =2;
+  QualificationInfo Qualification_Info=3;
+  QualificationLevel Qualification_Level=4;
+  ContentInfo Content_Info=5;
+  QualificationFunction Qualification_Function=6;
+  AdditionalInfo Additional_Info=7;
+  SupplementCertification Supplement_Certification=8;
+  HigherEducationSystemInfo HigherEducationSystem_Info=9;
+  string id  =10;
+}
+
+//date format dd-MM-yyyy
+message HolderInfo{
+  string Name =1;
+  string DateOfBirth=2;
+  string StudentId=3;
+}
+
+message QualificationInfo{
+  string Name=1;
+  string FieldsOfStudy=2;
+  string InstitutionName=3;
+  string InstitutionStatus=4;
+  string InstructionLanguage=5;
+}
+
+message QualificationLevel{
+  string Level =1;
+  string ProgrammeLength =2;
+  string AccecssRequirements=3;
+}
+
+message ContentInfo{
+  string ModeOfStudy=1;
+  string ProgrammeRequirements=2;
+  string ProgrammeDetails=3;
+  string GradingScheme=4;
+  string OverallClassificationOfQualification=5;
+
+}
+
+message QualificationFunction{
+  string AccessToFurtherStudy=1;
+  string ProfessionalStatus=2;
+}
+
+message AdditionalInfo{
+  string AdditionalInfo=1;
+  string InfoSources=2;
+}
+
+//date format dd-MM-yyyy
+message SupplementCertification{
+  string Date=1;
+  string Name =2;
+  string Capacity=3;
+  string Signature=4;
+  string Stamp=5;
+}
+
+message HigherEducationSystemInfo{
+  string HigherEducationSystem_Info=1;
+}
