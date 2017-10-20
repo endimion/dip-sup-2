@@ -50,7 +50,7 @@ module.exports.wrapDbResToProto = function(ds){
   }
 
   let HigherEducationSystemInfo={
-    HigherEducationSystem_Info : ds.HigherEducationSystem_Info.HigherEducationSystem_Info;
+    HigherEducationSystem_Info : ds.HigherEducationSystem_Info.HigherEducationSystem_Info
   }
 
   return {
@@ -63,7 +63,7 @@ module.exports.wrapDbResToProto = function(ds){
     Additional_Info: AdditionalInfo,
     Supplement_Certification : SupplementCertification,
     HigherEducationSystem_Info: HigherEducationSystemInfo,
-    id: ds._id
+    id: ds._id.valueOf().toString()
   }
 
 
