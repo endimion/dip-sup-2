@@ -15,16 +15,19 @@ const dsService = require('./service/DSService.js');
 */
 function getDiplomaSupplements(call) {
   console.log("getDiplomaSupplements called");
-    let counter = 0;
+   let counter = 0;
    dsService.findAllDiplomaByCriterria(call.request).then(result =>{
        result.forEach(ds =>{
         console.log("writing DS " + counter);
+        ds.id = ds._id;
+        delete ds._id; 
+	console.log(ds);
         call.write(ds);
         counter++;
        });
+       call.end();	
   });
 
-  call.end();
 }
 
 

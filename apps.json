@@ -26,7 +26,7 @@
   },
 
   {"name": "univBackend",
-    "script": "testServer.js",
+    "script": "server.js",
     "cwd": "./univBackEnd",
     "env": {"ENV_VARIABLE":123, "SRV_ADDR":"127.0.0.1:8001",
                                       "NODE_ENV": "development",

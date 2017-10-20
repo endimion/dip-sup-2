@@ -1,6 +1,5 @@
 
 const ds = require('../model/DSModel.js');
-const signServ = require("./SignService.js");
 const DiplomaSupplement = ds.Schema;
 // const conn = ds.connection;
 const mongoose = require('mongoose');
