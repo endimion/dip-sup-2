@@ -31,9 +31,9 @@ function getDiplomaSupplements(call) {
           HigherEducationSystem_Info: ds.HigherEducationSystem_Info,
           id: ds._id
         }
-        console.log("will write to stream");
+        console.log("Will write to STREAM: " + counter);
         console.log(resp);
-        call.write(resp);
+        // call.write(resp);
         counter++;
        });
        call.end();
