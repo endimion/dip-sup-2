@@ -15,7 +15,6 @@ service DsBackend {
 
 // The criteria by which to search for a diplomaSupplement in the
 // university DataBase
-//date format dd-MM-yyyy
 message DSCriteria {
   string Name = 1;
   string Eid = 2;
@@ -25,7 +24,6 @@ message DSCriteria {
   string University = 6;
   string DateOfBirth = 7;
 }
-
 
 // The Diploma Supplement received from
 // the University Backend
@@ -42,53 +40,51 @@ message DiplomaSupplement{
   string id  =10;
 }
 
-//date format dd-MM-yyyy
 message HolderInfo{
-  string Name =1;
-  string DateOfBirth=2;
-  string StudentId=3;
+  string StudentId = 1;
+  string DateOfBirth = 2;
+  string Name =3;
 }
 
 message QualificationInfo{
-  string Name=1;
-  string FieldsOfStudy=2;
+  string InstructionLanguage=1;
+  string InstitutionStatus=2;
   string InstitutionName=3;
-  string InstitutionStatus=4;
-  string InstructionLanguage=5;
+  string FieldsOfStudy=4;
+  string Name=5;
 }
 
 message QualificationLevel{
-  string Level =1;
+  string Level =3;
   string ProgrammeLength =2;
-  string AccecssRequirements=3;
+  string AccecssRequirements=1;
 }
 
 message ContentInfo{
-  string ModeOfStudy=1;
-  string ProgrammeRequirements=2;
+  string ModeOfStudy=5;
+  string ProgrammeRequirements=4;
   string ProgrammeDetails=3;
-  string GradingScheme=4;
-  string OverallClassificationOfQualification=5;
+  string GradingScheme=2;
+  string OverallClassificationOfQualification=1;
 
 }
 
 message QualificationFunction{
-  string AccessToFurtherStudy=1;
-  string ProfessionalStatus=2;
+  string AccessToFurtherStudy=2;
+  string ProfessionalStatus=1;
 }
 
 message AdditionalInfo{
-  string AdditionalInfo=1;
-  string InfoSources=2;
+  string AdditionalInfo=2;
+  string InfoSources=1;
 }
 
-//date format dd-MM-yyyy
 message SupplementCertification{
-  string Date=1;
-  string Name =2;
+  string Date=5;
+  string Name =4;
   string Capacity=3;
-  string Signature=4;
-  string Stamp=5;
+  string Signature=2;
+  string Stamp=1;
 }
 
 message HigherEducationSystemInfo{
