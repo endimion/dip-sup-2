@@ -19,13 +19,22 @@ function getDiplomaSupplements(call) {
    dsService.findAllDiplomaByCriterria(call.request).then(result =>{
        result.forEach(ds =>{
         console.log("writing DS " + counter);
-        ds.id = ds._id;
-        delete ds._id; 
-	console.log(ds);
-        call.write(ds);
+        let resp = {
+          university: ds.university,
+          Holder_Info: ds.Holder_Info,
+          Qualification_Info: ds.Qualification_Info,
+          Qualification_Level :ds.Qualification_Level,
+          Content_Info : ds.Content_Info,
+          Qualification_Function: ds.Qualification_Function,
+          Additional_Info: ds.Additional_Info,
+          Supplement_Certification : ds.Supplement_Certification,
+          HigherEducationSystem_Info: ds.HigherEducationSystem_Info,
+          id: ds._id
+        }
+        call.write(resp);
         counter++;
        });
-       call.end();	
+       call.end();
   });
 
 }
