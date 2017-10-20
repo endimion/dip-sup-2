@@ -21,7 +21,7 @@ function getDiplomaSupplements(call) {
         console.log("writing DS " + counter);
         let resp = {
           university: ds.university,
-          Holder_Info: ds.Holder_Info,
+          Holder_Info: ds.Holder_Info ,
           Qualification_Info: ds.Qualification_Info,
           Qualification_Level :ds.Qualification_Level,
           Content_Info : ds.Content_Info,
@@ -31,6 +31,8 @@ function getDiplomaSupplements(call) {
           HigherEducationSystem_Info: ds.HigherEducationSystem_Info,
           id: ds._id
         }
+        console.log("will write to stream");
+        console.log(resp);
         call.write(resp);
         counter++;
        });
