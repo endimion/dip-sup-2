@@ -106,13 +106,8 @@ type SupplementsAsset struct{
 	Supplements []DiplomaSupplement
 }
 
-type EmployersAsset struct{
-	Employers []string
-}
 
-type UniversitiesAsset struct{
-	Universities []string
-}
+
 
 type DiplomaSupplementInvitesAsset struct{
 	DiplomaSupplementInvites map[string]DiplomaSupplementInvite
@@ -129,11 +124,9 @@ type DiplomaSupplementInvite struct {
 
 // Structure that holds all the assets of the app
 type Assets struct{
-	Supplements []DiplomaSupplement
-	Employers []string
-	Universities []string
-	DiplomaSupplementInvite map[string]DiplomaSupplementInvite
-	PublishRequests []PublishRequest
+	// Supplements []DiplomaSupplement
+	// DiplomaSupplementInvite map[string]DiplomaSupplementInvite
+	//PublishRequests []PublishRequest
 }
 
 type AuthorizedUser struct{
@@ -177,21 +170,14 @@ func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface) pb.Response  {
 	// _, args := stub.GetFunctionAndParameters()
 
 	// "list", slice in golang, that will hold the DiplomaSupplements as strings
-	var supplements = make([]DiplomaSupplement,0)
-	// slice, that will hold the eIDs of the employers as strings
-	var employers = make([]string,0)
-	// slice, that will hold the eIDs of the universities as strings
-	var universities = make([]string,0)
-	// slice, that will hold the publication Requests of the users
-	var pubRequests = make([]PublishRequest,0)
+	// var supplements = make([]DiplomaSupplement,0)
+
 	//map that will hold the diplomasupplmet-hash-recipient map
-	var diplomaSupplementInvites = make(map[string]DiplomaSupplementInvite)
+	// var diplomaSupplementInvites = make(map[string]DiplomaSupplementInvite)
 
-
-	assets := Assets{ Universities: universities,
-		Employers:employers, Supplements:supplements,
-		DiplomaSupplementInvite:diplomaSupplementInvites,
-		PublishRequests : pubRequests	}
+//  DiplomaSupplementInvite:diplomaSupplementInvites,
+	assets := Assets{}
+		//  Supplements:supplements}
 	encodedAssets,err  := json.Marshal(assets)
 	err = stub.PutState("assets", []byte(encodedAssets))
 	if err != nil {
@@ -247,9 +233,7 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
 		return t.GetDiplomaSupplementInvitesByHash(stub,args)
 	}
 
-	if function == "getPendingRequestByUniv" {
-		return t.GetPendingRequestByUniv(stub,args)
-	}
+
 
 	return shim.Error(fmt.Sprintf("Unknown action. Got: %v", args[0]))
 }

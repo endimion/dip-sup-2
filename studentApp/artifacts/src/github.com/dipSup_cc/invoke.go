@@ -10,6 +10,8 @@ import (
 
 
 //Adds a request by a user to the university to publish his DS
+// PubRequests will be added using as key : The combination of  userEid + university
+// New requests will replace old ones as a user might want to publish a newly obtained DS
 func (t *SimpleChaincode) RequestSupplementPublication(stub shim.ChaincodeStubInterface, args []string)  pb.Response {
 		if len(args) != 8 {
 			return SendErrorEvent(stub,"Incorrect number of arguments. Expecting 8, the first is the userEid")
@@ -25,16 +27,8 @@ func (t *SimpleChaincode) RequestSupplementPublication(stub shim.ChaincodeStubIn
 		university := args[6]
 		bday := args[7]
 
-		//get the assets from the state
-		assetBytes, err := stub.GetState("assets")
-		if err != nil {
-			return SendErrorEvent(stub,"Failed to get state for key \"assets\"")
-		}
-		//get the supplements from the assets
-		assets := Assets{}
-		json.Unmarshal([]byte(assetBytes), &assets)
-		pubRequestsSlice := assets.PublishRequests
-
+		//build the new key to put the PubRequest in the db (state)
+		key := userEid + university
 
 		isIssuedBySender  :=	( userEid == eid)
 		if isIssuedBySender {
@@ -46,18 +40,16 @@ func (t *SimpleChaincode) RequestSupplementPublication(stub shim.ChaincodeStubIn
 				EidHash : eidHash,
 				University : university,
  				DateOfBirth: bday }
-			pubRequestsSlice = append(pubRequestsSlice,request)
-			assets.PublishRequests = pubRequestsSlice
+			encodedReq,err  := json.Marshal(request)
+			if err != nil {
+				return SendErrorEvent(stub,"Could not Marshal PubRequest")
+			}
+			// put the asset in the state
+			err = stub.PutState(key, []byte(encodedReq))
+			if err != nil {
+				SendErrorEvent(stub,"Could not put request to state")
+			}
 
-			//update the state with the new assets
-			encodedAssets,err  := json.Marshal(assets)
-			if err != nil {
-				return SendErrorEvent(stub,"Could not Marshal Assets")
-			}
-			err = stub.PutState("assets", []byte(encodedAssets))
-			if err != nil {
-				SendErrorEvent(stub,"Could not put assets to state")
-			}
 			//Execution of chaincode finishe successfully
 			SendSuccessEvent(stub,request,"Tx chaincode finished OK.")
 		}else{
@@ -91,50 +83,55 @@ func (t *SimpleChaincode) Publish(stub shim.ChaincodeStubInterface, args []strin
 	isIssuedBySender  :=	( userEid == suplement.University)
 
 	if isIssuedBySender{
-			//get the assets from the state
-			assetBytes, err := stub.GetState("assets")
+			//get the publication Request if it exists (key is userEid + university)
+			pubRequestKey := suplement.Owner+suplement.University
+			requestBytes, err := stub.GetState(pubRequestKey)
 			if err != nil {
-				return SendErrorEvent(stub,"{\"Error\":\"Failed to get state for key \"assets\"}" )
+				return SendErrorEvent(stub,"{\"Error\":\"Failed to get state for key"+pubRequestKey+"  }" )
 			}
-			assets := Assets{}
-			json.Unmarshal([]byte(assetBytes), &assets)
+			request := PublishRequest{}
+			json.Unmarshal([]byte(requestBytes), &request)
 
-			found := false
-			index := -1
-			pubRequestsSlice := assets.PublishRequests
-			for indx, request := range pubRequestsSlice{
-				if (request.EidHash == suplement.Owner) &&
-				(request.University == suplement.University){
-					found = true
-					index = indx
-					break
-				}
+			// assetBytes, err := stub.GetState("assets")
+			// if err != nil {
+			// 	return SendErrorEvent(stub,"{\"Error\":\"Failed to get state for key"+pubRequestKey+"  }" )
+			// }
+			// assets := Assets{}
+			// json.Unmarshal([]byte(assetBytes), &assets)
+			//
+			// //apend the received supplement to the assets
+			// supplementSlice := assets.Supplements
+			// supplementSlice = append(supplementSlice,suplement)
+			// assets.Supplements = supplementSlice
+
+			//update the state with the new assets
+			encodedSupplement,err  := json.Marshal(suplement)
+			if err != nil {
+				return SendErrorEvent(stub, "Could not  marshal Supplement")
 			}
-			if found {
-				//apend the received supplement to the assets
-				supplementSlice := assets.Supplements
-				supplementSlice = append(supplementSlice,suplement)
-				assets.Supplements = supplementSlice
-
-				//remove the request from the pending requests
-				pubRequestsSlice= RemoveFromReqSlice(pubRequestsSlice,index)
-				assets.PublishRequests = pubRequestsSlice
-
-				//update the state with the new assets
-				encodedAssets,err  := json.Marshal(assets)
-				if err != nil {
-					return SendErrorEvent(stub, "Could not  marshal assets")
-				}
-				err = stub.PutState("assets", []byte(encodedAssets))
-				if err != nil {
-					return SendErrorEvent(stub,"Could not place assets back in the state" )
-				}
-				//Execution of chaincode finished successfully
-				return SendSuccessEvent(stub,PublishRequest{},"Tx chaincode finished OK.")
-
-			}else{
-				return SendErrorEvent(stub,"No Publication Request Found for" + suplement.Owner + " \n " + suplement.University)
+			//the key of the supplement is its Id
+			err = stub.PutState(suplement.Id, []byte(encodedSupplement))
+			if err != nil {
+				return SendErrorEvent(stub,"Could not place Supplement in the state" )
 			}
+
+			//add a composite key in the sate for easy query
+			// this composite key will be suplement.Id ~ suplement.Owner
+			// this will allow us to query supplements based on Owner
+			indexName := "Id~Owner"
+			idOwnerIndexKey, err := stub.CreateCompositeKey(indexName, []string{suplement.Id, suplement.Owner})
+			if err != nil {
+				return SendErrorEvent(stub,"Could not  make composite key for values " + suplement.Id +"::"+ suplement.Owner )
+			}
+			//  Save index entry to state. Only the key name is needed, no need to store a duplicate copy of the DS.
+			//  Note - passing a 'nil' value will effectively delete the key from state, therefore we pass null character as value
+			value := []byte{0x00}
+			stub.PutState(idOwnerIndexKey, value)
+
+			//remove the PublicationRequest from the state since it was satisfied
+			err = stub.DelState(pubRequestKey)
+			//Execution of chaincode finished successfully
+			return SendSuccessEvent(stub,PublishRequest{},"Tx chaincode finished OK.")
 		}else{
 			return SendErrorEvent(stub," Identities not match, expecting " + suplement.University + " found " + userEid )
 		}
@@ -147,6 +144,8 @@ func (t *SimpleChaincode) Publish(stub shim.ChaincodeStubInterface, args []strin
 		// args[0] the DSMAP  JSON string
 		// Only a user that has the attribute typeOfUser = Student can invoke this transaction with success
 		// and he has to be the owner of the supplment as that is identified by the DSId fieled of the DSMAP struct
+		//
+		// The invites are stored in teh state using teh DSHash value (which is unique)
 		func (t *SimpleChaincode) AddDiplomaSupplementInvite(stub shim.ChaincodeStubInterface, args []string)  pb.Response {
 			if len(args) != 2 {
 				return SendErrorEvent(stub,"Incorrect number of arguments. Expecting 2. DSInvite and UserEid")
@@ -158,13 +157,10 @@ func (t *SimpleChaincode) Publish(stub shim.ChaincodeStubInterface, args []strin
 			json.Unmarshal([]byte(dsinviteString), &dsinvite)
 			senderEid := args[1]
 
-			//
-			// // Here the ABAC API is called to verify the attributes, only then will the new
-			// // supplement be added
-			// isUniversity, _ := stub.VerifyAttribute("typeOfUser", []byte("Student"))
+
 			suplementId := dsinvite.DSId
-			//
-			//
+
+
 			assetBytes, err := stub.GetState("assets")
 			if err != nil {
 				return SendErrorEvent(stub, "Error, Failed to get state for key \"assets\"" )
@@ -172,29 +168,30 @@ func (t *SimpleChaincode) Publish(stub shim.ChaincodeStubInterface, args []strin
 			assets := Assets{}
 			json.Unmarshal([]byte(assetBytes), &assets)
 			//
-			supplement, position := FindSupplementInSlice(assets.Supplements, suplementId)
-			if position == -1{
+			supplementBytes,err := stub.GetState(suplementId)
+			if err != nil{
 				return SendErrorEvent(stub, "Error, No Supplement Found with the given ID:: " + suplementId + ".")
 			}
+			supplement := DiplomaSupplement{}
+			json.Unmarshal([]byte(supplementBytes), &supplement)
 			//
 			// //check if the supplement is issued by the user sending the transaction
 			// isIssuedBySender, _ := stub.VerifyAttribute("eID", []byte(supplement.Owner))
 			//
 			if senderEid == supplement.Owner{
-			// 	//apend the received DiplomaSupplementInvite to the assets
-				assets.DiplomaSupplementInvite[dsinvite.DSHash] = dsinvite
-			//
-			// 	//update the state with the new assets
-				encodedAssets,err  := json.Marshal(assets)
+		 		encodedInvite,err := json.Marshal(dsinvite)
 				if err != nil {
-					return SendErrorEvent(stub, "Error, Marshaling Assets" )
+					return SendErrorEvent(stub, "Error, Marshaling Invite" )
 				}
-				err = stub.PutState("assets", []byte(encodedAssets))
+				//put the invite in the state
+				err = stub.PutState(dsinvite.DSHash, []byte(encodedInvite))
 				if err != nil {
-					return SendErrorEvent(stub,  "Error,putting assets back in state" )
+					return SendErrorEvent(stub,  "Error,putting INVITE back in state" )
 				}
 			// 	//Execution of chaincode finishe successfully
 				return SendSuccessEvent(stub,PublishRequest{},"Tx chaincode finished OK.")
+			}else{
+				return SendErrorEvent(stub,  "Owner and sender do not match " + senderEid +","+ supplement.Owner)
 			}
 			return shim.Success(nil)
 		}
@@ -224,51 +221,56 @@ func (t *SimpleChaincode) Publish(stub shim.ChaincodeStubInterface, args []strin
 			json.Unmarshal([]byte(assetBytes), &assets)
 			//
 			//find the DSInvite in the state
-			dsInv,ok:= assets.DiplomaSupplementInvite[dsHash]
-			if ok {
+			dsInvBytes,err:= stub.GetState(dsHash)
+			if err == nil {
+				dsInv := DiplomaSupplementInvite{}
+				json.Unmarshal([]byte(dsInvBytes), &dsInv)
 				if dsInv.Recipient != "" {
 					return SendErrorEvent(stub, "Error, DiplomaSupplementInvite is already finalized! Cannot add new Recipient!")
 				}else{
 						if dsInv.Code != emailedCode {
 							return SendErrorEvent(stub,  "Error, Wrong Authorization code!")
 						}else{
-								dsInv.Recipient = recepientEid
 			// 					//update the assets and put them in the state
 			// 					//update the DSInvite
-								assets.DiplomaSupplementInvite[dsHash] = dsInv
-			//
-			// 					//update the actual supplement
-								supplementSlice := assets.Supplements
-								suplementId := dsInv.DSId
-								supToUpdate , position := FindSupplementInSlice(supplementSlice, suplementId)
-								if position == -1 {
-									return SendErrorEvent(stub,"Error, No supplement found for the given ID::" +suplementId+".")
-								}
-								authorizedUserEntry  := AuthorizedUser{Email:dsInv.Email, Eid: recepientEid}
-								supToUpdate.Authorized = append(supToUpdate.Authorized,authorizedUserEntry)
-			// 					//delete the old version of the supplement
-								supplementSlice = RemoveFromSupSlice(supplementSlice,position)
-			// 					//add the new supplement
-								supplementSlice = append(supplementSlice,supToUpdate)
-								assets.Supplements = supplementSlice
-			//
-								encodedAssets,err  := json.Marshal(assets)
-								if err != nil {
-									return SendErrorEvent(stub,"Error, Marshaling assets")
-								}
-								err = stub.PutState("assets", []byte(encodedAssets))
-								if err != nil {
-									return SendErrorEvent(stub,"Error, putting assets")
-								}
-			// 					//Execution of chaincode finishe successfully
-								return SendSuccessEvent(stub,PublishRequest{},"Tx chaincode finished OK.")
-							}
+						dsInv.Recipient = recepientEid
+						encodedInvite,err := json.Marshal(dsInv)
+						if err != nil {
+							return SendErrorEvent(stub,"Error, Marshaling invite")
 						}
-						}else{
-							return SendErrorEvent(stub, "Error, No DiplomaSupplementInvite Found with the given hash " + dsHash)
+						err = stub.PutState(dsHash, []byte(encodedInvite))
+						if err != nil {
+							return SendErrorEvent(stub,"Error, putting invite")
 						}
-						return  shim.Success(nil)
+
+						suplementId := dsInv.DSId
+						supToUpdateBytes,err := stub.GetState(suplementId)
+						if err != nil {
+							return SendErrorEvent(stub,"Error, No supplement found for the given ID::" +suplementId+".")
+						}
+						supToUpdate := DiplomaSupplement{}
+						json.Unmarshal([]byte(supToUpdateBytes), &supToUpdate)
+
+						authorizedUserEntry  := AuthorizedUser{Email:dsInv.Email, Eid: recepientEid}
+						supToUpdate.Authorized = append(supToUpdate.Authorized,authorizedUserEntry)
+
+						encodedSupplement,err  := json.Marshal(supToUpdate)
+						if err != nil {
+							return SendErrorEvent(stub,"Error, Marshaling Supplement")
+						}
+						err = stub.PutState(suplementId, []byte(encodedSupplement))
+						if err != nil {
+							return SendErrorEvent(stub,"Error, putting assets")
+						}
+	// 					//Execution of chaincode finishe successfully
+						return SendSuccessEvent(stub,PublishRequest{},"Tx chaincode finished OK.")
 					}
+				}
+		}else{
+				return SendErrorEvent(stub, "Error, No DiplomaSupplementInvite Found with the given hash " + dsHash)
+	}
+	return  shim.Success(nil)
+}
 
 
 /*
@@ -289,27 +291,30 @@ func (t *SimpleChaincode) AddCodeForDSInvite(stub shim.ChaincodeStubInterface, a
 		json.Unmarshal([]byte(assetBytes), &assets)
 		//
 		// //find the DSInvite in the state
-		dsInv,ok:= assets.DiplomaSupplementInvite[dsHash]
-		if ok {
-		if dsInv.Recipient != "" {
-			return SendErrorEvent(stub,"Error, DiplomaSupplementInvite is already finalized! Cannot add new Recipient!")
-		}else{
-			dsInv.Code = emailCode
-		// //update the assets and put them in the state
-		// //update the DSInvite
-			assets.DiplomaSupplementInvite[dsHash] = dsInv
-		//
-			encodedAssets,err  := json.Marshal(assets)
-			if err != nil {
-				return SendErrorEvent(stub,"Error, encoding assets")
-			}
-			err = stub.PutState("assets", []byte(encodedAssets))
-			if err != nil {
-				return SendErrorEvent(stub,"Error,putting assets in state")
-			}
-		// //Execution of chaincode finishe successfully
-		 	return SendSuccessEvent(stub,PublishRequest{},"Tx chaincode finished OK.")
-			}
+		dsInvBytes,err := stub.GetState(dsHash)
+
+		if err == nil {
+			dsInv := DiplomaSupplementInvite{}
+			json.Unmarshal([]byte(dsInvBytes), &dsInv)
+
+			if dsInv.Recipient != "" {
+				return SendErrorEvent(stub,"Error, DiplomaSupplementInvite is already finalized! Cannot add new Recipient!")
+			}else{
+				dsInv.Code = emailCode
+			// //update the assets and put them in the state
+			// //update the DSInvite
+				encodedInvite,err := json.Marshal(dsInv)
+				if err != nil {
+					return SendErrorEvent(stub,"Error, encoding invite")
+				}
+				err = stub.PutState(dsHash, []byte(encodedInvite))
+
+				if err != nil {
+					return SendErrorEvent(stub,"Error,putting invite back in state")
+				}
+			// //Execution of chaincode finishe successfully
+			 	return SendSuccessEvent(stub,PublishRequest{},"Tx chaincode finished OK.")
+				}
 		}else{
 			return SendErrorEvent(stub,"Error, No DiplomaSupplementInvite Found with the given hash " + dsHash )
 		}
@@ -395,25 +400,15 @@ func (t *SimpleChaincode) UninviteUsers(stub shim.ChaincodeStubInterface, args [
 		emailsArray := strings.Split(emailsString,";")
 
 		//
-		//get the assets from the state
-		assetBytes, err := stub.GetState("assets")
+		//get the supplement
+		supplementBytes, err := stub.GetState(suplementId)
 		if err != nil {
-		return SendErrorEvent(stub,"Failed to get state for key \"assets\"")
+			return SendErrorEvent(stub,"Failed to get state for key \""+suplementId+"\"")
 		}
 		//get the supplements from the assets
-		assets := Assets{}
-		json.Unmarshal([]byte(assetBytes), &assets)
-		supplementSlice := assets.Supplements
-		//
-		supToUpdate , position := FindSupplementInSlice(supplementSlice, suplementId)
-		if position == -1 {
-			return SendErrorEvent(stub,"No supplement found with the given ID"+suplementId)
-		}
-		//
-		// // Here the ABAC API is called to verify the attributes, only then will the
-		// // supplement be updated
-		// isStudent, _ := stub.VerifyAttribute("typeOfUser", []byte("Student"))
-		// isOwner, _ := stub.VerifyAttribute("eID", []byte(supToUpdate.Owner))
+		supToUpdate := DiplomaSupplement{}
+		json.Unmarshal([]byte(supplementBytes), &supToUpdate)
+
 		if supToUpdate.Owner == sender {
 		// // authorizedUsers := supToUpdate.Authorized
 		for _, mail := range emailsArray{
@@ -424,21 +419,15 @@ func (t *SimpleChaincode) UninviteUsers(stub shim.ChaincodeStubInterface, args [
 				}
 			}
 		}
-		// //delete the old version of the supplement
-		supplementSlice = RemoveFromSupSlice(supplementSlice,position)
-		// //add the new supplement
-		supplementSlice = append(supplementSlice,supToUpdate)
-		//
-		assets.Supplements = supplementSlice
-		//
-		// //update the state with the new assets
-		encodedAssets,err  := json.Marshal(assets)
+
+		// //update the state with the updated supplement
+		encodedSupplement,err  := json.Marshal(supToUpdate)
 		if err != nil {
-			return SendErrorEvent(stub,"Error Marshaling Assets")
+			return SendErrorEvent(stub,"Error Marshaling Supplement")
 		}
-		err = stub.PutState("assets", []byte(encodedAssets))
+		err = stub.PutState(suplementId, []byte(encodedSupplement))
 		if err != nil {
-			return SendErrorEvent(stub,"Error putting assets")
+			return SendErrorEvent(stub,"Error putting supplement")
 		}
 		// //Execution of chaincode finishe successfully
 			return SendSuccessEvent(stub,PublishRequest{},"Tx chaincode finished OK.")
