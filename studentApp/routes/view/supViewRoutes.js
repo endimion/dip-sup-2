@@ -102,7 +102,7 @@ router.get('/edit/:supId',authorizeAll,(req,res) =>{
     let userEid = details.eid;
     basic.queryChaincode(peer, channel, chaincode, [supId,userEid], "getSupplementById", userEid, org)
     .then( resp =>{
-          if(JSON.parse(resp).eid === userEid){
+          if(JSON.parse(resp).Owner === userEid){
             res.render('editSupplement',{ title: 'Edit Supplement',
                   message: 'Welcome user: ' + details.userName  ,
                   userType: "Student",
