@@ -102,14 +102,20 @@ router.get('/edit/:supId',authorizeAll,(req,res) =>{
     let userEid = details.eid;
     basic.queryChaincode(peer, channel, chaincode, [supId,userEid], "getSupplementById", userEid, org)
     .then( resp =>{
-          res.render('editSupplement',{ title: 'Edit Supplement',
-                message: 'Welcome user: ' + details.userName  ,
-                userType: "Student",
-                supplement: JSON.parse(resp),
-                eID: userEid,
-                userName: details.userName,
-                firstName: details.firstName,
-                lastName:  details.familyName});
+          if(JSON.parse(resp).eid === userEid){
+            res.render('editSupplement',{ title: 'Edit Supplement',
+                  message: 'Welcome user: ' + details.userName  ,
+                  userType: "Student",
+                  supplement: JSON.parse(resp),
+                  eID: userEid,
+                  userName: details.userName,
+                  firstName: details.firstName,
+                  lastName:  details.familyName});
+          }else{
+            res.render('errorMessage',{ title: 'Ooops... an error occured!',
+                        message: "You can only edit supplements you own",
+                        stdId: ""});
+          }
       }).catch(err=>{
         res.render('errorMessage',{ title: 'Ooops... an error occured!',
                     message: error.toString(),
