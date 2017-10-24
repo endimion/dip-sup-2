@@ -9,6 +9,8 @@ $( document ).ready(function() {
         let invite = JSON.parse(resp);
         // console.log(invite);
         $("#meassageDiv").text("Checking constraints...");
+        console.log("invite ");
+        console.log(invite);
         if(invite.Recipient !== ""){
           $.get("/supplement/rest/view/"+invite.DSId).done(resp=>{
               makeSupplementCard(JSON.parse(resp));
