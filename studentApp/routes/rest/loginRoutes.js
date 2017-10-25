@@ -30,7 +30,7 @@ router.get('/loginSuccess',(req,res)=>{
   console.log("dsHashCookie: " + cookie);
   if (cookie === undefined)
   {
-    res.redirect(303,"/supplement/view");
+    res.redirect(303,"/");
   }else{
     res.redirect(303,"/supplement/view/invite/"+cookie);
   }
