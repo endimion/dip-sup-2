@@ -122,7 +122,7 @@ function makeSupplementCard(supplement){
   let modalContent = $("<div>",{"class":"modal-content"});
   modalMailWrapper.append(modalContent);
   let modalHeader = $("<h4>");
-  modalHeader.text("Share DiplomaSupplement " + supplement.Id);
+  modalHeader.text("Share By Email ");
   modalContent.append(modalHeader);
   let modalMessage = $("<p>",{"class":"modalMessage"});
   modalContent.append(modalMessage);
@@ -138,7 +138,7 @@ function makeSupplementCard(supplement){
   modalFormGroupMail.append(modalLabel);
   let mailInput = $("<input>",{"class":"form-control","id":"email"+supplement.Id,"type":"email"});
   let supIdInput = $("<input>",{"class":"form-control","type":"hidden","id":"supId"+supplement.Id,"name":"supId","value":supplement.Id});
-  let sendMail = $("<a>",{"class":"waves-effect waves-green btn-flat","onclick":'sendEmail("email'+supplement.Id+'",'+'"supId'+supplement.Id+'","'+supplement.Id+'")'});
+  let sendMail = $("<a>",{"class":"waves-effect waves-green btn btn-primary","onclick":'sendEmail("email'+supplement.Id+'",'+'"supId'+supplement.Id+'","'+supplement.Id+'")'});
   sendMail.text("Send");
   modalFormGroupMail.append(mailInput);
   modalFormGroupMail.append(supIdInput);
@@ -151,7 +151,7 @@ function makeSupplementCard(supplement){
   let modalQrContent = $("<div>",{"class":"modal-content"});
   modalQrWrapper.append(modalQrContent);
   let modalQrHeader = $("<h4>");
-  modalQrHeader.text("Share DiplomaSupplement " + supplement.Id);
+  modalQrHeader.text("Share By QR ");
   modalQrContent.append(modalQrHeader);
   let modalQrMessage = $("<p>",{"class":"modalMessage"});
   modalQrContent.append(modalQrMessage);
@@ -167,7 +167,7 @@ function makeSupplementCard(supplement){
   modalQrFormGroupMail.append(modalLabel);
   let qrMailInput = $("<input>",{"class":"form-control","id":"qrEmail"+supplement.Id,"type":"email"});
   let qrSupIdInput = $("<input>",{"class":"form-control","type":"hidden","id":"qrSupId"+supplement.Id,"name":"qrSupId","value":supplement.Id});
-  let makeQR = $("<a>",{"class":"waves-effect waves-green btn-flat","onclick":'makeQRcode("qrEmail'+supplement.Id+'",'+'"qrSupId'+supplement.Id+'","'+supplement.Id+'")'});
+  let makeQR = $("<a>",{"class":"waves-effect waves-green btn btn-primary","onclick":'makeQRcode("qrEmail'+supplement.Id+'",'+'"qrSupId'+supplement.Id+'","'+supplement.Id+'")'});
   makeQR.text("Generate QR");
   modalQrFormGroupMail.append(qrMailInput);
   modalQrFormGroupMail.append(qrSupIdInput);
