@@ -13,7 +13,8 @@ let dsSchema = new Schema({
   Holder_Info:{
     Name:String,
     DateOfBirth:String,
-    StudentId:String
+    StudentId:String,
+    PlaceOfBirth:String
   },
   Qualification_Info:{
       Name:String,
@@ -30,7 +31,18 @@ let dsSchema = new Schema({
   Content_Info:{
     ModeOfStudy:String,
     ProgrammeRequirements:String,
-    ProgrammeDetails:String,
+    ProgrammeDetails: {
+      Description : String,
+      Modules : [{
+          ModuleCode :String,
+          NameOfTheModule: String,
+          TypeOfModule: String,
+          ExamPeriod: String,
+          Grade: String,
+          InWriting: String
+      }],
+      Legend, : String
+    },
     GradingScheme:String,
     OverallClassificationOfQualification:String
   },
@@ -54,6 +66,9 @@ let dsSchema = new Schema({
   },
   _id: Schema.Types.ObjectId
 });
+
+
+
 
 let DiplomaSupplement = connection.model('DiplomaSupplement', dsSchema);
 

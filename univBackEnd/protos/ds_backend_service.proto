@@ -62,11 +62,26 @@ message QualificationLevel{
 
 message ContentInfo{
   string ModeOfStudy=5;
-  string ProgrammeRequirements=4;
+  ProgrammeRequirement ProgrammeRequirements=4;
   string ProgrammeDetails=3;
   string GradingScheme=2;
   string OverallClassificationOfQualification=1;
 
+}
+
+message ProgrammeRequirement{
+  string Description =1;
+  repeated ModuleType Modules =2;
+  string Legend=3;
+}
+
+message ModuleType{
+  string ModuleCode =1;
+  string NameOfTheModule=2;
+  string TypeOfModule =3;
+  string ExamPeriod =4;
+  string Grade =5;
+  string InWriting =6;
 }
 
 message QualificationFunction{
