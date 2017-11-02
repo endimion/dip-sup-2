@@ -41,7 +41,7 @@ let dsSchema = new Schema({
           Grade: String,
           InWriting: String
       }],
-      Legend, : String
+      Legend : String
     },
     GradingScheme:String,
     OverallClassificationOfQualification:String
