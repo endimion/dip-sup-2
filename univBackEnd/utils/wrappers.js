@@ -27,7 +27,7 @@ module.exports.wrapDbResToProto = function(ds){
 
 
 let modules = [];
-console.log(ds.Content_Info.ProgrammeDetails.Modules);
+// console.log(ds.Content_Info.ProgrammeDetails.Modules);
   ds.Content_Info.ProgrammeDetails.Modules.forEach(mod =>{
     modules.push({
       ModuleCode :mod.ModuleCode,
@@ -44,10 +44,10 @@ console.log(ds.Content_Info.ProgrammeDetails.Modules);
     Modules: modules,
     Legend: ds.Content_Info.ProgrammeDetails.Legend
   }
-console.log("modules!!!!");
-console.log(modules);
-console.log("programmeDetail!!!!");
-console.log(programmeDetail);
+// console.log("modules!!!!");
+// console.log(modules);
+// console.log("programmeDetail!!!!");
+// console.log(programmeDetail);
   let ContentInfo ={
     ModeOfStudy: ds.Content_Info.ModeOfStudy,
     ProgrammeRequirements: ds.Content_Info.ProgrammeRequirements,
@@ -78,6 +78,9 @@ console.log(programmeDetail);
   let HigherEducationSystemInfo={
     HigherEducationSystem_Info : ds.HigherEducationSystem_Info.HigherEducationSystem_Info
   }
+
+  console.log("ContentInfo.ProgrammeDetails"!!!!!!!!!!!!!);
+  console.log(ContentInfo.ProgrammeDetails);
 
   return {
     university: UNIVERSITY,
