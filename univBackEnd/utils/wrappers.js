@@ -24,13 +24,36 @@ module.exports.wrapDbResToProto = function(ds){
     AccecssRequirements: ds.Qualification_Level.AccecssRequirements
   };
 
+
+
+  let modules = [];
+  ds.Content_Info.ProgrammeDetails.Modules.forEach(mod =>{
+    modules.push({
+      ModuleCode :mod.ModuleCode,
+      NameOfTheModule: mod.NameOfTheModule,
+      TypeOfModule: mod.TypeOfModule,
+      ExamPeriod: mod.ExamPeriod,
+      Grade: mod.Grade,
+      InWriting: mod.InWriting
+    });
+  });
+
+  let programmeDetail ={
+    Description : ds.Content_Info.ProgrammeDetails.Description,
+    Modules: modules,
+    Legend: ds.Content_Info.ProgrammeDetails.Legend
+
+  }
+
   let ContentInfo ={
     ModeOfStudy: ds.Content_Info.ModeOfStudy,
     ProgrammeRequirements: ds.Content_Info.ProgrammeRequirements,
-    ProgrammeDetails: ds.Content_Info.ProgrammeDetails,
+    ProgrammeDetails: programmeDetail,
     GradingScheme: ds.Content_Info.GradingScheme,
     OverallClassificationOfQualification: ds.Content_Info.OverallClassificationOfQualification
   };
+
+
 
   let QualificationFunction ={
     AccessToFurtherStudy: ds.Qualification_Function.AccessToFurtherStudy,
