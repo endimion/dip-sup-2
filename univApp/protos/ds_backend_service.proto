@@ -62,14 +62,14 @@ message QualificationLevel{
 
 message ContentInfo{
   string ModeOfStudy=5;
-  ProgrammeRequirement ProgrammeRequirements=4;
-  string ProgrammeDetails=3;
+  string ProgrammeRequirements=4;
+  ProgrammeDetail ProgrammeDetails=3;
   string GradingScheme=2;
   string OverallClassificationOfQualification=1;
 
 }
 
-message ProgrammeRequirement{
+message ProgrammeDetail{
   string Description =1;
   repeated ModuleType Modules =2;
   string Legend=3;
