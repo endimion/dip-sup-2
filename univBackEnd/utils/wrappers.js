@@ -79,7 +79,7 @@ let modules = [];
     HigherEducationSystem_Info : ds.HigherEducationSystem_Info.HigherEducationSystem_Info
   }
 
-  console.log("ContentInfo.ProgrammeDetails"!!!!!!!!!!!!!);
+  console.log("ContentInfo.ProgrammeDetails!!!!!!!!!!!!!");
   console.log(ContentInfo.ProgrammeDetails);
 
   return {
