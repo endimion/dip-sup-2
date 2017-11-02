@@ -73,27 +73,26 @@ type QualificationLevel struct{
 type ContentInfo struct{
 	ModeOfStudy string
 	ProgrammeRequirements string
-	Programme_Details string
+	ProgrammeDetails ProgrammeDetails
 	GradingScheme string
 	OverallClassificationOfQualification string
 }
 
-type ProgrammeDetails struct{
-	Description string,
-	Modules []ModuleType,
-	Legend string
-}
-
 type ModuleType struct{
-	ModuleCode string,
-  NameOfTheModule string,
-  TypeOfModule string,
-  ExamPeriod string,
-  Grade string,
+  ModuleCode string
+  NameOfTheModule string
+  TypeOfModule string
+  ExamPeriod string
+  Grade string
   InWriting string
 }
 
 
+type ProgrammeDetails struct{
+	Description string
+	Modules []ModuleType
+	Legend string
+}
 
 type QualificationFunction struct{
 	AccessToFurtherStudy string
