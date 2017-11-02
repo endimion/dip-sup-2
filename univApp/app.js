@@ -66,6 +66,7 @@ evHelper.registerEventHubForOrg(org,chaincode,'evtsender', event => {
            console.log(JSON.stringify(dsResult));
             if(resp.indexOf("error") !== -1){ //if not sup with given Id is found
                 console.log("will publish");
+               
                 basic.invokeChaincode([peerAddr], channel, chaincode, "publish",
       							[JSON.stringify(dsResult),UNIVERSITY],UNIVERSITY, org)
             }

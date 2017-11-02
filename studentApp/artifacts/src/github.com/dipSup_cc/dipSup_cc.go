@@ -73,7 +73,7 @@ type QualificationLevel struct{
 type ContentInfo struct{
 	ModeOfStudy string
 	ProgrammeRequirements string
-	ProgrammeDetails ProgrammeDetails
+	ProgrammeDetails ProgrammeDetail
 	GradingScheme string
 	OverallClassificationOfQualification string
 }
@@ -88,7 +88,7 @@ type ModuleType struct{
 }
 
 
-type ProgrammeDetails struct{
+type ProgrammeDetail struct{
 	Description string
 	Modules []ModuleType
 	Legend string
