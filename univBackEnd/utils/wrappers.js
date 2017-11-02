@@ -26,7 +26,7 @@ module.exports.wrapDbResToProto = function(ds){
 
 
 
-  let modules = [];
+let modules = [];
 console.log(ds.Content_Info.ProgrammeDetails.Modules);
   ds.Content_Info.ProgrammeDetails.Modules.forEach(mod =>{
     modules.push({
@@ -43,9 +43,11 @@ console.log(ds.Content_Info.ProgrammeDetails.Modules);
     Description : ds.Content_Info.ProgrammeDetails.Description,
     Modules: modules,
     Legend: ds.Content_Info.ProgrammeDetails.Legend
-
   }
-
+console.log("modules!!!!");
+console.log(modules);
+console.log("programmeDetail!!!!");
+console.log(programmeDetail);
   let ContentInfo ={
     ModeOfStudy: ds.Content_Info.ModeOfStudy,
     ProgrammeRequirements: ds.Content_Info.ProgrammeRequirements,
