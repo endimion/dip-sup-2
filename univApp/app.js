@@ -50,9 +50,9 @@ evHelper.registerEventHubForOrg(org,chaincode,'evtsender', event => {
                   "ModeOfStudy": dbDipSup.Content_Info.ModeOfStudy,
                   "ProgrammeRequirements":dbDipSup.Content_Info.ProgrammeRequirements,
                   "Programme_Details":{
-                      "Description": "1",//dbDipSup.Content_Info.ProgrammeDetails.Description,
-                      "Modules": [],//dbDipSup.Content_Info.ProgrammeDetails.Modules,
-                      "Legend":"3"//dbDipSup.Content_Info.ProgrammeDetails.Legend
+                      "Description":  dbDipSup.Content_Info.ProgrammeDetails.Description,
+                      "Modules":  dbDipSup.Content_Info.ProgrammeDetails.Modules,
+                      "Legend": dbDipSup.Content_Info.ProgrammeDetails.Legend
                   },
                   "GradingScheme": dbDipSup.Content_Info.GradingScheme,
                   "OverallClassificationOfQualification": dbDipSup.Content_Info.OverallClassificationOfQualification
