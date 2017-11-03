@@ -11,12 +11,21 @@ function requestPublication(evt){
   $("form").hide();
   $("#preloader").show();
 
-  $.post("/supplement/rest/request",{uniName:universityName,email:email, univId:universityId, dateOfBirth:date})
-  .then(resp =>{
-      console.log(resp);
-      window.location.href="/home" ;
-  }).fail(err =>{
-     console.log(err);
-      $("#headerMessage").text("Request failed");
-  });
+  let requestPub = function(){
+    $.post("/supplement/rest/request",{uniName:universityName,email:email, univId:universityId, dateOfBirth:date})
+    .then(resp =>{
+      if(typeof(resp) === "string"
+          && (resp.indexOf("Timeout") >= 0 || resp.indexOf("Endpoint read failed") >= 0 )){
+          requestPub();
+      }else{
+        console.log(resp);
+        window.location.href="/home" ;
+      }
+    }).fail(err =>{
+       console.log(err);
+        $("#headerMessage").text("Request failed");
+    });
+  };
+
+  requestPub();
 }
