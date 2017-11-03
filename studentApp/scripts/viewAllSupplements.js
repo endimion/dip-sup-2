@@ -266,7 +266,8 @@ function renderProgrammeDetails(name, details){
   }
 
 
-  // let details = JSON.parse(progDetailsString);
+  let details = $("<div>",{"class":"collapsible-body"});
+
   let result = $("<li>");
   let header = $("<div>");
   header.text(name);
@@ -320,5 +321,6 @@ function renderProgrammeDetails(name, details){
   ledgend.text("Legend: " + details.Legend);
   attributesList.append(ledgend);
   result.append(attributesList);
-  return result;
+  details.append(result);
+  return details;
 }
