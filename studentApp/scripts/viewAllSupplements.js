@@ -1,3 +1,18 @@
+const entryCSS = {
+      "display": "block",
+      "cursor": "pointer",
+      "min-height": "3rem",
+      "line-height": "3rem",
+      "padding": "0 1rem",
+      "background-color": "#fff",
+      "border-bottom": "1px solid #ddd"
+}
+
+const headerCSS = {
+  "background-color": "aliceblue"
+}
+
+
 
 $( document ).ready(function() {
 //Error: Endpoint read failed
@@ -35,8 +50,6 @@ $( document ).ready(function() {
 
 
 function makeSupplementCard(supplement){
-
-
 
   let card = $("<div>", {"class": "card"});
   let cardContent = $("<div>", {"class": "card-content","id":"textContent"});
@@ -205,19 +218,7 @@ function makeSupplementCard(supplement){
 
 
 function displaySupAttribute(name, value,node="<p>", properties={}){
-  let entryCSS = {
-        "display": "block",
-        "cursor": "pointer",
-        "min-height": "3rem",
-        "line-height": "3rem",
-        "padding": "0 1rem",
-        "background-color": "#fff",
-        "border-bottom": "1px solid #ddd"
-  }
 
-  let headerCSS = {
-    "background-color": "aliceblue"
-  }
 
   if(name !== "Signature" && name !== "Authorized"  && value !== "" && value){
     if(typeof(value) === "string"){
@@ -228,24 +229,79 @@ function displaySupAttribute(name, value,node="<p>", properties={}){
         }
         return result;
     }else{
-      let result = $(node);
-      // result.text(name+": ");
-     //class="collapsible" data-collapsible="accordion"
-      // let list = $("<ul>",{"class":"collapsible","data-collapsible":"accordion"});
-      // result.append(list);
-      let listItem = $("<li>");
-      //let header = $("<li>",{"class":"collection-header","style":"font-weight: bold;"});
-      let header = $("<div>",{"class":"collapsible-header"});
-      header.text(name);
-      header.css(headerCSS);
-      listItem.append(header);
-      for (var name in value) {
-        listItem.append(displaySupAttribute(name,value[name],"<div>",
-                            {"class":"collapsible-body"}));
-      }
+      if(name === "ProgramDetails"){
+        return renderProgrammeDetails(name, value)
 
-      // accordionList.append(listItem);
-      return listItem;
+      }else{
+        let result = $(node);
+        let listItem = $("<li>");
+        let header = $("<div>",{"class":"collapsible-header"});
+        header.text(name);
+        header.css(headerCSS);
+        listItem.append(header);
+        for (var name in value) {
+          listItem.append(displaySupAttribute(name,value[name],"<div>",
+                              {"class":"collapsible-body"}));
+        }
+        return listItem;
+      }
     }
  }
+}
+
+
+function renderProgrammeDetails(name, details){
+  // let details = JSON.parse(progDetailsString);
+  let result = $("div");
+  let header = $("div");
+  header.text(name);
+  result.append(header);
+
+  let attributesList = $("<ul>");
+  let descr  = $("<li>");
+  descr.text("Description: " + details.Description);
+  attributesList.append(descr);
+
+  let modules = $("<li>");
+  let modHeader = $("<div>",{"class":"collapsible-header"});
+  modHeader.text("Modules");
+  modHeader.css(headerCSS);
+  modules.append(modHeader);
+  details.Modules.forEach(mod =>{
+    let item = $("<div>",{"class":"collapsible-body"});
+
+    let wrapper = $("<ul>");
+    let mCode = $("<li>");
+    mCode.text("ModuleCode:" + mod.ModuleCode);
+    wrapper.append(mCode);
+
+    let mName = $("<li>");
+    mName.text("NameOfTheModule:" + mod.NameOfTheModule);
+    wrapper.append(mName);
+
+    let mType = $("<li>");
+    mType.text("TypeOfModule:" + mod.TypeOfModule);
+    wrapper.append(mType);
+
+    let mExam = $("<li>");
+    mExam.text("ExamPeriod:" + mod.ExamPeriod);
+    wrapper.append(mExam);
+
+    let mGrade = $("<li>");
+    mGrade.text("Grade:" + mod.Grade);
+    wrapper.append(mGrade);
+
+    let mWriting = $("<li>");
+    mWriting.text("InWriting:" + mod.InWriting);
+    wrapper.append(mWriting);
+
+    item.append(wrapper);
+    modules.append(item);
+  });
+
+  let ledgend  = $("<li>");
+  ledgend.text("Legend: " + details.Legend);
+  attributesList.append(ledgend);
+  result.append(attributesList);
+  return result;
 }
