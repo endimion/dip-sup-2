@@ -118,8 +118,8 @@ func (t *SimpleChaincode) Publish(stub shim.ChaincodeStubInterface, args []strin
 			//add a composite key in the sate for easy query
 			// this composite key will be suplement.Id ~ suplement.Owner
 			// this will allow us to query supplements based on Owner
-			indexName := "Id~Owner"
-			idOwnerIndexKey, err := stub.CreateCompositeKey(indexName, []string{suplement.Id, suplement.Owner})
+			indexName := "Owner~Id"
+			idOwnerIndexKey, err := stub.CreateCompositeKey(indexName, []string{suplement.Owner,suplement.Id})
 			if err != nil {
 				return SendErrorEvent(stub,"Could not  make composite key for values " + suplement.Id +"::"+ suplement.Owner )
 			}

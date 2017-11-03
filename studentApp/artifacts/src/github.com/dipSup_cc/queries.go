@@ -31,9 +31,9 @@ func (t *SimpleChaincode) GetSupplements(stub shim.ChaincodeStubInterface, args 
 
   matchingSupplements := make([]DiplomaSupplement,0)
 
-	// Query the "Id~Owner" index by Owner
+	// Query the "Owner~Id" index by Owner
 	// This will execute a key range query on all keys starting with 'Owner'
-	supplementsResultsIterator, err := stub.GetStateByPartialCompositeKey("Id~Owner", []string{userEid})
+	supplementsResultsIterator, err := stub.GetStateByPartialCompositeKey("Owner~Id", []string{userEid})
 	if err != nil{
 		return shim.Error(err.Error())
 	}
@@ -45,13 +45,13 @@ func (t *SimpleChaincode) GetSupplements(stub shim.ChaincodeStubInterface, args 
 		if err != nil {
 			return shim.Error(err.Error())
 		}
-		// get the Id and Owner from Id~Owner composite key
+		// get the Id and Owner from Owner~Id composite key
 		_, compositeKeyParts, err := stub.SplitCompositeKey(responseRange.Key)
 		if err != nil {
 			return shim.Error(err.Error())
 		}
-		returnedId := compositeKeyParts[0] //the supplementID
-		// returnedOwner := compositeKeyParts[1]
+		returnedId := compositeKeyParts[1] //the supplementID
+		// returnedOwner := compositeKeyParts[0]
 
     // element is the element from someSlice for where we are
 		supBytes, err := stub.GetState(returnedId)
