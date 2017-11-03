@@ -267,7 +267,7 @@ function renderProgrammeDetails(name, details){
 
 
   // let details = JSON.parse(progDetailsString);
-  let result = $("div");
+  let result = $("li");
   let header = $("div");
   header.text(name);
   result.append(header);
