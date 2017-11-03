@@ -304,8 +304,8 @@ function renderProgrammeDetails(name, details){
   let moduleItem = $("<li>");
   let modHeader = $("<div>",{"class":"collapsible-header"});
   modHeader.css(headerCSS);
-  let headerText = $("<p>");
-  headerText.text("Modules");
+  // let headerText = $("<p>");
+  modHeader.text("Modules");
   let headerIcon = $("<i>",{"class":"material-icons"});
   headerIcon.text("expand_more");
   modHeader.append(headerText);
