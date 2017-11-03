@@ -303,7 +303,7 @@ function renderProgrammeDetails(name, details){
   col.append(modules);
   let moduleItem = $("<li>");
   let modHeader = $("<div>",{"class":"collapsible-header"});
-  modeHeader.css(headerCSS);
+  modHeader.css(headerCSS);
   let headerText = $("<p>");
   headerText.text("Modules");
   let headerIcon = $("<i>",{"class":"material-icons"});
