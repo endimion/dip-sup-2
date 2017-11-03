@@ -265,8 +265,14 @@ function renderProgrammeDetails(name, details){
     "background-color": "aliceblue"
   }
 
+//	<div class="row">
+				// <div class="col s12 m12">
+					// <ul class="collapsible" data-collapsible="accordion">
+  //this boilerplate is neede to nest collabsibles with materialize
 
   let body = $("<div>",{"class":"collapsible-body"});
+
+
 
   let result = $("<li>");
   let header = $("<div>");
@@ -278,7 +284,15 @@ function renderProgrammeDetails(name, details){
   descr.text("Description: " + details.Description);
   attributesList.append(descr);
 
-  let modules = $("<li>");
+  let modList = $("<li>");
+  let row = $("<div>",{"class":"row"});
+  modList.append(row);
+  let col = $("<div>",{"class":"col s12 m12"});
+  row.append(col);
+
+  let modules = $("<ul>",{"class":"collapsible","data-collapsible":"accordion"});
+  col.append(modules);
+
   let modHeader = $("<div>",{"class":"collapsible-header"});
   modHeader.text("Modules");
   modHeader.css(headerCSS);
@@ -315,7 +329,7 @@ function renderProgrammeDetails(name, details){
     modules.append(item);
   });
 
-    attributesList.append(modules);
+    attributesList.append(modList);
 
   let ledgend  = $("<li>");
   ledgend.text("Legend: " + details.Legend);
