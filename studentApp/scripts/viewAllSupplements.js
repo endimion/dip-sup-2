@@ -266,7 +266,7 @@ function renderProgrammeDetails(name, details){
   }
 
 
-  let details = $("<div>",{"class":"collapsible-body"});
+  let body = $("<div>",{"class":"collapsible-body"});
 
   let result = $("<li>");
   let header = $("<div>");
@@ -321,6 +321,6 @@ function renderProgrammeDetails(name, details){
   ledgend.text("Legend: " + details.Legend);
   attributesList.append(ledgend);
   result.append(attributesList);
-  details.append(result);
-  return details;
+  body.append(result);
+  return body;
 }
