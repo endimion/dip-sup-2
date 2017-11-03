@@ -295,13 +295,14 @@ function renderProgrammeDetails(name, details){
 
   let modules = $("<ul>",{"class":"collapsible","data-collapsible":"accordion"});
   col.append(modules);
-
-  let modHeader = $("<li>",{"class":"collapsible-header"});
+  let moduleItem = $("<li>");
+  let modHeader = $("<div>",{"class":"collapsible-header"});
   modHeader.text("Modules");
   modHeader.css(headerCSS);
-  modules.append(modHeader);
-  let colBody  = $("<li>",{"class":"collapsible-body"});
-  modules.append(colBody);
+  moduleItem.append(modHeader);
+  let colBody  = $("<div>",{"class":"collapsible-body"});
+  moduleItem.append(colBody);
+  modules.append(moduleItem);
   details.Modules.forEach(mod =>{
     // let listItem = $("<li>");
     // let itemHeader = $("<div>")
