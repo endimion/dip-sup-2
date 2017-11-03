@@ -269,7 +269,7 @@ function renderProgrammeDetails(name, details){
   }
 
   const modulesCSS = {
-    // "background-color": "aliceblue",
+    "background-color": "lightgrey",
     "box-shadow": "none"
 
   }
@@ -303,7 +303,7 @@ function renderProgrammeDetails(name, details){
   col.append(modules);
   let moduleItem = $("<li>");
   let modHeader = $("<div>",{"class":"collapsible-header"});
-  modHeader.css(headerCSS);
+  modHeader.css(modulesCSS);
   // let headerText = $("<p>");
   modHeader.text("Modules");
   let headerIcon = $("<i>",{"class":"material-icons"});
@@ -322,27 +322,27 @@ function renderProgrammeDetails(name, details){
     let item = $("<div>");
 
     let wrapper = $("<ul>");
-    let mCode = $("<li>");
+    let mCode = $("<li>",{"style":"border-bottom: 1px solid #ddd"});
     mCode.text("ModuleCode:" + mod.ModuleCode);
     wrapper.append(mCode);
 
-    let mName = $("<li>");
+    let mName = $("<li>",{"style":"border-bottom: 1px solid #ddd"});
     mName.text("NameOfTheModule:" + mod.NameOfTheModule);
     wrapper.append(mName);
 
-    let mType = $("<li>");
+    let mType = $("<li>",{"style":"border-bottom: 1px solid #ddd"});
     mType.text("TypeOfModule:" + mod.TypeOfModule);
     wrapper.append(mType);
 
-    let mExam = $("<li>");
+    let mExam = $("<li>",{"style":"border-bottom: 1px solid #ddd"});
     mExam.text("ExamPeriod:" + mod.ExamPeriod);
     wrapper.append(mExam);
 
-    let mGrade = $("<li>");
+    let mGrade = $("<li>",{"style":"border-bottom: 1px solid #ddd"});
     mGrade.text("Grade:" + mod.Grade);
     wrapper.append(mGrade);
 
-    let mWriting = $("<li>");
+    let mWriting = $("<li>",{"style":"border-bottom: 1px solid #ddd"});
     mWriting.text("InWriting:" + mod.InWriting);
     wrapper.append(mWriting);
 
