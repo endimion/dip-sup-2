@@ -308,7 +308,7 @@ function renderProgrammeDetails(name, details){
   modHeader.text("Modules");
   let headerIcon = $("<i>",{"class":"material-icons"});
   headerIcon.text("expand_more");
-  modHeader.append(headerText);
+  // modHeader.append(headerText);
   modHeader.append(headerIcon);
 
   modHeader.css(headerCSS);
