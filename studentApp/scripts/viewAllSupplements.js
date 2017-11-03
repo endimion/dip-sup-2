@@ -272,51 +272,51 @@ function renderProgrammeDetails(name, details){
   header.text(name);
   result.append(header);
 
-  let attributesList = $("<ul>");
-  let descr  = $("<li>");
-  descr.text("Description: " + details.Description);
-  attributesList.append(descr);
-
-  let modules = $("<li>");
-  let modHeader = $("<div>",{"class":"collapsible-header"});
-  modHeader.text("Modules");
-  modHeader.css(headerCSS);
-  modules.append(modHeader);
-  details.Modules.forEach(mod =>{
-    let item = $("<div>",{"class":"collapsible-body"});
-
-    let wrapper = $("<ul>");
-    let mCode = $("<li>");
-    mCode.text("ModuleCode:" + mod.ModuleCode);
-    wrapper.append(mCode);
-
-    let mName = $("<li>");
-    mName.text("NameOfTheModule:" + mod.NameOfTheModule);
-    wrapper.append(mName);
-
-    let mType = $("<li>");
-    mType.text("TypeOfModule:" + mod.TypeOfModule);
-    wrapper.append(mType);
-
-    let mExam = $("<li>");
-    mExam.text("ExamPeriod:" + mod.ExamPeriod);
-    wrapper.append(mExam);
-
-    let mGrade = $("<li>");
-    mGrade.text("Grade:" + mod.Grade);
-    wrapper.append(mGrade);
-
-    let mWriting = $("<li>");
-    mWriting.text("InWriting:" + mod.InWriting);
-    wrapper.append(mWriting);
-
-    item.append(wrapper);
-    modules.append(item);
-  });
-
-  let ledgend  = $("<li>");
-  ledgend.text("Legend: " + details.Legend);
-  attributesList.append(ledgend);
-  result.append(attributesList);
+  // let attributesList = $("<ul>");
+  // let descr  = $("<li>");
+  // descr.text("Description: " + details.Description);
+  // attributesList.append(descr);
+  //
+  // let modules = $("<li>");
+  // let modHeader = $("<div>",{"class":"collapsible-header"});
+  // modHeader.text("Modules");
+  // modHeader.css(headerCSS);
+  // modules.append(modHeader);
+  // details.Modules.forEach(mod =>{
+  //   let item = $("<div>",{"class":"collapsible-body"});
+  //
+  //   let wrapper = $("<ul>");
+  //   let mCode = $("<li>");
+  //   mCode.text("ModuleCode:" + mod.ModuleCode);
+  //   wrapper.append(mCode);
+  //
+  //   let mName = $("<li>");
+  //   mName.text("NameOfTheModule:" + mod.NameOfTheModule);
+  //   wrapper.append(mName);
+  //
+  //   let mType = $("<li>");
+  //   mType.text("TypeOfModule:" + mod.TypeOfModule);
+  //   wrapper.append(mType);
+  //
+  //   let mExam = $("<li>");
+  //   mExam.text("ExamPeriod:" + mod.ExamPeriod);
+  //   wrapper.append(mExam);
+  //
+  //   let mGrade = $("<li>");
+  //   mGrade.text("Grade:" + mod.Grade);
+  //   wrapper.append(mGrade);
+  //
+  //   let mWriting = $("<li>");
+  //   mWriting.text("InWriting:" + mod.InWriting);
+  //   wrapper.append(mWriting);
+  //
+  //   item.append(wrapper);
+  //   modules.append(item);
+  // });
+  //
+  // let ledgend  = $("<li>");
+  // ledgend.text("Legend: " + details.Legend);
+  // attributesList.append(ledgend);
+  // result.append(attributesList);
   return result;
 }
