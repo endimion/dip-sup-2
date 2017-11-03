@@ -212,9 +212,9 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
 		return t.Publish(stub, args)
 	}
 
-	if function == "addAuthorizedUser"{
-		return t.AddAuthorizedUser(stub, args)
-	}
+	// if function == "addAuthorizedUser"{
+	// 	return t.AddAuthorizedUser(stub, args)
+	// }
 
 	if function == "addDiplomaSupplementInvite"{
 		return t.AddDiplomaSupplementInvite(stub,args)
