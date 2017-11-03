@@ -229,7 +229,7 @@ function displaySupAttribute(name, value,node="<p>", properties={}){
         }
         return result;
     }else{
-      if(name === "Program_Details"){
+      if(name === "Programme_Details"){
         return renderProgrammeDetails(name, value)
 
       }else{
