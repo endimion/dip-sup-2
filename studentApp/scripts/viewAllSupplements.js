@@ -268,6 +268,12 @@ function renderProgrammeDetails(name, details){
     "background-color": "aliceblue"
   }
 
+  const modulesCSS = {
+    // "background-color": "aliceblue",
+    "box-shadow": "none"
+
+  }
+
 //	<div class="row">
 				// <div class="col s12 m12">
 					// <ul class="collapsible" data-collapsible="accordion">
@@ -297,7 +303,14 @@ function renderProgrammeDetails(name, details){
   col.append(modules);
   let moduleItem = $("<li>");
   let modHeader = $("<div>",{"class":"collapsible-header"});
-  modHeader.text("Modules");
+  modeHeader.css(headerCSS);
+  let headerText = $("<p>");
+  headerText.text("Modules");
+  let headerIcon = $("<i>",{"class":"material-icons"});
+  headerIcon.text("expand_more");
+  modHeader.append(headerText);
+  modHeader.append(headerIcon);
+
   modHeader.css(headerCSS);
   moduleItem.append(modHeader);
   let colBody  = $("<div>",{"class":"collapsible-body"});
