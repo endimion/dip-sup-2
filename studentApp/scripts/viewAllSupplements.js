@@ -1,16 +1,3 @@
-const entryCSS = {
-      "display": "block",
-      "cursor": "pointer",
-      "min-height": "3rem",
-      "line-height": "3rem",
-      "padding": "0 1rem",
-      "background-color": "#fff",
-      "border-bottom": "1px solid #ddd"
-}
-
-const headerCSS = {
-  "background-color": "aliceblue"
-}
 
 
 
@@ -218,6 +205,19 @@ function makeSupplementCard(supplement){
 
 
 function displaySupAttribute(name, value,node="<p>", properties={}){
+  const entryCSS = {
+        "display": "block",
+        "cursor": "pointer",
+        "min-height": "3rem",
+        "line-height": "3rem",
+        "padding": "0 1rem",
+        "background-color": "#fff",
+        "border-bottom": "1px solid #ddd"
+  }
+
+  const headerCSS = {
+    "background-color": "aliceblue"
+  }
 
 
   if(name !== "Signature" && name !== "Authorized"  && value !== "" && value){
@@ -251,6 +251,21 @@ function displaySupAttribute(name, value,node="<p>", properties={}){
 
 
 function renderProgrammeDetails(name, details){
+  const entryCSS = {
+        "display": "block",
+        "cursor": "pointer",
+        "min-height": "3rem",
+        "line-height": "3rem",
+        "padding": "0 1rem",
+        "background-color": "#fff",
+        "border-bottom": "1px solid #ddd"
+  }
+
+  const headerCSS = {
+    "background-color": "aliceblue"
+  }
+
+
   // let details = JSON.parse(progDetailsString);
   let result = $("div");
   let header = $("div");
