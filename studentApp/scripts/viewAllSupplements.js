@@ -321,28 +321,28 @@ function renderProgrammeDetails(name, details){
     // let itemHeader = $("<div>")
     let item = $("<div>");
 
-    let wrapper = $("<ul>");
-    let mCode = $("<li>",{"style":"border-bottom: 1px solid #ddd"});
+    let wrapper = $("<ul>",{"style":"border-bottom: 1px solid #ddd"});
+    let mCode = $("<li>");
     mCode.text("ModuleCode:" + mod.ModuleCode);
     wrapper.append(mCode);
 
-    let mName = $("<li>",{"style":"border-bottom: 1px solid #ddd"});
+    let mName = $("<li>");
     mName.text("NameOfTheModule:" + mod.NameOfTheModule);
     wrapper.append(mName);
 
-    let mType = $("<li>",{"style":"border-bottom: 1px solid #ddd"});
+    let mType = $("<li>");
     mType.text("TypeOfModule:" + mod.TypeOfModule);
     wrapper.append(mType);
 
-    let mExam = $("<li>",{"style":"border-bottom: 1px solid #ddd"});
+    let mExam = $("<li>");
     mExam.text("ExamPeriod:" + mod.ExamPeriod);
     wrapper.append(mExam);
 
-    let mGrade = $("<li>",{"style":"border-bottom: 1px solid #ddd"});
+    let mGrade = $("<li>");
     mGrade.text("Grade:" + mod.Grade);
     wrapper.append(mGrade);
 
-    let mWriting = $("<li>",{"style":"border-bottom: 1px solid #ddd"});
+    let mWriting = $("<li>");
     mWriting.text("InWriting:" + mod.InWriting);
     wrapper.append(mWriting);
 
