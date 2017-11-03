@@ -200,7 +200,10 @@ function makeSupplementCard(supplement){
   $("#supplements").append(card);
 
 
-  $('.collapsible').collapsible();
+  // $('.collapsible').collapsible();
+  $('.collapsible').collapsible({
+    accordion : true
+  });
 }
 
 
