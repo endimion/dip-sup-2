@@ -314,6 +314,8 @@ function renderProgrammeDetails(name, details){
     modules.append(item);
   });
 
+    attributesList.append(modules);
+
   let ledgend  = $("<li>");
   ledgend.text("Legend: " + details.Legend);
   attributesList.append(ledgend);
