@@ -226,7 +226,9 @@ function displaySupAttribute(name, value,node="<p>", properties={}){
   if(name !== "Signature" && name !== "Authorized"  && value !== "" && value){
     if(typeof(value) === "string"){
         let result = $(node,properties);
-        result.text(name+": " + value);
+        let resultTag = $("<i>",{"style":"font-weight: bolder"});
+        result.append(resultTag);
+        result.text(": " + value);
         if(node =="<p>"){
           result.css(entryCSS);
         }
