@@ -293,13 +293,19 @@ function renderProgrammeDetails(name, details){
 
 
   let result = $("<li>");
-  let header = $("<div>");
+  let header = $("<div>",{"style":"padding-bottom: 0.8em;font-size: larger;font-weight: bold"});
   header.text(name);
   result.append(header);
 
   let attributesList = $("<ul>");
-  let descr  = $("<li>");
-  descr.text("Description: " + details.Description);
+  let descr  = renderDetailsTag("Description",details.Description);// $("<li>");
+  // descr.text("Description: " + details.Description);
+  // let descrTag = $("<i>",{"style":"font-weight: bold"});
+  // descrTag.text("Description");
+  // let descrVal = $("<p>",{"style":"display:inline"});
+  // descr.append(descrTag);
+  // desr.append(descrVal);
+
   attributesList.append(descr);
 
   let modList = $("<li>");
@@ -331,28 +337,28 @@ function renderProgrammeDetails(name, details){
     let item = $("<div>");
 
     let wrapper = $("<ul>",{"style":"border-bottom: 1px solid #ddd"});
-    let mCode = $("<li>");
-    mCode.text("ModuleCode:" + mod.ModuleCode);
+    let mCode = renderDetailsTag("ModuleCode",mod.ModuleCode);// $("<li>");
+    //mCode.text("ModuleCode:" + mod.ModuleCode);
     wrapper.append(mCode);
 
-    let mName = $("<li>");
-    mName.text("NameOfTheModule:" + mod.NameOfTheModule);
+    let mName = renderDetailsTag("NameOfTheModule",mod.NameOfTheModule);//$("<li>");
+    // mName.text("NameOfTheModule:" + mod.NameOfTheModule);
     wrapper.append(mName);
 
-    let mType = $("<li>");
-    mType.text("TypeOfModule:" + mod.TypeOfModule);
+    let mType = renderDetailsTag("TypeOfModule",mod.TypeOfModule);//$("<li>");
+    // mType.text("TypeOfModule:" + mod.TypeOfModule);
     wrapper.append(mType);
 
-    let mExam = $("<li>");
-    mExam.text("ExamPeriod:" + mod.ExamPeriod);
+    let mExam = renderDetailsTag("ExamPeriod",mod.ExamPeriod);//$("<li>");
+    // mExam.text("ExamPeriod:" + mod.ExamPeriod);
     wrapper.append(mExam);
 
-    let mGrade = $("<li>");
-    mGrade.text("Grade:" + mod.Grade);
+    let mGrade = renderDetailsTag("Grade",mod.Grade);//$("<li>");
+    // mGrade.text("Grade:" + mod.Grade);
     wrapper.append(mGrade);
 
-    let mWriting = $("<li>");
-    mWriting.text("InWriting:" + mod.InWriting);
+    let mWriting = renderDetailsTag("InWriting",mod.InWriting);//$("<li>");
+    // mWriting.text("InWriting:" + mod.InWriting);
     wrapper.append(mWriting);
 
     item.append(wrapper);
@@ -361,10 +367,23 @@ function renderProgrammeDetails(name, details){
 
     attributesList.append(modList);
 
-  let ledgend  = $("<li>");
-  ledgend.text("Legend: " + details.Legend);
+  let ledgend  = renderDetailsTag("Legend",details.Legend);//$("<li>");
+  // ledgend.text("Legend: " + details.Legend);
   attributesList.append(ledgend);
   result.append(attributesList);
   body.append(result);
   return body;
+}
+
+
+function renderDetailsTag(name,value){
+  let node  = $("<li>");
+  // descr.text("Description: " + details.Description);
+  let nodeTag = $("<i>",{"style":"font-weight: bold"});
+  nodeTag.text(name);
+  let nodeVal = $("<p>",{"style":"display:inline"});
+  nodeVal.text(": "+value)  ;
+  node.append(nodeTag);
+  node.append(nodeVal);
+  return node;
 }
