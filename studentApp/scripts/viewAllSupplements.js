@@ -227,6 +227,7 @@ function displaySupAttribute(name, value,node="<p>", properties={}){
     if(typeof(value) === "string"){
         let result = $(node,properties);
         let resultTag = $("<i>",{"style":"font-weight: bolder"});
+        resultTag.append(name);
         result.append(resultTag);
         result.text(": " + value);
         if(node =="<p>"){
