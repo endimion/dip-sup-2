@@ -226,11 +226,12 @@ function displaySupAttribute(name, value,node="<p>", properties={}){
   if(name !== "Signature" && name !== "Authorized"  && value !== "" && value){
     if(typeof(value) === "string"){
         let result = $(node,properties);
-        result.text(": " + value);
-
         let resultTag = $("<i>",{"style":"font-weight: bolder"});
         resultTag.text(name);
+        let resultValue = $("<p>",{"style":"display: inline"});
+        resultValue.text(": " + value);
         result.append(resultTag);
+        result.append(resultValue);
 
         if(node =="<p>"){
           result.css(entryCSS);
