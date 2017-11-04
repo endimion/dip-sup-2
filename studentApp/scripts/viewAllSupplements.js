@@ -241,6 +241,9 @@ function displaySupAttribute(name, value,node="<p>", properties={}){
         let header = $("<div>",{"class":"collapsible-header"});
         header.text(name);
         header.css(headerCSS);
+        let headerIcon = $("<i>",{"class":"material-icons"});
+        headerIcon.text("expand_more");
+        header.append(headerIcon);
         listItem.append(header);
         for (var name in value) {
           listItem.append(displaySupAttribute(name,value[name],"<div>",
