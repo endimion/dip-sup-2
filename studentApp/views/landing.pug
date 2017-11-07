@@ -112,7 +112,7 @@
     <section>
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 col-md-8"">
+                <div class="col-lg-8 col-md-8">
                     <h1 class="section-heading">eIDAS identity management</h1>
                     <p class="lead section-lead">Empowerd by eIDAS</p>
                     <p class="section-paragraph">Account managment powered by eIDAS. </p>
@@ -149,12 +149,14 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="/landing/js/bootstrap.min.js"></script>
-
-    <!-- Register ServiceWorker -->
-    <script src="/scripts/register-serviceworker.js"></script>
-
+    
     <!-- Install ServiceWorker -->
-    <script src="/scripts/install-serviceworker.js"></script>
+    script
+      include ../scripts/register-serviceworker.js
+    script
+      include ../scripts/install-serviceworker.js
+
+   
 
 </body>
 
