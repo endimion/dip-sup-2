@@ -14,6 +14,9 @@ const basic = require('./model/hlf/basic');
 const timeout = require('connect-timeout');
 const cookieParser = require('cookie-parser')
 const morgan  = require('morgan');
+const https = require('https');
+const fs = require('fs');
+
 /**** routes **/
 let loginRoutes = require('./routes/rest/loginRoutes');
 let loginViewRoutes = require('./routes/view/loginViewRoutes');
@@ -48,6 +51,18 @@ app.use('/supplement/',supViewRoutes);
 app.use('/qr',qr);
 
 app.use(haltOnTimedout);//the following timeout middleware has to be the last middleware
+
+
+
+let key = fs.readFileSync('tsl/private.key');
+let cert = fs.readFileSync( 'tsl/server.crt' );
+let options = {
+    key: key,
+    cert: cert
+}
+
+//start https server
+https.createServer(options, app).listen(8443);
 
 
 //start the server
