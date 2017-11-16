@@ -1,6 +1,7 @@
 # Diploma Supplement Portal
 
 ##Greek Version
+
 Το έργο αναπτύχθηκε για τις ανάγκες του έργου "No INEA/CEF/ICT/A2015/1147836", από το "Information Management Lab (i4M Lab)", το οποίο αποτελεί μέρος της Ερευνητικής Ομάδας "ATLANTIS Group".
 
 - Σχετικά με την Ερευνητική Ομάδα "ATLANTIS Group" επισκεφθείτε την ιστοσελίδα: http://www.atlantis-group.gr/
@@ -20,11 +21,11 @@
 
 Το αποθετήριο είναι χωρισμένο στα εξής μέρη:
 
-**  *dsIss **, περιέχει ένα mircoservice το οποίο δρα σαν trust anchor στο σύστημα, και αλληλεπιδρά με τον eIDAS κόμβο της Ελλάδας για να ταυτοποιήσει τους χρήστες (υλοποίηση Java/Spring boot, https://projects.spring.io/spring-boot/)
-** *studentApp **, περιέχει ένα  microservice  το οποίο παρέχει το UI των χρηστών και χειρίζεται την αλληλεπίδρασή τους με το blockchain. Αλληλεπιδρά με το με το loginWebApp microservice μέσω REST api. Υλοπoίηση με nodejs/Express (https://expressjs.com/)
-** *univApp**, περιέχει ένα microservice το οποίο παρακολουθεί το blokchain και δρα εκ μέρους του πανεπιστημίου του Αιγαίου. Υλοπoίηση με nodejs/Express (https://expressjs.com/)
-** *univBackEnd**, περιέχει ένα microservice οποίο παρέχει τη σύνδεση με τη βάση δεδομένων του πανεπιστημίου του Αιγαίου. Αλληλεπιδρά με το univApp μέσω gRPC (https://grpc.io/). Υλοπoίηση με nodejs/Express (https://expressjs.com/)
-**  *hlfNetwork**, περιέχει τα αναγκαία αρχεία ρυθμίσεων για τη δημιουργία του blockchain. Έιναι αναγκαία η χρήση docker (https://www.docker.com/), docker-compose(https://docs.docker.com/compose/) και docker-swarm(https://docs.docker.com/engine/swarm/).
+* **dsIss**, περιέχει ένα mircoservice το οποίο δρα σαν trust anchor στο σύστημα, και αλληλεπιδρά με τον eIDAS κόμβο της Ελλάδας για να ταυτοποιήσει τους χρήστες (υλοποίηση Java/Spring boot, https://projects.spring.io/spring-boot/)
+* **studentApp**, περιέχει ένα  microservice  το οποίο παρέχει το UI των χρηστών και χειρίζεται την αλληλεπίδρασή τους με το blockchain. Αλληλεπιδρά με το με το loginWebApp microservice μέσω REST api. Υλοπoίηση με nodejs/Express (https://expressjs.com/)
+* **univApp**, περιέχει ένα microservice το οποίο παρακολουθεί το blokchain και δρα εκ μέρους του πανεπιστημίου του Αιγαίου. Υλοπoίηση με nodejs/Express (https://expressjs.com/)
+* **univBackEnd**, περιέχει ένα microservice οποίο παρέχει τη σύνδεση με τη βάση δεδομένων του πανεπιστημίου του Αιγαίου. Αλληλεπιδρά με το univApp μέσω gRPC (https://grpc.io/). Υλοπoίηση με nodejs/Express (https://expressjs.com/)
+* **hlfNetwork**, περιέχει τα αναγκαία αρχεία ρυθμίσεων για τη δημιουργία του blockchain. Έιναι αναγκαία η χρήση docker (https://www.docker.com/), docker-compose(https://docs.docker.com/compose/) και docker-swarm(https://docs.docker.com/engine/swarm/).
 
 
 
