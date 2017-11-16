@@ -20,11 +20,11 @@
 
 Το αποθετήριο είναι χωρισμένο στα εξής μέρη:
 
-**α) dsIss**, περιέχει ένα mircoservice το οποίο δρα σαν trust anchor στο σύστημα, και αλληλεπιδρά με τον eIDAS κόμβο της Ελλάδας για να ταυτοποιήσει τους χρήστες (υλοποίηση Java/Spring boot, https://projects.spring.io/spring-boot/)
-**β) studentApp**, περιέχει ένα  microservice  το οποίο παρέχει το UI των χρηστών και χειρίζεται την αλληλεπίδρασή τους με το blockchain. Αλληλεπιδρά με το με το loginWebApp microservice μέσω REST api. Υλοπoίηση με nodejs/Express (https://expressjs.com/)
-**γ) univApp**, περιέχει ένα microservice το οποίο παρακολουθεί το blokchain και δρα εκ μέρους του πανεπιστημίου του Αιγαίου. Υλοπoίηση με nodejs/Express (https://expressjs.com/)
-**δ) univBackEnd**, περιέχει ένα microservice οποίο παρέχει τη σύνδεση με τη βάση δεδομένων του πανεπιστημίου του Αιγαίου. Αλληλεπιδρά με το univApp μέσω gRPC (https://grpc.io/). Υλοπoίηση με nodejs/Express (https://expressjs.com/)
-**ε) hlfNetwork**, περιέχει τα αναγκαία αρχεία ρυθμίσεων για τη δημιουργία του blockchain. Έιναι αναγκαία η χρήση docker (https://www.docker.com/), docker-compose(https://docs.docker.com/compose/) και docker-swarm(https://docs.docker.com/engine/swarm/).
+**  *dsIss **, περιέχει ένα mircoservice το οποίο δρα σαν trust anchor στο σύστημα, και αλληλεπιδρά με τον eIDAS κόμβο της Ελλάδας για να ταυτοποιήσει τους χρήστες (υλοποίηση Java/Spring boot, https://projects.spring.io/spring-boot/)
+** *studentApp **, περιέχει ένα  microservice  το οποίο παρέχει το UI των χρηστών και χειρίζεται την αλληλεπίδρασή τους με το blockchain. Αλληλεπιδρά με το με το loginWebApp microservice μέσω REST api. Υλοπoίηση με nodejs/Express (https://expressjs.com/)
+** *univApp**, περιέχει ένα microservice το οποίο παρακολουθεί το blokchain και δρα εκ μέρους του πανεπιστημίου του Αιγαίου. Υλοπoίηση με nodejs/Express (https://expressjs.com/)
+** *univBackEnd**, περιέχει ένα microservice οποίο παρέχει τη σύνδεση με τη βάση δεδομένων του πανεπιστημίου του Αιγαίου. Αλληλεπιδρά με το univApp μέσω gRPC (https://grpc.io/). Υλοπoίηση με nodejs/Express (https://expressjs.com/)
+**  *hlfNetwork**, περιέχει τα αναγκαία αρχεία ρυθμίσεων για τη δημιουργία του blockchain. Έιναι αναγκαία η χρήση docker (https://www.docker.com/), docker-compose(https://docs.docker.com/compose/) και docker-swarm(https://docs.docker.com/engine/swarm/).
 
 
 
