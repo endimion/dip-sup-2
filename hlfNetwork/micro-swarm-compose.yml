@@ -1,0 +1,53 @@
+version: '3'
+
+networks:
+  hyp-net:
+    # If network is created with deplyment, Chaincode container cannot connect to network
+    # as the created network name is '<STACK NAME>_hyperledger-ov'.
+    # But chaincode container will attempt to connect 'hyperledger-ov' network
+    external:
+      name: hyp-net
+
+services:
+
+  # DipSup login microservice
+  loginWebApp:
+  #container_name: loginWebApp
+    image: endimion13/eidas-gr-loginwebapp:1.6
+    #expose:
+    #  - 8090
+    ports:
+      - 8080:8090
+      - 8090:8090
+    environment:
+      - EIDAS_PROPERTIES=CurrentFamilyName,CurrentGivenName,DateOfBirth,PersonIdentifier
+      - SP_FAIL_PAGE=https://www.google.com
+      #- SP_BACKEND=
+      - SP_SUCCESS_PAGE=http://138.68.103.237/loginSuccess
+      - SP_METADATA_URL=http://138.68.103.237:8090/metadata
+      - SP_RETURN_URL=http://138.68.103.237:8090/eidasResponse
+      - SP_LOGO=http://trc.aiest.org/wp-content/uploads/2013/04/university-of-the-aegean.png
+      - SP_CONFIG_REPOSITORY=/configEidas/
+    volumes:
+      - /configEidasOLD:/configEidas
+      - /keystore:/keystore
+    networks:
+      hyp-net:
+        aliases:
+          - loginWeb
+
+
+
+  # email microservice
+  postfix:
+    image: catatnight/postfix
+    ports:
+      - 25:25
+    environment:
+      - maildomain=mail.example.com
+      - smtp_user=user:pwd
+    networks:
+      hyp-net:
+        aliases:
+          - postfixWebApp
+
