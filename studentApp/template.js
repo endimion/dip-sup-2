@@ -18,7 +18,7 @@ export default ({ body, title }) => {
       	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
       	<!-- And then your bundled js -->
          <div id="root"></div>
-      <script src="/main.bundle.js"></script>
+      <script src="/react/main.bundle.js"></script>
       </body>
     </html>
 
