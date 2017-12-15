@@ -153,7 +153,7 @@ router.post('/request',authorizeAll,(req,res) =>{
     userDetails.then( details =>{
       let userEid = details.eid;
       let userFullName = details.firstName + " " + details.familyName;
-      let dateOfBirth = deatils.dateOfBrith;
+      let dateOfBirth = details.dateOfBrith;
       console.log([userEid,userFullName, userEid,universityId,userEmail,userEid,universityName,dateOfBirth]);
       basic.invokeChaincode([peerAddr],channel, chaincode, "requestSupplementPublication",
 								[userEid,userFullName, userEid,universityId,userEmail,userEid,universityName,dateOfBirth],
