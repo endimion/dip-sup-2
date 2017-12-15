@@ -41,7 +41,7 @@ app.set('views', path.join(__dirname,'views'));
 app.set('view engine', 'pug');
 
 //middlewares
-app.use('/',express.static('public'));
+app.use('/',express.static('dist/build/public'));
 app.use('/react',express.static('dist/build'));
 // instruct the app to use the `bodyParser()` middleware for all routes
 app.use(bodyParser.json()); // support json encoded bodies
