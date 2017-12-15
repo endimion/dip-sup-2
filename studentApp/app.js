@@ -1,6 +1,18 @@
 /*jslint es6,  node:true */
 'use strict';
 
+import React from 'react';
+import { renderToString } from 'react-dom/server';
+import Container from './reactApp/src/components/containerServer.jsx';
+import template from './template';
+
+import StaticRouter from 'react-router-dom/StaticRouter';
+import {Provider} from 'react-redux';
+
+import Store from './reactApp/store.js'
+// let renderReact = require('./reactApp/src/renderReact.js');
+
+
 
 const express = require('express');
 const app = express();
@@ -29,7 +41,8 @@ app.set('views', path.join(__dirname,'views'));
 app.set('view engine', 'pug');
 
 //middlewares
-app.use(express.static('public'));
+app.use('/',express.static('public'));
+app.use('/react',express.static('dist/build'));
 // instruct the app to use the `bodyParser()` middleware for all routes
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
@@ -63,6 +76,22 @@ let options = {
 
 //start https server
 https.createServer(options, app).listen(8443);
+
+
+app.get('/test', (req, res) => {
+
+  const store = {};
+  const appString = renderToString(
+    <Provider store={Store}><Container /></Provider>
+  );
+
+
+
+  res.send(template({
+    body: appString,
+    title: 'Hello World from the server'
+  }));
+});
 
 
 //start the server

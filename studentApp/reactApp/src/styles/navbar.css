@@ -1,0 +1,5 @@
+.navbar-fixed {
+    position: relative;
+    height: 56px;
+    z-index: 998;
+}
