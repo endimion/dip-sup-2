@@ -1,18 +1,6 @@
 /*jslint es6,  node:true */
 'use strict';
 
-import React from 'react';
-import { renderToString } from 'react-dom/server';
-import Container from './reactApp/src/components/containerServer.jsx';
-import template from './template';
-
-import StaticRouter from 'react-router-dom/StaticRouter';
-import {Provider} from 'react-redux';
-
-import Store from './reactApp/store.js'
-// let renderReact = require('./reactApp/src/renderReact.js');
-
-
 
 const express = require('express');
 const app = express();
@@ -78,20 +66,6 @@ let options = {
 https.createServer(options, app).listen(8443);
 
 
-app.get('/test', (req, res) => {
-
-  const store = {};
-  const appString = renderToString(
-    <Provider store={Store}><Container /></Provider>
-  );
-
-
-
-  res.send(template({
-    body: appString,
-    title: 'Hello World from the server'
-  }));
-});
 
 
 //start the server
