@@ -46,10 +46,10 @@ app.use(session({
 app.use(morgan('tiny')); //http request logger
 app.use(timeout(120000));
 app.use('/',[loginRoutes,loginViewRoutes]);
-app.use('/login',[loginRoutes,loginViewRoutes]);
-app.use('/supplement/rest',supplementRoutes);
-app.use('/supplement/',supViewRoutes);
-app.use('/qr',qr);
+app.use('/back/login',[loginRoutes,loginViewRoutes]);
+app.use('/back/supplement/rest',supplementRoutes);
+app.use('/back/supplement/',supViewRoutes);
+app.use('/back/qr',qr);
 
 app.use(haltOnTimedout);//the following timeout middleware has to be the last middleware
 
