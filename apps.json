@@ -1,12 +1,25 @@
 {"apps": [
   {
     "name": "studentClient",
-    "script": "app.js",
+    // "script":"appOld.js"
+    "script": "/dist/build/server.js",
     "cwd":"./studentApp",
     //"watch": true,
     "env": {"ENV_VARIABLE":123, "SRV_ADDR":"127.0.0.1:8000",
                                       "NODE_ENV": "development",
                                       "BASE_URL":"/"},
+    "env_production": {"ENV_VARIABLE":123,
+                        "SRV_ADDR":"http://138.68.103.237",
+                        "NODE_ENV": "production",
+                        "BASE_URL":"/"}
+  },
+  {
+    "name": "studentBack",
+    "script": "app.js",
+    "cwd":"./studentBack",
+    "env": {"ENV_VARIABLE":123, "SRV_ADDR":"127.0.0.1:8000",
+                                      "NODE_ENV": "development",
+                                      "BASE_URL":"/back"},
     "env_production": {"ENV_VARIABLE":123,
                         "SRV_ADDR":"http://138.68.103.237",
                         "NODE_ENV": "production",
@@ -35,6 +48,5 @@
                         "SRV_ADDR":"http://138.68.103.237",
                         "NODE_ENV": "production",
                         "BASE_URL":"/univ/"}
-  } 
+  }
 ]}
-
