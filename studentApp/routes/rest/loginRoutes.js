@@ -40,7 +40,7 @@ router.get('/loginSuccess',(req,res)=>{
 
 router.get('/loginSuccessReact',(req,res)=>{
   let cookie = req.cookies.inviteHash;
-  // console.log("dsHashCookie: " + cookie);
+  console.log("dsHashCookie: " + cookie);
   if (cookie === undefined)
   {
     res.redirect(303,"/app");
