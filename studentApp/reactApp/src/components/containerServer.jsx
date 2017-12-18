@@ -5,7 +5,8 @@ import {connect} from 'react-redux'
 import {
   Route,
   Link,
-  Switch
+  Switch,
+  Redirect
 } from 'react-router-dom'
 import StaticRouter from 'react-router-dom/StaticRouter';
 
@@ -36,18 +37,19 @@ export default class Container extends React.Component {
 
 
     componentWillMount(){
-      const { cookies } = this.props;
-      const  userAccount = {
-        firstName: "Nikos ",
-        lastName: "Trintafylloy",
-        email: "test@test.gr",
-        userName: "handlename",
-        eid: "123"
-        };
+      // const { cookies } = this.props;
+      // const  userAccount = {
+      //   firstName: "Nikos ",
+      //   lastName: "Trintafylloy",
+      //   email: "test@test.gr",
+      //   userName: "handlename",
+      //   eid: "123"
+      //   };
 
       // let  name = cookies.get('name') || 'Ben';
-
-      this.props.dispatch(setUser(userAccount));
+      // console.log("User:");
+      // console.log(this.props.usr);
+      // this.props.dispatch(setUser(this.props.usr));
     }
 
     render(){
@@ -60,13 +62,14 @@ export default class Container extends React.Component {
       let edit = ({match}) => (<div><NavigationBar user={user}/><EditSup match={match}/></div> );
 
 
-      return  <StaticRouter>
+      return  <StaticRouter location={this.props.location} context={this.props.context}>
                   <Switch>
-                    <Route path="/" exact component={home} />
-                    <Route path="/home" exact component={home} />
-                    <Route path="/manage" exact component={manage} />
-                    <Route path="/request" exact component={request} />
-                    <Route path="/edit/:id" component={edit}/>
+                    <Route path="/app/" exact component={home} />
+                    <Route path="/app/test" exact component={home} />
+                    <Route path="/app/home" exact component={home} />
+                    <Route path="/app/manage" exact component={manage} />
+                    <Route path="/app/request" exact component={request} />
+                    <Route path="/app/edit/:id" component={edit}/>
                   </Switch>
                 </StaticRouter>
 

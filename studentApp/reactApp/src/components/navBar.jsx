@@ -16,9 +16,9 @@ export default class NavigationBar extends React.Component {
 
         const account = <li><NavLink to="/">Account</NavLink></li>;
         return   <Navbar style={style} brand='DS Service' right fixed={true}>
-                 <li><NavLink to="/home">Home</NavLink></li>
-	               <li><NavLink to="/manage">Manage Supplements</NavLink></li>
-                 <li><NavLink to="/request">Request new Supplement</NavLink></li>
+                 <li><NavLink to="/app/home">Home</NavLink></li>
+	               <li><NavLink to="/app/manage">Manage Supplements</NavLink></li>
+                 <li><NavLink to="/app/request">Request new Supplement</NavLink></li>
                  <SideNavigation  trig={account} user= {this.props.user}/>
               </Navbar>
 

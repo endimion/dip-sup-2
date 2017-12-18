@@ -61,7 +61,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 33);
+/******/ 	return __webpack_require__(__webpack_require__.s = 32);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -78,12 +78,6 @@ module.exports = require("react-materialize");
 
 /***/ }),
 /* 2 */
-/***/ (function(module, exports) {
-
-module.exports = require("path");
-
-/***/ }),
-/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -93,10 +87,10 @@ module.exports = require("path");
 var bcrypt = __webpack_require__(23);
 var jwt = __webpack_require__(18);
 var secretKey = process.env.SECRET_KEY ? process.env.SECRET_KEY : "secret"; //the secret comes from an enviroment variable
-var stripchar = __webpack_require__(28).StripChar;
+var stripchar = __webpack_require__(27).StripChar;
 var fs = __webpack_require__(5);
-var path = __webpack_require__(2);
-var nJwt = __webpack_require__(93);
+var path = __webpack_require__(3);
+var nJwt = __webpack_require__(92);
 /**
   check if a user eID exists on teh session,
   if not verify the existance of a jwt token and its validity
@@ -158,6 +152,11 @@ exports.authorizeAdmin = function (req, res, next) {
 */
 exports.userDetailsFromToken = function (req, res) {
   var token = req.cookies.access_token;
+  //TODO remove this is only for test on localhost
+  if (!token) {
+    token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJlaWRcIjpcIkdSL0dSL0VSTUlTLTExMDc2NjY5XCIsXCJwZXJzb25JZGVudGlmaWVyXCI6XCJHUi9HUi9FUk1JUy0xMTA3NjY2OVwiLFwiZGF0ZU9mQmlydGhcIjpcIjE5ODAtMDEtMDFcIixcImN1cnJlbnRGYW1pbHlOYW1lXCI6XCLOoM6VzqTOoc6fzqVcIixcImN1cnJlbnRHaXZlbk5hbWVcIjpcIs6Rzp3OlM6hzpXOkc6jXCJ9In0.AjC4Brk9gVS1vfsuMyATKh-U5Lyoa6GT9VL1U1ty2qE";
+  }
+
   return new Promise(function (resolve, reject) {
     jwt.verify(token, secretKey, { algorithms: ['HS256'] }, function (err, token) {
       if (err) {
@@ -181,6 +180,12 @@ exports.userDetailsFromToken = function (req, res) {
     });
   });
 };
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+module.exports = require("path");
 
 /***/ }),
 /* 4 */
@@ -235,7 +240,7 @@ var log4js = __webpack_require__(78);
 var logger = log4js.getLogger('Helper');
 // logger.setLevel('DEBUG');
 
-var path = __webpack_require__(2);
+var path = __webpack_require__(3);
 var util = __webpack_require__(7);
 var fs = __webpack_require__(79);
 var User = __webpack_require__(80);
@@ -735,7 +740,7 @@ var SupBtns = function (_React$Component) {
       );
       var edit = _react2.default.createElement(
         _reactRouterDom.Link,
-        { to: "/edit/" + this.props.id, className: 'btn-floating btn-medium waves-effect waves-light yellow darken-3', style: { marginLeft: "1em" } },
+        { to: "/app/edit/" + this.props.id, className: 'btn-floating btn-medium waves-effect waves-light yellow darken-3', style: { marginLeft: "1em" } },
         _react2.default.createElement(
           'i',
           { className: 'material-icons' },
@@ -1033,7 +1038,7 @@ module.exports = require("axios");
 /*jslint es6,  node:true */
 
 
-var path = __webpack_require__(2);
+var path = __webpack_require__(3);
 var fs = __webpack_require__(5);
 var util = __webpack_require__(7);
 var config = __webpack_require__(6);
@@ -1046,7 +1051,7 @@ var createChannel = __webpack_require__(84);
 var instantiate = __webpack_require__(85);
 var query = __webpack_require__(86);
 var invoke = __webpack_require__(87);
-var evHelper = __webpack_require__(27);
+var evHelper = __webpack_require__(26);
 
 exports.installChaincode = function (peers, chaincodeName, chaincodePath, chaincodeVersion, username, org) {
   console.log('\n============ Install chaincode on organizations ============\n');
@@ -1137,12 +1142,6 @@ module.exports = require("bcrypt");
 
 /***/ }),
 /* 24 */
-/***/ (function(module, exports) {
-
-module.exports = require("react-router-dom/StaticRouter");
-
-/***/ }),
-/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -1177,13 +1176,13 @@ module.exports = require("react-router-dom/StaticRouter");
   
 
 /***/ }),
-/* 26 */
+/* 25 */
 /***/ (function(module, exports) {
 
 module.exports = require("redux");
 
 /***/ }),
-/* 27 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1192,7 +1191,7 @@ module.exports = require("redux");
 
 var helper = __webpack_require__(8);
 var fs = __webpack_require__(5);
-var path = __webpack_require__(2);
+var path = __webpack_require__(3);
 var util = __webpack_require__(7);
 
 /**
@@ -1260,19 +1259,19 @@ exports.txDetectionEvent = function (reject, resolve, payload, ehub, listenerHan
 };
 
 /***/ }),
-/* 28 */
+/* 27 */
 /***/ (function(module, exports) {
 
 module.exports = require("stripchar");
 
 /***/ }),
-/* 29 */
+/* 28 */
 /***/ (function(module, exports) {
 
 module.exports = require("uuid/v1");
 
 /***/ }),
-/* 30 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1289,13 +1288,13 @@ function generateSupplementHash(employerEmail, supId, userName) {
 }
 
 /***/ }),
-/* 31 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var path = __webpack_require__(2);
+var path = __webpack_require__(3);
 
 var nodemailer = __webpack_require__(98);
 var fileUtils = __webpack_require__(99);
@@ -1352,36 +1351,34 @@ function sendEmail(receiverAddress, body) {
 };
 
 /***/ }),
-/* 32 */
+/* 31 */
 /***/ (function(module, exports) {
 
 module.exports = require("randomstring");
 
 /***/ }),
-/* 33 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /*jslint es6,  node:true */
 
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _server = __webpack_require__(34);
+var _server = __webpack_require__(33);
 
-var _containerServer = __webpack_require__(35);
+var _containerServer = __webpack_require__(34);
 
 var _containerServer2 = _interopRequireDefault(_containerServer);
 
 var _template = __webpack_require__(65);
 
 var _template2 = _interopRequireDefault(_template);
-
-var _StaticRouter = __webpack_require__(24);
-
-var _StaticRouter2 = _interopRequireDefault(_StaticRouter);
 
 var _reactRedux = __webpack_require__(4);
 
@@ -1397,7 +1394,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var express = __webpack_require__(11);
 var app = express();
 var port = 8000;
-var path = __webpack_require__(2);
+var path = __webpack_require__(3);
 var bodyParser = __webpack_require__(75);
 var session = __webpack_require__(76); //warning The default server-side session storage, MemoryStore, is purposely not designed for a production environment.
 //compatible session stores https://github.com/expressjs/session#compatible-session-stores
@@ -1409,8 +1406,10 @@ var morgan = __webpack_require__(90);
 var https = __webpack_require__(91);
 var fs = __webpack_require__(5);
 
+var util = __webpack_require__(2);
+
 /**** routes **/
-var loginRoutes = __webpack_require__(92);
+var loginRoutes = __webpack_require__(93);
 var loginViewRoutes = __webpack_require__(94);
 var supplementRoutes = __webpack_require__(95);
 var supViewRoutes = __webpack_require__(102);
@@ -1422,7 +1421,9 @@ app.set('view engine', 'pug');
 
 //middlewares
 app.use('/', express.static('public'));
-app.use('/react', express.static('dist/build'));
+app.use('/', express.static('dist/build'));
+app.use('/dist/build/', express.static('dist/build'));
+
 // instruct the app to use the `bodyParser()` middleware for all routes
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
@@ -1455,19 +1456,39 @@ var options = {
   //start https server
 };https.createServer(options, app).listen(8443);
 
-app.get('/test', function (req, res) {
+app.get('/app*', function (req, res) {
+  util.userDetailsFromToken(req, res).then(function (usr) {
+    // const staticContext = {}
+    var css = new Set(); // CSS for all rendered React components
+    var staticContext = { insertCss: function insertCss() {
+        for (var _len = arguments.length, styles = Array(_len), _key = 0; _key < _len; _key++) {
+          styles[_key] = arguments[_key];
+        }
 
-  var store = {};
-  var appString = (0, _server.renderToString)(_react2.default.createElement(
-    _reactRedux.Provider,
-    { store: _store2.default },
-    _react2.default.createElement(_containerServer2.default, null)
-  ));
-
-  res.send((0, _template2.default)({
-    body: appString,
-    title: 'Hello World from the server'
-  }));
+        return styles.forEach(function (style) {
+          return css.add(style._getCss());
+        });
+      } };
+    var theUser = usr;
+    // Grab the initial state from our Redux store
+    var preloadedState = _extends({}, _store2.default.getState(), {
+      user: { user: _extends({}, usr, { lastName: usr.familyName }) } });
+    var appString = (0, _server.renderToString)(_react2.default.createElement(
+      _reactRedux.Provider,
+      { store: _store2.default },
+      _react2.default.createElement(_containerServer2.default, { location: req.url,
+        context: staticContext,
+        usr: theUser })
+    ));
+    res.send((0, _template2.default)({
+      body: appString,
+      title: 'Hello World from the server',
+      preloadedState: preloadedState,
+      css: css
+    }));
+  }).catch(function (err) {
+    res.redirect("/login/landing");
+  });
 });
 
 //start the server
@@ -1499,13 +1520,13 @@ function haltOnTimedout(req, res, next) {
 }
 
 /***/ }),
-/* 34 */
+/* 33 */
 /***/ (function(module, exports) {
 
 module.exports = require("react-dom/server");
 
 /***/ }),
-/* 35 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1528,7 +1549,7 @@ var _reactRedux = __webpack_require__(4);
 
 var _reactRouterDom = __webpack_require__(12);
 
-var _StaticRouter = __webpack_require__(24);
+var _StaticRouter = __webpack_require__(35);
 
 var _StaticRouter2 = _interopRequireDefault(_StaticRouter);
 
@@ -1593,19 +1614,19 @@ var Container = (_dec = (0, _reactRedux.connect)(function (store) {
   _createClass(Container, [{
     key: 'componentWillMount',
     value: function componentWillMount() {
-      var cookies = this.props.cookies;
-
-      var userAccount = {
-        firstName: "Nikos ",
-        lastName: "Trintafylloy",
-        email: "test@test.gr",
-        userName: "handlename",
-        eid: "123"
-      };
+      // const { cookies } = this.props;
+      // const  userAccount = {
+      //   firstName: "Nikos ",
+      //   lastName: "Trintafylloy",
+      //   email: "test@test.gr",
+      //   userName: "handlename",
+      //   eid: "123"
+      //   };
 
       // let  name = cookies.get('name') || 'Ben';
-
-      this.props.dispatch((0, _userActions.setUser)(userAccount));
+      // console.log("User:");
+      // console.log(this.props.usr);
+      // this.props.dispatch(setUser(this.props.usr));
     }
   }, {
     key: 'render',
@@ -1653,15 +1674,16 @@ var Container = (_dec = (0, _reactRedux.connect)(function (store) {
 
       return _react2.default.createElement(
         _StaticRouter2.default,
-        null,
+        { location: this.props.location, context: this.props.context },
         _react2.default.createElement(
           _reactRouterDom.Switch,
           null,
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/', exact: true, component: home }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/home', exact: true, component: home }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/manage', exact: true, component: manage }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/request', exact: true, component: request }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/edit/:id', component: edit })
+          _react2.default.createElement(_reactRouterDom.Route, { path: '/app/', exact: true, component: home }),
+          _react2.default.createElement(_reactRouterDom.Route, { path: '/app/test', exact: true, component: home }),
+          _react2.default.createElement(_reactRouterDom.Route, { path: '/app/home', exact: true, component: home }),
+          _react2.default.createElement(_reactRouterDom.Route, { path: '/app/manage', exact: true, component: manage }),
+          _react2.default.createElement(_reactRouterDom.Route, { path: '/app/request', exact: true, component: request }),
+          _react2.default.createElement(_reactRouterDom.Route, { path: '/app/edit/:id', component: edit })
         )
       );
 
@@ -1672,6 +1694,12 @@ var Container = (_dec = (0, _reactRedux.connect)(function (store) {
   return Container;
 }(_react2.default.Component)) || _class);
 exports.default = Container;
+
+/***/ }),
+/* 35 */
+/***/ (function(module, exports) {
+
+module.exports = require("react-router-dom/StaticRouter");
 
 /***/ }),
 /* 36 */
@@ -1842,7 +1870,7 @@ var _sideNav = __webpack_require__(19);
 
 var _sideNav2 = _interopRequireDefault(_sideNav);
 
-__webpack_require__(25);
+__webpack_require__(24);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1885,7 +1913,7 @@ var NavigationBar = function (_React$Component) {
           null,
           _react2.default.createElement(
             _reactRouterDom.NavLink,
-            { to: '/home' },
+            { to: '/app/home' },
             'Home'
           )
         ),
@@ -1894,7 +1922,7 @@ var NavigationBar = function (_React$Component) {
           null,
           _react2.default.createElement(
             _reactRouterDom.NavLink,
-            { to: '/manage' },
+            { to: '/app/manage' },
             'Manage Supplements'
           )
         ),
@@ -1903,7 +1931,7 @@ var NavigationBar = function (_React$Component) {
           null,
           _react2.default.createElement(
             _reactRouterDom.NavLink,
-            { to: '/request' },
+            { to: '/app/request' },
             'Request new Supplement'
           )
         ),
@@ -2247,7 +2275,7 @@ var _sideNav = __webpack_require__(19);
 
 var _sideNav2 = _interopRequireDefault(_sideNav);
 
-__webpack_require__(25);
+__webpack_require__(24);
 
 var _manageDocuments = __webpack_require__(50);
 
@@ -2313,7 +2341,7 @@ var HomePage = function (_React$Component) {
           { className: 'card-action' },
           _react2.default.createElement(
             _reactRouterDom.Link,
-            { to: '/manage' },
+            { to: '/app/manage' },
             'View Supplements'
           )
         )
@@ -2346,7 +2374,7 @@ var HomePage = function (_React$Component) {
           { className: 'card-action' },
           _react2.default.createElement(
             _reactRouterDom.Link,
-            { to: '/request' },
+            { to: '/app/request' },
             'Request'
           )
         )
@@ -2379,7 +2407,7 @@ var HomePage = function (_React$Component) {
           { className: 'card-action' },
           _react2.default.createElement(
             _reactRouterDom.Link,
-            { to: '/account' },
+            { to: '/app/account' },
             'Review Account'
           )
         )
@@ -2682,7 +2710,7 @@ var SupplementCard = function (_React$Component) {
                 )
               );
             } else {
-              console.log(k, entry[k]);
+              // console.log(k,entry[k]);
               var details = entry[k];
               var modules = details.Modules.map(function (mod) {
                 return _react2.default.createElement(
@@ -3983,11 +4011,15 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 exports.default = function (_ref) {
   var body = _ref.body,
-      title = _ref.title;
+      title = _ref.title,
+      preloadedState = _ref.preloadedState,
+      css = _ref.css;
 
-  return '\n    <!DOCTYPE html>\n    <html lang="en">\n    <head>\n    \t<!-- Import Google Icon Font -->\n    \t<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">\n    \t<!-- Import materialize.css -->\n    \t<link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css" rel="stylesheet">\n      <title>Diploma Supplement</title>\n    </head>\n      <body>\n        <!-- Import jQuery before materialize.js -->\n      \t<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>\n      \t<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>\n      \t<!-- And then your bundled js -->\n         <div id="root"></div>\n      <script src="/react/main.bundle.js"></script>\n      </body>\n    </html>\n\n  ';
+  return '\n    <!DOCTYPE html>\n    <html lang="en">\n    <head>\n    \t<!-- Import Google Icon Font -->\n    \t<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">\n    \t<!-- Import materialize.css -->\n    \t<link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css" rel="stylesheet">\n      <style type="text/css">' + [].concat(_toConsumableArray(css)).join('') + '</style>\n      <title>Diploma Supplement</title>\n    </head>\n      <body>\n        <!-- Import jQuery before materialize.js -->\n      \t<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>\n      \t<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>\n      \t<!-- And then your bundled js -->\n         <div id="root">' + body + '</div>\n         <script>\n           // WARNING: See the following for security issues around embedding JSON in HTML:\n           // http://redux.js.org/docs/recipes/ServerRendering.html#security-considerations\n           window.__PRELOADED_STATE__ = ' + JSON.stringify(preloadedState).replace(/</g, '\\u003c') + '\n         </script>\n        <script src="/main.bundle.js"></script>\n        <link href="/public/navbar.css" rel="stylesheet">\n      </body>\n    </html>\n\n  ';
 };
 
 /***/ }),
@@ -4001,7 +4033,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _redux = __webpack_require__(26);
+var _redux = __webpack_require__(25);
 
 var _reduxLogger = __webpack_require__(67);
 
@@ -4052,7 +4084,7 @@ Object.defineProperty(exports, "__esModule", {
                   value: true
 });
 
-var _redux = __webpack_require__(26);
+var _redux = __webpack_require__(25);
 
 var _userReducer = __webpack_require__(71);
 
@@ -4411,7 +4443,7 @@ module.exports = require("fabric-ca-client");
  *  limitations under the License.
  */
 var util = __webpack_require__(7);
-var path = __webpack_require__(2);
+var path = __webpack_require__(3);
 var fs = __webpack_require__(5);
 
 var Peer = __webpack_require__(16);
@@ -4557,7 +4589,7 @@ exports.joinChannel = joinChannel;
  */
 var util = __webpack_require__(7);
 var fs = __webpack_require__(5);
-var path = __webpack_require__(2);
+var path = __webpack_require__(3);
 var config = __webpack_require__(6);
 var helper = __webpack_require__(8);
 var logger = helper.getLogger('Create-Channel');
@@ -4635,7 +4667,7 @@ exports.createChannel = createChannel;
  */
 
 
-var path = __webpack_require__(2);
+var path = __webpack_require__(3);
 var fs = __webpack_require__(5);
 var util = __webpack_require__(7);
 var hfc = __webpack_require__(15);
@@ -4784,7 +4816,7 @@ exports.instantiateChaincode = instantiateChaincode;
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-var path = __webpack_require__(2);
+var path = __webpack_require__(3);
 var fs = __webpack_require__(5);
 var util = __webpack_require__(7);
 var hfc = __webpack_require__(15);
@@ -5055,7 +5087,7 @@ exports.getChannels = getChannels;
  */
 
 
-var path = __webpack_require__(2);
+var path = __webpack_require__(3);
 var fs = __webpack_require__(5);
 var util = __webpack_require__(7);
 var hfc = __webpack_require__(15);
@@ -5066,7 +5098,7 @@ var logger = helper.getLogger('invoke-chaincode');
 var EventHub = __webpack_require__(17);
 hfc.addConfigFile(path.join(__dirname, 'network-config.json'));
 var ORGS = hfc.getConfigSetting('network-config');
-var evHelper = __webpack_require__(27);
+var evHelper = __webpack_require__(26);
 
 /**
 	@param  eventHandler, an OPTIONAL function, that handles the custom events
@@ -5227,6 +5259,12 @@ module.exports = require("https");
 
 /***/ }),
 /* 92 */
+/***/ (function(module, exports) {
+
+module.exports = require("njwt");
+
+/***/ }),
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5239,11 +5277,11 @@ var bcrypt = __webpack_require__(23);
 var jwt = __webpack_require__(18);
 var secretKey = process.env.SECRET_KEY ? process.env.SECRET_KEY : "testSecret"; //the secret comes from an enviroment variable
 var request = __webpack_require__(14);
-var authorizeAll = __webpack_require__(3).authorizeAll;
-var authorizeAdmin = __webpack_require__(3).authorizeAdmin;
-var getUserDetails = __webpack_require__(3).userDetailsFromToken;
+var authorizeAll = __webpack_require__(2).authorizeAll;
+var authorizeAdmin = __webpack_require__(2).authorizeAdmin;
+var getUserDetails = __webpack_require__(2).userDetailsFromToken;
 var fs = __webpack_require__(5);
-var path = __webpack_require__(2);
+var path = __webpack_require__(3);
 
 module.exports = router;
 
@@ -5340,12 +5378,6 @@ router.get('/logout', function (req, res) {
 });
 
 /***/ }),
-/* 93 */
-/***/ (function(module, exports) {
-
-module.exports = require("njwt");
-
-/***/ }),
 /* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5359,10 +5391,10 @@ var bcrypt = __webpack_require__(23);
 var jwt = __webpack_require__(18);
 var secretKey = process.env.SECRET_KEY ? process.env.SECRET_KEY : "testSecret"; //the secret comes from an enviroment variable
 var request = __webpack_require__(14);
-var authorizeAll = __webpack_require__(3).authorizeAll;
-var authorizeAdmin = __webpack_require__(3).authorizeAdmin;
-var getUserDetails = __webpack_require__(3).userDetailsFromToken;
-var uuid = __webpack_require__(29);
+var authorizeAll = __webpack_require__(2).authorizeAll;
+var authorizeAdmin = __webpack_require__(2).authorizeAdmin;
+var getUserDetails = __webpack_require__(2).userDetailsFromToken;
+var uuid = __webpack_require__(28);
 
 module.exports = router;
 
@@ -5401,13 +5433,13 @@ router.get('/eIDAS', function (req, res) {
 var express = __webpack_require__(11);
 var router = express.Router();
 var request = __webpack_require__(14);
-var authorizeAll = __webpack_require__(3).authorizeAll;
-var authorizeAdmin = __webpack_require__(3).authorizeAdmin;
-var getUserDetails = __webpack_require__(3).userDetailsFromToken;
+var authorizeAll = __webpack_require__(2).authorizeAll;
+var authorizeAdmin = __webpack_require__(2).authorizeAdmin;
+var getUserDetails = __webpack_require__(2).userDetailsFromToken;
 var basic = __webpack_require__(22);
-var supUtils = __webpack_require__(30);
-var emailUtil = __webpack_require__(31);
-var randomstring = __webpack_require__(32);
+var supUtils = __webpack_require__(29);
+var emailUtil = __webpack_require__(30);
+var randomstring = __webpack_require__(31);
 var qr = __webpack_require__(101);
 
 /* configuration */
@@ -5529,7 +5561,7 @@ router.post('/request', authorizeAll, function (req, res) {
   userDetails.then(function (details) {
     var userEid = details.eid;
     var userFullName = details.firstName + " " + details.familyName;
-    var dateOfBirth = deatils.dateOfBrith;
+    var dateOfBirth = details.dateOfBrith;
     console.log([userEid, userFullName, userEid, universityId, userEmail, userEid, universityName, dateOfBirth]);
     basic.invokeChaincode([peerAddr], channel, chaincode, "requestSupplementPublication", [userEid, userFullName, userEid, universityId, userEmail, userEid, universityName, dateOfBirth], userEid, org).then(function (resp) {
       console.log("response");
@@ -5745,17 +5777,17 @@ module.exports = require("qr-image");
 var express = __webpack_require__(11);
 var router = express.Router();
 var request = __webpack_require__(14);
-var authorizeAll = __webpack_require__(3).authorizeAll;
-var authorizeAdmin = __webpack_require__(3).authorizeAdmin;
-var getUserDetails = __webpack_require__(3).userDetailsFromToken;
+var authorizeAll = __webpack_require__(2).authorizeAll;
+var authorizeAdmin = __webpack_require__(2).authorizeAdmin;
+var getUserDetails = __webpack_require__(2).userDetailsFromToken;
 var basic = __webpack_require__(22);
-var supUtils = __webpack_require__(30);
-var emailUtil = __webpack_require__(31);
-var randomstring = __webpack_require__(32);
+var supUtils = __webpack_require__(29);
+var emailUtil = __webpack_require__(30);
+var randomstring = __webpack_require__(31);
 var jwt = __webpack_require__(18);
 var secretKey = process.env.SECRET_KEY ? process.env.SECRET_KEY : "testSecret"; //the secret comes from an enviroment variable
-var stripchar = __webpack_require__(28).StripChar;
-var uuid = __webpack_require__(29);
+var stripchar = __webpack_require__(27).StripChar;
+var uuid = __webpack_require__(28);
 
 /* configuration */
 var config = __webpack_require__(6);

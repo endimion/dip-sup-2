@@ -29,7 +29,7 @@ export default class HomePage extends React.Component {
             <p>View published supplements, manage user access</p>
           </div>
           <div className="card-action">
-            <Link to="/manage">View Supplements</Link>
+            <Link to="/app/manage">View Supplements</Link>
           </div>
         </div>;
 
@@ -42,7 +42,7 @@ export default class HomePage extends React.Component {
             <p>Request the publication of a Diploma Supplement.</p>
           </div>
           <div className="card-action">
-            <Link to="/request">Request</Link>
+            <Link to="/app/request">Request</Link>
 
           </div>
         </div>;
@@ -56,7 +56,7 @@ export default class HomePage extends React.Component {
             <p>Review your account details</p>
           </div>
           <div className="card-action">
-            <Link to="/account">Review Account</Link>
+            <Link to="/app/account">Review Account</Link>
           </div>
         </div>;
 

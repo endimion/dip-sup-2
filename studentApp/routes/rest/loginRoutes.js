@@ -38,6 +38,20 @@ router.get('/loginSuccess',(req,res)=>{
 
 
 
+router.get('/loginSuccessReact',(req,res)=>{
+  let cookie = req.cookies.inviteHash;
+  // console.log("dsHashCookie: " + cookie);
+  if (cookie === undefined)
+  {
+    res.redirect(303,"/app");
+  }else{
+    res.redirect(303,"/app/invite/"+cookie);
+  }
+});
+
+
+
+
 
 
 // router.get('/authenticate/:token', (req,res) =>{

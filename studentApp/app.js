@@ -6,7 +6,7 @@ import { renderToString } from 'react-dom/server';
 import Container from './reactApp/src/components/containerServer.jsx';
 import template from './template';
 
-import StaticRouter from 'react-router-dom/StaticRouter';
+
 import {Provider} from 'react-redux';
 
 import Store from './reactApp/store.js'
@@ -29,6 +29,10 @@ const morgan  = require('morgan');
 const https = require('https');
 const fs = require('fs');
 
+
+const util = require('./utils/authUtils.js');
+
+
 /**** routes **/
 let loginRoutes = require('./routes/rest/loginRoutes');
 let loginViewRoutes = require('./routes/view/loginViewRoutes');
@@ -42,8 +46,9 @@ app.set('view engine', 'pug');
 
 //middlewares
 app.use('/',express.static('public'));
-app.use('/react/',express.static('dist/build'));
+app.use('/',express.static('dist/build'));
 app.use('/dist/build/',express.static('dist/build'));
+
 // instruct the app to use the `bodyParser()` middleware for all routes
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
@@ -79,20 +84,37 @@ let options = {
 https.createServer(options, app).listen(8443);
 
 
-app.get('/test', (req, res) => {
+app.get('/app*', (req, res) => {
+  util.userDetailsFromToken(req,res).then( (usr) => {
+    // const staticContext = {}
+    const css = new Set(); // CSS for all rendered React components
+    const staticContext = { insertCss: (...styles) => styles.forEach(style => css.add(style._getCss())) };
+    const theUser= usr;
+    // Grab the initial state from our Redux store
+    const preloadedState = {...Store.getState(),
+                            user:{user:{...usr, lastName: usr.familyName}}}
+    const appString = renderToString(
+      <Provider store={Store}>
+        <Container location={req.url}
+                   context={staticContext}
+                   usr={theUser}/>
+        </Provider>
+    );
+    res.send(template({
+      body: appString,
+      title: 'Hello World from the server',
+      preloadedState: preloadedState,
+      css:css
+    }));
 
-  const store = {};
-  const appString = renderToString(
-    <Provider store={Store}><Container /></Provider>
-  );
+  }).catch(err=>{
+    res.redirect("/login/landing");
+  });
 
-
-
-  res.send(template({
-    body: appString,
-    title: 'Hello World from the server'
-  }));
 });
+
+
+
 
 
 //start the server

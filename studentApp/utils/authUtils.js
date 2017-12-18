@@ -76,6 +76,11 @@ exports.authorizeAdmin =  (req, res, next) =>{
 */
 exports.userDetailsFromToken = (req,res) =>{
   let  token = req.cookies.access_token;
+  //TODO remove this is only for test on localhost
+  if(!token){
+    token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJlaWRcIjpcIkdSL0dSL0VSTUlTLTExMDc2NjY5XCIsXCJwZXJzb25JZGVudGlmaWVyXCI6XCJHUi9HUi9FUk1JUy0xMTA3NjY2OVwiLFwiZGF0ZU9mQmlydGhcIjpcIjE5ODAtMDEtMDFcIixcImN1cnJlbnRGYW1pbHlOYW1lXCI6XCLOoM6VzqTOoc6fzqVcIixcImN1cnJlbnRHaXZlbk5hbWVcIjpcIs6Rzp3OlM6hzpXOkc6jXCJ9In0.AjC4Brk9gVS1vfsuMyATKh-U5Lyoa6GT9VL1U1ty2qE";
+  }
+
   return new Promise( (resolve,reject) =>{
     jwt.verify(token,secretKey,{ algorithms: ['HS256']},function(err,token){
       if(err){

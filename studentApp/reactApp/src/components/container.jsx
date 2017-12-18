@@ -6,7 +6,8 @@ import {
   BrowserRouter as Router,
   Route,
   Link,
-  Switch
+  Switch,
+  Redirect
 } from 'react-router-dom'
 
 import {sideBarOnOff} from '../actions/sideBarActions'
@@ -37,17 +38,6 @@ export default class Container extends React.Component {
 
     componentWillMount(){
       const { cookies } = this.props;
-      const  userAccount = {
-        firstName: "Nikos ",
-        lastName: "Trintafylloy",
-        email: "test@test.gr",
-        userName: "handlename",
-        eid: "123"
-        };
-
-      // let  name = cookies.get('name') || 'Ben';
-
-      this.props.dispatch(setUser(userAccount));
     }
 
     render(){
@@ -58,16 +48,27 @@ export default class Container extends React.Component {
       let manage = () => <div><NavigationBar user={user}/><Supplements user={user} /></div>;
       let request = () => <div><NavigationBar user={user}/><RequestSupplementCard name={"user"} eID={"eID"}/></div>;
       let edit = ({match}) => (<div><NavigationBar user={user}/><EditSup match={match}/></div> );
-
+      let inviteView = ({match}) => {
+                  if(user === undefined || user.firstName !==  undefined){
+                    // return <Redirect from="/app" to="/login" push />
+                    const cookies = new Cookies();
+                    cookies.set('inviteHash', match, { path: '/' });
+                    window.location = '/login';
+                  }else{
+                    //<SharedSup match={match}/>
+                    return (<div><NavigationBar user={user}/></div> )
+                  }
+      };
 
       return  <Router>
                   <Switch>
-                    <Route path="/" exact component={home} />
-                    <Route path="/test" exact component={home} />
-                    <Route path="/home" exact component={home} />
-                    <Route path="/manage" exact component={manage} />
-                    <Route path="/request" exact component={request} />
-                    <Route path="/edit/:id" component={edit}/>
+                    <Route path="/app/" exact component={home} />
+                    <Route path="/app/test" exact component={home} />
+                    <Route path="/app/home" exact component={home} />
+                    <Route path="/app/manage" exact component={manage} />
+                    <Route path="/app/request" exact component={request} />
+                    <Route path="/app/edit/:id" component={edit}/>
+                    <Route path="/app/invite/:id" component={inviteView}/>
                   </Switch>
                 </Router>
 

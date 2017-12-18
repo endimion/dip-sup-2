@@ -38,7 +38,7 @@ export default class SupplementCard extends React.Component {
                                 <span>{k} : {entry[k]}</span>
                             </div>;
               }else{
-                  console.log(k,entry[k]);
+                  // console.log(k,entry[k]);
                   let details = entry[k];
                   let modules =  details.Modules.map( (mod) =>{
                     return <Row>

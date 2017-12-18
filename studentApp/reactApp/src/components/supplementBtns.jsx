@@ -11,7 +11,7 @@ export default class SupBtns extends React.Component {
     const download = <a className="btn-floating btn-medium waves-effect waves-light blue darken-3">
                         <i className="material-icons">file_download</i>
                     </a>;
-    const edit =  <Link to={"/edit/"+this.props.id} className="btn-floating btn-medium waves-effect waves-light yellow darken-3" style={{ marginLeft: "1em"}}>
+    const edit =  <Link to={"/app/edit/"+this.props.id} className="btn-floating btn-medium waves-effect waves-light yellow darken-3" style={{ marginLeft: "1em"}}>
                         <i className="material-icons">edit</i>
                     </Link>;
 
