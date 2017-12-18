@@ -1,8 +1,7 @@
 {"apps": [
   {
     "name": "studentClient",
-    // "script":"appOld.js"
-    "script": "/dist/build/server.js",
+    "script": "node /dist/build/server.js",
     "cwd":"./studentApp",
     //"watch": true,
     "env": {"ENV_VARIABLE":123, "SRV_ADDR":"127.0.0.1:8000",
@@ -15,7 +14,7 @@
   },
   {
     "name": "studentBack",
-    "script": "app.js",
+    "script": "appOld.js",
     "cwd":"./studentBack",
     "env": {"ENV_VARIABLE":123, "SRV_ADDR":"127.0.0.1:8002",
                                       "NODE_ENV": "development",

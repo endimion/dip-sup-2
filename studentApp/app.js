@@ -22,7 +22,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session'); //warning The default server-side session storage, MemoryStore, is purposely not designed for a production environment.
                                             //compatible session stores https://github.com/expressjs/session#compatible-session-stores
 const FileStore = require('session-file-store')(session);
-const basic = require('./model/hlf/basic');
+// const basic = require('./model/hlf/basic');
 const timeout = require('connect-timeout');
 const cookieParser = require('cookie-parser')
 const morgan  = require('morgan');
