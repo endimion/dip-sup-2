@@ -34,7 +34,7 @@ const util = require('./utils/authUtils.js');
 
 
 /**** routes **/
-// let loginRoutes = require('./routes/rest/loginRoutes');
+let loginRoutes = require('./routes/rest/loginRoutes');
 let loginViewRoutes = require('./routes/view/loginViewRoutes');
 // let supplementRoutes = require('./routes/rest/supplementRoutes');
 let supViewRoutes = require('./routes/view/supViewRoutes');
@@ -63,7 +63,7 @@ app.use(session({
 })); //set up middleware for session handling
 app.use(morgan('tiny')); //http request logger
 app.use(timeout(120000));
-app.use('/', loginViewRoutes);
+app.use('/', [loginViewRoutes,loginRoutes]);
 app.use('/login', loginViewRoutes);
 // app.use('/supplement/rest',supplementRoutes);
 app.use('/supplement/',supViewRoutes);
