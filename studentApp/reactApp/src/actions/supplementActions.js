@@ -10,7 +10,8 @@ export function  getSupplementsByEid(userEid) {
        //here we should make an Ajax call with axios
       // on success it should return GET_SUP_FULLFILED else GET_SUP_REJECTED
       setTimeout(function () {
-        axios.get("http://rest.learncode.academy/api/test123/tweets")
+        // axios.get("http://rest.learncode.academy/api/test123/tweets")
+        axios.get("rest/view")
          .then(response =>{
            dispatch({type: "GET_SUP_FULLFILED",payload:DS})
          })

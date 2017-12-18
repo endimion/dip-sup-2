@@ -13,8 +13,13 @@ export function remUsers(supplementId,users) {
      dispatch({type:"MODAL_OPEN"});
      dispatch({type:"REM_USERS_SENT"});
      console.log("wil open");
+
+     let data = {};
+     data.supId = supplementId;
+     data.emails = users;
+
     $('#modal1').modal('open');
-     axios.get("http://rest.learncode.academy/api/test123/tweets")
+     axios.post("/supplement/rest/removeInvites",data)
      .then(response =>{
        dispatch({type:"REM_USERS_FULLFILED",payload:response.data})
        dispatch({type:"MODAL_CLOSE"});
@@ -26,5 +31,3 @@ export function remUsers(supplementId,users) {
 
    }
 }
-
- 
