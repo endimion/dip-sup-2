@@ -17,7 +17,7 @@
     "name": "studentBack",
     "script": "app.js",
     "cwd":"./studentBack",
-    "env": {"ENV_VARIABLE":123, "SRV_ADDR":"127.0.0.1:8000",
+    "env": {"ENV_VARIABLE":123, "SRV_ADDR":"127.0.0.1:8002",
                                       "NODE_ENV": "development",
                                       "BASE_URL":"/back"},
     "env_production": {"ENV_VARIABLE":123,

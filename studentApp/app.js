@@ -34,11 +34,11 @@ const util = require('./utils/authUtils.js');
 
 
 /**** routes **/
-let loginRoutes = require('./routes/rest/loginRoutes');
+// let loginRoutes = require('./routes/rest/loginRoutes');
 let loginViewRoutes = require('./routes/view/loginViewRoutes');
-let supplementRoutes = require('./routes/rest/supplementRoutes');
+// let supplementRoutes = require('./routes/rest/supplementRoutes');
 let supViewRoutes = require('./routes/view/supViewRoutes');
-let qr = require('./routes/rest/qrCodeRoutes');
+// let qr = require('./routes/rest/qrCodeRoutes');
 
 // view engine setup
 app.set('views', path.join(__dirname,'views'));
@@ -63,11 +63,11 @@ app.use(session({
 })); //set up middleware for session handling
 app.use(morgan('tiny')); //http request logger
 app.use(timeout(120000));
-app.use('/',[loginRoutes,loginViewRoutes]);
-app.use('/login',[loginRoutes,loginViewRoutes]);
-app.use('/supplement/rest',supplementRoutes);
+app.use('/', loginViewRoutes);
+app.use('/login', loginViewRoutes);
+// app.use('/supplement/rest',supplementRoutes);
 app.use('/supplement/',supViewRoutes);
-app.use('/qr',qr);
+// app.use('/qr',qr);
 
 app.use(haltOnTimedout);//the following timeout middleware has to be the last middleware
 

@@ -19,7 +19,7 @@ export function remUsers(supplementId,users) {
      data.emails = users;
 
     $('#modal1').modal('open');
-     axios.post("/supplement/rest/removeInvites",data)
+     axios.post("/back/supplement/rest/removeInvites",data)
      .then(response =>{
        dispatch({type:"REM_USERS_FULLFILED",payload:response.data})
        dispatch({type:"MODAL_CLOSE"});
