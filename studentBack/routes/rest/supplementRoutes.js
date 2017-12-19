@@ -117,6 +117,7 @@ router.get('/invite/:invHash',authorizeAll,(req,res) =>{
   getUserDetails(req,res).then( details =>{
       let userEid = details.eid;
       let invHash = req.params.invHash;
+      console.log("will query for" + invHash);
       basic.queryChaincode(peer, channel, chaincode, [invHash], "getDiplomaSupplementInvitesByHash", userEid, org)
       .then( resp =>{
         res.status(200).json(resp);
