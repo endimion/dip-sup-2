@@ -70,9 +70,10 @@ export function  shareByQR(_supId,_email) {
   setTimeout(function () {
        axios.post("/back/supplement/rest/inviteByQR",{"supId":_supId, "email":_email})
         .then(response =>{
-          console.log(response);
+          // console.log(response);
           dispatch({type: "SHARE_SUP_QR_FULLFILED",
-                    payload:'<svg width="100" height="100"><circle cx="50" cy="50" r="40" stroke="green" stroke-width="4" fill="yellow" /></svg>'
+                    //payload:'<svg width="100" height="100"><circle cx="50" cy="50" r="40" stroke="green" stroke-width="4" fill="yellow" /></svg>'
+                      payload:response.data
                   });
         })
         .catch(err=>{
