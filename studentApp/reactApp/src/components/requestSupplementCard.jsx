@@ -23,7 +23,7 @@ import {  requestPublication,
             modal:store.publish.modal,
             eId: store.user.user.eid,
             userName: store.user.user.firstName + " " + store.user.user.lastName,
-            date: store.user.user.dateOfBirth
+            dateOfBirth: store.user.user.dateOfBirth
         };
 })
 
@@ -43,8 +43,9 @@ export default class RequestSupplementCard extends React.Component {
     let eId = this.props.eId;
     let universityId = this.props.univId;
     let email = this.props.email;
-    let date = this.props.date;
-    this.props.dispatch(requestPublication(university,userName,eId,universityId,email,date));
+    let dateOfBirth = this.props.dateOfBirth;
+    console.log(university,userName,eId,universityId,email,dateOfBirth);
+    this.props.dispatch(requestPublication(university,userName,eId,universityId,email,dateOfBirth));
   }
 
 
