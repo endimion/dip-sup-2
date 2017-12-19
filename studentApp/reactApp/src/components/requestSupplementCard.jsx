@@ -17,7 +17,7 @@ import {  requestPublication,
 
 
 @connect( (store)=>{
-  return {  university: store.publish.university ,
+  return {  university: store.publish.univsersity ,
             univId:store.publish.univId,
             email: store.publish.email,
             modal:store.publish.modal,
@@ -39,12 +39,13 @@ export default class RequestSupplementCard extends React.Component {
 
   sendPubrequest(){
     let university = this.props.university;
-    let userName = this.props.userName;
-    let eId = this.props.eId;
+    // let userName = this.props.userName;
+    // let eId = this.props.eId;
     let universityId = this.props.univId;
     let email = this.props.email;
-    let dateOfBirth = this.props.dateOfBirth;
-    console.log(university,userName,eId,universityId,email,dateOfBirth);
+    // let dateOfBirth = this.props.dateOfBirth;
+    console.log(university,universityId,email);
+                                        // university,username,eID,universityId,email,date
     this.props.dispatch(requestPublication(university,userName,eId,universityId,email,dateOfBirth));
   }
 
