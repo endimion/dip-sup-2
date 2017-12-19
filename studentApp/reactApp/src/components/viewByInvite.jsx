@@ -68,8 +68,10 @@ export default class InviteViewCard extends React.Component {
             </div>
             );
       }
+      if(this.props.validate){
 
-      
+      }
+
 
 
 

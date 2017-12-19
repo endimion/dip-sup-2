@@ -4,7 +4,8 @@ export default function reducer(state={
   error:null,
   fetching:false,
   message:"",
-  validate:false
+  validate:false,
+  code:""
 },action){
 
   switch(action.type){
@@ -29,6 +30,9 @@ export default function reducer(state={
     }
     case "GET_INV_REJECTED":{
       return {...state, fetching: false,message:"",validate:false,error:action.payload}
+    }
+    case "UPDATE_CODE":{
+      return {...state, code:action.payload}
     }
 
   }

@@ -4,7 +4,10 @@ import DS from "../assets/fakeDS"
 import axios from "axios"
 
 
-
+export function  updateCode(code) {
+  return  function(dispatch){
+      dispatch({type: "UPDATE_CODE",payload:code} );
+}};
 
 export function  getInvAndGenValCode(inviteId) {
   return  function(dispatch){
