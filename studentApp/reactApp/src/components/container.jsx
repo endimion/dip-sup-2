@@ -16,14 +16,14 @@ import {setUser } from '../actions/userActions'
 import { withCookies, Cookies } from 'react-cookie';
 
 
-import TweetList from "./tweetList.jsx"
+
 import NavigationBar from "./navBar.jsx"
 import SideNavigation from "./sideNav.jsx"
-import Dummy from "./dummy.jsx"
 import HomePage from "./home.jsx"
 import Supplements from "./supplements.jsx"
 import EditSup from "./editSupplement.jsx"
 import RequestSupplementCard from "./requestSupplementCard.jsx"
+import InviteView from "./viewByInvite.jsx"
 
 @connect( (store)=>{
   return { user: store.user.user,
@@ -56,7 +56,8 @@ export default class Container extends React.Component {
                     window.location = '/login';
                   }else{
                     //<SharedSup match={match}/>
-                    return (<div><NavigationBar user={user}/></div> )
+                    // return (<div><NavigationBar user={user}/></div> )
+                    return <InviteView inviteId={match} />
                   }
       };
 

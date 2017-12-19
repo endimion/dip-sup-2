@@ -6,10 +6,12 @@ import user from "./userReducer"
 import sups from "./supplementsReducer"
 import edit from "./editSupReducer"
 import publish from "./requestPubReducer"
+import invite from "./invitesReducers"
 
 export default combineReducers({
                   user,
                   sups,
                   edit,
-                  publish
+                  publish,
+                  invite
 })

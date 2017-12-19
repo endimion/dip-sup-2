@@ -48,7 +48,7 @@ export default class ShareByQRModal extends React.Component {
     if(this.props.QR != null){
       return <Row>
                 <Col s={6} >
-                    <InlineSVG src={this.props.QR} />
+                    <InlineSVG style={{height:"7em"}} src={this.props.QR} />
                 </Col>
                 <Col s={6} >
                     <div><span>Save this image and add it to your CV to</span></div>
