@@ -13,7 +13,7 @@ export function  getInvAndGenValCode(inviteId) {
       axios.get("/back/supplement/rest/invite/"+inviteId)
          .then(response =>{
            let invite = JSON.parse(response.data);
-           console.log(invite)  ;
+           // console.log(invite)  ;
            dispatch({type: "GET_INV_FULLFILED",payload:invite})
            let promise = new Promise(function(resolve, reject){
                 resolve({recip: invite.Recipient, id: invite.DSId});
@@ -31,7 +31,7 @@ export function  getInvAndGenValCode(inviteId) {
                 });
             }else{
                 dispatch({type: "SEND_VAL_CODE"});
-                axios.post("/back/supplement/rest/invite/"+id+"/sendMail").then(resp =>{
+                axios.post("/back/supplement/rest/invite/"+inviteId+"/sendMail").then(resp =>{
                   dispatch({type: "SEND_VAL_CODE_FULLFILED"});
                 })
             }
