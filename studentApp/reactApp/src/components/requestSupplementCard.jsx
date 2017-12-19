@@ -46,7 +46,7 @@ export default class RequestSupplementCard extends React.Component {
     // let dateOfBirth = this.props.dateOfBirth;
     console.log(university,universityId,email);
                                         // university,username,eID,universityId,email,date
-    this.props.dispatch(requestPublication(university,userName,eId,universityId,email,dateOfBirth));
+    this.props.dispatch(requestPublication(university,universityId,email));
   }
 
 
