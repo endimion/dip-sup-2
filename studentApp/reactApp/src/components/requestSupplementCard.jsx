@@ -41,7 +41,7 @@ export default class RequestSupplementCard extends React.Component {
     let university = this.props.university;
     let userName = this.props.userName;
     let eId = this.props.eId;
-    let universityId = this.props.universityId;
+    let universityId = this.props.univId;
     let email = this.props.email;
     let date = this.props.date;
     this.props.dispatch(requestPublication(university,userName,eId,universityId,email,date));

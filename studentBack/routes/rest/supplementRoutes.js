@@ -148,7 +148,7 @@ router.post('/request',authorizeAll,(req,res) =>{
     let universityName = req.body.uniName;
     let universityId = req.body.univId; //user univesrity ID (e.g. ge01117)
     let userEmail = req.body.email;
-    // let dateOfBirth = req.body.dateOfBirth;
+    let dateOfBirth = req.body.dateOfBirth;
 
     userDetails.then( details =>{
       let userEid = details.eid;
