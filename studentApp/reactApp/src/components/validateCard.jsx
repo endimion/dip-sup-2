@@ -9,13 +9,14 @@ import {  Card  , CardPanel, Icon,
 
 import RequestSupplementModal from "./requestSupplementModal.jsx"
 
-import { updateCode
+import { updateCode, sendValidation
         } from "../actions/inviteActions"
 
 
 @connect( (store)=>{
   return {
-            code: store.invite.code
+            code: store.invite.code,
+
         };
 })
 
@@ -24,12 +25,12 @@ export default class ValidateCard extends React.Component {
   constructor(props) {
     super(props);
     this.updateCode = this.updateCode.bind(this);
-    this.sendValidation = this.sendValidation.bind(this);
+    this.validate = this.validate.bind(this);
   }
 
-  sendValidation(){
-    let university = this.props.university;
-    // this.props.dispatch(requestPublication(university,universityId,email));
+  validate(){
+    let id = this.props.inviteId;
+    this.props.dispatch(sendValidation(this.props.code,id));
   }
 
 
@@ -59,7 +60,7 @@ componentDidMount(){
           </div>
         </Row>
          <Row>
-            <Button onClick={this.sendPubrequest}>Submit</Button>
+            <Button onClick={this.validate}>Validate</Button>
         </Row>
       </div>
     </div>
