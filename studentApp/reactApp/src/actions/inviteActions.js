@@ -13,12 +13,14 @@ export function  getInvAndGenValCode(inviteId) {
       axios.get("/back/supplement/rest/invite/"+inviteId)
          .then(response =>{
            let invite = JSON.parse(response.data);
+           console.log(invite)  ;
            dispatch({type: "GET_INV_FULLFILED",payload:invite})
            let promise = new Promise(function(resolve, reject){
                 resolve({recip: invite.Recipient, id: invite.DSId});
            });
            return promise;
          }).then( res =>{
+            console.log(res);
             let recipient = res.recip;
             let id = res.id;
             if(recipient!== ""){
