@@ -45,7 +45,7 @@ export default class Container extends React.Component {
 
       // let root = () => <div><NavigationBar user={user}/><Dummy user={user}/></div>;
       let home = () => {
-        const cookie = this.props.cookies;
+        let cookie = this.props.cookies;
         let id = cookie.get("inviteHash");
         if(id){
           return <Redirect from="/app" to={"/app/invite/"+id} push />

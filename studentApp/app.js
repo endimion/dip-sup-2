@@ -5,7 +5,7 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import Container from './reactApp/src/components/containerServer.jsx';
 import template from './template';
-
+import { CookiesProvider } from 'react-cookie';
 
 import {Provider} from 'react-redux';
 
@@ -95,9 +95,11 @@ app.get('/app*', (req, res) => {
                             user:{user:{...usr, lastName: usr.familyName}}}
     const appString = renderToString(
       <Provider store={Store}>
-        <Container location={req.url}
-                   context={staticContext}
-                   usr={theUser}/>
+        <CookiesProvider>
+          <Container location={req.url}
+                     context={staticContext}
+                     usr={theUser}/>
+          </CookiesProvider>
         </Provider>
     );
     res.send(template({
