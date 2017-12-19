@@ -8,6 +8,8 @@ import {  Card  , CardPanel, Icon,
 
 
 import RequestSupplementModal from "./requestSupplementModal.jsx"
+import SupplementCard from "./supplementCard.jsx"
+
 
 import {  getInvAndGenValCode
         } from "../actions/inviteActions"
@@ -51,6 +53,23 @@ export default class InviteViewCard extends React.Component {
 
               </div>);
     }else{
+      if(this.props.error){
+        return (<div className="container" style={{marginTop:"10%"}}>{this.props.error}</div>
+        );
+      }
+      if(this.props.supplements.length > 0){
+        let supCards = sups.map(sup =>{
+                  return <SupplementCard key={sup.Id} sup={sup}
+                            restricted={true}
+                           />
+                });
+        return (  <div className="main container" style={{marginTop: "3%"}}>
+                   {supCards}
+            </div>
+            );
+      }
+
+
       return (<div className="container" style={{marginTop:"10%"}}>Not fetching</div>
       );
     }

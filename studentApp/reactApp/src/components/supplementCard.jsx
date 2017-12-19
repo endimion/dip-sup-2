@@ -106,7 +106,7 @@ export default class SupplementCard extends React.Component {
                 </Collapsible>
              </div>
              <div className="card-action">
-               <SupBtns isOwner ={true} id={sup.Id}/>
+               <SupBtns isOwner ={!this.props.restricted} id={sup.Id}/>
 
                <SupFab  mailModal={this.props.openShareByMail}
                         qrModal={this.props.openShareByQR}
