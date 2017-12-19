@@ -39,9 +39,16 @@ export default class InviteViewCard extends React.Component {
 
   render(){
     if(this.props.fetching){
-      return (<div>
-              <div>{this.props.message}</div>
-                <ProgressBar />
+      return (<div className="container">
+              <div className="row">
+                <div className="col s12 m12 l12">
+                  {this.props.message}
+                </div>
+                <div className="col s12 m12 l12">
+                  <ProgressBar />
+                </div>
+              </div>
+
               </div>);
     }else{
       return (<div>Not fetching</div>
