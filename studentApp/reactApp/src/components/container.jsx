@@ -66,7 +66,7 @@ export default class Container extends React.Component {
                   }else{
                     //<SharedSup match={match}/>
                     // return (<div><NavigationBar user={user}/></div> )
-                    return<div><NavigationBar user={user}/><InviteView inviteId={match}/></div>;
+                    return <div><NavigationBar user={user}/><InviteView inviteId={match}/></div>;
                   }
       };
 
