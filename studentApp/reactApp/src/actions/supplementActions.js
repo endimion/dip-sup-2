@@ -68,7 +68,7 @@ export function  shareByQR(_supId,_email) {
   return  function(dispatch){
   dispatch({type: "SHARE_SUP_QR"});
   setTimeout(function () {
-       axios.get("/supplement/rest/inviteByQR",{_supId:supId, email:_email})
+       axios.get("/supplement/rest/inviteByQR",{supId:_supId, email:_email})
         .then(response =>{
           console.log(response);
           dispatch({type: "SHARE_SUP_QR_FULLFILED",
