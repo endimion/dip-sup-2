@@ -25,7 +25,7 @@ export function  getInvAndGenValCode(inviteId) {
                 //$.get("/supplement/rest/view/"+invite.DSId).done(resp=>{
                 dispatch({type: "GET_INV_SUP"});
                 axios.get("/back/supplement/rest/view/"+id).then( resp =>{
-                  dispatch({type: "GET_INV_SUP_FULLFILED", payload:payload:JSON.parse(response.data)});
+                  dispatch({type: "GET_INV_SUP_FULLFILED", payload:JSON.parse(response.data)});
                 });
             }else{
                 dispatch({type: "SEND_VAL_CODE"});
