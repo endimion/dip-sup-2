@@ -7,7 +7,7 @@ const dsService = require('./service/DSService.js');
 const bkService = require('./service/BackEndService.js')
 const hash = require('hash.js');
 const signService = require('./service/SignService.js');
-const UNIVERSITY = process.env.UNIVERSITY_NAME||"UAgean";
+const UNIVERSITY = process.env.UNIVERSITY_NAME||"UAegean";
 
 /* configuration */
 const config = require('./config.json');
