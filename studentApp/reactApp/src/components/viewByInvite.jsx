@@ -39,7 +39,7 @@ export default class InviteViewCard extends React.Component {
 
   render(){
     if(this.props.fetching){
-      return (<div className="container">
+      return (<div className="container" style={{marginTop:"10%"}}>
               <div className="row">
                 <div className="col s12 m12 l12">
                   {this.props.message}
@@ -51,7 +51,7 @@ export default class InviteViewCard extends React.Component {
 
               </div>);
     }else{
-      return (<div>Not fetching</div>
+      return (<div className="container" style={{marginTop:"10%"}}>Not fetching</div>
       );
     }
 

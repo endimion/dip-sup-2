@@ -12,8 +12,7 @@ import {
 
 import {sideBarOnOff} from '../actions/sideBarActions'
 import {setUser } from '../actions/userActions'
-
-import { withCookies, Cookies } from 'react-cookie';
+import Cookies from 'universal-cookie';
 
 
 

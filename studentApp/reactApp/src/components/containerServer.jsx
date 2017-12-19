@@ -15,6 +15,12 @@ import {setUser } from '../actions/userActions'
 
 import { withCookies, Cookies } from 'react-cookie';
 
+import {  Card  , CardPanel, Icon,
+          Tag, Modal, Button, ProgressBar,
+          CollectionItem, Collection,
+          Row, Col,input} from 'react-materialize'
+
+
 
 import TweetList from "./tweetList.jsx"
 import NavigationBar from "./navBar.jsx"
@@ -56,10 +62,10 @@ export default class Container extends React.Component {
       const  {user,tweets,sideNav} = this.props;
 
       // let root = () => <div><NavigationBar user={user}/><Dummy user={user}/></div>;
-      let home = () => <div><NavigationBar user={user}/><HomePage user={user}/></div>;
-      let manage = () => <div><NavigationBar user={user}/><Supplements user={user} /></div>;
-      let request = () => <div><NavigationBar user={user}/><RequestSupplementCard name={"user"} eID={"eID"}/></div>;
-      let edit = ({match}) => (<div><NavigationBar user={user}/><EditSup match={match}/></div> );
+      let home = () => <div><NavigationBar user={user}/><ProgressBar /></div>;
+      let manage = () => <div><NavigationBar user={user}/><ProgressBar /></div>;
+      let request = () => <div><NavigationBar user={user}/><ProgressBar /></div>;
+      let edit = ({match}) => (<div><NavigationBar user={user}/><ProgressBar /></div> );
 
 
       return  <StaticRouter location={this.props.location} context={this.props.context}>
