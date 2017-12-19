@@ -13,7 +13,8 @@ export function  getSupplementsByEid(userEid) {
         // axios.get("http://rest.learncode.academy/api/test123/tweets")
         axios.get("/back/supplement/rest/view")
          .then(response =>{
-           dispatch({type: "GET_SUP_FULLFILED",payload:DS})
+           // dispatch({type: "GET_SUP_FULLFILED",payload:DS})
+            dispatch({type: "GET_SUP_FULLFILED",payload:DS})
          })
          .catch(err=>{
            dispatch({type:"GET_SUP_REJECTED",payload:err})
