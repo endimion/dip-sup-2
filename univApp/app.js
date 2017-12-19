@@ -26,6 +26,7 @@ evHelper.registerEventHubForOrg(org,chaincode,'evtsender', event => {
     console.log("Publication Request:");
     console.log(pubReq);
     let univName = UNIVERSITY;
+    console.log(univName);
     console.log(pubReq.University === univName);
     if(pubReq.University === univName){
       bkService.findAllDiplomaByCriterria(pubReq).then(result =>{
