@@ -9,7 +9,7 @@ import {  Card  , CardPanel, Icon,
 
 import RequestSupplementModal from "./requestSupplementModal.jsx"
 import SupplementCard from "./supplementCard.jsx"
-
+import ValidateCard from "./validateCard.jsx"
 
 import {  getInvAndGenValCode
         } from "../actions/inviteActions"
@@ -69,7 +69,7 @@ export default class InviteViewCard extends React.Component {
             );
       }
       if(this.props.validate){
-
+          return (<ValidateCard/>);
       }
 
 
