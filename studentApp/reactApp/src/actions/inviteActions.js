@@ -9,7 +9,7 @@ import axios from "axios"
 export function  getInvAndGenValCode(inviteId) {
   return  function(dispatch){
       dispatch({type: "GET_INV"} );
-
+      console.log("the id is "+ inviteId);
       axios.get("/back/supplement/rest/invite/"+inviteId)
          .then(response =>{
            let invite = JSON.parse(response.data);
