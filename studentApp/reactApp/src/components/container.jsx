@@ -48,7 +48,7 @@ export default class Container extends React.Component {
         const cookie = this.props.cookies;
         let id = cookie.get("inviteHash");
         if(id){
-          return <Redirect from="/app" to="/app/invite/"+id push />
+          return <Redirect from="/app" to={"/app/invite/"+id} push />
         }else{
           return <div><NavigationBar user={user}/><HomePage user={user}/></div>;
         }

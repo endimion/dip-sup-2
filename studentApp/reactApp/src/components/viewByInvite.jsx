@@ -40,7 +40,7 @@ export default class InviteViewCard extends React.Component {
   render(){
     if(this.props.fetching){
       return (<div>
-              <div>this.props.message</div>
+              <div>{this.props.message}/div>
                 <ProgressBar />
               </div>);
     }else{
