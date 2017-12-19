@@ -20,13 +20,14 @@ export default class SupplementCard extends React.Component {
   render(){
     const  {sup} = this.props;
     const headerCss = {backgroundColor: "aliceblue", color:"black"};
+    // const over = {overflow:"hidden"};
 
     let contents  = Object.keys(sup)
     .filter( (key) => {return key !== "Name"  && key !==  "Surname" && key !==  "Authorized"})
     .map(function(key) {
       if(typeof(sup[key]) === "string"){
          return ( <li key={key}>
-                    <div class="collapsible-header" style={{color:"black"}} key={key}>
+                    <div class="collapsible-header" style={{color:"black",overflow:"hidden"}} key={key}>
                           <b>{key}</b> : {sup[key]}
                     </div>
                   </li>);

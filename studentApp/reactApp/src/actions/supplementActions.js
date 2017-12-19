@@ -34,11 +34,13 @@ export function  openShareByMail(supId) {
   }
 }
 
-export function  shareByMail(supId,email) {
+export function  shareByMail(_supId,_email) {
   return  function(dispatch){
   dispatch({type: "SHARE_SUP"});
+  let data = { email: _email, supId: _supId };
+
   setTimeout(function () {
-       axios.get("http://rest.learncode.academy/api/test123/tweets")
+       axios.post("/back/supplement/rest/inviteByMail",data)
         .then(response =>{
           dispatch({type: "SHARE_SUP_FULLFILED"});
           console.log('#modal'+supId);
@@ -62,12 +64,13 @@ export function  openShareByQR(supId) {
   }
 }
 
-export function  shareByQR(supId,email) {
+export function  shareByQR(_supId,_email) {
   return  function(dispatch){
   dispatch({type: "SHARE_SUP_QR"});
   setTimeout(function () {
-       axios.get("http://rest.learncode.academy/api/test123/tweets")
+       axios.get("/supplement/rest/inviteByQR",{_supId:supId, email:_email})
         .then(response =>{
+          console.log(response);
           dispatch({type: "SHARE_SUP_QR_FULLFILED",
                     payload:'<svg width="100" height="100"><circle cx="50" cy="50" r="40" stroke="green" stroke-width="4" fill="yellow" /></svg>'
                   });
