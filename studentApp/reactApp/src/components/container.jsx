@@ -35,6 +35,9 @@ export default class Container extends React.Component {
     super(props);
   }
 
+  static propTypes = {
+    cookies: instanceOf(Cookies).isRequired
+  };
 
     componentWillMount(){
       const { cookies } = this.props;
@@ -42,11 +45,11 @@ export default class Container extends React.Component {
 
     render(){
       const  {user,tweets,sideNav} = this.props;
-
+      const { cookies } = this.props;
       // let root = () => <div><NavigationBar user={user}/><Dummy user={user}/></div>;
       let home = () => {
-        let cookie = this.props.cookies;
-        let id = cookie.get("inviteHash");
+        // let cookie = this.props.cookies;
+        let id = cookies.get("inviteHash");
         if(id){
           return <Redirect from="/app" to={"/app/invite/"+id} push />
         }else{
@@ -60,7 +63,7 @@ export default class Container extends React.Component {
       let inviteView = ({match}) => {
                   if(user === undefined || user.firstName ==  undefined){
                     // return <Redirect from="/app" to="/login" push />
-                    const cookies = new Cookies();
+                    // const cookies = new Cookies();
                     cookies.set('inviteHash', match, { path: '/' });
                     window.location = '/login';
                   }else{
