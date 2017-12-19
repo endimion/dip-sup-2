@@ -11,7 +11,7 @@ export function  getSupplementsByEid(userEid) {
       // on success it should return GET_SUP_FULLFILED else GET_SUP_REJECTED
       setTimeout(function () {
         // axios.get("http://rest.learncode.academy/api/test123/tweets")
-        axios.get("/back/rest/view")
+        axios.get("/back/supplement/rest/view")
          .then(response =>{
            dispatch({type: "GET_SUP_FULLFILED",payload:DS})
          })
