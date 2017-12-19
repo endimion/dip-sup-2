@@ -9,6 +9,7 @@ const stripchar = require('stripchar').StripChar;
 const fs = require('fs');
 const path = require('path');
 const  nJwt = require('njwt');
+const utf8 = require('utf8');
 /**
   check if a user eID exists on teh session,
   if not verify the existance of a jwt token and its validity
@@ -93,12 +94,12 @@ exports.userDetailsFromToken = (req,res) =>{
         let result = JSON.parse(token.sub);
         result.eid = stripchar.RSExceptUnsAlpNum(result.eid);
         if(!result.firstName){
-          result.firstName = result.currentGivenName;
+          result.firstName = utf8.encode(result.currentGivenName);
         }
         if(!result.familyName){
-          result.familyName = result.currentFamilyName;
+          result.familyName = utf8.encode(result.currentFamilyName);
         }
-        result.userName = result.firstName+"_"+result.familyName;
+        result.userName = utf8.encode(result.firstName+"_"+result.familyName);
         resolve(result);
       }
     });
