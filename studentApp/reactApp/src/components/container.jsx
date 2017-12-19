@@ -35,9 +35,9 @@ export default class Container extends React.Component {
     super(props);
   }
 
-  static propTypes = {
-    cookies: instanceOf(Cookies).isRequired
-  };
+  // static propTypes = {
+  //   cookies: instanceOf(Cookies).isRequired
+  // };
 
     componentWillMount(){
       const { cookies } = this.props;
