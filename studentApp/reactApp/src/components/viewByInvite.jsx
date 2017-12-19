@@ -69,6 +69,9 @@ export default class InviteViewCard extends React.Component {
             );
       }
 
+      
+
+
 
       return (<div className="container" style={{marginTop:"10%"}}>Not fetching</div>
       );

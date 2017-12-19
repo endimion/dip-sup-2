@@ -15,7 +15,7 @@ export function  getInvAndGenValCode(inviteId) {
            let invite = JSON.parse(response.data);
            dispatch({type: "GET_INV_FULLFILED",payload:invite})
            let promise = new Promise(function(resolve, reject){
-                resovle({recip: invite.Recipient, id: invite.DSId});
+                resolve({recip: invite.Recipient, id: invite.DSId});
            });
            return promise;
          }).then( res =>{
