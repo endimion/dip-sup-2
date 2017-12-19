@@ -44,7 +44,16 @@ export default class Container extends React.Component {
       const  {user,tweets,sideNav} = this.props;
 
       // let root = () => <div><NavigationBar user={user}/><Dummy user={user}/></div>;
-      let home = () => <div><NavigationBar user={user}/><HomePage user={user}/></div>;
+      let home = () => {
+        const cookie = this.props.cookies;
+        let id = cookie.get("inviteHash");
+        if(id){
+          return <Redirect from="/app" to="/app/invite/"+id push />
+        }else{
+          return <div><NavigationBar user={user}/><HomePage user={user}/></div>;
+        }
+      }
+
       let manage = () => <div><NavigationBar user={user}/><Supplements user={user} /></div>;
       let request = () => <div><NavigationBar user={user}/><RequestSupplementCard name={"user"} eID={"eID"}/></div>;
       let edit = ({match}) => (<div><NavigationBar user={user}/><EditSup match={match}/></div> );
@@ -57,7 +66,7 @@ export default class Container extends React.Component {
                   }else{
                     //<SharedSup match={match}/>
                     // return (<div><NavigationBar user={user}/></div> )
-                    return <InviteView inviteId={match} />
+                    return<div><NavigationBar user={user}/><InviteView inviteId={match}/></div>;
                   }
       };
 
