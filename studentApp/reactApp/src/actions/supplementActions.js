@@ -37,14 +37,14 @@ export function  openShareByMail(supId) {
 export function  shareByMail(_supId,_email) {
   return  function(dispatch){
   dispatch({type: "SHARE_SUP"});
-  let data = { email: _email, supId: _supId };
+  let data = {email: _email, supId: _supId };
 
   setTimeout(function () {
        axios.post("/back/supplement/rest/inviteByMail",data)
         .then(response =>{
           dispatch({type: "SHARE_SUP_FULLFILED"});
-          console.log('#modal'+supId);
-          $('#mailModal'+supId).modal('close');
+          console.log('#modal'+_supId);
+          $('#mailModal'+_supId).modal('close');
         })
         .catch(err=>{
           dispatch({type:"SHARE_SUP_REJECTED",payload:err.toString()})
@@ -68,7 +68,7 @@ export function  shareByQR(_supId,_email) {
   return  function(dispatch){
   dispatch({type: "SHARE_SUP_QR"});
   setTimeout(function () {
-       axios.get("/back/supplement/rest/inviteByQR",{supId:_supId, email:_email})
+       axios.post("/back/supplement/rest/inviteByQR",{"supId":_supId, "email":_email})
         .then(response =>{
           console.log(response);
           dispatch({type: "SHARE_SUP_QR_FULLFILED",
