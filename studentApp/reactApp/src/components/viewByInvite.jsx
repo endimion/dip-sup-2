@@ -69,7 +69,9 @@ export default class InviteViewCard extends React.Component {
             );
       }
       if(this.props.validate){
-          return (<ValidateCard/>);
+          return (<div className="main container" style={{marginTop: "3%"}}>
+                    <ValidateCard/>
+              </div>);
       }
 
 

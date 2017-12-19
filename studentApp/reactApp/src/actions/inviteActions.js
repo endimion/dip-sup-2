@@ -9,6 +9,23 @@ export function  updateCode(code) {
       dispatch({type: "UPDATE_CODE",payload:code} );
 }};
 
+
+export function sendValidation(_code,invHash){
+  return function(dispatch){
+    axios.post("/back/supplement/invite/"+invHash+"/authorize",
+                    { validationCode:_code,
+                      inviteHash: invHash
+              }).then(res =>{
+                  dispatch({type: "GET_INV_SUP_FULLFILED", payload:JSON.parse(res.data)});
+    }).catch(err =>{
+      dispatch({type:"GET_INV_REJECTED",payload:err});
+
+    })
+  }
+
+}
+
+
 export function  getInvAndGenValCode(inviteId) {
   return  function(dispatch){
       dispatch({type: "GET_INV"} );
@@ -30,7 +47,7 @@ export function  getInvAndGenValCode(inviteId) {
                 //$.get("/supplement/rest/view/"+invite.DSId).done(resp=>{
                 dispatch({type: "GET_INV_SUP"});
                 axios.get("/back/supplement/rest/view/"+id).then( resp =>{
-                  dispatch({type: "GET_INV_SUP_FULLFILED", payload:JSON.parse(response.data)});
+                  dispatch({type: "GET_INV_SUP_FULLFILED", payload:JSON.parse(resp.data)});
                 });
             }else{
                 dispatch({type: "SEND_VAL_CODE"});
