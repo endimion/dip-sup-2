@@ -49,6 +49,7 @@ export default class Container extends React.Component {
       // let root = () => <div><NavigationBar user={user}/><Dummy user={user}/></div>;
       let home = () => {
         // let cookie = this.props.cookies;
+        const cookies = new Cookies();
         let id = cookies.get("inviteHash");
         if(id){
           return <Redirect from="/app" to={"/app/invite/"+id} push />
@@ -63,7 +64,7 @@ export default class Container extends React.Component {
       let inviteView = ({match}) => {
                   if(user === undefined || user.firstName ==  undefined){
                     // return <Redirect from="/app" to="/login" push />
-                    // const cookies = new Cookies();
+                    const cookies = new Cookies();
                     cookies.set('inviteHash', match, { path: '/' });
                     window.location = '/login';
                   }else{

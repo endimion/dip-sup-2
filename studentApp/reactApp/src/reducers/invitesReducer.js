@@ -27,6 +27,9 @@ export default function reducer(state={
     case "SEND_VAL_CODE_FULLFILED":{
       return {...state, fetching: false,message:"",validate:true}
     }
+    case "GET_INV_REJECTED":{
+      return {...state, fetching: false,message:"",validate:false,error:action.payload}
+    }
 
   }
   return state

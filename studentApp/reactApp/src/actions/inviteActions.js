@@ -34,7 +34,7 @@ export function  getInvAndGenValCode(inviteId) {
                 })
             }
          })
-         .catch(err=>{
+         .catch(err =>{
            dispatch({type:"GET_INV_REJECTED",payload:err})
          });
 
