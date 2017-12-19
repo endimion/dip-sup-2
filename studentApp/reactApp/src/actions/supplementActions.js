@@ -14,7 +14,7 @@ export function  getSupplementsByEid(userEid) {
         axios.get("/back/supplement/rest/view")
          .then(response =>{
            // dispatch({type: "GET_SUP_FULLFILED",payload:DS})
-            dispatch({type: "GET_SUP_FULLFILED",payload:response})
+            dispatch({type: "GET_SUP_FULLFILED",payload:response.data})
          })
          .catch(err=>{
            dispatch({type:"GET_SUP_REJECTED",payload:err})
