@@ -58,7 +58,8 @@ export default class InviteViewCard extends React.Component {
         );
       }
       if(this.props.supplements.length > 0){
-        let supCards = sups.map(sup =>{
+          let sups = this.props.supplements;
+          let supCards = sups.map(sup =>{
                   return <SupplementCard key={sup.Id} sup={sup}
                             restricted={true}
                            />
