@@ -10,7 +10,7 @@ export function  getInvAndGenValCode(inviteId) {
   return  function(dispatch){
       dispatch({type: "GET_INV"} );
 
-      axios.get("/back/supplement/rest/invite/"+invHash)
+      axios.get("/back/supplement/rest/invite/"+inviteId)
          .then(response =>{
            let invite = JSON.parse(response.data);
            dispatch({type: "GET_INV_FULLFILED",payload:invite})
