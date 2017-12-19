@@ -11,7 +11,7 @@ export default function reducer(state={
 
   switch(action.type){
     case "GET_SUP_FULLFILED":{
-        return {...state, supplements:action.payload.DS, fetching: false}
+        return {...state, supplements:action.payload, fetching: false}
     }
     case "GET_SUP_REJECTED":{
       return {...state, supError:action.payload,fetching: false}
