@@ -18,7 +18,7 @@ import { withCookies, Cookies } from 'react-cookie';
 import {  Card  , CardPanel, Icon,
           Tag, Modal, Button, ProgressBar,
           CollectionItem, Collection,
-          Row, Col,input} from 'react-materialize'
+          Row, Col,input, Preloader} from 'react-materialize'
 
 
 
@@ -62,10 +62,12 @@ export default class Container extends React.Component {
       const  {user,tweets,sideNav} = this.props;
 
       // let root = () => <div><NavigationBar user={user}/><Dummy user={user}/></div>;
-      let home = () => <div><NavigationBar user={user}/><ProgressBar /></div>;
-      let manage = () => <div><NavigationBar user={user}/><ProgressBar /></div>;
-      let request = () => <div><NavigationBar user={user}/><ProgressBar /></div>;
-      let edit = ({match}) => (<div><NavigationBar user={user}/><ProgressBar /></div> );
+
+      let home = () => <div><NavigationBar user={user}/><div style={{marginTop:"2em"}}><Preloader size="big" flashing /></div></div>;
+      let manage = () => <div><NavigationBar user={user}/><div style={{marginTop:"2em"}}><Preloader size="big" flashing /></div></div>;
+      let request = () => <div><NavigationBar user={user}/><div style={{marginTop:"2em"}}><Preloader size="big" flashing /></div></div>;
+      let edit = ({match}) => (<div><NavigationBar user={user}/><div style={{marginTop:"2em"}}><Preloader size="big" flashing /></div></div> );
+      let inviteView = ({match}) => (<div><NavigationBar user={user}/><div style={{marginTop:"2em"}}><Preloader size="big" flashing /></div></div> );
 
 
       return  <StaticRouter location={this.props.location} context={this.props.context}>
@@ -76,6 +78,7 @@ export default class Container extends React.Component {
                     <Route path="/app/manage" exact component={manage} />
                     <Route path="/app/request" exact component={request} />
                     <Route path="/app/edit/:id" component={edit}/>
+                    <Route path="/app/invite/:id" component={inviteView}/>
                   </Switch>
                 </StaticRouter>
 
