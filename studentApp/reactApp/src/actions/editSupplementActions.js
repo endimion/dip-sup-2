@@ -18,6 +18,8 @@ export function remUsers(supplementId,users) {
      data.supId = supplementId;
      data.emails = users;
 
+    console.log(users);
+
     $('#modal1').modal('open');
      axios.post("/back/supplement/rest/removeInvites",data)
      .then(response =>{
