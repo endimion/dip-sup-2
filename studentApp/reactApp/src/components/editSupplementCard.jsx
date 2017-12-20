@@ -41,7 +41,7 @@ export default class EditSupplementCard extends React.Component {
 
   render(){
     const  {sup} = this.props;
-    const authorized = sup.Authorized.map( (user) => {
+    const authorized = sup.Authorized.map((user)=> {return user.Email}).map( (user) => {
         return (<div key={user}  onClick={(e) => this.addRemUser(user)}> <Tag>{user}</Tag> </div>);
     });
 
