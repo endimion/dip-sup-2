@@ -64,7 +64,9 @@ export default class Container extends React.Component {
                   if(user === undefined || user.firstName ==  undefined){
                     // return <Redirect from="/app" to="/login" push />
                     const cookies = new Cookies();
+                    console.log("will set cookie!!");
                     cookies.set('inviteHash', match.params.id, { path: '/' });
+                    console.log(cookies.get("inviteHash"));
                     window.location = '/login';
                   }else{
                     //<SharedSup match={match}/>
