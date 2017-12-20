@@ -44,7 +44,7 @@ export default class Container extends React.Component {
 
     render(){
       const  {user,tweets,sideNav} = this.props;
-      const { cookies } = this.props;
+      // const { cookies } = this.props;
       // let root = () => <div><NavigationBar user={user}/><Dummy user={user}/></div>;
       let home = () => {
         // let cookie = this.props.cookies;
@@ -64,7 +64,7 @@ export default class Container extends React.Component {
                   if(user === undefined || user.firstName ==  undefined){
                     // return <Redirect from="/app" to="/login" push />
                     const cookies = new Cookies();
-                    cookies.set('inviteHash', match, { path: '/' });
+                    cookies.set('inviteHash', match.params.id, { path: '/' });
                     window.location = '/login';
                   }else{
                     //<SharedSup match={match}/>
