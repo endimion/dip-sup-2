@@ -35,7 +35,7 @@ export default class EditSupplementCard extends React.Component {
   }
 
   remUsers(supId){
-    this.props.dispatch(remUsers(this.props.usersToRem,supId));
+    this.props.dispatch(remUsers(supId,this.props.usersToRem));
   }
 
 
