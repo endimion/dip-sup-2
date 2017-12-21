@@ -108,7 +108,8 @@ export default class SupplementCard extends React.Component {
              <div className="card-action">
                <SupBtns isOwner ={!this.props.restricted} id={sup.Id}/>
 
-               <SupFab  mailModal={this.props.openShareByMail}
+               <SupFab  isOwner ={!this.props.restricted}  
+                        mailModal={this.props.openShareByMail}
                         qrModal={this.props.openShareByQR}
                         supId={sup.Id}
                 />

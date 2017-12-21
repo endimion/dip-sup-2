@@ -10,6 +10,10 @@ export default class SupFab extends React.Component {
     }
 
     render(){
+      if(!isOwner){
+        return <p></p>
+      }
+
       return (
           <div className="fixed-action-btn horizontal click-to-toggle" style={{position: "absolute", right:" 24px",bottom:"1.2em",zIndex: "997"}}>
               <a className="btn-floating btn-medium red"><i className="material-icons">share</i></a>
