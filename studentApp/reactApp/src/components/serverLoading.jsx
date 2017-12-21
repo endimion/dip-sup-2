@@ -13,7 +13,7 @@ export default class ServerLoading extends React.Component {
         let user = this.props.user;
         return (
             <div>
-              <NavigationBar user={user}/>
+              // <NavigationBar user={user}/>
               <div className ="container" style={{marginTop:"2em"}}>
                 <div className="row" style={{marginLeft:"50%"}}>
                   <Preloader  size="big" flashing />
