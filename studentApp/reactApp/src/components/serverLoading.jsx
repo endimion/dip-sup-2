@@ -1,12 +1,9 @@
 import React, { Component } from 'react'
-import {Navbar, NavItem, Button, Icon} from 'react-materialize'
+import {Navbar, NavItem, Button, Icon, Preloader} from 'react-materialize'
 import {Link,NavLink} from 'react-router-dom'
 import SideNavigation from "./sideNav.jsx"
 
-import {  Card  , CardPanel, Icon,
-          Tag, Modal, Button, ProgressBar,
-          CollectionItem, Collection,
-          Row, Col,input, Preloader} from 'react-materialize'
+
 
 
 export default class ServerLoading extends React.Component {
