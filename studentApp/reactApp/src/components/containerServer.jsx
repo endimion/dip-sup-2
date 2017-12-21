@@ -30,6 +30,7 @@ import HomePage from "./home.jsx"
 import Supplements from "./supplements.jsx"
 import EditSup from "./editSupplement.jsx"
 import RequestSupplementCard from "./requestSupplementCard.jsx"
+import ServerLoading from "./serverLoading.jsx"
 
 @connect( (store)=>{
   return { user: store.user.user,
@@ -62,12 +63,12 @@ export default class Container extends React.Component {
       const  {user,tweets,sideNav} = this.props;
 
       // let root = () => <div><NavigationBar user={user}/><Dummy user={user}/></div>;
-      let style = {marginLeft: "50%"};
-      let home = () => <div><NavigationBar user={user}/><div className ="container" style={{marginTop:"2em"}}><Preloader style={style} size="big" flashing /></div></div>;
-      let manage = () => <div><NavigationBar user={user}/><div className ="container" style={{marginTop:"2em"}}><Preloader style={style} size="big" flashing /></div></div>;
-      let request = () => <div><NavigationBar user={user}/><div className ="container" style={{marginTop:"2em"}}><Preloader style={style} size="big" flashing /></div></div>;
-      let edit = ({match}) => (<div><NavigationBar user={user}/><div className ="container" style={{marginTop:"2em"}}><Preloader style={style} size="big" flashing /></div></div> );
-      let inviteView = ({match}) => (<div><NavigationBar user={user}/><div className ="container" style={{marginTop:"2em"}}><Preloader style={style} size="big" flashing /></div></div> );
+
+      let home = () => <ServerLoading user={user}/>;
+      let manage = () => <ServerLoading user={user}/>;
+      let request = () => <ServerLoading user={user}/>;
+      let edit = ({match}) => (<ServerLoading user={user}/>);
+      let inviteView = ({match}) => (<ServerLoading user={user}/>);
 
 
       return  <StaticRouter location={this.props.location} context={this.props.context}>
