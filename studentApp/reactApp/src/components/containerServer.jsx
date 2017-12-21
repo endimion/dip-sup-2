@@ -83,18 +83,7 @@ export default class Container extends React.Component {
       let request = () => <div><NavigationBar user={user}/><RequestSupplementCard name={"user"} eID={"eID"}/></div>;
       let edit = ({match}) => (<div><NavigationBar user={user}/><EditSup match={match}/></div> );
       let inviteView = ({match}) => {
-                  if(user === undefined || user.firstName ==  undefined){
-                    // return <Redirect from="/app" to="/login" push />
-                    // const cookies = new Cookies();
-                    // console.log("will set cookie!!");
-                    // cookies.set('inviteHash', match.params.id, { path: '/' });
-                    // console.log(cookies.get("inviteHash"));
-                    // window.location = '/login';
-                  }else{
-                    //<SharedSup match={match}/>
-                    // return (<div><NavigationBar user={user}/></div> )
                     return <div><NavigationBar user={user}/><InviteView inviteId={match.params.id}/></div>;
-                  }
       };
 
 
