@@ -10,6 +10,7 @@ export default class SupFab extends React.Component {
     }
 
     render(){
+      let isOwner = this.props.isOwner;
       if(!isOwner){
         return <p></p>
       }
