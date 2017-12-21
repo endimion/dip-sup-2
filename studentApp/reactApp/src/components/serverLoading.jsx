@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {Navbar, NavItem, Button, Icon, Preloader} from 'react-materialize'
 import {Link,NavLink} from 'react-router-dom'
 import SideNavigation from "./sideNav.jsx"
-
+import NavigationBar from "./navBar.jsx"
 
 
 
