@@ -23,7 +23,7 @@ export default function reducer(state={
               supplements: [...state.supplements,action.payload] }
     }
     case "SEND_VAL_CODE":{
-      return {...state, fetching: true,message:"Sending Validation code..."}
+      return {...state, fetching: true, message:"Sending Validation code..."}
     }
     case "SEND_VAL_CODE_FULLFILED":{
       return {...state, fetching: false,message:"",validate:true}
@@ -34,7 +34,9 @@ export default function reducer(state={
     case "UPDATE_CODE":{
       return {...state, code:action.payload}
     }
-
+    case "SEND_UPDATE_CODE":{
+      return {...state, fetching:true,mesage:"Validating Invitation..."}
+    }
   }
   return state
 }

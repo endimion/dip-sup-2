@@ -12,6 +12,7 @@ export function  updateCode(code) {
 
 export function sendValidation(_code,invHash){
   return function(dispatch){
+    dispatch({type: "SEND_UPDATE_CODE",payload:code} );
     axios.post("/back/supplement/rest/invite/"+invHash+"/authorize",
                     { validationCode:_code,
                       inviteHash: invHash

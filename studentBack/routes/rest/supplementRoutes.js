@@ -191,7 +191,7 @@ router.post('/inviteByMail',authorizeAll,(req,res) =>{
       basic.invokeChaincode([peerAddr], channel, chaincode, "addDiplomaSupplementInvite",
 														['{"DSHash":"'+inviteHash+'", "DSId":"'+supId+'","Email":"'+email+'"}',eid],eid, org)
       .then(resp => {
-        let emailBody = '<p>Click<a href="'+ process.env.SRV_ADDR + '/supplement/view/invite/'
+        let emailBody = '<p>Click<a href="'+ process.env.SRV_ADDR + '/app/invite/'
                           +inviteHash +'"> here</a> to view the shared diploma supplement </p>';
         emailUtil.sendEmail(email,emailBody);
         res.status(200).json(resp);
@@ -221,7 +221,7 @@ router.post('/inviteByQR',authorizeAll,(req,res) =>{
       basic.invokeChaincode([peerAddr], channel, chaincode, "addDiplomaSupplementInvite",
 														['{"DSHash":"'+inviteHash+'", "DSId":"'+supId+'","Email":"'+email+'"}',eid],eid, org)
       .then(resp => {
-        let code = qr.image(process.env.SRV_ADDR+'/supplement/view/invite/'+inviteHash, { type: 'svg' });
+        let code = qr.image(process.env.SRV_ADDR+'/app/invite/'+inviteHash, { type: 'svg' });
         res.type('svg');
         code.pipe(res);
       }).catch(err =>{
