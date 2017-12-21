@@ -12,13 +12,11 @@ export default class ServerLoading extends React.Component {
       render(){
         let user = this.props.user;
         return (
-            <div>
               <div className ="container" style={{marginTop:"2em"}}>
                 <div className="row" style={{marginLeft:"50%"}}>
                   <Preloader  size="big" flashing />
                 </div>
               </div>
-            </div>
           )  ;
 
     }
