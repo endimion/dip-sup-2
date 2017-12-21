@@ -64,11 +64,38 @@ export default class Container extends React.Component {
 
       // let root = () => <div><NavigationBar user={user}/><Dummy user={user}/></div>;
 
-      let home = () => {console.log("home"); return <ServerLoading user={user}/>;} ;
-      let manage = () => <ServerLoading user={user}/>;
-      let request = () => <ServerLoading user={user}/>;
-      let edit = ({match}) => (<ServerLoading user={user}/>);
-      let inviteView = ({match}) => { console.log("inivte"); return <ServerLoading user={user}/>};
+      // let home = () => {console.log("home"); return <ServerLoading user={user}/>;} ;
+      // let manage = () => <ServerLoading user={user}/>;
+      // let request = () => <ServerLoading user={user}/>;
+      // let edit = ({match}) => (<ServerLoading user={user}/>);
+      // let inviteView = ({match}) => { console.log("inivte"); return <ServerLoading user={user}/>};
+      let home = () => {
+        // let cookie = this.props.cookies;
+        const cookies = new Cookies();
+        let id = cookies.get("inviteHash");
+        if(id){
+          return <Redirect from="/app" to={"/app/invite/"+id} push />
+        }else{
+          return <div><NavigationBar user={user}/><HomePage user={user}/></div>;
+        }
+      }
+      let manage = () => <div><NavigationBar user={user}/><Supplements user={user} /></div>;
+      let request = () => <div><NavigationBar user={user}/><RequestSupplementCard name={"user"} eID={"eID"}/></div>;
+      let edit = ({match}) => (<div><NavigationBar user={user}/><EditSup match={match}/></div> );
+      let inviteView = ({match}) => {
+                  if(user === undefined || user.firstName ==  undefined){
+                    // return <Redirect from="/app" to="/login" push />
+                    // const cookies = new Cookies();
+                    // console.log("will set cookie!!");
+                    // cookies.set('inviteHash', match.params.id, { path: '/' });
+                    // console.log(cookies.get("inviteHash"));
+                    // window.location = '/login';
+                  }else{
+                    //<SharedSup match={match}/>
+                    // return (<div><NavigationBar user={user}/></div> )
+                    return <div><NavigationBar user={user}/><InviteView inviteId={match.params.id}/></div>;
+                  }
+      };
 
 
       return  <StaticRouter location={this.props.location} context={this.props.context}>
