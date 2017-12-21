@@ -64,17 +64,16 @@ export default class Container extends React.Component {
 
       // let root = () => <div><NavigationBar user={user}/><Dummy user={user}/></div>;
 
-      let home = () => <ServerLoading user={user}/>;
+      let home = () => (console.log("home"); return <ServerLoading user={user}/>;) ;
       let manage = () => <ServerLoading user={user}/>;
       let request = () => <ServerLoading user={user}/>;
       let edit = ({match}) => (<ServerLoading user={user}/>);
-      let inviteView = ({match}) => (<ServerLoading user={user}/>);
+      let inviteView = ({match}) => ( console.log("inivte"); return <ServerLoading user={user}/>);
 
 
       return  <StaticRouter location={this.props.location} context={this.props.context}>
                   <Switch>
                     <Route path="/app/" exact component={home} />
-                    <Route path="/app/test" exact component={home} />
                     <Route path="/app/home" exact component={home} />
                     <Route path="/app/manage" exact component={manage} />
                     <Route path="/app/request" exact component={request} />

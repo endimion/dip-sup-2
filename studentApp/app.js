@@ -89,7 +89,7 @@ app.get('/app*', (req, res) => {
   if(url.indexOf("invite") > -1 ){
     let parts = url.split("/");
     let invId = parts[parts.length -1];
-    res.cookie('inviteHash',invId, { maxAge: 900000, httpOnly: true });
+    res.cookie('inviteHash',invId, {httpOnly: true });
   }
 
   util.userDetailsFromToken(req,res).then( (usr) => {
@@ -117,6 +117,7 @@ app.get('/app*', (req, res) => {
     }));
 
   }).catch(err=>{
+    console.log(err);
     res.redirect("/login/landing");
   });
 
