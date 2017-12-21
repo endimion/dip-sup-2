@@ -9,6 +9,7 @@
   "author": "Nikos Triantafyllou",
   "license": "ISC",
   "dependencies": {
+    "axios-retry": "^3.0.1",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-react-html-attrs": "^2.1.0",
