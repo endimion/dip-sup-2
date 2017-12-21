@@ -9,7 +9,6 @@ export function  getSupplementsByEid(userEid) {
        dispatch({type: "GET_SUP"} );
        //here we should make an Ajax call with axios
       // on success it should return GET_SUP_FULLFILED else GET_SUP_REJECTED
-      setTimeout(function () {
         // axios.get("http://rest.learncode.academy/api/test123/tweets")
         axios.get("/back/supplement/rest/view")
          .then(response =>{
@@ -19,11 +18,7 @@ export function  getSupplementsByEid(userEid) {
          .catch(err=>{
            dispatch({type:"GET_SUP_REJECTED",payload:err})
          });
-      }, 2000);
-
-
   }
-
 }
 
 export function  openShareByMail(supId) {
@@ -38,9 +33,7 @@ export function  shareByMail(_supId,_email) {
   return  function(dispatch){
   dispatch({type: "SHARE_SUP"});
   let data = {email: _email, supId: _supId };
-
-  setTimeout(function () {
-       axios.post("/back/supplement/rest/inviteByMail",data)
+     axios.post("/back/supplement/rest/inviteByMail",data)
         .then(response =>{
           dispatch({type: "SHARE_SUP_FULLFILED"});
           console.log('#modal'+_supId);
@@ -49,7 +42,6 @@ export function  shareByMail(_supId,_email) {
         .catch(err=>{
           dispatch({type:"SHARE_SUP_REJECTED",payload:err.toString()})
         });
-     }, 2000);
   }
 }
 
@@ -67,7 +59,6 @@ export function  openShareByQR(supId) {
 export function  shareByQR(_supId,_email) {
   return  function(dispatch){
   dispatch({type: "SHARE_SUP_QR"});
-  setTimeout(function () {
        axios.post("/back/supplement/rest/inviteByQR",{"supId":_supId, "email":_email})
         .then(response =>{
           // console.log(response);
@@ -79,6 +70,5 @@ export function  shareByQR(_supId,_email) {
         .catch(err=>{
           dispatch({type:"SHARE_SUP_QR_REJECTED",payload:err.toString()})
         });
-     }, 2000);
   }
 }
