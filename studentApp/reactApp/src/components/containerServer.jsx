@@ -62,12 +62,12 @@ export default class Container extends React.Component {
       const  {user,tweets,sideNav} = this.props;
 
       // let root = () => <div><NavigationBar user={user}/><Dummy user={user}/></div>;
-
-      let home = () => <div><NavigationBar user={user}/><div className ="container" style={{marginTop:"2em"}}><Preloader size="big" flashing /></div></div>;
-      let manage = () => <div><NavigationBar user={user}/><div className ="container" style={{marginTop:"2em"}}><Preloader size="big" flashing /></div></div>;
-      let request = () => <div><NavigationBar user={user}/><div className ="container" style={{marginTop:"2em"}}><Preloader size="big" flashing /></div></div>;
-      let edit = ({match}) => (<div><NavigationBar user={user}/><div className ="container" style={{marginTop:"2em"}}><Preloader size="big" flashing /></div></div> );
-      let inviteView = ({match}) => (<div><NavigationBar user={user}/><div className ="container" style={{marginTop:"2em"}}><Preloader size="big" flashing /></div></div> );
+      let style = {marginLeft: "50%"};
+      let home = () => <div><NavigationBar user={user}/><div className ="container" style={{marginTop:"2em"}}><Preloader style={style} size="big" flashing /></div></div>;
+      let manage = () => <div><NavigationBar user={user}/><div className ="container" style={{marginTop:"2em"}}><Preloader style={style} size="big" flashing /></div></div>;
+      let request = () => <div><NavigationBar user={user}/><div className ="container" style={{marginTop:"2em"}}><Preloader style={style} size="big" flashing /></div></div>;
+      let edit = ({match}) => (<div><NavigationBar user={user}/><div className ="container" style={{marginTop:"2em"}}><Preloader style={style} size="big" flashing /></div></div> );
+      let inviteView = ({match}) => (<div><NavigationBar user={user}/><div className ="container" style={{marginTop:"2em"}}><Preloader style={style} size="big" flashing /></div></div> );
 
 
       return  <StaticRouter location={this.props.location} context={this.props.context}>
