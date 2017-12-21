@@ -83,7 +83,7 @@ export default class Container extends React.Component {
       let request = () => <div><NavigationBar user={user}/><RequestSupplementCard name={"user"} eID={"eID"}/></div>;
       let edit = ({match}) => (<div><NavigationBar user={user}/><EditSup match={match}/></div> );
       let inviteView = ({match}) => {
-                    return <div><NavigationBar user={user}/><InviteView inviteId={match.params.id}/></div>;
+                    return <div><NavigationBar user={user}/></div>;
       };
 
 
