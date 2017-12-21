@@ -1,4 +1,8 @@
 import axios from "axios"
+// ES6
+import axiosRetry from 'axios-retry';
+
+axiosRetry(axios, { retries: 3 });
 
 export function addUserToRem(userEmail) {
     return {

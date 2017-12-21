@@ -2,6 +2,10 @@
 import DS from "../assets/fakeDS"
 
 import axios from "axios"
+// ES6
+import axiosRetry from 'axios-retry';
+
+axiosRetry(axios, { retries: 3 });
 
 export function  getSupplementsByEid(userEid) {
   return  function(dispatch){
