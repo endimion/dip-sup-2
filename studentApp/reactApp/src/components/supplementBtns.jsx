@@ -8,9 +8,9 @@ export default class SupBtns extends React.Component {
 
   render(){
 
-    const download = <a className="btn-floating btn-medium waves-effect waves-light blue darken-3">
+    const download = <Link to={"/back/pdf/"+this.props.id} className="btn-floating btn-medium waves-effect waves-light blue darken-3">
                         <i className="material-icons">file_download</i>
-                    </a>;
+                    </Link>;
     const edit =  <Link to={"/app/edit/"+this.props.id} className="btn-floating btn-medium waves-effect waves-light yellow darken-3" style={{ marginLeft: "1em"}}>
                         <i className="material-icons">edit</i>
                     </Link>;

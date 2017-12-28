@@ -61,7 +61,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 32);
+/******/ 	return __webpack_require__(__webpack_require__.s = 31);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -78,19 +78,37 @@ module.exports = require("react-materialize");
 
 /***/ }),
 /* 2 */
+/***/ (function(module, exports) {
+
+module.exports = require("path");
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+module.exports = require("react-redux");
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+module.exports = require("fs");
+
+/***/ }),
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /*jslint es6,  node:true */
 
 
-var bcrypt = __webpack_require__(23);
-var jwt = __webpack_require__(18);
+var bcrypt = __webpack_require__(22);
+var jwt = __webpack_require__(15);
 var secretKey = process.env.SECRET_KEY ? process.env.SECRET_KEY : "secret"; //the secret comes from an enviroment variable
-var stripchar = __webpack_require__(27).StripChar;
-var fs = __webpack_require__(5);
-var path = __webpack_require__(3);
-var nJwt = __webpack_require__(92);
+var stripchar = __webpack_require__(28).StripChar;
+var fs = __webpack_require__(4);
+var path = __webpack_require__(2);
+var nJwt = __webpack_require__(81);
 /**
   check if a user eID exists on teh session,
   if not verify the existance of a jwt token and its validity
@@ -152,10 +170,10 @@ exports.authorizeAdmin = function (req, res, next) {
 */
 exports.userDetailsFromToken = function (req, res) {
   var token = req.cookies.access_token;
-  //TODO remove this is only for test on localhost
-  if (!token) {
-    token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJlaWRcIjpcIkdSL0dSL0VSTUlTLTExMDc2NjY5XCIsXCJwZXJzb25JZGVudGlmaWVyXCI6XCJHUi9HUi9FUk1JUy0xMTA3NjY2OVwiLFwiZGF0ZU9mQmlydGhcIjpcIjE5ODAtMDEtMDFcIixcImN1cnJlbnRGYW1pbHlOYW1lXCI6XCLOoM6VzqTOoc6fzqVcIixcImN1cnJlbnRHaXZlbk5hbWVcIjpcIs6Rzp3OlM6hzpXOkc6jXCJ9In0.AjC4Brk9gVS1vfsuMyATKh-U5Lyoa6GT9VL1U1ty2qE";
-  }
+  // //TODO remove this is only for test on localhost
+  // if(!token){
+  //   token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJlaWRcIjpcIkdSL0dSL0VSTUlTLTExMDc2NjY5XCIsXCJwZXJzb25JZGVudGlmaWVyXCI6XCJHUi9HUi9FUk1JUy0xMTA3NjY2OVwiLFwiZGF0ZU9mQmlydGhcIjpcIjE5ODAtMDEtMDFcIixcImN1cnJlbnRGYW1pbHlOYW1lXCI6XCLOoM6VzqTOoc6fzqVcIixcImN1cnJlbnRHaXZlbk5hbWVcIjpcIs6Rzp3OlM6hzpXOkc6jXCJ9In0.AjC4Brk9gVS1vfsuMyATKh-U5Lyoa6GT9VL1U1ty2qE";
+  // }
 
   return new Promise(function (resolve, reject) {
     jwt.verify(token, secretKey, { algorithms: ['HS256'] }, function (err, token) {
@@ -182,37 +200,19 @@ exports.userDetailsFromToken = function (req, res) {
 };
 
 /***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
-module.exports = require("path");
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports) {
-
-module.exports = require("react-redux");
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports) {
-
-module.exports = require("fs");
-
-/***/ }),
 /* 6 */
+/***/ (function(module, exports) {
+
+module.exports = require("util");
+
+/***/ }),
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 module.exports = { "host": "172.17.0.1", "port": "4000", "jwt_expiretime": "36000", "channelName": "mychannel", "GOPATH": "artifacts", "keyValueStore": "/tmp/fabric-client-kvs", "eventWaitTime": "90000", "orderer": "grpcs://172.17.0.1:7050", "users": [{ "username": "admin", "secret": "adminpw" }], "peer": "peer1", "chaincode": "dipSup_cc13", "org": "org1", "peerAddress": "localhost:7051" };
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports) {
-
-module.exports = require("util");
 
 /***/ }),
 /* 8 */
@@ -236,19 +236,19 @@ module.exports = require("util");
  */
 
 
-var log4js = __webpack_require__(78);
+var log4js = __webpack_require__(86);
 var logger = log4js.getLogger('Helper');
 // logger.setLevel('DEBUG');
 
-var path = __webpack_require__(3);
-var util = __webpack_require__(7);
-var fs = __webpack_require__(79);
-var User = __webpack_require__(80);
-var crypto = __webpack_require__(81);
-var copService = __webpack_require__(82);
-var config = __webpack_require__(6);
+var path = __webpack_require__(2);
+var util = __webpack_require__(6);
+var fs = __webpack_require__(87);
+var User = __webpack_require__(88);
+var crypto = __webpack_require__(89);
+var copService = __webpack_require__(90);
+var config = __webpack_require__(7);
 
-var hfc = __webpack_require__(15);
+var hfc = __webpack_require__(16);
 hfc.addConfigFile(path.join(__dirname, '../network-config.json'));
 hfc.setLogger(logger);
 var ORGS = hfc.getConfigSetting('network-config');
@@ -587,6 +587,12 @@ exports.getOrgAdmin = getOrgAdmin;
 
 /***/ }),
 /* 9 */
+/***/ (function(module, exports) {
+
+module.exports = require("react-router-dom");
+
+/***/ }),
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -626,6 +632,11 @@ var SupFab = function (_React$Component) {
         key: 'render',
         value: function render() {
             var _this2 = this;
+
+            var isOwner = this.props.isOwner;
+            if (!isOwner) {
+                return _react2.default.createElement('p', null);
+            }
 
             return _react2.default.createElement(
                 'div',
@@ -687,7 +698,7 @@ var SupFab = function (_React$Component) {
 exports.default = SupFab;
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -706,7 +717,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactMaterialize = __webpack_require__(1);
 
-var _reactRouterDom = __webpack_require__(12);
+var _reactRouterDom = __webpack_require__(9);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -771,19 +782,7 @@ var SupBtns = function (_React$Component) {
 exports.default = SupBtns;
 
 /***/ }),
-/* 11 */
-/***/ (function(module, exports) {
-
-module.exports = require("express");
-
-/***/ }),
 /* 12 */
-/***/ (function(module, exports) {
-
-module.exports = require("react-router-dom");
-
-/***/ }),
-/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -795,12 +794,18 @@ Object.defineProperty(exports, "__esModule", {
 exports.addUserToRem = addUserToRem;
 exports.remUsers = remUsers;
 
-var _axios = __webpack_require__(21);
+var _axios = __webpack_require__(20);
 
 var _axios2 = _interopRequireDefault(_axios);
 
+var _axiosRetry = __webpack_require__(21);
+
+var _axiosRetry2 = _interopRequireDefault(_axiosRetry);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+(0, _axiosRetry2.default)(_axios2.default, { retries: 3 });
+// ES6
 function addUserToRem(userEmail) {
   return {
     type: "ADD_USER_REM",
@@ -814,8 +819,15 @@ function remUsers(supplementId, users) {
     dispatch({ type: "MODAL_OPEN" });
     dispatch({ type: "REM_USERS_SENT" });
     console.log("wil open");
+
+    var data = {};
+    data.supId = supplementId;
+    data.emails = users;
+
+    console.log(users);
+
     $('#modal1').modal('open');
-    _axios2.default.get("http://rest.learncode.academy/api/test123/tweets").then(function (response) {
+    _axios2.default.post("/back/supplement/rest/removeInvites", data).then(function (response) {
       dispatch({ type: "REM_USERS_FULLFILED", payload: response.data });
       dispatch({ type: "MODAL_CLOSE" });
       $('#modal1').modal('close');
@@ -826,37 +838,7 @@ function remUsers(supplementId, users) {
 }
 
 /***/ }),
-/* 14 */
-/***/ (function(module, exports) {
-
-module.exports = require("request");
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports) {
-
-module.exports = require("fabric-client");
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports) {
-
-module.exports = require("fabric-client/lib/Peer.js");
-
-/***/ }),
-/* 17 */
-/***/ (function(module, exports) {
-
-module.exports = require("fabric-client/lib/EventHub.js");
-
-/***/ }),
-/* 18 */
-/***/ (function(module, exports) {
-
-module.exports = require("jsonwebtoken");
-
-/***/ }),
-/* 19 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -875,11 +857,11 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactMaterialize = __webpack_require__(1);
 
-var _office = __webpack_require__(41);
+var _office = __webpack_require__(38);
 
 var _office2 = _interopRequireDefault(_office);
 
-var _user = __webpack_require__(42);
+var _user = __webpack_require__(39);
 
 var _user2 = _interopRequireDefault(_user);
 
@@ -937,7 +919,37 @@ var SideNavigation = function (_React$Component) {
 exports.default = SideNavigation;
 
 /***/ }),
-/* 20 */
+/* 14 */
+/***/ (function(module, exports) {
+
+module.exports = require("express");
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports) {
+
+module.exports = require("jsonwebtoken");
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports) {
+
+module.exports = require("fabric-client");
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports) {
+
+module.exports = require("fabric-client/lib/Peer.js");
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports) {
+
+module.exports = require("fabric-client/lib/EventHub.js");
+
+/***/ }),
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -952,29 +964,35 @@ exports.shareByMail = shareByMail;
 exports.openShareByQR = openShareByQR;
 exports.shareByQR = shareByQR;
 
-var _fakeDS = __webpack_require__(54);
+var _fakeDS = __webpack_require__(51);
 
 var _fakeDS2 = _interopRequireDefault(_fakeDS);
 
-var _axios = __webpack_require__(21);
+var _axios = __webpack_require__(20);
 
 var _axios2 = _interopRequireDefault(_axios);
 
+var _axiosRetry = __webpack_require__(21);
+
+var _axiosRetry2 = _interopRequireDefault(_axiosRetry);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+(0, _axiosRetry2.default)(_axios2.default, { retries: 3 });
+// ES6
 function getSupplementsByEid(userEid) {
   return function (dispatch) {
     console.log(userEid);
     dispatch({ type: "GET_SUP" });
     //here we should make an Ajax call with axios
     // on success it should return GET_SUP_FULLFILED else GET_SUP_REJECTED
-    setTimeout(function () {
-      _axios2.default.get("http://rest.learncode.academy/api/test123/tweets").then(function (response) {
-        dispatch({ type: "GET_SUP_FULLFILED", payload: _fakeDS2.default });
-      }).catch(function (err) {
-        dispatch({ type: "GET_SUP_REJECTED", payload: err });
-      });
-    }, 2000);
+    // axios.get("http://rest.learncode.academy/api/test123/tweets")
+    _axios2.default.get("/back/supplement/rest/view").then(function (response) {
+      // dispatch({type: "GET_SUP_FULLFILED",payload:DS})
+      dispatch({ type: "GET_SUP_FULLFILED", payload: JSON.parse(response.data) });
+    }).catch(function (err) {
+      dispatch({ type: "GET_SUP_REJECTED", payload: err });
+    });
   };
 }
 
@@ -986,18 +1004,17 @@ function openShareByMail(supId) {
   };
 }
 
-function shareByMail(supId, email) {
+function shareByMail(_supId, _email) {
   return function (dispatch) {
     dispatch({ type: "SHARE_SUP" });
-    setTimeout(function () {
-      _axios2.default.get("http://rest.learncode.academy/api/test123/tweets").then(function (response) {
-        dispatch({ type: "SHARE_SUP_FULLFILED" });
-        console.log('#modal' + supId);
-        $('#mailModal' + supId).modal('close');
-      }).catch(function (err) {
-        dispatch({ type: "SHARE_SUP_REJECTED", payload: err.toString() });
-      });
-    }, 2000);
+    var data = { email: _email, supId: _supId };
+    _axios2.default.post("/back/supplement/rest/inviteByMail", data).then(function (response) {
+      dispatch({ type: "SHARE_SUP_FULLFILED" });
+      console.log('#modal' + _supId);
+      $('#mailModal' + _supId).modal('close');
+    }).catch(function (err) {
+      dispatch({ type: "SHARE_SUP_REJECTED", payload: err.toString() });
+    });
   };
 }
 
@@ -1009,843 +1026,53 @@ function openShareByQR(supId) {
   };
 }
 
-function shareByQR(supId, email) {
+function shareByQR(_supId, _email) {
   return function (dispatch) {
     dispatch({ type: "SHARE_SUP_QR" });
-    setTimeout(function () {
-      _axios2.default.get("http://rest.learncode.academy/api/test123/tweets").then(function (response) {
-        dispatch({ type: "SHARE_SUP_QR_FULLFILED",
-          payload: '<svg width="100" height="100"><circle cx="50" cy="50" r="40" stroke="green" stroke-width="4" fill="yellow" /></svg>'
-        });
-      }).catch(function (err) {
-        dispatch({ type: "SHARE_SUP_QR_REJECTED", payload: err.toString() });
+    _axios2.default.post("/back/supplement/rest/inviteByQR", { "supId": _supId, "email": _email }).then(function (response) {
+      // console.log(response);
+      dispatch({ type: "SHARE_SUP_QR_FULLFILED",
+        //payload:'<svg width="100" height="100"><circle cx="50" cy="50" r="40" stroke="green" stroke-width="4" fill="yellow" /></svg>'
+        payload: response.data
       });
-    }, 2000);
+    }).catch(function (err) {
+      dispatch({ type: "SHARE_SUP_QR_REJECTED", payload: err.toString() });
+    });
   };
 }
 
 /***/ }),
-/* 21 */
+/* 20 */
 /***/ (function(module, exports) {
 
 module.exports = require("axios");
 
 /***/ }),
-/* 22 */
-/***/ (function(module, exports, __webpack_require__) {
+/* 21 */
+/***/ (function(module, exports) {
 
-"use strict";
-/*jslint es6,  node:true */
-
-
-var path = __webpack_require__(3);
-var fs = __webpack_require__(5);
-var util = __webpack_require__(7);
-var config = __webpack_require__(6);
-var helper = __webpack_require__(8);
-var logger = helper.getLogger('install-chaincode');
-var tx_id = null;
-
-var join = __webpack_require__(83);
-var createChannel = __webpack_require__(84);
-var instantiate = __webpack_require__(85);
-var query = __webpack_require__(86);
-var invoke = __webpack_require__(87);
-var evHelper = __webpack_require__(26);
-
-exports.installChaincode = function (peers, chaincodeName, chaincodePath, chaincodeVersion, username, org) {
-  console.log('\n============ Install chaincode on organizations ============\n');
-  helper.setupChaincodeDeploy();
-  var channel = helper.getChannelForOrg(org);
-  var client = helper.getClientForOrg(org);
-
-  return helper.getOrgAdmin(org).then(function (user) {
-    var request = {
-      targets: helper.newPeers(peers),
-      chaincodePath: chaincodePath,
-      chaincodeId: chaincodeName,
-      chaincodeVersion: chaincodeVersion
-    };
-    console.log("test.js --> installChaincode");
-    console.log(request);
-    return client.installChaincode(request);
-  }, function (err) {
-    console.log('Failed to enroll user \'' + username + '\'. ' + err);
-    throw new Error('Failed to enroll user \'' + username + '\'. ' + err);
-  }).then(function (results) {
-    var proposalResponses = results[0];
-    var proposal = results[1];
-    var all_good = true;
-    for (var i in proposalResponses) {
-      var one_good = false;
-      if (proposalResponses && proposalResponses[0].response && proposalResponses[0].response.status === 200) {
-        one_good = true;
-        console.log('install proposal was good');
-      } else {
-        console.log('install proposal was bad');
-      }
-      all_good = all_good & one_good;
-    }
-    if (all_good) {
-      console.log(util.format('Successfully sent install Proposal and received ProposalResponse: Status - %s', proposalResponses[0].response.status));
-      console.log('\nSuccessfully Installed chaincode on organization ' + org + '\n');
-      return 'Successfully Installed chaincode on organization ' + org;
-    } else {
-      console.log('Failed to send install Proposal or receive valid response. Response null or status is not 200. exiting...');
-      return 'Failed to send install Proposal or receive valid response. Response null or status is not 200. exiting...';
-    }
-  }, function (err) {
-    console.log( true ? err.stack : err);
-    throw new Error( true ? err.stack : err);
-  });
-};
-
-exports.createChannel = function () {
-  createChannel.createChannel("mychannel", "../artifacts/channel/channel.tx", "nikos2", "org1").then(function (resp) {
-    console.log("=============CHANEL CREATED===================");
-  }).catch(function (err) {
-    console.log(err);
-  });
-};
-
-exports.joinAllOrgsOnChannel = function (chanelName) {
-  join.joinChannel(chanelName, ["localhost:7051"], "nikos2", "org1").then(function (resp) {
-    console.log("=============Peer localhost:7051 JOINED===================");
-  }).then(function (resp) {
-    join.joinChannel(chanelName, ["localhost:8051"], "nikos2", "org2");
-    console.log("=============Peer localhost:8051 JOINED===================");
-  }).catch(function (err) {
-    console.log(err);
-  });
-};
-
-exports.instantiateChaincode = function (channelName, chaincodeName, chaincodeVersion, functionName, args, username, org) {
-  return instantiate.instantiateChaincode(channelName, chaincodeName, chaincodeVersion, functionName, args, username, org);
-};
-
-exports.queryChaincode = function (peer, channelName, chaincodeName, args, fcn, username, org) {
-  return query.queryChaincode(peer, channelName, chaincodeName, args, fcn, username, org);
-};
-
-/**
-  Invoke transaction and listen to custom DS events
-**/
-exports.invokeChaincode = function (peersUrls, channelName, chaincodeName, fcn, args, username, org) {
-  return invoke.invokeChaincode(peersUrls, channelName, chaincodeName, fcn, args, username, org, evHelper.txDetectionEvent);
-};
+module.exports = require("axios-retry");
 
 /***/ }),
-/* 23 */
+/* 22 */
 /***/ (function(module, exports) {
 
 module.exports = require("bcrypt");
 
 /***/ }),
+/* 23 */
+/***/ (function(module, exports) {
+
+module.exports = require("request");
+
+/***/ }),
 /* 24 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-    var content = __webpack_require__(43);
-    var insertCss = __webpack_require__(45);
-
-    if (typeof content === 'string') {
-      content = [[module.i, content, '']];
-    }
-
-    module.exports = content.locals || {};
-    module.exports._getContent = function() { return content; };
-    module.exports._getCss = function() { return content.toString(); };
-    module.exports._insertCss = function(options) { return insertCss(content, options) };
-    
-    // Hot Module Replacement
-    // https://webpack.github.io/docs/hot-module-replacement
-    // Only activated in browser context
-    if (false) {
-      var removeCss = function() {};
-      module.hot.accept("!!../../../node_modules/css-loader/index.js??ref--0-1!./navbar.css", function() {
-        content = require("!!../../../node_modules/css-loader/index.js??ref--0-1!./navbar.css");
-
-        if (typeof content === 'string') {
-          content = [[module.id, content, '']];
-        }
-
-        removeCss = insertCss(content, { replace: true });
-      });
-      module.hot.dispose(function() { removeCss(); });
-    }
-  
-
-/***/ }),
-/* 25 */
-/***/ (function(module, exports) {
-
-module.exports = require("redux");
-
-/***/ }),
-/* 26 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/*jslint es6,  node:true */
-
-
-var helper = __webpack_require__(8);
-var fs = __webpack_require__(5);
-var path = __webpack_require__(3);
-var util = __webpack_require__(7);
-
-/**
-  registers an event hub for the given organisation
-  for the given chaincode
-  listening for the specified events
-  @param org the name of the organisation e.g. org1
-  @param chaincodeName the name of the chaincode, e.g. dipSup_cc4
-  @param eventName teh name of the event as that is defined in the chaincode
-  @param successCallback the function to call upon receiving an event. It is applied to
-         the unencoded (originally it is unit8 bytearray) event payload
-**/
-exports.registerEventHubForOrg = function (org, chaincodeName, eventName, successCallback) {
-
-  var client = helper.getClientForOrg(org);
-  helper.getOrgAdmin(org).then(function (admin) {
-    //this is required to add a user to the client object
-    var caCert = fs.readFileSync(path.join(__dirname, "../artifacts/channel/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt"));
-    // console.log(data);
-    var eh = client.newEventHub();
-    eh.setPeerAddr("grpcs://localhost:7053", {
-      pem: Buffer.from(caCert).toString(),
-      'ssl-target-name-override': "peer0.org1.example.com"
-    });
-
-    var eventObj = eh.registerChaincodeEvent(chaincodeName, eventName, function (event) {
-      var unEncodedEvnet = String.fromCharCode.apply(null, event.payload);
-      successCallback(unEncodedEvnet, eh, eventObj);
-    }, function (err) {
-      console.log(err);
-    });
-    eh.connect();
-  });
-};
-
-/**
-  function that can be used as a callback (eventHandler) at the
-  invokeChaincode = function(peersUrls, channelName, chaincodeName, fcn, args, username, org, eventHandler)
-  of the invoke-transaction.js module
-  to detect custom events as they are submitted by the DS app
-*/
-exports.txDetectionEvent = function (reject, resolve, payload, ehub, listenerHandle, txHash) {
-  console.log(util.format("Custom event received, payload: %j\n", payload));
-  var eventJSON = JSON.parse(payload);
-  var eventMessage = eventJSON.Message;
-  var eventBODY = eventJSON.Body;
-  var eventTXID = eventJSON.TxId;
-
-  if (eventMessage.indexOf("Error") >= 0) {
-    if (eventTXID === txHash) {
-      //resolve promise only when the current transaction has finished
-      ehub.unregisterChaincodeEvent(listenerHandle);
-      ehub.disconnect();
-      reject(eventMessage);
-    }
-  }
-  if (eventMessage.indexOf("Tx chaincode finished OK") >= 0) {
-    if (eventTXID === txHash) {
-      //resolve promise only when the current transaction has finished
-      ehub.unregisterChaincodeEvent(listenerHandle);
-      ehub.disconnect();
-      resolve(eventMessage);
-    }
-  }
-};
-
-/***/ }),
-/* 27 */
-/***/ (function(module, exports) {
-
-module.exports = require("stripchar");
-
-/***/ }),
-/* 28 */
-/***/ (function(module, exports) {
-
-module.exports = require("uuid/v1");
-
-/***/ }),
-/* 29 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var n = __webpack_require__(96)();
-var hash = __webpack_require__(97);
-
-module.exports.generateSupplementHash = generateSupplementHash;
-
-function generateSupplementHash(employerEmail, supId, userName) {
-      // console.log("the nonce is " + n());
-      return hash.sha256().update(n() + employerEmail + supId + userName).digest('hex');
-}
-
-/***/ }),
-/* 30 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var path = __webpack_require__(3);
-
-var nodemailer = __webpack_require__(98);
-var fileUtils = __webpack_require__(99);
-var srvUtils = __webpack_require__(100);
-
-exports.sendEmail = sendEmail;
-
-/**
-Sends an email and returns a Promise that it will be sent
-**/
-function sendEmail(receiverAddress, body) {
-
-  return new Promise(function (resolve, reject) {
-    var thePath = path.join(__dirname, '..', 'resources', 'emailCredentials');
-    fileUtils.readFilePromise(thePath).then(function (_pass) {
-      // console.log("pass" + pass);
-      // create reusable transporter object using the default SMTP transport
-      var transporter = nodemailer.createTransport({
-        //        service: 'gmail',
-        host: 'localhost',
-        port: '25',
-        //      secure: false,
-        tls: {
-          rejectUnauthorized: false
-        },
-        auth: {
-          //user: 'triantafyllou.ni@gmail.com',
-          //pass: _pass
-          user: 'user@mail.example.com',
-          pass: 'pwd'
-        }
-      });
-
-      console.log('Email Body ' + body);
-      // setup email data with unicode symbols
-      var mailOptions = {
-        from: '"Diploma Supplement Service" <dss@aegean.gr>', // sender address
-        to: receiverAddress, // list of receivers
-        subject: 'A Diploma Supplement has been shared with you ', // Subject line
-        text: body, //'Hello world ?', // plain text body
-        html: body //Hello world ?</b>' // html body
-      };
-      transporter.sendMail(mailOptions).then(function (result) {
-        console.log("mail sent");
-        resolve(result);
-      }).catch(function (err) {
-        console.log(err);
-        reject(err);
-      });
-    }).catch(function (err) {
-      reject(err);
-    });
-  });
-};
-
-/***/ }),
-/* 31 */
-/***/ (function(module, exports) {
-
-module.exports = require("randomstring");
-
-/***/ }),
-/* 32 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/*jslint es6,  node:true */
-
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _server = __webpack_require__(33);
-
-var _containerServer = __webpack_require__(34);
-
-var _containerServer2 = _interopRequireDefault(_containerServer);
-
-var _template = __webpack_require__(65);
-
-var _template2 = _interopRequireDefault(_template);
-
-var _reactRedux = __webpack_require__(4);
-
-var _store = __webpack_require__(66);
-
-var _store2 = _interopRequireDefault(_store);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// let renderReact = require('./reactApp/src/renderReact.js');
-
-
-var express = __webpack_require__(11);
-var app = express();
-var port = 8000;
-var path = __webpack_require__(3);
-var bodyParser = __webpack_require__(75);
-var session = __webpack_require__(76); //warning The default server-side session storage, MemoryStore, is purposely not designed for a production environment.
-//compatible session stores https://github.com/expressjs/session#compatible-session-stores
-var FileStore = __webpack_require__(77)(session);
-var basic = __webpack_require__(22);
-var timeout = __webpack_require__(88);
-var cookieParser = __webpack_require__(89);
-var morgan = __webpack_require__(90);
-var https = __webpack_require__(91);
-var fs = __webpack_require__(5);
-
-var util = __webpack_require__(2);
-
-/**** routes **/
-var loginRoutes = __webpack_require__(93);
-var loginViewRoutes = __webpack_require__(94);
-var supplementRoutes = __webpack_require__(95);
-var supViewRoutes = __webpack_require__(102);
-var qr = __webpack_require__(103);
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
-
-//middlewares
-app.use('/', express.static('public'));
-app.use('/', express.static('dist/build'));
-app.use('/dist/build/', express.static('dist/build'));
-
-// instruct the app to use the `bodyParser()` middleware for all routes
-app.use(bodyParser.json()); // support json encoded bodies
-app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
-app.use(cookieParser());
-app.use(session({
-  store: new FileStore(),
-  name: 'clientAppCookie',
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: false }
-})); //set up middleware for session handling
-app.use(morgan('tiny')); //http request logger
-app.use(timeout(120000));
-app.use('/', [loginRoutes, loginViewRoutes]);
-app.use('/login', [loginRoutes, loginViewRoutes]);
-app.use('/supplement/rest', supplementRoutes);
-app.use('/supplement/', supViewRoutes);
-app.use('/qr', qr);
-
-app.use(haltOnTimedout); //the following timeout middleware has to be the last middleware
-
-
-var key = fs.readFileSync('tsl/private.key');
-var cert = fs.readFileSync('tsl/server.crt');
-var options = {
-  key: key,
-  cert: cert
-
-  //start https server
-};https.createServer(options, app).listen(8443);
-
-app.get('/app*', function (req, res) {
-  util.userDetailsFromToken(req, res).then(function (usr) {
-    // const staticContext = {}
-    var css = new Set(); // CSS for all rendered React components
-    var staticContext = { insertCss: function insertCss() {
-        for (var _len = arguments.length, styles = Array(_len), _key = 0; _key < _len; _key++) {
-          styles[_key] = arguments[_key];
-        }
-
-        return styles.forEach(function (style) {
-          return css.add(style._getCss());
-        });
-      } };
-    var theUser = usr;
-    // Grab the initial state from our Redux store
-    var preloadedState = _extends({}, _store2.default.getState(), {
-      user: { user: _extends({}, usr, { lastName: usr.familyName }) } });
-    var appString = (0, _server.renderToString)(_react2.default.createElement(
-      _reactRedux.Provider,
-      { store: _store2.default },
-      _react2.default.createElement(_containerServer2.default, { location: req.url,
-        context: staticContext,
-        usr: theUser })
-    ));
-    res.send((0, _template2.default)({
-      body: appString,
-      title: 'Hello World from the server',
-      preloadedState: preloadedState,
-      css: css
-    }));
-  }).catch(function (err) {
-    res.redirect("/login/landing");
-  });
-});
-
-//start the server
-var server = app.listen(port, "127.0.0.1", function (err, res) {
-  if (err) {
-    console.log("error!!", err);
-  } else {
-    var host = server.address().address;
-    var port = server.address().port;
-
-    console.log("Example app listening at http://%s:%s", host, port);
-    console.log("server started");
-    //initialize the blocokchain configuration
-    console.log("SRV address" + process.env.SRV_ADDR);
-
-    // basic.init();
-  }
-});
-
-// catch the uncaught errors that weren't wrapped in a domain or try catch statement
-// do not use this in modules, but only in applications, as otherwise we could have multiple of these bound
-process.on('uncaughtException', function (err) {
-  // handle the error safely
-  console.log(err);
-});
-
-function haltOnTimedout(req, res, next) {
-  if (!req.timedout) next();
-}
-
-/***/ }),
-/* 33 */
-/***/ (function(module, exports) {
-
-module.exports = require("react-dom/server");
-
-/***/ }),
-/* 34 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _dec, _class; //This will be inside src/components
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRedux = __webpack_require__(4);
-
-var _reactRouterDom = __webpack_require__(12);
-
-var _StaticRouter = __webpack_require__(35);
-
-var _StaticRouter2 = _interopRequireDefault(_StaticRouter);
-
-var _sideBarActions = __webpack_require__(36);
-
-var _userActions = __webpack_require__(37);
-
-var _reactCookie = __webpack_require__(38);
-
-var _tweetList = __webpack_require__(39);
-
-var _tweetList2 = _interopRequireDefault(_tweetList);
-
-var _navBar = __webpack_require__(40);
-
-var _navBar2 = _interopRequireDefault(_navBar);
-
-var _sideNav = __webpack_require__(19);
-
-var _sideNav2 = _interopRequireDefault(_sideNav);
-
-var _dummy = __webpack_require__(48);
-
-var _dummy2 = _interopRequireDefault(_dummy);
-
-var _home = __webpack_require__(49);
-
-var _home2 = _interopRequireDefault(_home);
-
-var _supplements = __webpack_require__(53);
-
-var _supplements2 = _interopRequireDefault(_supplements);
-
-var _editSupplement = __webpack_require__(59);
-
-var _editSupplement2 = _interopRequireDefault(_editSupplement);
-
-var _requestSupplementCard = __webpack_require__(62);
-
-var _requestSupplementCard2 = _interopRequireDefault(_requestSupplementCard);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Container = (_dec = (0, _reactRedux.connect)(function (store) {
-  return { user: store.user.user
-  };
-}), _dec(_class = function (_React$Component) {
-  _inherits(Container, _React$Component);
-
-  function Container(props) {
-    _classCallCheck(this, Container);
-
-    return _possibleConstructorReturn(this, (Container.__proto__ || Object.getPrototypeOf(Container)).call(this, props));
-  }
-
-  _createClass(Container, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
-      // const { cookies } = this.props;
-      // const  userAccount = {
-      //   firstName: "Nikos ",
-      //   lastName: "Trintafylloy",
-      //   email: "test@test.gr",
-      //   userName: "handlename",
-      //   eid: "123"
-      //   };
-
-      // let  name = cookies.get('name') || 'Ben';
-      // console.log("User:");
-      // console.log(this.props.usr);
-      // this.props.dispatch(setUser(this.props.usr));
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          user = _props.user,
-          tweets = _props.tweets,
-          sideNav = _props.sideNav;
-
-      // let root = () => <div><NavigationBar user={user}/><Dummy user={user}/></div>;
-
-      var home = function home() {
-        return _react2.default.createElement(
-          'div',
-          null,
-          _react2.default.createElement(_navBar2.default, { user: user }),
-          _react2.default.createElement(_home2.default, { user: user })
-        );
-      };
-      var manage = function manage() {
-        return _react2.default.createElement(
-          'div',
-          null,
-          _react2.default.createElement(_navBar2.default, { user: user }),
-          _react2.default.createElement(_supplements2.default, { user: user })
-        );
-      };
-      var request = function request() {
-        return _react2.default.createElement(
-          'div',
-          null,
-          _react2.default.createElement(_navBar2.default, { user: user }),
-          _react2.default.createElement(_requestSupplementCard2.default, { name: "user", eID: "eID" })
-        );
-      };
-      var edit = function edit(_ref) {
-        var match = _ref.match;
-        return _react2.default.createElement(
-          'div',
-          null,
-          _react2.default.createElement(_navBar2.default, { user: user }),
-          _react2.default.createElement(_editSupplement2.default, { match: match })
-        );
-      };
-
-      return _react2.default.createElement(
-        _StaticRouter2.default,
-        { location: this.props.location, context: this.props.context },
-        _react2.default.createElement(
-          _reactRouterDom.Switch,
-          null,
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/app/', exact: true, component: home }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/app/test', exact: true, component: home }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/app/home', exact: true, component: home }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/app/manage', exact: true, component: manage }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/app/request', exact: true, component: request }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/app/edit/:id', component: edit })
-        )
-      );
-
-      // return null;
-    }
-  }]);
-
-  return Container;
-}(_react2.default.Component)) || _class);
-exports.default = Container;
-
-/***/ }),
-/* 35 */
-/***/ (function(module, exports) {
-
-module.exports = require("react-router-dom/StaticRouter");
-
-/***/ }),
-/* 36 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.sideBarOnOff = sideBarOnOff;
-// constructor () {
-//     super()
-//     this.showModal = this.showModal.bind(this);
-//     this.id = 'yo'
-//   }
-//
-//   showModal () {
-//     $(`#${this.id}`).modal('open');
-//   }
-
-
-function sideBarOnOff(status, nav) {
-  console.log(nav.id);
-  if (!status) {
-    $("#" + nav.id).sideNav('show');
-    return {
-      type: "SIDE_BAR_OPEN",
-      payload: {}
-    };
-  } else {
-    $(nav).sideNav('hide');
-    return {
-      type: "SIDE_BAR_CLOSE",
-      payload: {}
-    };
-  }
-}
-
-/***/ }),
-/* 37 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.fetchUser = fetchUser;
-exports.setUserName = setUserName;
-exports.setUser = setUser;
-function fetchUser() {
-  return {
-    type: "FETCH_USER_FULLFILED",
-    payload: {
-      name: "Nikos",
-      age: "34"
-    }
-  };
-}
-
-function setUserName(name) {
-  return {
-    type: "SET_USER_NAME",
-    payload: name
-  };
-}
-
-function setUser(user) {
-  return {
-    type: "SET_USER",
-    payload: user
-  };
-}
-
-/***/ }),
-/* 38 */
 /***/ (function(module, exports) {
 
 module.exports = require("react-cookie");
 
 /***/ }),
-/* 39 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.default = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var TweetList = function (_React$Component) {
-    _inherits(TweetList, _React$Component);
-
-    function TweetList() {
-        _classCallCheck(this, TweetList);
-
-        return _possibleConstructorReturn(this, (TweetList.__proto__ || Object.getPrototypeOf(TweetList)).apply(this, arguments));
-    }
-
-    _createClass(TweetList, [{
-        key: 'render',
-        value: function render() {
-            var tweets = this.props.tweets;
-            var tweetsList = tweets.map(function (tweet) {
-                return _react2.default.createElement(
-                    'li',
-                    null,
-                    tweet.id,
-                    ' : ',
-                    tweet.text
-                );
-            });
-            return _react2.default.createElement(
-                'ul',
-                null,
-                tweetsList
-            );
-        }
-    }]);
-
-    return TweetList;
-}(_react2.default.Component);
-
-exports.default = TweetList;
-
-/***/ }),
-/* 40 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1864,13 +1091,13 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactMaterialize = __webpack_require__(1);
 
-var _reactRouterDom = __webpack_require__(12);
+var _reactRouterDom = __webpack_require__(9);
 
-var _sideNav = __webpack_require__(19);
+var _sideNav = __webpack_require__(13);
 
 var _sideNav2 = _interopRequireDefault(_sideNav);
 
-__webpack_require__(24);
+__webpack_require__(26);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1946,22 +1173,676 @@ var NavigationBar = function (_React$Component) {
 exports.default = NavigationBar;
 
 /***/ }),
-/* 41 */
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+    var content = __webpack_require__(40);
+    var insertCss = __webpack_require__(42);
+
+    if (typeof content === 'string') {
+      content = [[module.i, content, '']];
+    }
+
+    module.exports = content.locals || {};
+    module.exports._getContent = function() { return content; };
+    module.exports._getCss = function() { return content.toString(); };
+    module.exports._insertCss = function(options) { return insertCss(content, options) };
+    
+    // Hot Module Replacement
+    // https://webpack.github.io/docs/hot-module-replacement
+    // Only activated in browser context
+    if (false) {
+      var removeCss = function() {};
+      module.hot.accept("!!../../../node_modules/css-loader/index.js??ref--0-1!./navbar.css", function() {
+        content = require("!!../../../node_modules/css-loader/index.js??ref--0-1!./navbar.css");
+
+        if (typeof content === 'string') {
+          content = [[module.id, content, '']];
+        }
+
+        removeCss = insertCss(content, { replace: true });
+      });
+      module.hot.dispose(function() { removeCss(); });
+    }
+  
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports) {
+
+module.exports = require("redux");
+
+/***/ }),
+/* 28 */
+/***/ (function(module, exports) {
+
+module.exports = require("stripchar");
+
+/***/ }),
+/* 29 */
+/***/ (function(module, exports) {
+
+module.exports = require("uuid/v1");
+
+/***/ }),
+/* 30 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/*jslint es6,  node:true */
+
+
+var helper = __webpack_require__(8);
+var fs = __webpack_require__(4);
+var path = __webpack_require__(2);
+var util = __webpack_require__(6);
+
+/**
+  registers an event hub for the given organisation
+  for the given chaincode
+  listening for the specified events
+  @param org the name of the organisation e.g. org1
+  @param chaincodeName the name of the chaincode, e.g. dipSup_cc4
+  @param eventName teh name of the event as that is defined in the chaincode
+  @param successCallback the function to call upon receiving an event. It is applied to
+         the unencoded (originally it is unit8 bytearray) event payload
+**/
+exports.registerEventHubForOrg = function (org, chaincodeName, eventName, successCallback) {
+
+  var client = helper.getClientForOrg(org);
+  helper.getOrgAdmin(org).then(function (admin) {
+    //this is required to add a user to the client object
+    var caCert = fs.readFileSync(path.join(__dirname, "../artifacts/channel/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt"));
+    // console.log(data);
+    var eh = client.newEventHub();
+    eh.setPeerAddr("grpcs://localhost:7053", {
+      pem: Buffer.from(caCert).toString(),
+      'ssl-target-name-override': "peer0.org1.example.com"
+    });
+
+    var eventObj = eh.registerChaincodeEvent(chaincodeName, eventName, function (event) {
+      var unEncodedEvnet = String.fromCharCode.apply(null, event.payload);
+      successCallback(unEncodedEvnet, eh, eventObj);
+    }, function (err) {
+      console.log(err);
+    });
+    eh.connect();
+  });
+};
+
+/**
+  function that can be used as a callback (eventHandler) at the
+  invokeChaincode = function(peersUrls, channelName, chaincodeName, fcn, args, username, org, eventHandler)
+  of the invoke-transaction.js module
+  to detect custom events as they are submitted by the DS app
+*/
+exports.txDetectionEvent = function (reject, resolve, payload, ehub, listenerHandle, txHash) {
+  console.log(util.format("Custom event received, payload: %j\n", payload));
+  var eventJSON = JSON.parse(payload);
+  var eventMessage = eventJSON.Message;
+  var eventBODY = eventJSON.Body;
+  var eventTXID = eventJSON.TxId;
+
+  if (eventMessage.indexOf("Error") >= 0) {
+    if (eventTXID === txHash) {
+      //resolve promise only when the current transaction has finished
+      ehub.unregisterChaincodeEvent(listenerHandle);
+      ehub.disconnect();
+      reject(eventMessage);
+    }
+  }
+  if (eventMessage.indexOf("Tx chaincode finished OK") >= 0) {
+    if (eventTXID === txHash) {
+      //resolve promise only when the current transaction has finished
+      ehub.unregisterChaincodeEvent(listenerHandle);
+      ehub.disconnect();
+      resolve(eventMessage);
+    }
+  }
+};
+
+/***/ }),
+/* 31 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/*jslint es6,  node:true */
+
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _server = __webpack_require__(32);
+
+var _containerServer = __webpack_require__(33);
+
+var _containerServer2 = _interopRequireDefault(_containerServer);
+
+var _template = __webpack_require__(63);
+
+var _template2 = _interopRequireDefault(_template);
+
+var _reactCookie = __webpack_require__(24);
+
+var _reactRedux = __webpack_require__(3);
+
+var _store = __webpack_require__(64);
+
+var _store2 = _interopRequireDefault(_store);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// let renderReact = require('./reactApp/src/renderReact.js');
+
+
+var express = __webpack_require__(14);
+var app = express();
+var port = 8000;
+var path = __webpack_require__(2);
+var bodyParser = __webpack_require__(74);
+var session = __webpack_require__(75); //warning The default server-side session storage, MemoryStore, is purposely not designed for a production environment.
+//compatible session stores https://github.com/expressjs/session#compatible-session-stores
+var FileStore = __webpack_require__(76)(session);
+// const basic = require('./model/hlf/basic');
+var timeout = __webpack_require__(77);
+var cookieParser = __webpack_require__(78);
+var morgan = __webpack_require__(79);
+var https = __webpack_require__(80);
+var fs = __webpack_require__(4);
+
+var util = __webpack_require__(5);
+
+/**** routes **/
+var loginRoutes = __webpack_require__(82);
+var loginViewRoutes = __webpack_require__(83);
+// let supplementRoutes = require('./routes/rest/supplementRoutes');
+var supViewRoutes = __webpack_require__(84);
+// let qr = require('./routes/rest/qrCodeRoutes');
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
+
+//middlewares
+app.use('/', express.static('public'));
+app.use('/', express.static('dist/build'));
+app.use('/dist/build/', express.static('dist/build'));
+
+// instruct the app to use the `bodyParser()` middleware for all routes
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+app.use(cookieParser());
+app.use(session({
+  store: new FileStore(),
+  name: 'clientAppCookie',
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false }
+})); //set up middleware for session handling
+app.use(morgan('tiny')); //http request logger
+app.use(timeout(120000));
+app.use('/', [loginViewRoutes, loginRoutes]);
+app.use('/login', loginViewRoutes);
+// app.use('/supplement/rest',supplementRoutes);
+app.use('/supplement/', supViewRoutes);
+// app.use('/qr',qr);
+
+app.use(haltOnTimedout); //the following timeout middleware has to be the last middleware
+
+
+var key = fs.readFileSync('tsl/private.key');
+var cert = fs.readFileSync('tsl/server.crt');
+var options = {
+  key: key,
+  cert: cert
+
+  //start https server
+};https.createServer(options, app).listen(8443);
+
+app.get('/app*', function (req, res) {
+  var url = req.url;
+  if (url.indexOf("invite") > -1) {
+    var parts = url.split("/");
+    var invId = parts[parts.length - 1];
+    res.cookie('inviteHash', invId, { httpOnly: true });
+  }
+
+  util.userDetailsFromToken(req, res).then(function (usr) {
+    // const staticContext = {}
+    var css = new Set(); // CSS for all rendered React components
+    var staticContext = { insertCss: function insertCss() {
+        for (var _len = arguments.length, styles = Array(_len), _key = 0; _key < _len; _key++) {
+          styles[_key] = arguments[_key];
+        }
+
+        return styles.forEach(function (style) {
+          return css.add(style._getCss());
+        });
+      } };
+    var theUser = usr;
+    // Grab the initial state from our Redux store
+    var preloadedState = _extends({}, _store2.default.getState(), {
+      user: { user: _extends({}, usr, { lastName: usr.familyName }) } });
+    var appString = (0, _server.renderToString)(_react2.default.createElement(
+      _reactRedux.Provider,
+      { store: _store2.default },
+      _react2.default.createElement(
+        _reactCookie.CookiesProvider,
+        null,
+        _react2.default.createElement(_containerServer2.default, { location: req.url,
+          context: staticContext,
+          usr: theUser })
+      )
+    ));
+    res.send((0, _template2.default)({
+      body: appString,
+      title: 'Hello World from the server',
+      preloadedState: preloadedState,
+      css: css
+    }));
+  }).catch(function (err) {
+    console.log(err);
+    res.redirect("/login/landing");
+  });
+});
+
+//start the server
+var server = app.listen(port, "127.0.0.1", function (err, res) {
+  if (err) {
+    console.log("error!!", err);
+  } else {
+    var host = server.address().address;
+    var port = server.address().port;
+
+    console.log("Example app listening at http://%s:%s", host, port);
+    console.log("server started");
+    //initialize the blocokchain configuration
+    console.log("SRV address" + process.env.SRV_ADDR);
+
+    // basic.init();
+  }
+});
+
+// catch the uncaught errors that weren't wrapped in a domain or try catch statement
+// do not use this in modules, but only in applications, as otherwise we could have multiple of these bound
+process.on('uncaughtException', function (err) {
+  // handle the error safely
+  console.log(err);
+});
+
+function haltOnTimedout(req, res, next) {
+  if (!req.timedout) next();
+}
+
+/***/ }),
+/* 32 */
+/***/ (function(module, exports) {
+
+module.exports = require("react-dom/server");
+
+/***/ }),
+/* 33 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _dec, _class; //This will be inside src/components
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(3);
+
+var _reactRouterDom = __webpack_require__(9);
+
+var _StaticRouter = __webpack_require__(34);
+
+var _StaticRouter2 = _interopRequireDefault(_StaticRouter);
+
+var _sideBarActions = __webpack_require__(35);
+
+var _userActions = __webpack_require__(36);
+
+var _reactCookie = __webpack_require__(24);
+
+var _reactMaterialize = __webpack_require__(1);
+
+var _tweetList = __webpack_require__(37);
+
+var _tweetList2 = _interopRequireDefault(_tweetList);
+
+var _navBar = __webpack_require__(25);
+
+var _navBar2 = _interopRequireDefault(_navBar);
+
+var _sideNav = __webpack_require__(13);
+
+var _sideNav2 = _interopRequireDefault(_sideNav);
+
+var _dummy = __webpack_require__(45);
+
+var _dummy2 = _interopRequireDefault(_dummy);
+
+var _home = __webpack_require__(46);
+
+var _home2 = _interopRequireDefault(_home);
+
+var _supplements = __webpack_require__(50);
+
+var _supplements2 = _interopRequireDefault(_supplements);
+
+var _editSupplement = __webpack_require__(56);
+
+var _editSupplement2 = _interopRequireDefault(_editSupplement);
+
+var _requestSupplementCard = __webpack_require__(59);
+
+var _requestSupplementCard2 = _interopRequireDefault(_requestSupplementCard);
+
+var _serverLoading = __webpack_require__(62);
+
+var _serverLoading2 = _interopRequireDefault(_serverLoading);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Container = (_dec = (0, _reactRedux.connect)(function (store) {
+  return { user: store.user.user
+  };
+}), _dec(_class = function (_React$Component) {
+  _inherits(Container, _React$Component);
+
+  function Container(props) {
+    _classCallCheck(this, Container);
+
+    return _possibleConstructorReturn(this, (Container.__proto__ || Object.getPrototypeOf(Container)).call(this, props));
+  }
+
+  _createClass(Container, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      // const { cookies } = this.props;
+      // const  userAccount = {
+      //   firstName: "Nikos ",
+      //   lastName: "Trintafylloy",
+      //   email: "test@test.gr",
+      //   userName: "handlename",
+      //   eid: "123"
+      //   };
+
+      // let  name = cookies.get('name') || 'Ben';
+      // console.log("User:");
+      // console.log(this.props.usr);
+      // this.props.dispatch(setUser(this.props.usr));
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          user = _props.user,
+          tweets = _props.tweets,
+          sideNav = _props.sideNav;
+
+      // let root = () => <div><NavigationBar user={user}/><Dummy user={user}/></div>;
+
+      // let home = () => {console.log("home"); return <ServerLoading user={user}/>;} ;
+      // let manage = () => <ServerLoading user={user}/>;
+      // let request = () => <ServerLoading user={user}/>;
+      // let edit = ({match}) => (<ServerLoading user={user}/>);
+      // let inviteView = ({match}) => { console.log("inivte"); return <ServerLoading user={user}/>};
+
+      var home = function home() {
+        // let cookie = this.props.cookies;
+        var cookies = new _reactCookie.Cookies();
+        var id = cookies.get("inviteHash");
+        if (id) {
+          return _react2.default.createElement(_reactRouterDom.Redirect, { from: '/app', to: "/app/invite/" + id, push: true });
+        } else {
+          return _react2.default.createElement(
+            'div',
+            null,
+            _react2.default.createElement(_navBar2.default, { user: user }),
+            _react2.default.createElement(_home2.default, { user: user })
+          );
+        }
+      };
+      var manage = function manage() {
+        return _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(_navBar2.default, { user: user }),
+          _react2.default.createElement(_supplements2.default, { user: user })
+        );
+      };
+      var request = function request() {
+        return _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(_navBar2.default, { user: user }),
+          _react2.default.createElement(_requestSupplementCard2.default, { name: "user", eID: "eID" })
+        );
+      };
+      var edit = function edit(_ref) {
+        var match = _ref.match;
+        return _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(_navBar2.default, { user: user }),
+          _react2.default.createElement(_editSupplement2.default, { match: match })
+        );
+      };
+      var inviteView = function inviteView(_ref2) {
+        var match = _ref2.match;
+
+        return _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(_navBar2.default, { user: user })
+        );
+      };
+
+      return _react2.default.createElement(
+        _StaticRouter2.default,
+        { location: this.props.location, context: this.props.context },
+        _react2.default.createElement(
+          _reactRouterDom.Switch,
+          null,
+          _react2.default.createElement(_reactRouterDom.Route, { path: '/app/', exact: true, component: home }),
+          _react2.default.createElement(_reactRouterDom.Route, { path: '/app/home', exact: true, component: home }),
+          _react2.default.createElement(_reactRouterDom.Route, { path: '/app/manage', exact: true, component: manage }),
+          _react2.default.createElement(_reactRouterDom.Route, { path: '/app/request', exact: true, component: request }),
+          _react2.default.createElement(_reactRouterDom.Route, { path: '/app/edit/:id', component: edit }),
+          _react2.default.createElement(_reactRouterDom.Route, { path: '/app/invite/:id', component: inviteView })
+        )
+      );
+
+      // return null;
+    }
+  }]);
+
+  return Container;
+}(_react2.default.Component)) || _class);
+exports.default = Container;
+
+/***/ }),
+/* 34 */
+/***/ (function(module, exports) {
+
+module.exports = require("react-router-dom/StaticRouter");
+
+/***/ }),
+/* 35 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.sideBarOnOff = sideBarOnOff;
+// constructor () {
+//     super()
+//     this.showModal = this.showModal.bind(this);
+//     this.id = 'yo'
+//   }
+//
+//   showModal () {
+//     $(`#${this.id}`).modal('open');
+//   }
+
+
+function sideBarOnOff(status, nav) {
+  console.log(nav.id);
+  if (!status) {
+    $("#" + nav.id).sideNav('show');
+    return {
+      type: "SIDE_BAR_OPEN",
+      payload: {}
+    };
+  } else {
+    $(nav).sideNav('hide');
+    return {
+      type: "SIDE_BAR_CLOSE",
+      payload: {}
+    };
+  }
+}
+
+/***/ }),
+/* 36 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.fetchUser = fetchUser;
+exports.setUserName = setUserName;
+exports.setUser = setUser;
+function fetchUser() {
+  return {
+    type: "FETCH_USER_FULLFILED",
+    payload: {
+      name: "Nikos",
+      age: "34"
+    }
+  };
+}
+
+function setUserName(name) {
+  return {
+    type: "SET_USER_NAME",
+    payload: name
+  };
+}
+
+function setUser(user) {
+  return {
+    type: "SET_USER",
+    payload: user
+  };
+}
+
+/***/ }),
+/* 37 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var TweetList = function (_React$Component) {
+    _inherits(TweetList, _React$Component);
+
+    function TweetList() {
+        _classCallCheck(this, TweetList);
+
+        return _possibleConstructorReturn(this, (TweetList.__proto__ || Object.getPrototypeOf(TweetList)).apply(this, arguments));
+    }
+
+    _createClass(TweetList, [{
+        key: 'render',
+        value: function render() {
+            var tweets = this.props.tweets;
+            var tweetsList = tweets.map(function (tweet) {
+                return _react2.default.createElement(
+                    'li',
+                    null,
+                    tweet.id,
+                    ' : ',
+                    tweet.text
+                );
+            });
+            return _react2.default.createElement(
+                'ul',
+                null,
+                tweetsList
+            );
+        }
+    }]);
+
+    return TweetList;
+}(_react2.default.Component);
+
+exports.default = TweetList;
+
+/***/ }),
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "e60095e669fadeeb6c225bb4a575b383.jpg";
 
 /***/ }),
-/* 42 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "21f505892075a5f20c11b47a368c7630.png";
 
 /***/ }),
-/* 43 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(44)(undefined);
+exports = module.exports = __webpack_require__(41)(undefined);
 // imports
 
 
@@ -1972,7 +1853,7 @@ exports.push([module.i, ".navbar-fixed {\n    position: relative;\n    height: 5
 
 
 /***/ }),
-/* 44 */
+/* 41 */
 /***/ (function(module, exports) {
 
 /*
@@ -2054,17 +1935,17 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 45 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _stringify = __webpack_require__(46);
+var _stringify = __webpack_require__(43);
 
 var _stringify2 = _interopRequireDefault(_stringify);
 
-var _slicedToArray2 = __webpack_require__(47);
+var _slicedToArray2 = __webpack_require__(44);
 
 var _slicedToArray3 = _interopRequireDefault(_slicedToArray2);
 
@@ -2184,19 +2065,19 @@ function insertCss(styles) {
 module.exports = insertCss;
 
 /***/ }),
-/* 46 */
+/* 43 */
 /***/ (function(module, exports) {
 
 module.exports = require("babel-runtime/core-js/json/stringify");
 
 /***/ }),
-/* 47 */
+/* 44 */
 /***/ (function(module, exports) {
 
 module.exports = require("babel-runtime/helpers/slicedToArray");
 
 /***/ }),
-/* 48 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2250,7 +2131,7 @@ var Dummy = function (_React$Component) {
 exports.default = Dummy;
 
 /***/ }),
-/* 49 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2269,23 +2150,23 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactMaterialize = __webpack_require__(1);
 
-var _reactRouterDom = __webpack_require__(12);
+var _reactRouterDom = __webpack_require__(9);
 
-var _sideNav = __webpack_require__(19);
+var _sideNav = __webpack_require__(13);
 
 var _sideNav2 = _interopRequireDefault(_sideNav);
 
-__webpack_require__(24);
+__webpack_require__(26);
 
-var _manageDocuments = __webpack_require__(50);
+var _manageDocuments = __webpack_require__(47);
 
 var _manageDocuments2 = _interopRequireDefault(_manageDocuments);
 
-var _publishDocument = __webpack_require__(51);
+var _publishDocument = __webpack_require__(48);
 
 var _publishDocument2 = _interopRequireDefault(_publishDocument);
 
-var _manageUser = __webpack_require__(52);
+var _manageUser = __webpack_require__(49);
 
 var _manageUser2 = _interopRequireDefault(_manageUser);
 
@@ -2449,25 +2330,25 @@ var HomePage = function (_React$Component) {
 exports.default = HomePage;
 
 /***/ }),
-/* 50 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "e460414865f573e4fbec7cb297e5f358.png";
 
 /***/ }),
-/* 51 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "e5c3c53e1943d3dc0d2c2ffb3b385eee.png";
 
 /***/ }),
-/* 52 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "16d4a26c8de8ae7db43040ae1095ff86.png";
 
 /***/ }),
-/* 53 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2486,15 +2367,15 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(4);
+var _reactRedux = __webpack_require__(3);
 
 var _reactMaterialize = __webpack_require__(1);
 
-var _reactRouterDom = __webpack_require__(12);
+var _reactRouterDom = __webpack_require__(9);
 
-var _supplementActions = __webpack_require__(20);
+var _supplementActions = __webpack_require__(19);
 
-var _supplementCard = __webpack_require__(55);
+var _supplementCard = __webpack_require__(52);
 
 var _supplementCard2 = _interopRequireDefault(_supplementCard);
 
@@ -2599,7 +2480,7 @@ var Supplements = (_dec = (0, _reactRedux.connect)(function (store) {
 exports.default = Supplements;
 
 /***/ }),
-/* 54 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2614,7 +2495,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 55 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2631,23 +2512,23 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(4);
+var _reactRedux = __webpack_require__(3);
 
 var _reactMaterialize = __webpack_require__(1);
 
-var _supplementFab = __webpack_require__(9);
+var _supplementFab = __webpack_require__(10);
 
 var _supplementFab2 = _interopRequireDefault(_supplementFab);
 
-var _supplementBtns = __webpack_require__(10);
+var _supplementBtns = __webpack_require__(11);
 
 var _supplementBtns2 = _interopRequireDefault(_supplementBtns);
 
-var _shareSupMailModal = __webpack_require__(56);
+var _shareSupMailModal = __webpack_require__(53);
 
 var _shareSupMailModal2 = _interopRequireDefault(_shareSupMailModal);
 
-var _shareSupQRModal = __webpack_require__(57);
+var _shareSupQRModal = __webpack_require__(54);
 
 var _shareSupQRModal2 = _interopRequireDefault(_shareSupQRModal);
 
@@ -2674,6 +2555,7 @@ var SupplementCard = function (_React$Component) {
       var sup = this.props.sup;
 
       var headerCss = { backgroundColor: "aliceblue", color: "black" };
+      // const over = {overflow:"hidden"};
 
       var contents = Object.keys(sup).filter(function (key) {
         return key !== "Name" && key !== "Surname" && key !== "Authorized";
@@ -2684,7 +2566,7 @@ var SupplementCard = function (_React$Component) {
             { key: key },
             _react2.default.createElement(
               'div',
-              { className: 'collapsible-header', style: { color: "black" }, key: key },
+              { className: 'collapsible-header', style: { color: "black", overflow: "hidden" }, key: key },
               _react2.default.createElement(
                 'b',
                 null,
@@ -2895,8 +2777,9 @@ var SupplementCard = function (_React$Component) {
             _react2.default.createElement(
               'div',
               { className: 'card-action' },
-              _react2.default.createElement(_supplementBtns2.default, { isOwner: true, id: sup.Id }),
-              _react2.default.createElement(_supplementFab2.default, { mailModal: this.props.openShareByMail,
+              _react2.default.createElement(_supplementBtns2.default, { isOwner: !this.props.restricted, id: sup.Id }),
+              _react2.default.createElement(_supplementFab2.default, { isOwner: !this.props.restricted,
+                mailModal: this.props.openShareByMail,
                 qrModal: this.props.openShareByQR,
                 supId: sup.Id
               }),
@@ -2915,7 +2798,7 @@ var SupplementCard = function (_React$Component) {
 exports.default = SupplementCard;
 
 /***/ }),
-/* 56 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2934,21 +2817,21 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(4);
+var _reactRedux = __webpack_require__(3);
 
 var _reactMaterialize = __webpack_require__(1);
 
-var _supplementFab = __webpack_require__(9);
+var _supplementFab = __webpack_require__(10);
 
 var _supplementFab2 = _interopRequireDefault(_supplementFab);
 
-var _supplementBtns = __webpack_require__(10);
+var _supplementBtns = __webpack_require__(11);
 
 var _supplementBtns2 = _interopRequireDefault(_supplementBtns);
 
-var _editSupplementActions = __webpack_require__(13);
+var _editSupplementActions = __webpack_require__(12);
 
-var _supplementActions = __webpack_require__(20);
+var _supplementActions = __webpack_require__(19);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3060,7 +2943,7 @@ var ShareByMailModal = (_dec = (0, _reactRedux.connect)(function (store) {
 exports.default = ShareByMailModal;
 
 /***/ }),
-/* 57 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3079,25 +2962,25 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(4);
+var _reactRedux = __webpack_require__(3);
 
-var _svgInlineReact = __webpack_require__(58);
+var _svgInlineReact = __webpack_require__(55);
 
 var _svgInlineReact2 = _interopRequireDefault(_svgInlineReact);
 
 var _reactMaterialize = __webpack_require__(1);
 
-var _supplementFab = __webpack_require__(9);
+var _supplementFab = __webpack_require__(10);
 
 var _supplementFab2 = _interopRequireDefault(_supplementFab);
 
-var _supplementBtns = __webpack_require__(10);
+var _supplementBtns = __webpack_require__(11);
 
 var _supplementBtns2 = _interopRequireDefault(_supplementBtns);
 
-var _editSupplementActions = __webpack_require__(13);
+var _editSupplementActions = __webpack_require__(12);
 
-var _supplementActions = __webpack_require__(20);
+var _supplementActions = __webpack_require__(19);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3164,7 +3047,7 @@ var ShareByQRModal = (_dec = (0, _reactRedux.connect)(function (store) {
           _react2.default.createElement(
             _reactMaterialize.Col,
             { s: 6 },
-            _react2.default.createElement(_svgInlineReact2.default, { src: this.props.QR })
+            _react2.default.createElement(_svgInlineReact2.default, { style: { height: "7em" }, src: this.props.QR })
           ),
           _react2.default.createElement(
             _reactMaterialize.Col,
@@ -3243,13 +3126,13 @@ var ShareByQRModal = (_dec = (0, _reactRedux.connect)(function (store) {
 exports.default = ShareByQRModal;
 
 /***/ }),
-/* 58 */
+/* 55 */
 /***/ (function(module, exports) {
 
 module.exports = require("svg-inline-react");
 
 /***/ }),
-/* 59 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3270,9 +3153,9 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactMaterialize = __webpack_require__(1);
 
-var _reactRedux = __webpack_require__(4);
+var _reactRedux = __webpack_require__(3);
 
-var _editSupplementCard = __webpack_require__(60);
+var _editSupplementCard = __webpack_require__(57);
 
 var _editSupplementCard2 = _interopRequireDefault(_editSupplementCard);
 
@@ -3329,7 +3212,7 @@ var EditSup = (_dec = (0, _reactRedux.connect)(function (store) {
 exports.default = EditSup;
 
 /***/ }),
-/* 60 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3348,23 +3231,23 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(4);
+var _reactRedux = __webpack_require__(3);
 
 var _reactMaterialize = __webpack_require__(1);
 
-var _supplementFab = __webpack_require__(9);
+var _supplementFab = __webpack_require__(10);
 
 var _supplementFab2 = _interopRequireDefault(_supplementFab);
 
-var _supplementBtns = __webpack_require__(10);
+var _supplementBtns = __webpack_require__(11);
 
 var _supplementBtns2 = _interopRequireDefault(_supplementBtns);
 
-var _supplementModal = __webpack_require__(61);
+var _supplementModal = __webpack_require__(58);
 
 var _supplementModal2 = _interopRequireDefault(_supplementModal);
 
-var _editSupplementActions = __webpack_require__(13);
+var _editSupplementActions = __webpack_require__(12);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3401,7 +3284,7 @@ var EditSupplementCard = (_dec = (0, _reactRedux.connect)(function (store) {
   }, {
     key: 'remUsers',
     value: function remUsers(supId) {
-      this.props.dispatch((0, _editSupplementActions.remUsers)(this.props.usersToRem, supId));
+      this.props.dispatch((0, _editSupplementActions.remUsers)(supId, this.props.usersToRem));
     }
   }, {
     key: 'render',
@@ -3411,6 +3294,8 @@ var EditSupplementCard = (_dec = (0, _reactRedux.connect)(function (store) {
       var sup = this.props.sup;
 
       var authorized = sup.Authorized.map(function (user) {
+        return user.Email;
+      }).map(function (user) {
         return _react2.default.createElement(
           'div',
           { key: user, onClick: function onClick(e) {
@@ -3564,7 +3449,7 @@ var EditSupplementCard = (_dec = (0, _reactRedux.connect)(function (store) {
 exports.default = EditSupplementCard;
 
 /***/ }),
-/* 61 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3583,19 +3468,19 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(4);
+var _reactRedux = __webpack_require__(3);
 
 var _reactMaterialize = __webpack_require__(1);
 
-var _supplementFab = __webpack_require__(9);
+var _supplementFab = __webpack_require__(10);
 
 var _supplementFab2 = _interopRequireDefault(_supplementFab);
 
-var _supplementBtns = __webpack_require__(10);
+var _supplementBtns = __webpack_require__(11);
 
 var _supplementBtns2 = _interopRequireDefault(_supplementBtns);
 
-var _editSupplementActions = __webpack_require__(13);
+var _editSupplementActions = __webpack_require__(12);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3654,7 +3539,7 @@ var EditSupplementModal = (_dec = (0, _reactRedux.connect)(function (store) {
 exports.default = EditSupplementModal;
 
 /***/ }),
-/* 62 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3673,15 +3558,15 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(4);
+var _reactRedux = __webpack_require__(3);
 
 var _reactMaterialize = __webpack_require__(1);
 
-var _requestSupplementModal = __webpack_require__(63);
+var _requestSupplementModal = __webpack_require__(60);
 
 var _requestSupplementModal2 = _interopRequireDefault(_requestSupplementModal);
 
-var _requestSupplementActions = __webpack_require__(64);
+var _requestSupplementActions = __webpack_require__(61);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3692,12 +3577,13 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var RequestSupplementCard = (_dec = (0, _reactRedux.connect)(function (store) {
-  return { university: store.publish.university,
+  return { university: store.publish.univsersity,
     univId: store.publish.univId,
     email: store.publish.email,
     modal: store.publish.modal,
     eId: store.user.user.eid,
-    userName: store.user.user.firstName + " " + store.user.user.lastName
+    userName: store.user.user.firstName + " " + store.user.user.lastName,
+    dateOfBirth: store.user.user.dateOfBirth
   };
 }), _dec(_class = function (_React$Component) {
   _inherits(RequestSupplementCard, _React$Component);
@@ -3718,12 +3604,14 @@ var RequestSupplementCard = (_dec = (0, _reactRedux.connect)(function (store) {
     key: 'sendPubrequest',
     value: function sendPubrequest() {
       var university = this.props.university;
-      var userName = this.props.userName;
-      var eId = this.props.eId;
-      var universityId = this.props.universityId;
+      // let userName = this.props.userName;
+      // let eId = this.props.eId;
+      var universityId = this.props.univId;
       var email = this.props.email;
-
-      this.props.dispatch((0, _requestSupplementActions.requestPublication)(university, userName, eId, universityId, email));
+      // let dateOfBirth = this.props.dateOfBirth;
+      console.log(university, universityId, email);
+      // university,username,eID,universityId,email,date
+      this.props.dispatch((0, _requestSupplementActions.requestPublication)(university, universityId, email));
     }
   }, {
     key: 'updateUniversityId',
@@ -3861,7 +3749,7 @@ var RequestSupplementCard = (_dec = (0, _reactRedux.connect)(function (store) {
 exports.default = RequestSupplementCard;
 
 /***/ }),
-/* 63 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3880,19 +3768,19 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(4);
+var _reactRedux = __webpack_require__(3);
 
 var _reactMaterialize = __webpack_require__(1);
 
-var _supplementFab = __webpack_require__(9);
+var _supplementFab = __webpack_require__(10);
 
 var _supplementFab2 = _interopRequireDefault(_supplementFab);
 
-var _supplementBtns = __webpack_require__(10);
+var _supplementBtns = __webpack_require__(11);
 
 var _supplementBtns2 = _interopRequireDefault(_supplementBtns);
 
-var _editSupplementActions = __webpack_require__(13);
+var _editSupplementActions = __webpack_require__(12);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3951,7 +3839,7 @@ var RequestSupplementModal = (_dec = (0, _reactRedux.connect)(function (store) {
 exports.default = RequestSupplementModal;
 
 /***/ }),
-/* 64 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3965,19 +3853,32 @@ exports.updateUnivId = updateUnivId;
 exports.updateUniversity = updateUniversity;
 exports.updateEmail = updateEmail;
 
-var _axios = __webpack_require__(21);
+var _axios = __webpack_require__(20);
 
 var _axios2 = _interopRequireDefault(_axios);
 
+var _axiosRetry = __webpack_require__(21);
+
+var _axiosRetry2 = _interopRequireDefault(_axiosRetry);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function requestPublication(university, username, eID, universityId, email) {
+(0, _axiosRetry2.default)(_axios2.default, { retries: 3 });
+// ES6
+function requestPublication(university, universityId, email) {
+     /*
+     let universityName = req.body.uniName;
+     let universityId = req.body.univId; //user univesrity ID (e.g. ge01117)
+     let userEmail = req.body.email;
+      */
+
      return function (dispatch) {
           console.log("wil dispatch");
           dispatch({ type: "PUBLISH_MODAL_OPEN" });
           dispatch({ type: "REQUEST_PUBLISH_SENT" });
           $('#modal1').modal('open');
-          _axios2.default.get("http://rest.learncode.academy/api/test123/tweets").then(function (response) {
+          _axios2.default.post("/back/supplement/rest/request", { uniName: university, email: email,
+               univId: universityId }).then(function (response) {
                dispatch({ type: "REQUEST_PUBLISH_FULLFILED", payload: response.data });
                dispatch({ type: "PUBLISH_MODAL_CLOSE" });
                $('#modal1').modal('close');
@@ -4000,7 +3901,78 @@ function updateEmail(mail) {
 }
 
 /***/ }),
-/* 65 */
+/* 62 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactMaterialize = __webpack_require__(1);
+
+var _reactRouterDom = __webpack_require__(9);
+
+var _sideNav = __webpack_require__(13);
+
+var _sideNav2 = _interopRequireDefault(_sideNav);
+
+var _navBar = __webpack_require__(25);
+
+var _navBar2 = _interopRequireDefault(_navBar);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ServerLoading = function (_React$Component) {
+  _inherits(ServerLoading, _React$Component);
+
+  function ServerLoading() {
+    _classCallCheck(this, ServerLoading);
+
+    return _possibleConstructorReturn(this, (ServerLoading.__proto__ || Object.getPrototypeOf(ServerLoading)).apply(this, arguments));
+  }
+
+  _createClass(ServerLoading, [{
+    key: 'render',
+
+
+    //// <NavigationBar user={user}/>
+    value: function render() {
+      var user = this.props.user;
+      return _react2.default.createElement(
+        'div',
+        { className: 'container', style: { marginTop: "2em" } },
+        _react2.default.createElement(
+          'div',
+          { className: 'row', style: { marginLeft: "50%" } },
+          _react2.default.createElement(_reactMaterialize.Preloader, { size: 'big', flashing: true })
+        )
+      );
+    }
+  }]);
+
+  return ServerLoading;
+}(_react2.default.Component);
+
+exports.default = ServerLoading;
+
+/***/ }),
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4019,11 +3991,11 @@ exports.default = function (_ref) {
       preloadedState = _ref.preloadedState,
       css = _ref.css;
 
-  return '\n    <!DOCTYPE html>\n    <html lang="en">\n    <head>\n    \t<!-- Import Google Icon Font -->\n    \t<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">\n    \t<!-- Import materialize.css -->\n    \t<link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css" rel="stylesheet">\n      <style type="text/css">' + [].concat(_toConsumableArray(css)).join('') + '</style>\n      <title>Diploma Supplement</title>\n    </head>\n      <body>\n        <!-- Import jQuery before materialize.js -->\n      \t<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>\n      \t<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>\n      \t<!-- And then your bundled js -->\n         <div id="root">' + body + '</div>\n         <script>\n           // WARNING: See the following for security issues around embedding JSON in HTML:\n           // http://redux.js.org/docs/recipes/ServerRendering.html#security-considerations\n           window.__PRELOADED_STATE__ = ' + JSON.stringify(preloadedState).replace(/</g, '\\u003c') + '\n         </script>\n        <script src="/main.bundle.js"></script>\n        <link href="/public/navbar.css" rel="stylesheet">\n      </body>\n    </html>\n\n  ';
+  return '\n    <!DOCTYPE html>\n    <html lang="en">\n    <head>\n      <meta charset="utf-8">\n      <meta http-equiv="X-UA-Compatible" content="IE=edge">\n      <meta name="viewport" content="width=device-width, initial-scale=1">\n\n    \t<!-- Import Google Icon Font -->\n    \t<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">\n    \t<!-- Import materialize.css -->\n    \t<link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css" rel="stylesheet">\n      <style type="text/css">' + [].concat(_toConsumableArray(css)).join('') + '</style>\n      <title>Diploma Supplement</title>\n    </head>\n      <body>\n        <!-- Import jQuery before materialize.js -->\n      \t<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>\n      \t<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>\n      \t<!-- And then your bundled js -->\n         <div id="root">' + body + '</div>\n         <script>\n           // WARNING: See the following for security issues around embedding JSON in HTML:\n           // http://redux.js.org/docs/recipes/ServerRendering.html#security-considerations\n           window.__PRELOADED_STATE__ = ' + JSON.stringify(preloadedState).replace(/</g, '\\u003c') + '\n         </script>\n        <script src="/main.bundle.js"></script>\n        <link href="/public/navbar.css" rel="stylesheet">\n      </body>\n    </html>\n\n  ';
 };
 
 /***/ }),
-/* 66 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4033,19 +4005,19 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _redux = __webpack_require__(25);
+var _redux = __webpack_require__(27);
 
-var _reduxLogger = __webpack_require__(67);
+var _reduxLogger = __webpack_require__(65);
 
-var _reduxThunk = __webpack_require__(68);
+var _reduxThunk = __webpack_require__(66);
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-var _reduxPromiseMiddleware = __webpack_require__(69);
+var _reduxPromiseMiddleware = __webpack_require__(67);
 
 var _reduxPromiseMiddleware2 = _interopRequireDefault(_reduxPromiseMiddleware);
 
-var _reducers = __webpack_require__(70);
+var _reducers = __webpack_require__(68);
 
 var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -4056,25 +4028,25 @@ var middleware = (0, _redux.applyMiddleware)(_reduxThunk2.default, _reduxLogger.
 exports.default = (0, _redux.createStore)(_reducers2.default, middleware);
 
 /***/ }),
-/* 67 */
+/* 65 */
 /***/ (function(module, exports) {
 
 module.exports = require("redux-logger");
 
 /***/ }),
-/* 68 */
+/* 66 */
 /***/ (function(module, exports) {
 
 module.exports = require("redux-thunk");
 
 /***/ }),
-/* 69 */
+/* 67 */
 /***/ (function(module, exports) {
 
 module.exports = require("redux-promise-middleware");
 
 /***/ }),
-/* 70 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4084,37 +4056,43 @@ Object.defineProperty(exports, "__esModule", {
                   value: true
 });
 
-var _redux = __webpack_require__(25);
+var _redux = __webpack_require__(27);
 
-var _userReducer = __webpack_require__(71);
+var _userReducer = __webpack_require__(69);
 
 var _userReducer2 = _interopRequireDefault(_userReducer);
 
-var _supplementsReducer = __webpack_require__(72);
+var _supplementsReducer = __webpack_require__(70);
 
 var _supplementsReducer2 = _interopRequireDefault(_supplementsReducer);
 
-var _editSupReducer = __webpack_require__(73);
+var _editSupReducer = __webpack_require__(71);
 
 var _editSupReducer2 = _interopRequireDefault(_editSupReducer);
 
-var _requestPubReducer = __webpack_require__(74);
+var _requestPubReducer = __webpack_require__(72);
 
 var _requestPubReducer2 = _interopRequireDefault(_requestPubReducer);
 
+var _invitesReducer = __webpack_require__(73);
+
+var _invitesReducer2 = _interopRequireDefault(_invitesReducer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import tweets from "./tweetReducer"
+// import sideNav from "./sideNavReducer"
 exports.default = (0, _redux.combineReducers)({
                   user: _userReducer2.default,
                   sups: _supplementsReducer2.default,
                   edit: _editSupReducer2.default,
-                  publish: _requestPubReducer2.default
+                  publish: _requestPubReducer2.default,
+                  invite: _invitesReducer2.default
 });
-// import sideNav from "./sideNavReducer"
+
+// import tweets from "./tweetReducer"
 
 /***/ }),
-/* 71 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4174,7 +4152,7 @@ function reducer() {
 }
 
 /***/ }),
-/* 72 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4204,7 +4182,7 @@ function reducer() {
     switch (action.type) {
         case "GET_SUP_FULLFILED":
             {
-                return _extends({}, state, { supplements: action.payload.DS, fetching: false });
+                return _extends({}, state, { supplements: action.payload, fetching: false });
             }
         case "GET_SUP_REJECTED":
             {
@@ -4253,7 +4231,7 @@ function reducer() {
 }
 
 /***/ }),
-/* 73 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4311,7 +4289,7 @@ function reducer() {
 }
 
 /***/ }),
-/* 74 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4329,7 +4307,7 @@ function reducer() {
     modal: false,
     univId: "",
     email: "",
-    univsersity: "",
+    univsersity: "UAegean",
     sendingRequest: false
   };
   var action = arguments[1];
@@ -4373,55 +4351,560 @@ function reducer() {
 }
 
 /***/ }),
-/* 75 */
+/* 73 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+exports.default = reducer;
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+function reducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
+    supplements: [],
+    invite: null,
+    error: null,
+    fetching: false,
+    message: "",
+    validate: false,
+    code: ""
+  };
+  var action = arguments[1];
+
+
+  switch (action.type) {
+    case "GET_INV":
+      {
+        return _extends({}, state, { fetching: true, message: "Fetching Invite..." });
+      }
+    case "GET_INV_FULLFILED":
+      {
+        return _extends({}, state, { fetching: false, invite: action.payload, message: "" });
+      }
+    case "GET_INV_SUP":
+      {
+        return _extends({}, state, { fetching: true, message: "Fetching supplement..." });
+      }
+    case "GET_INV_SUP_FULLFILED":
+      {
+        return _extends({}, state, { fetching: false, message: "",
+          supplements: [].concat(_toConsumableArray(state.supplements), [action.payload]) });
+      }
+    case "SEND_VAL_CODE":
+      {
+        return _extends({}, state, { fetching: true, message: "Sending Validation code..." });
+      }
+    case "SEND_VAL_CODE_FULLFILED":
+      {
+        return _extends({}, state, { fetching: false, message: "", validate: true });
+      }
+    case "GET_INV_REJECTED":
+      {
+        return _extends({}, state, { fetching: false, message: "", validate: false, error: action.payload });
+      }
+    case "UPDATE_CODE":
+      {
+        return _extends({}, state, { code: action.payload });
+      }
+    case "SEND_UPDATE_CODE":
+      {
+        return _extends({}, state, { fetching: true, mesage: "Validating Invitation..." });
+      }
+  }
+  return state;
+}
+
+/***/ }),
+/* 74 */
 /***/ (function(module, exports) {
 
 module.exports = require("body-parser");
 
 /***/ }),
-/* 76 */
+/* 75 */
 /***/ (function(module, exports) {
 
 module.exports = require("express-session");
 
 /***/ }),
-/* 77 */
+/* 76 */
 /***/ (function(module, exports) {
 
 module.exports = require("session-file-store");
 
 /***/ }),
+/* 77 */
+/***/ (function(module, exports) {
+
+module.exports = require("connect-timeout");
+
+/***/ }),
 /* 78 */
 /***/ (function(module, exports) {
 
-module.exports = require("log4js");
+module.exports = require("cookie-parser");
 
 /***/ }),
 /* 79 */
 /***/ (function(module, exports) {
 
-module.exports = require("fs-extra");
+module.exports = require("morgan");
 
 /***/ }),
 /* 80 */
 /***/ (function(module, exports) {
 
-module.exports = require("fabric-client/lib/User.js");
+module.exports = require("https");
 
 /***/ }),
 /* 81 */
 /***/ (function(module, exports) {
 
-module.exports = require("crypto");
+module.exports = require("njwt");
 
 /***/ }),
 /* 82 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/*jslint es6,  node:true */
+
+
+var express = __webpack_require__(14);
+var router = express.Router();
+var bcrypt = __webpack_require__(22);
+var jwt = __webpack_require__(15);
+var secretKey = process.env.SECRET_KEY ? process.env.SECRET_KEY : "testSecret"; //the secret comes from an enviroment variable
+var request = __webpack_require__(23);
+var authorizeAll = __webpack_require__(5).authorizeAll;
+var authorizeAdmin = __webpack_require__(5).authorizeAdmin;
+var getUserDetails = __webpack_require__(5).userDetailsFromToken;
+var fs = __webpack_require__(4);
+var path = __webpack_require__(2);
+
+module.exports = router;
+
+router.post('/register', function (req, res) {
+  var userJSON = req.body; //in the body of the HTTP request we should have received a json here
+  var hashedPass = bcrypt.hashSync(req.body.password, 10);
+  userJSON.password = hashedPass;
+  //save the user in the db...
+  return res.json(userJSON);
+});
+
+router.get('/loginSuccess', function (req, res) {
+  var cookie = req.cookies.dsHash;
+  console.log("dsHashCookie: " + cookie);
+  if (cookie === undefined) {
+    res.redirect(303, "/");
+  } else {
+    res.redirect(303, "/supplement/view/invite/" + cookie);
+  }
+});
+
+router.get('/loginSuccessReact', function (req, res) {
+  var cookie = req.cookies.inviteHash;
+  console.log("dsHashCookie: " + cookie);
+  if (cookie === undefined) {
+    res.redirect(303, "/app");
+  } else {
+    res.redirect(303, "/app/invite/" + cookie);
+  }
+});
+
+// router.get('/authenticate/:token', (req,res) =>{
+//   let token = req.params.token;
+//   //get user details form eIDAS webapp based on token
+//   let siteURL = 'http://community.mastihawonder.com:8080/testISSsp-0.0.1-SNAPSHOT/'
+//   +'user?token=' + token;
+//
+//   let eIDASResponsePromise = new Promise( (resolve,reject) =>{
+//     request.get(siteURL,function (error, response, body) {
+//         try{
+//           let remoteResponse = {
+//               user:  JSON.parse(body),
+//               status : response.statusCode
+//           }
+//           resolve(remoteResponse);
+//         }catch(err){
+//           reject(err);
+//         }
+//     });
+//   });
+//
+//   eIDASResponsePromise.then( response =>{
+//
+//       //read the private key:
+//       let certName = "private_key.pem";
+//       let keyPath = path.join(__dirname, '..','..', 'resources',  certName);
+//       let cert = fs.readFileSync(keyPath);
+//
+//       if(response.status == 200 && response.user && response.user.eid && response.user.userName){
+//         // console.log(response.user);
+//         let  claims = {
+//           sub: response.user,
+//           iss: 'https://mytestapp.com',
+//           scope: "self, admins"
+//         }
+//         let access_token = jwt.sign(claims,secretKey); //
+//         // let access_token = jwt.sign(claims,cert, { algorithm: 'RS512'});
+//         // console.log(access_token);
+//         res.cookie('access_token',access_token,{
+//           httpOnly: true
+//           // secure: true      // for your production environment
+//         });
+//         // res.json({"result":"ok"});
+//
+//         let cookie = req.cookies.dsHash;
+//         console.log("dsHashCookie: " + cookie);
+//         if (cookie === undefined)
+//         {
+//           res.redirect(303,"/supplement/view");
+//         }else{
+//           res.redirect(303,"/supplement/view/invite/"+cookie);
+//         }
+//
+//       }else{
+//         res.json({"error_resp": response});
+//       }
+//   }).catch(err =>{
+//         res.json({"error_int":err.toString()});
+//   });
+//
+//
+//
+// });
+
+
+router.get('/logout', function (req, res) {
+  req.session.destroy(function (err) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.redirect(303, "/login/landing");
+    }
+  });
+});
+
+/***/ }),
+/* 83 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/*jslint es6,  node:true */
+
+
+var express = __webpack_require__(14);
+var router = express.Router();
+var bcrypt = __webpack_require__(22);
+var jwt = __webpack_require__(15);
+var secretKey = process.env.SECRET_KEY ? process.env.SECRET_KEY : "testSecret"; //the secret comes from an enviroment variable
+var request = __webpack_require__(23);
+var authorizeAll = __webpack_require__(5).authorizeAll;
+var authorizeAdmin = __webpack_require__(5).authorizeAdmin;
+var getUserDetails = __webpack_require__(5).userDetailsFromToken;
+var uuid = __webpack_require__(29);
+
+module.exports = router;
+
+router.get(['/', '/home'], authorizeAll, function (req, res) {
+  getUserDetails(req, res).then(function (details) {
+    res.render('stdMainView', { title: 'Publish a new Diploma Supplement',
+      message: 'Welcome user: ' + details.eid,
+      eID: details.eid,
+      userName: details.userName,
+      firstName: details.firstName,
+      lastName: details.familyName });
+  }).catch(function (err) {
+    res.render('landing', { title: 'Login', message: 'Login to the DiplomaSupplement WebApp' });
+  });
+});
+
+router.get('/landing', function (req, res) {
+  res.render('landing', { title: 'Login', message: 'Login to the DiplomaSupplement WebApp' });
+});
+
+router.get('/eIDAS', function (req, res) {
+  if (!req.session.userType && !req.session.eID) {
+    // res.redirect(303, "http://84.205.248.180/ISSPlus/ValidateToken?t="+ uuid()+"&sp=sp1&cc=CA&saml=eIDAS");
+    res.redirect(303, "http://138.68.103.237:8090/login");
+  }
+});
+
+/***/ }),
+/* 84 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/*jslint es6,  node:true */
+
+
+var express = __webpack_require__(14);
+var router = express.Router();
+var request = __webpack_require__(23);
+var authorizeAll = __webpack_require__(5).authorizeAll;
+var authorizeAdmin = __webpack_require__(5).authorizeAdmin;
+var getUserDetails = __webpack_require__(5).userDetailsFromToken;
+var basic = __webpack_require__(85);
+var supUtils = __webpack_require__(96);
+var emailUtil = __webpack_require__(99);
+var randomstring = __webpack_require__(103);
+var jwt = __webpack_require__(15);
+var secretKey = process.env.SECRET_KEY ? process.env.SECRET_KEY : "testSecret"; //the secret comes from an enviroment variable
+var stripchar = __webpack_require__(28).StripChar;
+var uuid = __webpack_require__(29);
+
+/* configuration */
+var config = __webpack_require__(7);
+var peer = config.peer;
+var peerAddr = config.peerAddress;
+var channel = config.channelName;
+var org = config.org;
+var chaincode = config.chaincode;
+
+module.exports = router;
+
+/**************** views ******************************/
+
+router.get('/view', authorizeAll, function (req, res) {
+  var userDetails = getUserDetails(req, res);
+  userDetails.then(function (details) {
+    var userEid = details.eid;
+    console.log(details);
+    console.log("\nSupplementsRouts.js /view :: userEid" + userEid);
+    res.render('viewSupplements', { title: 'Published Supplements',
+      message: 'Welcome user: ' + details.userName,
+      userType: "Student",
+      supplements: null,
+      eID: userEid,
+      userName: details.userName,
+      firstName: details.firstName,
+      lastName: details.familyName });
+  }).catch(function (err) {
+    res.render('errorMessage', { title: 'Ooops... an error occured!',
+      message: err,
+      stdId: req.session.eID });
+  });;
+});
+
+/*
+  Allows the user to view a DS based on an invite.
+  If the user is not logged in they are asked to login.
+  If they are logged in they check the inv:
+    a) If it is finalized then the id of the user is checked against the allowed set
+    b) else, a validation code is sent to the user.
+*/
+router.get('/view/invite/:inviteHash', function (req, res) {
+  var token = req.cookies.access_token;
+  var inviteHash = req.params.inviteHash;
+  jwt.verify(token, "secret", { algorithms: ['HS256'] }, function (err, token) {
+    if (err) {
+      res.cookie('dsHash', inviteHash, { maxAge: 900000, httpOnly: true });
+      res.render('loginEIDAS', { title: 'Login with eIDAS',
+        message: 'Login with the eIDAS system to view this Diploma Supplement',
+        token: uuid() });
+      console.log(err);
+    } else {
+      //jwt token found.
+      getUserDetails(req, res).then(function (details) {
+        var userEid = details.eid;
+        res.render('viewByInvite', { title: 'View DS by Invite',
+          message: 'Request Diploma Supplement Access',
+          token: "",
+          invHash: inviteHash });
+      });
+    }
+  });
+});
+
+router.get('/edit/:supId', authorizeAll, function (req, res) {
+  var userDetails = getUserDetails(req, res);
+  var supId = req.params.supId;
+  userDetails.then(function (details) {
+    var userEid = details.eid;
+    basic.queryChaincode(peer, channel, chaincode, [supId, userEid], "getSupplementById", userEid, org).then(function (resp) {
+      if (JSON.parse(resp).Owner === userEid) {
+        res.render('editSupplement', { title: 'Edit Supplement',
+          message: 'Welcome user: ' + details.userName,
+          userType: "Student",
+          supplement: JSON.parse(resp),
+          eID: userEid,
+          userName: details.userName,
+          firstName: details.firstName,
+          lastName: details.familyName });
+      } else {
+        res.render('errorMessage', { title: 'Ooops... an error occured!',
+          message: "You can only edit supplements you own",
+          stdId: "" });
+      }
+    }).catch(function (err) {
+      res.render('errorMessage', { title: 'Ooops... an error occured!',
+        message: error.toString(),
+        stdId: "" });
+    });
+  });
+});
+
+router.get('/request', authorizeAll, function (req, res) {
+  getUserDetails(req, res).then(function (details) {
+    res.render('requestPublication', { title: 'Request DS Publication',
+      message: "",
+      eID: details.eid,
+      userName: details.userName,
+      firstName: details.firstName,
+      lastName: details.familyName,
+      dateOfBirth: details.dateOfBirth,
+      eIDHash: details.eid
+    });
+  }).catch(function (err) {
+    console.log(err);
+  });
+});
+
+/***/ }),
+/* 85 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/*jslint es6,  node:true */
+
+
+var path = __webpack_require__(2);
+var fs = __webpack_require__(4);
+var util = __webpack_require__(6);
+var config = __webpack_require__(7);
+var helper = __webpack_require__(8);
+var logger = helper.getLogger('install-chaincode');
+var tx_id = null;
+
+var join = __webpack_require__(91);
+var createChannel = __webpack_require__(92);
+var instantiate = __webpack_require__(93);
+var query = __webpack_require__(94);
+var invoke = __webpack_require__(95);
+var evHelper = __webpack_require__(30);
+
+exports.installChaincode = function (peers, chaincodeName, chaincodePath, chaincodeVersion, username, org) {
+  console.log('\n============ Install chaincode on organizations ============\n');
+  helper.setupChaincodeDeploy();
+  var channel = helper.getChannelForOrg(org);
+  var client = helper.getClientForOrg(org);
+
+  return helper.getOrgAdmin(org).then(function (user) {
+    var request = {
+      targets: helper.newPeers(peers),
+      chaincodePath: chaincodePath,
+      chaincodeId: chaincodeName,
+      chaincodeVersion: chaincodeVersion
+    };
+    console.log("test.js --> installChaincode");
+    console.log(request);
+    return client.installChaincode(request);
+  }, function (err) {
+    console.log('Failed to enroll user \'' + username + '\'. ' + err);
+    throw new Error('Failed to enroll user \'' + username + '\'. ' + err);
+  }).then(function (results) {
+    var proposalResponses = results[0];
+    var proposal = results[1];
+    var all_good = true;
+    for (var i in proposalResponses) {
+      var one_good = false;
+      if (proposalResponses && proposalResponses[0].response && proposalResponses[0].response.status === 200) {
+        one_good = true;
+        console.log('install proposal was good');
+      } else {
+        console.log('install proposal was bad');
+      }
+      all_good = all_good & one_good;
+    }
+    if (all_good) {
+      console.log(util.format('Successfully sent install Proposal and received ProposalResponse: Status - %s', proposalResponses[0].response.status));
+      console.log('\nSuccessfully Installed chaincode on organization ' + org + '\n');
+      return 'Successfully Installed chaincode on organization ' + org;
+    } else {
+      console.log('Failed to send install Proposal or receive valid response. Response null or status is not 200. exiting...');
+      return 'Failed to send install Proposal or receive valid response. Response null or status is not 200. exiting...';
+    }
+  }, function (err) {
+    console.log( true ? err.stack : err);
+    throw new Error( true ? err.stack : err);
+  });
+};
+
+exports.createChannel = function () {
+  createChannel.createChannel("mychannel", "../artifacts/channel/channel.tx", "nikos2", "org1").then(function (resp) {
+    console.log("=============CHANEL CREATED===================");
+  }).catch(function (err) {
+    console.log(err);
+  });
+};
+
+exports.joinAllOrgsOnChannel = function (chanelName) {
+  join.joinChannel(chanelName, ["localhost:7051"], "nikos2", "org1").then(function (resp) {
+    console.log("=============Peer localhost:7051 JOINED===================");
+  }).then(function (resp) {
+    join.joinChannel(chanelName, ["localhost:8051"], "nikos2", "org2");
+    console.log("=============Peer localhost:8051 JOINED===================");
+  }).catch(function (err) {
+    console.log(err);
+  });
+};
+
+exports.instantiateChaincode = function (channelName, chaincodeName, chaincodeVersion, functionName, args, username, org) {
+  return instantiate.instantiateChaincode(channelName, chaincodeName, chaincodeVersion, functionName, args, username, org);
+};
+
+exports.queryChaincode = function (peer, channelName, chaincodeName, args, fcn, username, org) {
+  return query.queryChaincode(peer, channelName, chaincodeName, args, fcn, username, org);
+};
+
+/**
+  Invoke transaction and listen to custom DS events
+**/
+exports.invokeChaincode = function (peersUrls, channelName, chaincodeName, fcn, args, username, org) {
+  return invoke.invokeChaincode(peersUrls, channelName, chaincodeName, fcn, args, username, org, evHelper.txDetectionEvent);
+};
+
+/***/ }),
+/* 86 */
+/***/ (function(module, exports) {
+
+module.exports = require("log4js");
+
+/***/ }),
+/* 87 */
+/***/ (function(module, exports) {
+
+module.exports = require("fs-extra");
+
+/***/ }),
+/* 88 */
+/***/ (function(module, exports) {
+
+module.exports = require("fabric-client/lib/User.js");
+
+/***/ }),
+/* 89 */
+/***/ (function(module, exports) {
+
+module.exports = require("crypto");
+
+/***/ }),
+/* 90 */
 /***/ (function(module, exports) {
 
 module.exports = require("fabric-ca-client");
 
 /***/ }),
-/* 83 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4442,15 +4925,15 @@ module.exports = require("fabric-ca-client");
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-var util = __webpack_require__(7);
-var path = __webpack_require__(3);
-var fs = __webpack_require__(5);
+var util = __webpack_require__(6);
+var path = __webpack_require__(2);
+var fs = __webpack_require__(4);
 
-var Peer = __webpack_require__(16);
-var EventHub = __webpack_require__(17);
+var Peer = __webpack_require__(17);
+var EventHub = __webpack_require__(18);
 var tx_id = null;
 var nonce = null;
-var config = __webpack_require__(6);
+var config = __webpack_require__(7);
 var helper = __webpack_require__(8);
 var logger = helper.getLogger('Join-Channel');
 //helper.hfc.addConfigFile(path.join(__dirname, 'network-config.json'));
@@ -4566,7 +5049,7 @@ var joinChannel = function joinChannel(channelName, peers, username, org) {
 exports.joinChannel = joinChannel;
 
 /***/ }),
-/* 84 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4587,10 +5070,10 @@ exports.joinChannel = joinChannel;
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-var util = __webpack_require__(7);
-var fs = __webpack_require__(5);
-var path = __webpack_require__(3);
-var config = __webpack_require__(6);
+var util = __webpack_require__(6);
+var fs = __webpack_require__(4);
+var path = __webpack_require__(2);
+var config = __webpack_require__(7);
 var helper = __webpack_require__(8);
 var logger = helper.getLogger('Create-Channel');
 //Attempt to send a request to the orderer with the sendCreateChain method
@@ -4646,7 +5129,7 @@ var createChannel = function createChannel(channelName, channelConfigPath, usern
 exports.createChannel = createChannel;
 
 /***/ }),
-/* 85 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4667,13 +5150,13 @@ exports.createChannel = createChannel;
  */
 
 
-var path = __webpack_require__(3);
-var fs = __webpack_require__(5);
-var util = __webpack_require__(7);
-var hfc = __webpack_require__(15);
-var Peer = __webpack_require__(16);
-var EventHub = __webpack_require__(17);
-var config = __webpack_require__(6);
+var path = __webpack_require__(2);
+var fs = __webpack_require__(4);
+var util = __webpack_require__(6);
+var hfc = __webpack_require__(16);
+var Peer = __webpack_require__(17);
+var EventHub = __webpack_require__(18);
+var config = __webpack_require__(7);
 var helper = __webpack_require__(8);
 var logger = helper.getLogger('instantiate-chaincode');
 hfc.addConfigFile(path.join(__dirname, 'network-config.json'));
@@ -4795,7 +5278,7 @@ var instantiateChaincode = function instantiateChaincode(channelName, chaincodeN
 exports.instantiateChaincode = instantiateChaincode;
 
 /***/ }),
-/* 86 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4816,13 +5299,13 @@ exports.instantiateChaincode = instantiateChaincode;
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-var path = __webpack_require__(3);
-var fs = __webpack_require__(5);
-var util = __webpack_require__(7);
-var hfc = __webpack_require__(15);
-var Peer = __webpack_require__(16);
-var EventHub = __webpack_require__(17);
-var config = __webpack_require__(6);
+var path = __webpack_require__(2);
+var fs = __webpack_require__(4);
+var util = __webpack_require__(6);
+var hfc = __webpack_require__(16);
+var Peer = __webpack_require__(17);
+var EventHub = __webpack_require__(18);
+var config = __webpack_require__(7);
 var helper = __webpack_require__(8);
 var logger = helper.getLogger('Query');
 
@@ -5066,7 +5549,7 @@ exports.getInstalledChaincodes = getInstalledChaincodes;
 exports.getChannels = getChannels;
 
 /***/ }),
-/* 87 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5087,18 +5570,18 @@ exports.getChannels = getChannels;
  */
 
 
-var path = __webpack_require__(3);
-var fs = __webpack_require__(5);
-var util = __webpack_require__(7);
-var hfc = __webpack_require__(15);
-var Peer = __webpack_require__(16);
-var config = __webpack_require__(6);
+var path = __webpack_require__(2);
+var fs = __webpack_require__(4);
+var util = __webpack_require__(6);
+var hfc = __webpack_require__(16);
+var Peer = __webpack_require__(17);
+var config = __webpack_require__(7);
 var helper = __webpack_require__(8);
 var logger = helper.getLogger('invoke-chaincode');
-var EventHub = __webpack_require__(17);
+var EventHub = __webpack_require__(18);
 hfc.addConfigFile(path.join(__dirname, 'network-config.json'));
 var ORGS = hfc.getConfigSetting('network-config');
-var evHelper = __webpack_require__(26);
+var evHelper = __webpack_require__(30);
 
 /**
 	@param  eventHandler, an OPTIONAL function, that handles the custom events
@@ -5234,497 +5717,33 @@ var invokeChaincode = function invokeChaincode(peersUrls, channelName, chaincode
 exports.invokeChaincode = invokeChaincode;
 
 /***/ }),
-/* 88 */
-/***/ (function(module, exports) {
-
-module.exports = require("connect-timeout");
-
-/***/ }),
-/* 89 */
-/***/ (function(module, exports) {
-
-module.exports = require("cookie-parser");
-
-/***/ }),
-/* 90 */
-/***/ (function(module, exports) {
-
-module.exports = require("morgan");
-
-/***/ }),
-/* 91 */
-/***/ (function(module, exports) {
-
-module.exports = require("https");
-
-/***/ }),
-/* 92 */
-/***/ (function(module, exports) {
-
-module.exports = require("njwt");
-
-/***/ }),
-/* 93 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/*jslint es6,  node:true */
-
-
-var express = __webpack_require__(11);
-var router = express.Router();
-var bcrypt = __webpack_require__(23);
-var jwt = __webpack_require__(18);
-var secretKey = process.env.SECRET_KEY ? process.env.SECRET_KEY : "testSecret"; //the secret comes from an enviroment variable
-var request = __webpack_require__(14);
-var authorizeAll = __webpack_require__(2).authorizeAll;
-var authorizeAdmin = __webpack_require__(2).authorizeAdmin;
-var getUserDetails = __webpack_require__(2).userDetailsFromToken;
-var fs = __webpack_require__(5);
-var path = __webpack_require__(3);
-
-module.exports = router;
-
-router.post('/register', function (req, res) {
-  var userJSON = req.body; //in the body of the HTTP request we should have received a json here
-  var hashedPass = bcrypt.hashSync(req.body.password, 10);
-  userJSON.password = hashedPass;
-  //save the user in the db...
-  return res.json(userJSON);
-});
-
-router.get('/loginSuccess', function (req, res) {
-  var cookie = req.cookies.dsHash;
-  console.log("dsHashCookie: " + cookie);
-  if (cookie === undefined) {
-    res.redirect(303, "/");
-  } else {
-    res.redirect(303, "/supplement/view/invite/" + cookie);
-  }
-});
-
-// router.get('/authenticate/:token', (req,res) =>{
-//   let token = req.params.token;
-//   //get user details form eIDAS webapp based on token
-//   let siteURL = 'http://community.mastihawonder.com:8080/testISSsp-0.0.1-SNAPSHOT/'
-//   +'user?token=' + token;
-//
-//   let eIDASResponsePromise = new Promise( (resolve,reject) =>{
-//     request.get(siteURL,function (error, response, body) {
-//         try{
-//           let remoteResponse = {
-//               user:  JSON.parse(body),
-//               status : response.statusCode
-//           }
-//           resolve(remoteResponse);
-//         }catch(err){
-//           reject(err);
-//         }
-//     });
-//   });
-//
-//   eIDASResponsePromise.then( response =>{
-//
-//       //read the private key:
-//       let certName = "private_key.pem";
-//       let keyPath = path.join(__dirname, '..','..', 'resources',  certName);
-//       let cert = fs.readFileSync(keyPath);
-//
-//       if(response.status == 200 && response.user && response.user.eid && response.user.userName){
-//         // console.log(response.user);
-//         let  claims = {
-//           sub: response.user,
-//           iss: 'https://mytestapp.com',
-//           scope: "self, admins"
-//         }
-//         let access_token = jwt.sign(claims,secretKey); //
-//         // let access_token = jwt.sign(claims,cert, { algorithm: 'RS512'});
-//         // console.log(access_token);
-//         res.cookie('access_token',access_token,{
-//           httpOnly: true
-//           // secure: true      // for your production environment
-//         });
-//         // res.json({"result":"ok"});
-//
-//         let cookie = req.cookies.dsHash;
-//         console.log("dsHashCookie: " + cookie);
-//         if (cookie === undefined)
-//         {
-//           res.redirect(303,"/supplement/view");
-//         }else{
-//           res.redirect(303,"/supplement/view/invite/"+cookie);
-//         }
-//
-//       }else{
-//         res.json({"error_resp": response});
-//       }
-//   }).catch(err =>{
-//         res.json({"error_int":err.toString()});
-//   });
-//
-//
-//
-// });
-
-
-router.get('/logout', function (req, res) {
-  req.session.destroy(function (err) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.redirect(303, "/login/landing");
-    }
-  });
-});
-
-/***/ }),
-/* 94 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/*jslint es6,  node:true */
-
-
-var express = __webpack_require__(11);
-var router = express.Router();
-var bcrypt = __webpack_require__(23);
-var jwt = __webpack_require__(18);
-var secretKey = process.env.SECRET_KEY ? process.env.SECRET_KEY : "testSecret"; //the secret comes from an enviroment variable
-var request = __webpack_require__(14);
-var authorizeAll = __webpack_require__(2).authorizeAll;
-var authorizeAdmin = __webpack_require__(2).authorizeAdmin;
-var getUserDetails = __webpack_require__(2).userDetailsFromToken;
-var uuid = __webpack_require__(28);
-
-module.exports = router;
-
-router.get(['/', '/home'], authorizeAll, function (req, res) {
-  getUserDetails(req, res).then(function (details) {
-    res.render('stdMainView', { title: 'Publish a new Diploma Supplement',
-      message: 'Welcome user: ' + details.eid,
-      eID: details.eid,
-      userName: details.userName,
-      firstName: details.firstName,
-      lastName: details.familyName });
-  }).catch(function (err) {
-    res.render('landing', { title: 'Login', message: 'Login to the DiplomaSupplement WebApp' });
-  });
-});
-
-router.get('/landing', function (req, res) {
-  res.render('landing', { title: 'Login', message: 'Login to the DiplomaSupplement WebApp' });
-});
-
-router.get('/eIDAS', function (req, res) {
-  if (!req.session.userType && !req.session.eID) {
-    // res.redirect(303, "http://84.205.248.180/ISSPlus/ValidateToken?t="+ uuid()+"&sp=sp1&cc=CA&saml=eIDAS");
-    res.redirect(303, "http://138.68.103.237:8090/login");
-  }
-});
-
-/***/ }),
-/* 95 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/*jslint es6,  node:true */
-
-
-var express = __webpack_require__(11);
-var router = express.Router();
-var request = __webpack_require__(14);
-var authorizeAll = __webpack_require__(2).authorizeAll;
-var authorizeAdmin = __webpack_require__(2).authorizeAdmin;
-var getUserDetails = __webpack_require__(2).userDetailsFromToken;
-var basic = __webpack_require__(22);
-var supUtils = __webpack_require__(29);
-var emailUtil = __webpack_require__(30);
-var randomstring = __webpack_require__(31);
-var qr = __webpack_require__(101);
-
-/* configuration */
-var config = __webpack_require__(6);
-var peer = config.peer;
-var peerAddr = config.peerAddress;
-var channel = config.channelName;
-var org = config.org;
-var chaincode = config.chaincode;
-
-module.exports = router;
-
-/****************** QUERIES ****************************************/
-
-/*
-  returns a JSON containing all the DS of the loggedin user
-  retrieved from the JWT token
-*/
-router.get('/view', authorizeAll, function (req, res) {
-  var userDetails = getUserDetails(req, res);
-  userDetails.then(function (details) {
-    var userEid = details.eid;
-    console.log("getSupplements userEid " + userEid);
-    basic.queryChaincode(peer, channel, chaincode, [userEid], "getSupplements", userEid, org).then(function (resp) {
-      console.log(resp);
-      res.status(200).json(resp);
-    }).catch(function (err) {
-      console.log(err);
-      res.status(500);
-    });
-  }).catch(function (err) {
-    console.log(err);
-    res.status(500);
-  });
-});
-
-/*
-  returns a JSON of the  DS with the given ID provided loggedin user
-  can retrieve it
-*/
-router.get('/view/:supId', authorizeAll, function (req, res) {
-  getUserDetails(req, res).then(function (details) {
-    var userEid = details.eid;
-    var supId = req.params.supId;
-    basic.queryChaincode(peer, channel, chaincode, [supId, userEid], "getSupplementById", userEid, org).then(function (resp) {
-      if (resp.indexOf("error") != -1) {
-        res.status(401).json(resp);
-      }
-      res.status(200).json(resp);
-    }).catch(function (err) {
-      console.log("ERROR::");
-      console.log(err);
-      res.status(500);
-    });
-  }).catch(function (err) {
-    console.log(err);
-    res.status(500);
-  });
-});
-
-/*
-  returns a JSON of the  DS with the given ID provided loggedin user
-  can retrieve it
-*/
-router.get('/download/:supId', authorizeAll, function (req, res) {
-  getUserDetails(req, res).then(function (details) {
-    var userEid = details.eid;
-    var supId = req.params.supId;
-    basic.queryChaincode(peer, channel, chaincode, [supId, userEid], "getSupplementById", userEid, org).then(function (resp) {
-      if (resp.indexOf("error") != -1) {
-        res.status(401).json(resp);
-      }
-      res.status(200).json(resp);
-    }).catch(function (err) {
-      console.log("ERROR::");
-      console.log(err);
-      res.status(500);
-    });
-  }).catch(function (err) {
-    console.log(err);
-    res.status(500);
-  });
-});
-
-/*
-  returns the DS invite that contains the given hash
-*/
-router.get('/invite/:invHash', authorizeAll, function (req, res) {
-  getUserDetails(req, res).then(function (details) {
-    var userEid = details.eid;
-    var invHash = req.params.invHash;
-    basic.queryChaincode(peer, channel, chaincode, [invHash], "getDiplomaSupplementInvitesByHash", userEid, org).then(function (resp) {
-      res.status(200).json(resp);
-    }).catch(function (err) {
-      console.log(err);
-      res.status(500);
-    });
-  }).catch(function (err) {
-    console.log(err);
-    res.status(500);
-  });
-});
-
-/******************************** ACTIONS ************************/
-
-/*
-  Sends a request supplement publication request
-  post parameters
-  @university (the name of the university)
-  @email (the user contact email)
-*/
-router.post('/request', authorizeAll, function (req, res) {
-  var userDetails = getUserDetails(req, res);
-  var universityName = req.body.uniName;
-  var universityId = req.body.univId; //user univesrity ID (e.g. ge01117)
-  var userEmail = req.body.email;
-  // let dateOfBirth = req.body.dateOfBirth;
-
-  userDetails.then(function (details) {
-    var userEid = details.eid;
-    var userFullName = details.firstName + " " + details.familyName;
-    var dateOfBirth = details.dateOfBrith;
-    console.log([userEid, userFullName, userEid, universityId, userEmail, userEid, universityName, dateOfBirth]);
-    basic.invokeChaincode([peerAddr], channel, chaincode, "requestSupplementPublication", [userEid, userFullName, userEid, universityId, userEmail, userEid, universityName, dateOfBirth], userEid, org).then(function (resp) {
-      console.log("response");
-      console.log(resp);
-      res.status(200).json(resp);
-    }).catch(function (err) {
-      res.status(500);
-    });
-  }).catch(function (err) {
-    console.log(err);
-    res.status(500);
-  });
-});
-
-/*
-  sends an invite to view a specific DS to a user
-  identified by his email address
-*/
-router.post('/inviteByMail', authorizeAll, function (req, res) {
-  var userDetails = getUserDetails(req, res);
-  var supId = req.body.supId;
-  var email = req.body.email;
-  // console.log(supId + email);
-  userDetails.then(function (details) {
-    var inviteHash = supUtils.generateSupplementHash(email, supId, details.userName);
-    var eid = details.eid;
-    // console.log(inviteHash + eid);
-    basic.invokeChaincode([peerAddr], channel, chaincode, "addDiplomaSupplementInvite", ['{"DSHash":"' + inviteHash + '", "DSId":"' + supId + '","Email":"' + email + '"}', eid], eid, org).then(function (resp) {
-      var emailBody = '<p>Click<a href="' + process.env.SRV_ADDR + '/supplement/view/invite/' + inviteHash + '"> here</a> to view the shared diploma supplement </p>';
-      emailUtil.sendEmail(email, emailBody);
-      res.status(200).json(resp);
-    }).catch(function (err) {
-      res.status(500);
-    });
-  }).catch(function (err) {
-    res.status(500);
-  });
-});
-
-/*
-  sends an invite to view a specific DS to a user
-  identified by his email address by generating a QR code
-  and returns the svg generated QR code
-*/
-router.post('/inviteByQR', authorizeAll, function (req, res) {
-  var userDetails = getUserDetails(req, res);
-  var supId = req.body.supId;
-  var email = req.body.email;
-  // console.log(supId + email);
-  userDetails.then(function (details) {
-    var inviteHash = supUtils.generateSupplementHash(email, supId, details.userName);
-    var eid = details.eid;
-    // console.log(inviteHash + eid);
-    basic.invokeChaincode([peerAddr], channel, chaincode, "addDiplomaSupplementInvite", ['{"DSHash":"' + inviteHash + '", "DSId":"' + supId + '","Email":"' + email + '"}', eid], eid, org).then(function (resp) {
-      var code = qr.image(process.env.SRV_ADDR + '/supplement/view/invite/' + inviteHash, { type: 'svg' });
-      res.type('svg');
-      code.pipe(res);
-    }).catch(function (err) {
-      res.status(500);
-    });
-  }).catch(function (err) {
-    res.status(500);
-  });
-});
-
-/*
-    Generates a random String and adds it as the DSInvite validationCode
-    the invite is identified by its unique hash (inviteHash, DSHash in the cc)
-    and then sends an email to the address contained within the invite
-*/
-router.post('/invite/:inviteHash/sendMail', authorizeAll, function (req, res) {
-  var inviteHash = req.params.inviteHash;
-  var validationCode = randomstring.generate(4);
-
-  getUserDetails(req, res).then(function (details) {
-    var eid = details.eid;
-    basic.invokeChaincode([peerAddr], channel, chaincode, "addCodeForDSInvite", [inviteHash, validationCode], eid, org).then(function (resp) {
-      var emailBody = '<p>Your validation code is: ' + validationCode + '</p>';
-      console.log(emailBody);
-      basic.queryChaincode(peer, channel, chaincode, [inviteHash], "getDiplomaSupplementInvitesByHash", eid, org).then(function (resp) {
-        var dsInvite = JSON.parse(resp);
-        console.log(dsInvite);
-        emailUtil.sendEmail(dsInvite.Email, emailBody).then(function (resp) {
-          res.status(200).json(resp);
-        }).catch(function (err) {
-          res.status(500).send(err);
-        });
-      });
-    }).catch(function (err) {
-      res.status(500);
-    });
-  }).catch(function (err) {
-    console.log(err);
-    res.status(500);
-  });
-});
-
-/*
-  checks the given validation code, and if it is contained within
-  the invte, updates the invite to include the current user eid (and puts the eid in the allowed set of the ds)
-  Finally, redirects to the endpoint to retrieve  the ds contained in the invite
-*/
-router.post('/invite/:inviteHash/authorize', authorizeAll, function (req, res) {
-  var inviteHash = req.params.inviteHash;
-  var validationCode = req.body.validationCode;
-  var dsId = "";
-  getUserDetails(req, res).then(function (details) {
-    var eid = details.eid;
-    basic.queryChaincode(peer, channel, chaincode, [inviteHash], "getDiplomaSupplementInvitesByHash", eid, org).then(function (resp) {
-      var dsInvite = JSON.parse(resp);
-
-      if (dsInvite.Code === validationCode) {
-        dsId = dsInvite.DSId;
-        basic.invokeChaincode([peerAddr], channel, chaincode, "addRecepientToDSInvite", [inviteHash, eid, validationCode], eid, org).then(function (resp) {
-          console.log(dsInvite);
-          res.redirect("../../view/" + dsId);
-        }).catch(function (err) {
-          res.status(500).send(err);
-        });
-      } else {
-        res.status(401).json({ "message": "wrong validation code" });
-      }
-    }).catch(function (err) {
-      res.status(500).send(err);
-    });
-  });
-});
-
-/*
-  takes as input an  array  of emails
-  and a supplement Id and removes those emails from the supplement invites
-*/
-router.post('/removeInvites', function (req, res) {
-  var invitesEmails = req.body.emails.join(";");
-  var supId = req.body.supId;
-  getUserDetails(req, res).then(function (details) {
-    var eid = details.eid;
-    basic.invokeChaincode([peerAddr], channel, chaincode, "uninvite", [supId, invitesEmails, eid], eid, org).then(function (resp) {
-      res.status(200).send("ok");
-    }).catch(function (err) {
-      console.log(err);
-      res.status(400).send(err);
-    });
-  });
-});
-
-/***/ }),
 /* 96 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-module.exports = require("nonce");
+"use strict";
+
+
+var n = __webpack_require__(97)();
+var hash = __webpack_require__(98);
+
+module.exports.generateSupplementHash = generateSupplementHash;
+
+function generateSupplementHash(employerEmail, supId, userName) {
+      // console.log("the nonce is " + n());
+      return hash.sha256().update(n() + employerEmail + supId + userName).digest('hex');
+}
 
 /***/ }),
 /* 97 */
 /***/ (function(module, exports) {
 
-module.exports = require("hash.js");
+module.exports = require("nonce");
 
 /***/ }),
 /* 98 */
 /***/ (function(module, exports) {
 
-module.exports = require("nodemailer");
+module.exports = require("hash.js");
 
 /***/ }),
 /* 99 */
@@ -5733,7 +5752,76 @@ module.exports = require("nodemailer");
 "use strict";
 
 
-var fs = __webpack_require__(5);
+var path = __webpack_require__(2);
+
+var nodemailer = __webpack_require__(100);
+var fileUtils = __webpack_require__(101);
+var srvUtils = __webpack_require__(102);
+
+exports.sendEmail = sendEmail;
+
+/**
+Sends an email and returns a Promise that it will be sent
+**/
+function sendEmail(receiverAddress, body) {
+
+  return new Promise(function (resolve, reject) {
+    var thePath = path.join(__dirname, '..', 'resources', 'emailCredentials');
+    fileUtils.readFilePromise(thePath).then(function (_pass) {
+      // console.log("pass" + pass);
+      // create reusable transporter object using the default SMTP transport
+      var transporter = nodemailer.createTransport({
+        //        service: 'gmail',
+        host: 'localhost',
+        port: '25',
+        //      secure: false,
+        tls: {
+          rejectUnauthorized: false
+        },
+        auth: {
+          //user: 'triantafyllou.ni@gmail.com',
+          //pass: _pass
+          user: 'user@mail.example.com',
+          pass: 'pwd'
+        }
+      });
+
+      console.log('Email Body ' + body);
+      // setup email data with unicode symbols
+      var mailOptions = {
+        from: '"Diploma Supplement Service" <dss@aegean.gr>', // sender address
+        to: receiverAddress, // list of receivers
+        subject: 'A Diploma Supplement has been shared with you ', // Subject line
+        text: body, //'Hello world ?', // plain text body
+        html: body //Hello world ?</b>' // html body
+      };
+      transporter.sendMail(mailOptions).then(function (result) {
+        console.log("mail sent");
+        resolve(result);
+      }).catch(function (err) {
+        console.log(err);
+        reject(err);
+      });
+    }).catch(function (err) {
+      reject(err);
+    });
+  });
+};
+
+/***/ }),
+/* 100 */
+/***/ (function(module, exports) {
+
+module.exports = require("nodemailer");
+
+/***/ }),
+/* 101 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var fs = __webpack_require__(4);
 module.exports.readFilePromise = readFilePromise;
 
 function readFilePromise(path) {
@@ -5750,7 +5838,7 @@ function readFilePromise(path) {
 }
 
 /***/ }),
-/* 100 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5761,153 +5849,10 @@ var serverInfo = {};
 module.exports = serverInfo;
 
 /***/ }),
-/* 101 */
+/* 103 */
 /***/ (function(module, exports) {
 
-module.exports = require("qr-image");
-
-/***/ }),
-/* 102 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/*jslint es6,  node:true */
-
-
-var express = __webpack_require__(11);
-var router = express.Router();
-var request = __webpack_require__(14);
-var authorizeAll = __webpack_require__(2).authorizeAll;
-var authorizeAdmin = __webpack_require__(2).authorizeAdmin;
-var getUserDetails = __webpack_require__(2).userDetailsFromToken;
-var basic = __webpack_require__(22);
-var supUtils = __webpack_require__(29);
-var emailUtil = __webpack_require__(30);
-var randomstring = __webpack_require__(31);
-var jwt = __webpack_require__(18);
-var secretKey = process.env.SECRET_KEY ? process.env.SECRET_KEY : "testSecret"; //the secret comes from an enviroment variable
-var stripchar = __webpack_require__(27).StripChar;
-var uuid = __webpack_require__(28);
-
-/* configuration */
-var config = __webpack_require__(6);
-var peer = config.peer;
-var peerAddr = config.peerAddress;
-var channel = config.channelName;
-var org = config.org;
-var chaincode = config.chaincode;
-
-module.exports = router;
-
-/**************** views ******************************/
-
-router.get('/view', authorizeAll, function (req, res) {
-  var userDetails = getUserDetails(req, res);
-  userDetails.then(function (details) {
-    var userEid = details.eid;
-    console.log(details);
-    console.log("\nSupplementsRouts.js /view :: userEid" + userEid);
-    res.render('viewSupplements', { title: 'Published Supplements',
-      message: 'Welcome user: ' + details.userName,
-      userType: "Student",
-      supplements: null,
-      eID: userEid,
-      userName: details.userName,
-      firstName: details.firstName,
-      lastName: details.familyName });
-  }).catch(function (err) {
-    res.render('errorMessage', { title: 'Ooops... an error occured!',
-      message: err,
-      stdId: req.session.eID });
-  });;
-});
-
-/*
-  Allows the user to view a DS based on an invite.
-  If the user is not logged in they are asked to login.
-  If they are logged in they check the inv:
-    a) If it is finalized then the id of the user is checked against the allowed set
-    b) else, a validation code is sent to the user.
-*/
-router.get('/view/invite/:inviteHash', function (req, res) {
-  var token = req.cookies.access_token;
-  var inviteHash = req.params.inviteHash;
-  jwt.verify(token, "secret", { algorithms: ['HS256'] }, function (err, token) {
-    if (err) {
-      res.cookie('dsHash', inviteHash, { maxAge: 900000, httpOnly: true });
-      res.render('loginEIDAS', { title: 'Login with eIDAS',
-        message: 'Login with the eIDAS system to view this Diploma Supplement',
-        token: uuid() });
-      console.log(err);
-    } else {
-      //jwt token found.
-      getUserDetails(req, res).then(function (details) {
-        var userEid = details.eid;
-        res.render('viewByInvite', { title: 'View DS by Invite',
-          message: 'Request Diploma Supplement Access',
-          token: "",
-          invHash: inviteHash });
-      });
-    }
-  });
-});
-
-router.get('/edit/:supId', authorizeAll, function (req, res) {
-  var userDetails = getUserDetails(req, res);
-  var supId = req.params.supId;
-  userDetails.then(function (details) {
-    var userEid = details.eid;
-    basic.queryChaincode(peer, channel, chaincode, [supId, userEid], "getSupplementById", userEid, org).then(function (resp) {
-      if (JSON.parse(resp).Owner === userEid) {
-        res.render('editSupplement', { title: 'Edit Supplement',
-          message: 'Welcome user: ' + details.userName,
-          userType: "Student",
-          supplement: JSON.parse(resp),
-          eID: userEid,
-          userName: details.userName,
-          firstName: details.firstName,
-          lastName: details.familyName });
-      } else {
-        res.render('errorMessage', { title: 'Ooops... an error occured!',
-          message: "You can only edit supplements you own",
-          stdId: "" });
-      }
-    }).catch(function (err) {
-      res.render('errorMessage', { title: 'Ooops... an error occured!',
-        message: error.toString(),
-        stdId: "" });
-    });
-  });
-});
-
-router.get('/request', authorizeAll, function (req, res) {
-  getUserDetails(req, res).then(function (details) {
-    res.render('requestPublication', { title: 'Request DS Publication',
-      message: "",
-      eID: details.eid,
-      userName: details.userName,
-      firstName: details.firstName,
-      lastName: details.familyName,
-      dateOfBirth: details.dateOfBirth,
-      eIDHash: details.eid
-    });
-  }).catch(function (err) {
-    console.log(err);
-  });
-});
-
-/***/ }),
-/* 103 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var express = __webpack_require__(11);
-var router = express.Router();
-var request = __webpack_require__(14);
-
-module.exports = router;
+module.exports = require("randomstring");
 
 /***/ })
 /******/ ]);
