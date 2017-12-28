@@ -37,7 +37,7 @@ function genPdf(ds,res){
   // "Content_Info":{
   //     "ModeOfStudy":"FULL-TIME",
   //     "ProgrammeRequirements":"To be awareded the FME Diploma the students should successfully ... loads of text here",
-  //     "Programme_Details":{
+  //     "ProgrammeDetails":{
   //               "Description":"The course on which the bachelors graduate was examined... loads of text",
   //             "Modules":[
   //                         {"ModuleCode":"OIO103","NameOfTheModule":"Introduction to Economics","TypeOfModule":"CC","ExamPeriod":"Feb. 2012","Grade":"6","InWriting":"six"},
@@ -168,22 +168,22 @@ let profStatus = "5.2 Professional Status: ";
     .text(ds.Content_Info.ProgrammeRequirements,style)
     .moveDown()
     .text(infoProgDetails,style)
-    .text(ds.Content_Info.Programme_Details.Legend)
+    .text(ds.Content_Info.ProgrammeDetails.Legend)
     .moveDown()
     .text(fuctionOfQual)
     .moveDown()
     .text()
   // let header = {"ModuleCode":"Module Code","NameOfTheModule":"Name of Module","TypeOfModule":"Type of Module","ExamPeriod":"Exam Period","Grade":"Grade","InWriting":"In Writting"};
-  ds.Content_Info.Programme_Details.Modules.forEach(mod =>{
+  ds.Content_Info.ProgrammeDetails.Modules.forEach(mod =>{
     addTableRow(mod,doc);
   }) ;
-  doc.text(ds.Content_Info.Programme_Details.Legend)
+  doc.text(ds.Content_Info.ProgrammeDetails.Legend)
     .moveDown()
     .text(gradingScheme)
-    .text(ds.Content_Info.Programme_Details.GradingScheme)
+    .text(ds.Content_Info.ProgrammeDetails.GradingScheme)
     .moveDown()
     .text(overallCass)
-    .text(ds.Content_Info.Programme_Details.OverallClassificationOfQualification)
+    .text(ds.Content_Info.ProgrammeDetails.OverallClassificationOfQualification)
     .moveDown()
     .text(fuctionOfQual)
     .moveDown()

@@ -34,7 +34,7 @@ export default class SupplementCard extends React.Component {
       }else{
           let entry = sup[key];
           let innerContents = Object.keys(entry).map( (k) =>{
-              if(k !== "Programme_Details"){
+              if(k !== "ProgrammeDetails"){
                     return <div class="collapsible-body" style={{color:"black"}} key={k}>
                                 <span>{k} : {entry[k]}</span>
                             </div>;
@@ -108,7 +108,7 @@ export default class SupplementCard extends React.Component {
              <div className="card-action">
                <SupBtns isOwner ={!this.props.restricted} id={sup.Id}/>
 
-               <SupFab  isOwner ={!this.props.restricted}  
+               <SupFab  isOwner ={!this.props.restricted}
                         mailModal={this.props.openShareByMail}
                         qrModal={this.props.openShareByQR}
                         supId={sup.Id}
