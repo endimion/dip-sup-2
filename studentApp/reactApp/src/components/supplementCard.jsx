@@ -34,7 +34,7 @@ export default class SupplementCard extends React.Component {
       }else{
           let entry = sup[key];
           let innerContents = Object.keys(entry).map( (k) =>{
-              if(k !== "ProgrammeDetails"){
+              if(k !== "Programme_Details"){
                     return <div class="collapsible-body" style={{color:"black"}} key={k}>
                                 <span>{k} : {entry[k]}</span>
                             </div>;
