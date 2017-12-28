@@ -27,7 +27,7 @@ module.exports.wrapDbResToProto = function(ds){
 
 
 let modules = [];
-// console.log(ds.Content_Info.ProgrammeDetails.Modules);
+  console.log(ds.Content_Info.ProgrammeDetails.Modules);
   ds.Content_Info.ProgrammeDetails.Modules.forEach(mod =>{
     modules.push({
       ModuleCode :mod.ModuleCode,
