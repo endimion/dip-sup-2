@@ -11,6 +11,7 @@ const getUserDetails = require('../../utils/authUtils').userDetailsFromToken;
 const basic = require('../../model/hlf/basic.js');
 const supUtils = require('../../utils/supplementUtils.js');
 const emailUtil = require('../../utils/emailClient.js');
+const pdfHelper = require('../../utils/pdfHelper.js');
 const randomstring = require("randomstring");
 const qr = require('qr-image');
 
@@ -53,6 +54,27 @@ router.get('/view',authorizeAll,(req,res) =>{
     }).catch(err =>{
         console.log(err);
         res.status(500);
+    });
+});
+
+
+router.get('/pdf/:supId',authorizeAll,(req,res) =>{
+  getUserDetails(req,res).then( details =>{
+      let userEid = details.eid;
+      let supId = req.params.supId;
+      basic.queryChaincode(peer, channel, chaincode, [supId,userEid], "getSupplementById", userEid, org)
+      .then( resp =>{
+        if(resp.indexOf("error") != -1){
+          res.status(401).json(resp);
+        }
+        let ds = JSON.parse(resp);
+        pdfHelper.genPdf(ds,res);
+      }).catch(err =>{
+          console.log("ERROR::");
+          console.log(err);
+          res.status(500);
+      });
+
     });
 });
 
