@@ -26,12 +26,12 @@ module.exports.wrapDbResToProto = function(ds){
 
 
 
-let modules = [];
+let mods = [];
   console.log("THE MODILES");
   console.log(ds.Content_Info.ProgrammeDetails.Modules);
   console.log("---------00000000000000--------------------------");
   ds.Content_Info.ProgrammeDetails.Modules.forEach(mod =>{
-    modules.push({
+    mods.push({
       ModuleCode :mod.ModuleCode,
       NameOfTheModule: mod.NameOfTheModule,
       TypeOfModule: mod.TypeOfModule,
@@ -41,19 +41,19 @@ let modules = [];
     });
   });
 
-  let programmeDetail ={
+  let details ={
     Description : ds.Content_Info.ProgrammeDetails.Description,
-    Modules: modules,
+    Modules: mods,
     Legend: ds.Content_Info.ProgrammeDetails.Legend
   }
 // console.log("modules!!!!");
 // console.log(modules);
-// console.log("programmeDetail!!!!");
-// console.log(programmeDetail);
+console.log("programmeDetail!!!!");
+console.log(details);
   let ContentInfo ={
     ModeOfStudy: ds.Content_Info.ModeOfStudy,
     ProgrammeRequirements: ds.Content_Info.ProgrammeRequirements,
-    ProgrammeDetails: programmeDetail,
+    ProgrammeDetails: details,
     GradingScheme: ds.Content_Info.GradingScheme,
     OverallClassificationOfQualification: ds.Content_Info.OverallClassificationOfQualification
   };
