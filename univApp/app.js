@@ -72,7 +72,8 @@ evHelper.registerEventHubForOrg(org,chaincode,'evtsender', event => {
             console.log(supplement);
             // console.log("MODUKE!!!");
             // console.log(supplement.Content_Info.ProgrammeDetails.Modules);
-
+            console.log("app.js :: strigify"  );
+            console.log(JSON.stringify(supplement));
             return supplement;
         });
      })
@@ -84,7 +85,7 @@ evHelper.registerEventHubForOrg(org,chaincode,'evtsender', event => {
           //  // console.log(JSON.stringify(dsResult));
             if(resp.indexOf("error") !== -1){ //if not sup with given Id is found
                 // console.log(" app.js::  will publish!!!!!!!!!!!!!!!!!");
-                // console.log(JSON.stringify(dsResult));
+                console.log(JSON.stringify(dsResult));
                 basic.invokeChaincode([peerAddr], channel, chaincode, "publish",
       							[JSON.stringify(dsResult),UNIVERSITY],UNIVERSITY, org)
             }
