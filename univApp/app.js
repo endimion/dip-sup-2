@@ -68,8 +68,8 @@ evHelper.registerEventHubForOrg(org,chaincode,'evtsender', event => {
             let supHash = hash.sha256().update(JSON.stringify(supplement)).digest('hex');
             supplement.signature =signService.signHash(supHash);
 
-            // // console.log(" app.js:: wrapped response to:")  ;
-            // console.log(supplement);
+            console.log(" app.js:: wrapped response to:")  ;
+            console.log(supplement);
             // console.log("MODUKE!!!");
             // console.log(supplement.Content_Info.ProgrammeDetails.Modules);
 
