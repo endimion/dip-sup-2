@@ -14,13 +14,13 @@ const utils = require('./utils/wrappers.js')
 *     request property for the request value.
 */
 function getDiplomaSupplements(call) {
-  console.log("getDiplomaSupplements called");
+  console.log(" server.js::  getDiplomaSupplements called");
    let counter = 0;
    dsService.findAllDiplomaByCriterria(call.request).then(result =>{
        result.forEach(ds =>{
-        console.log("writing DS " + counter);
+        console.log(" server.js::  writing DS " + counter);
         let resp = utils.wrapDbResToProto(ds) ;
-        console.log("Will write to STREAM: " + counter);
+        console.log(" server.js::  Will write to STREAM: " + counter);
         console.log(resp);
         call.write(resp);
         counter++;
@@ -42,7 +42,7 @@ function getServer() {
 
 
 if (require.main === module) {
-  console.log("strating server");
+  console.log(" server.js::  strating server");
   // If this is run as a script, start a server on an unused port
   var routeServer = getServer();
   routeServer.bind('0.0.0.0:50051', grpc.ServerCredentials.createInsecure());

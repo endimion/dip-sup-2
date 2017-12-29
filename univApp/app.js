@@ -19,11 +19,11 @@ const chaincode = config.chaincode;
 
 
 evHelper.registerEventHubForOrg(org,chaincode,'evtsender', event => {
-    // console.log("Received Event:");
+    // console.log(" app.js::  Received Event:");
 		// console.log(event);
 
     let pubReq = JSON.parse(event).Body;
-    console.log("Publication Request:");
+    console.log(" app.js::  Publication Request:");
     console.log(pubReq);
     let univName = UNIVERSITY;
     console.log(univName);
@@ -34,8 +34,8 @@ evHelper.registerEventHubForOrg(org,chaincode,'evtsender', event => {
              //map the supplement from the grpc call to a full DiplomaSupplement Structure
              //owner value, denotes the eidas eid,  is retreived from the event,
              // the val. does not exist in the db
-            //  console.log("match found")  ;
-            //  console.log(dbDipSup);
+             console.log(" app.js::  match found")  ;
+             console.log(dbDipSup);
 
              let supplement =  {
                "Owner" : pubReq.EidHash,
@@ -50,7 +50,7 @@ evHelper.registerEventHubForOrg(org,chaincode,'evtsender', event => {
                "Content_Info": {
                   "ModeOfStudy": dbDipSup.Content_Info.ModeOfStudy,
                   "ProgrammeRequirements":dbDipSup.Content_Info.ProgrammeRequirements,
-                  "Programme_Details":{
+                  "ProgrammeDetails":{
                       "Description":  dbDipSup.Content_Info.ProgrammeDetails.Description,
                       "Modules":  dbDipSup.Content_Info.ProgrammeDetails.Modules,
                       "Legend": dbDipSup.Content_Info.ProgrammeDetails.Legend
@@ -78,7 +78,7 @@ evHelper.registerEventHubForOrg(org,chaincode,'evtsender', event => {
           .then( resp =>{
           //  console.log(JSON.stringify(dsResult));
             if(resp.indexOf("error") !== -1){ //if not sup with given Id is found
-                console.log("will publish!!!!!!!!!!!!!!!!!");
+                console.log(" app.js::  will publish!!!!!!!!!!!!!!!!!");
                 console.log(JSON.stringify(dsResult));
                 basic.invokeChaincode([peerAddr], channel, chaincode, "publish",
       							[JSON.stringify(dsResult),UNIVERSITY],UNIVERSITY, org)
