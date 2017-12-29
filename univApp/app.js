@@ -71,7 +71,7 @@ evHelper.registerEventHubForOrg(org,chaincode,'evtsender', event => {
             // // console.log(" app.js:: wrapped response to:")  ;
             // console.log(supplement);
             console.log("MODUKE!!!");
-            console.log(supplement.Content_Info.Modules);
+            console.log(supplement.Content_Info.ProgrammeDetails.Modules);
 
             return supplement;
         });
