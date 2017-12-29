@@ -34,15 +34,16 @@ export default class SupplementCard extends React.Component {
       }else{
           let entry = sup[key];
           let innerContents = Object.keys(entry).map( (k) =>{
-              if(k !== "Programme_Details"){
+              if(k !== "ProgrammeDetails"){
                     return <div class="collapsible-body" style={{color:"black"}} key={k}>
                                 <span>{k} : {entry[k]}</span>
                             </div>;
               }else{
                   // console.log(k,entry[k]);
                   let details = entry[k];
-                  let modules =  details.Modules.map( (mod) =>{
-                    return <Row>
+                  let modules =[];
+                  details.Modules.map( (mod) =>{
+                    modules.push( <Row>
                             <Col m={12} s={12}>
                               <Card>
                                 <Collection>
@@ -54,7 +55,7 @@ export default class SupplementCard extends React.Component {
                                   <CollectionItem key ={"InWriting"}><span>InWriting: {mod.InWriting}</span></CollectionItem>
                                 </Collection>
                               </Card>
-                          </Col></Row>
+                          </Col></Row>);
                   });
 
                 return (
