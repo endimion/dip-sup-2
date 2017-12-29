@@ -19,24 +19,24 @@ const chaincode = config.chaincode;
 
 
 evHelper.registerEventHubForOrg(org,chaincode,'evtsender', event => {
-    // console.log(" app.js::  Received Event:");
-		// console.log(event);
+    // // console.log(" app.js::  Received Event:");
+		// // console.log(event);
 
     let pubReq = JSON.parse(event).Body;
-    console.log(" app.js::  Publication Request:");
-    console.log(pubReq);
+    // console.log(" app.js::  Publication Request:");
+    // console.log(pubReq);
     let univName = UNIVERSITY;
-    console.log(univName);
-    console.log(pubReq.University === univName);
+    // console.log(univName);
+    // console.log(pubReq.University === univName);
     if(pubReq.University === univName){
       bkService.findAllDiplomaByCriterria(pubReq).then(result =>{
           return result.map(dbDipSup =>{
              //map the supplement from the grpc call to a full DiplomaSupplement Structure
              //owner value, denotes the eidas eid,  is retreived from the event,
              // the val. does not exist in the db
-             console.log(" app.js::  match found")  ;
-            console.log(" app.js::  MODUES!!!!!!!!!!!!!!!")  ;
-             console.log(dbDipSup.Content_Info.ProgrammeDetails.Modules);
+             // console.log(" app.js::  match found")  ;
+            // console.log(" app.js::  MODUES!!!!!!!!!!!!!!!")  ;
+             // console.log(dbDipSup.Content_Info.ProgrammeDetails.Modules);
 
              let supplement =  {
                "Owner" : pubReq.EidHash,
@@ -68,9 +68,10 @@ evHelper.registerEventHubForOrg(org,chaincode,'evtsender', event => {
             let supHash = hash.sha256().update(JSON.stringify(supplement)).digest('hex');
             supplement.signature =signService.signHash(supHash);
 
-            console.log(" app.js:: wrapped response to:")  ;
-            console.log(supplement);
-
+            // // console.log(" app.js:: wrapped response to:")  ;
+            // console.log(supplement);
+            console.log("MODUKE!!!");
+            console.log(supplement.Content_Info.Modules);
 
             return supplement;
         });
@@ -80,10 +81,10 @@ evHelper.registerEventHubForOrg(org,chaincode,'evtsender', event => {
           basic.queryChaincode(peer, channel, chaincode, [dsResult.Id.toString(),UNIVERSITY], "getSupplementById",
                                                     UNIVERSITY, org)
           .then( resp =>{
-          //  console.log(JSON.stringify(dsResult));
+          //  // console.log(JSON.stringify(dsResult));
             if(resp.indexOf("error") !== -1){ //if not sup with given Id is found
-                console.log(" app.js::  will publish!!!!!!!!!!!!!!!!!");
-                console.log(JSON.stringify(dsResult));
+                // console.log(" app.js::  will publish!!!!!!!!!!!!!!!!!");
+                // console.log(JSON.stringify(dsResult));
                 basic.invokeChaincode([peerAddr], channel, chaincode, "publish",
       							[JSON.stringify(dsResult),UNIVERSITY],UNIVERSITY, org)
             }
