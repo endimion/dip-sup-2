@@ -27,9 +27,9 @@ module.exports.wrapDbResToProto = function(ds){
 
 
 let mods = new Array();
-  console.log(" wrappers.js::    THE MODILES");
-  console.log(ds.Content_Info.ProgrammeDetails.Modules);
-  console.log(" wrappers.js::   ---------00000000000000--------------------------");
+  // console.log(" wrappers.js::    THE MODILES");
+  // console.log(ds.Content_Info.ProgrammeDetails.Modules);
+  // console.log(" wrappers.js::   ---------00000000000000--------------------------");
   ds.Content_Info.ProgrammeDetails.Modules.forEach(mod =>{
     mods.push({
       ModuleCode :mod.ModuleCode,
@@ -48,8 +48,8 @@ let mods = new Array();
   }
 // console.log(" wrappers.js::   modules!!!!");
 // console.log(modules);
-console.log(" wrappers.js::  programmeDetail!!!!");
-console.log(details);
+// console.log(" wrappers.js::  programmeDetail!!!!");
+// console.log(details);
   let ContentInfo ={
     ModeOfStudy: ds.Content_Info.ModeOfStudy,
     ProgrammeRequirements: ds.Content_Info.ProgrammeRequirements,

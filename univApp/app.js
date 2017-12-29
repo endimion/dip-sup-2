@@ -35,7 +35,7 @@ evHelper.registerEventHubForOrg(org,chaincode,'evtsender', event => {
              //owner value, denotes the eidas eid,  is retreived from the event,
              // the val. does not exist in the db
              console.log(" app.js::  match found")  ;
-             console.log(dbDipSup);
+             console.log(dbDipSup.Content_Info.ProgrammeDetails.Modules);
 
              let supplement =  {
                "Owner" : pubReq.EidHash,
