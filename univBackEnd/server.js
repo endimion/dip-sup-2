@@ -21,7 +21,7 @@ function getDiplomaSupplements(call) {
         console.log(" server.js::  writing DS " + counter);
         let resp = utils.wrapDbResToProto(ds) ;
         console.log(" server.js::  Will write to STREAM: " + counter);
-        console.log(resp);
+        console.log(resp.Content_Info.ProgrammeDetails.Modules);
         call.write(resp);
         counter++;
        });

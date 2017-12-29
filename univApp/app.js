@@ -35,9 +35,9 @@ evHelper.registerEventHubForOrg(org,chaincode,'evtsender', event => {
              //owner value, denotes the eidas eid,  is retreived from the event,
              // the val. does not exist in the db
              // console.log(" app.js::  match found")  ;
-            // console.log(" app.js::  MODUES!!!!!!!!!!!!!!!")  ;
+            console.log(" app.js::  MODUES!!!!!!!!!!!!!!!")  ;
              // console.log(dbDipSup.Content_Info.ProgrammeDetails.Modules);
-
+          console.log(dbDipSup.Content_Info.ProgrammeDetails.Modules);
              let supplement =  {
                "Owner" : pubReq.EidHash,
               //  "Name" : dbDipSup.name,
@@ -70,8 +70,8 @@ evHelper.registerEventHubForOrg(org,chaincode,'evtsender', event => {
 
             // // console.log(" app.js:: wrapped response to:")  ;
             // console.log(supplement);
-            console.log("MODUKE!!!");
-            console.log(supplement.Content_Info.ProgrammeDetails.Modules);
+            // console.log("MODUKE!!!");
+            // console.log(supplement.Content_Info.ProgrammeDetails.Modules);
 
             return supplement;
         });
