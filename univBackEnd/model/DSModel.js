@@ -1,7 +1,10 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 let location = process.env.mongoURL||'localhost';
-let connection = mongoose.connect("mongodb://"+location+'/dipSup');
+let connection = mongoose.connect("mongodb://"+location+'/dipSup', {
+  useMongoClient: true,
+  /* other options */
+});
 mongoose.Promise = Promise;
 
 
