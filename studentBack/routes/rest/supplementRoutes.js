@@ -47,7 +47,7 @@ router.get('/view',authorizeAll,(req,res) =>{
         // console.log(resp);
         try{
           JSON.parse(resp);
-        }catch(err =>{
+        }catch(err){
           console.log("supplementRoutes:: response not a json!");
           res.status(500);
         });
@@ -75,7 +75,7 @@ router.get('/pdf/:supId',authorizeAll,(req,res) =>{
         }
         try{
           JSON.parse(resp);
-        }catch(err =>{
+        }catch(err){
           console.log("supplementRoutes:: response not a json!");
           res.status(500);
         });
@@ -97,13 +97,13 @@ router.get('/pdf/:supId',authorizeAll,(req,res) =>{
 */
 router.get('/view/:supId',authorizeAll,(req,res) =>{
   getUserDetails(req,res).then( details =>{
-      let userEid = details.eid;
+      let userEid = details.eid;50
       let supId = req.params.supId;
       basic.queryChaincode(peer, channel, chaincode, [supId,userEid], "getSupplementById", userEid, org)
       .then( resp =>{
         try{
           JSON.parse(resp);
-        }catch(err =>{
+        }catch(err){
           console.log("supplementRoutes:: response not a json!");
           res.status(500);
         });
@@ -139,7 +139,7 @@ router.get('/download/:supId',authorizeAll,(req,res) =>{
         }
         try{
           JSON.parse(resp);
-        }catch(err =>{
+        }catch(err){
           console.log("supplementRoutes:: response not a json!");
           res.status(500);
         });
@@ -168,7 +168,7 @@ router.get('/invite/:invHash',authorizeAll,(req,res) =>{
       .then( resp =>{
         try{
           JSON.parse(resp);
-        }catch(err =>{
+        }catch(err){
           console.log("supplementRoutes:: response not a json!");
           res.status(500);
         });
