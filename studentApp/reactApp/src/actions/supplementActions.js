@@ -9,7 +9,7 @@ axiosRetry(axios, { retries: 3 });
 
 export function  getSupplementsByEid(userEid) {
   return  function(dispatch){
-    console.log(userEid);
+    // console.log(userEid);
        dispatch({type: "GET_SUP"} );
        //here we should make an Ajax call with axios
       // on success it should return GET_SUP_FULLFILED else GET_SUP_REJECTED
@@ -28,19 +28,19 @@ export function  getSupplementsByEid(userEid) {
 export function  openShareByMail(supId) {
   return  function(dispatch){
      dispatch({type: "OPEN_SHARE_BY_MAIL"} );
-      console.log(supId)  ;
+      // console.log(supId)  ;
      $('#mailModal'+supId).modal('open');
   }
 }
 
 export function  shareByMail(_supId,_email) {
   return  function(dispatch){
-  dispatch({type: "SHARE_SUP"});
+  // dispatch({type: "SHARE_SUP"});
   let data = {email: _email, supId: _supId };
      axios.post("/back/supplement/rest/inviteByMail",data)
         .then(response =>{
           dispatch({type: "SHARE_SUP_FULLFILED"});
-          console.log('#modal'+_supId);
+          // console.log('#modal'+_supId);
           $('#mailModal'+_supId).modal('close');
         })
         .catch(err=>{

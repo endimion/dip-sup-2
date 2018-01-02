@@ -44,7 +44,13 @@ router.get('/view',authorizeAll,(req,res) =>{
       console.log("getSupplements userEid " + userEid);
       basic.queryChaincode(peer, channel, chaincode, [userEid], "getSupplements", userEid, org)
       .then( resp =>{
-        console.log(resp);
+        // console.log(resp);
+        try{
+          JSON.parse(resp);
+        }catch(err =>{
+          console.log("supplementRoutes:: response not a json!");
+          res.status(500);
+        });
         res.status(200).json(resp);
       }).catch(err =>{
           console.log(err);
@@ -67,6 +73,12 @@ router.get('/pdf/:supId',authorizeAll,(req,res) =>{
         if(resp.indexOf("error") != -1){
           res.status(401).json(resp);
         }
+        try{
+          JSON.parse(resp);
+        }catch(err =>{
+          console.log("supplementRoutes:: response not a json!");
+          res.status(500);
+        });
         let ds = JSON.parse(resp);
         pdfHelper.genPdf(ds,res);
       }).catch(err =>{
@@ -89,6 +101,12 @@ router.get('/view/:supId',authorizeAll,(req,res) =>{
       let supId = req.params.supId;
       basic.queryChaincode(peer, channel, chaincode, [supId,userEid], "getSupplementById", userEid, org)
       .then( resp =>{
+        try{
+          JSON.parse(resp);
+        }catch(err =>{
+          console.log("supplementRoutes:: response not a json!");
+          res.status(500);
+        });
         if(resp.indexOf("error") != -1){
           res.status(401).json(resp);
         }
@@ -119,6 +137,12 @@ router.get('/download/:supId',authorizeAll,(req,res) =>{
         if(resp.indexOf("error") != -1){
           res.status(401).json(resp);
         }
+        try{
+          JSON.parse(resp);
+        }catch(err =>{
+          console.log("supplementRoutes:: response not a json!");
+          res.status(500);
+        });
         res.status(200).json(resp);
       }).catch(err =>{
           console.log("ERROR::");
@@ -142,6 +166,12 @@ router.get('/invite/:invHash',authorizeAll,(req,res) =>{
       console.log("will query for" + invHash);
       basic.queryChaincode(peer, channel, chaincode, [invHash], "getDiplomaSupplementInvitesByHash", userEid, org)
       .then( resp =>{
+        try{
+          JSON.parse(resp);
+        }catch(err =>{
+          console.log("supplementRoutes:: response not a json!");
+          res.status(500);
+        });
         res.status(200).json(resp);
       }).catch(err =>{
           console.log(err);
@@ -184,8 +214,14 @@ router.post('/request',authorizeAll,(req,res) =>{
 								[userEid,userFullName, userEid,universityId,userEmail,userEid,universityName,dateOfBirth],
 								userEid, org)
       .then( resp =>{
-        console.log("response");
-        console.log(resp);
+        // console.log("response");
+        // console.log(resp);
+        // try{
+        //   JSON.parse(resp);
+        // }catch(err =>{
+        //   console.log("supplementRoutes:: response not a json!");
+        //   res.status(500);
+        // });
         res.status(200).json(resp);
       }).catch(err =>{
         res.status(500);
@@ -216,6 +252,7 @@ router.post('/inviteByMail',authorizeAll,(req,res) =>{
         let emailBody = '<p>Click<a href="'+ process.env.SRV_ADDR + '/app/invite/'
                           +inviteHash +'"> here</a> to view the shared diploma supplement </p>';
         emailUtil.sendEmail(email,emailBody);
+
         res.status(200).json(resp);
       }).catch(err =>{
         res.status(500);
