@@ -50,7 +50,7 @@ router.get('/view',authorizeAll,(req,res) =>{
         }catch(err){
           console.log("supplementRoutes:: response not a json!");
           res.status(500);
-        });
+        }
         res.status(200).json(resp);
       }).catch(err =>{
           console.log(err);
@@ -78,7 +78,7 @@ router.get('/pdf/:supId',authorizeAll,(req,res) =>{
         }catch(err){
           console.log("supplementRoutes:: response not a json!");
           res.status(500);
-        });
+        }
         let ds = JSON.parse(resp);
         pdfHelper.genPdf(ds,res);
       }).catch(err =>{
@@ -106,7 +106,7 @@ router.get('/view/:supId',authorizeAll,(req,res) =>{
         }catch(err){
           console.log("supplementRoutes:: response not a json!");
           res.status(500);
-        });
+        }
         if(resp.indexOf("error") != -1){
           res.status(401).json(resp);
         }
@@ -142,7 +142,7 @@ router.get('/download/:supId',authorizeAll,(req,res) =>{
         }catch(err){
           console.log("supplementRoutes:: response not a json!");
           res.status(500);
-        });
+        }
         res.status(200).json(resp);
       }).catch(err =>{
           console.log("ERROR::");
@@ -171,7 +171,7 @@ router.get('/invite/:invHash',authorizeAll,(req,res) =>{
         }catch(err){
           console.log("supplementRoutes:: response not a json!");
           res.status(500);
-        });
+        }
         res.status(200).json(resp);
       }).catch(err =>{
           console.log(err);
