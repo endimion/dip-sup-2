@@ -49,17 +49,17 @@ router.get('/view',authorizeAll,(req,res) =>{
           JSON.parse(resp);
         }catch(err){
           console.log("supplementRoutes:: response not a json!");
-          res.status(500);
+          res.status(500).send(err);
         }
         res.status(200).json(resp);
       }).catch(err =>{
           console.log(err);
-          res.status(500);
+          res.status(500).send(err);
       });
 
     }).catch(err =>{
         console.log(err);
-        res.status(500);
+        res.status(500).send(err);
     });
 });
 
@@ -77,14 +77,14 @@ router.get('/pdf/:supId',authorizeAll,(req,res) =>{
           JSON.parse(resp);
         }catch(err){
           console.log("supplementRoutes:: response not a json!");
-          res.status(500);
+          res.status(500).send(err);
         }
         let ds = JSON.parse(resp);
         pdfHelper.genPdf(ds,res);
       }).catch(err =>{
           console.log("ERROR::");
           console.log(err);
-          res.status(500);
+          res.status(500).send(err);
       });
 
     });
@@ -105,7 +105,7 @@ router.get('/view/:supId',authorizeAll,(req,res) =>{
           JSON.parse(resp);
         }catch(err){
           console.log("supplementRoutes:: response not a json!");
-          res.status(500);
+          res.status(500).send(err);
         }
         if(resp.indexOf("error") != -1){
           res.status(401).json(resp);
@@ -114,11 +114,11 @@ router.get('/view/:supId',authorizeAll,(req,res) =>{
       }).catch(err =>{
           console.log("ERROR::");
           console.log(err);
-          res.status(500);
+          res.status(500).send(err);
       });
     }).catch(err =>{
         console.log(err);
-        res.status(500);
+        res.status(500).send(err);
     });
 });
 
@@ -141,17 +141,17 @@ router.get('/download/:supId',authorizeAll,(req,res) =>{
           JSON.parse(resp);
         }catch(err){
           console.log("supplementRoutes:: response not a json!");
-          res.status(500);
+          res.status(500).send(err);
         }
         res.status(200).json(resp);
       }).catch(err =>{
           console.log("ERROR::");
           console.log(err);
-          res.status(500);
+          res.status(500).send(err);
       });
     }).catch(err =>{
         console.log(err);
-        res.status(500);
+        res.status(500).send(err);
     });
 });
 
@@ -170,16 +170,16 @@ router.get('/invite/:invHash',authorizeAll,(req,res) =>{
           JSON.parse(resp);
         }catch(err){
           console.log("supplementRoutes:: response not a json!");
-          res.status(500);
+          res.status(500).send(err);
         }
         res.status(200).json(resp);
       }).catch(err =>{
           console.log(err);
-          res.status(500);
+          res.status(500).send(err);
       });
     }).catch(err =>{
         console.log(err);
-        res.status(500);
+        res.status(500).send(err);
     });
 });
 
@@ -220,15 +220,15 @@ router.post('/request',authorizeAll,(req,res) =>{
         //   JSON.parse(resp);
         // }catch(err =>{
         //   console.log("supplementRoutes:: response not a json!");
-        //   res.status(500);
+        //   res.status(500).send(err);
         // });
         res.status(200).json(resp);
       }).catch(err =>{
-        res.status(500);
+        res.status(500).send(err);
       });
     }).catch(err =>{
         console.log(err);
-        res.status(500);
+        res.status(500).send(err);
     });
 });
 
@@ -255,10 +255,10 @@ router.post('/inviteByMail',authorizeAll,(req,res) =>{
 
         res.status(200).json(resp);
       }).catch(err =>{
-        res.status(500);
+        res.status(500).send(err);
       });
     }).catch(err =>{
-        res.status(500);
+        res.status(500).send(err);
     });
 });
 
@@ -284,10 +284,10 @@ router.post('/inviteByQR',authorizeAll,(req,res) =>{
         res.type('svg');
         code.pipe(res);
       }).catch(err =>{
-        res.status(500);
+        res.status(500).send(err);
       });
     }).catch(err =>{
-        res.status(500);
+        res.status(500).send(err);
     });
 });
 
@@ -315,15 +315,15 @@ router.post('/invite/:inviteHash/sendMail',authorizeAll,(req,res) =>{
                     .then(resp =>{
                       res.status(200).json(resp);
                     }).catch(err =>{
-                        res.status(500).send(err);
+                        res.status(500).send(err).send(err);
                     });
                   });
                 }).catch(err =>{
-                  res.status(500);
+                  res.status(500).send(err);
                 });
     }).catch(err =>{
       console.log(err);
-      res.status(500);
+      res.status(500).send(err);
     });
 });
 
@@ -353,13 +353,13 @@ router.post('/invite/:inviteHash/authorize',authorizeAll,(req,res) =>{
               console.log(dsInvite);
               res.redirect("../../view/"+dsId);
           }).catch(err =>{
-              res.status(500).send(err);
+              res.status(500).send(err).send(err);
           });
           }else{
             res.status(401).json({"message":"wrong validation code"});
           }
         }).catch(err =>{
-            res.status(500).send(err);
+            res.status(500).send(err).send(err);
         });
     });
 });
