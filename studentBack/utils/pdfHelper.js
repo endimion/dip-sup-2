@@ -4,7 +4,7 @@ const PDFDocument = require('pdfkit');
 const fs = require('fs');
 const path = require('path');
 // create a document and pipe to a blob
-const doc = new PDFDocument();
+
 
 
 
@@ -19,6 +19,7 @@ exports.genPdf = genPdf;
 function genPdf(ds,res){
   // const stream = doc.pipe(blobStream());
   // const stream = doc.pipe(fs.createWriteStream('test.pdf') ) ;
+  const doc = new PDFDocument();
   const stream = doc.pipe(res);
 
 
