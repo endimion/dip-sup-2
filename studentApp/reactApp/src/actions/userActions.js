@@ -14,7 +14,7 @@ export function setUserName(name) {
       type: "SET_USER_NAME",
       payload: name
     }
-}
+  }
 
 export function setUser(user) {
  return {
@@ -22,3 +22,8 @@ export function setUser(user) {
       payload: user
     }
 }
+
+ export function logout(){
+   return { type:"LOG_OUT"
+          }
+ }

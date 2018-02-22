@@ -1,11 +1,21 @@
 import React, { Component } from 'react'
 import {SideNav, SideNavItem, Button, Icon} from 'react-materialize'
-
+import {logout} from '../actions/userActions'
 
 import officeImg from '../static/img/office.jpg';
 import accountImg from '../static/img/user.png';
 
 export default class SideNavigation extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.logoutUser = this.logoutUser.bind(this);
+  }
+
+  logoutUser(){
+    this.props.dispatch(logout);
+  }
+
     render(){
       const user = this.props.user;
       return   <SideNav
@@ -24,8 +34,7 @@ export default class SideNavigation extends React.Component {
                 		}}
                 	/>
                 	<SideNavItem divider />
-                	<SideNavItem >Logout</SideNavItem>
-
+                	<SideNavItem> <div onClick={e =>this.logoutUser()}>Logout</div></SideNavItem>
                 </SideNav>
     }
 
