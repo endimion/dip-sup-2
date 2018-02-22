@@ -24,6 +24,7 @@ export function setUser(user) {
 }
 
  export function logout(){
+   window.location="/app/";
    return { type:"LOG_OUT"
           }
  }
