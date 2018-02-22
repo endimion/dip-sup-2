@@ -115,6 +115,6 @@ export default class RequestSupplementCard extends React.Component {
       );
     }
 
-    return <Redirect from="/app/request" to={"/app} push />
+    return <Redirect from="/app/request" to={"/app"} push />
   }
 }
