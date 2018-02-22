@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
+import {connect} from 'react-redux'
 import {SideNav, SideNavItem, Button, Icon} from 'react-materialize'
 import {logout} from '../actions/userActions'
 
 import officeImg from '../static/img/office.jpg';
 import accountImg from '../static/img/user.png';
 
+@connect( (store)=>{
+  return { };
+})
 export default class SideNavigation extends React.Component {
 
   constructor(props) {
