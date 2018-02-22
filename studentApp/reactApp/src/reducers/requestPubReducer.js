@@ -3,7 +3,8 @@ export default function reducer(state={
   univId:"",
   email:"",
   univsersity:"UAegean",
-  sendingRequest:false
+  sendingRequest:false,
+  requestFullfiled:false
 },action){
 
   switch(action.type){
@@ -11,7 +12,7 @@ export default function reducer(state={
       return {...state, sendingRequest:true}
     }
     case "REQUEST_PUBLISH_FULLFILED":{
-      return {...state, sendingRequest:false,removedUser:true,usersToRem:[]}
+      return {...state, sendingRequest:false,requestFullfiled:true,removedUser:true,usersToRem:[]}
     }
     case "REQUEST_PUBLISH_REJECTED":{
       return {...state, sendingRequest:false,removedUser:true,remError:action.payload}

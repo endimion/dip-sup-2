@@ -21,6 +21,7 @@ import {  requestPublication,
             univId:store.publish.univId,
             email: store.publish.email,
             modal:store.publish.modal,
+            fullfiled:store.publish.requestFullfiled,
             eId: store.user.user.eid,
             userName: store.user.user.firstName + " " + store.user.user.lastName,
             dateOfBirth: store.user.user.dateOfBirth
@@ -73,43 +74,47 @@ export default class RequestSupplementCard extends React.Component {
 
 
   render(){
-    return (
-      <div>
-        <div className="container" style={{marginTop:"2em"}}>
-        <Row>
-          <div className="input-field col s6">
-            <i className="material-icons prefix">account_circle</i>
-            <input id="universityId" type="text" class="validate" onChange={e =>this.updateUniversityId(e.target.value)}/>
-            <label for="universityId">UniversityId</label>
-          </div>
-        </Row>
-        <Row>
-          <div className="input-field col s6">
-            <i className="material-icons prefix">email</i>
-            <input id="email" type="email" class="validate" onChange={e =>this.updateMail(e.target.value)}/>
-            <label for="email">Email</label>
-          </div>
-        </Row>
-        <Row>
-          <div>
-            <span style={{float:"left", marginLeft:"1.1em"}}><Icon >account_balance</Icon></span>
-              <div className="input-field col s6">
-                <select ref="mySelectBox">
-                  <option key="UAegean" value='UAegean'>University of the Aegean</option>
-                  <option key="UAgr" value='UAgr'>Agricultural University of Athens</option>
-                 </select>
-                 <label>University</label>
-              </div>
-          </div>
-        </Row>
-        <Row>
-            <Button onClick={this.sendPubrequest}>Submit</Button>
-        </Row>
+    if(!fullfiled){
+      return (
+        <div>
+          <div className="container" style={{marginTop:"2em"}}>
+          <Row>
+            <div className="input-field col s6">
+              <i className="material-icons prefix">account_circle</i>
+              <input id="universityId" type="text" class="validate" onChange={e =>this.updateUniversityId(e.target.value)}/>
+              <label for="universityId">UniversityId</label>
+            </div>
+          </Row>
+          <Row>
+            <div className="input-field col s6">
+              <i className="material-icons prefix">email</i>
+              <input id="email" type="email" class="validate" onChange={e =>this.updateMail(e.target.value)}/>
+              <label for="email">Email</label>
+            </div>
+          </Row>
+          <Row>
+            <div>
+              <span style={{float:"left", marginLeft:"1.1em"}}><Icon >account_balance</Icon></span>
+                <div className="input-field col s6">
+                  <select ref="mySelectBox">
+                    <option key="UAegean" value='UAegean'>University of the Aegean</option>
+                    <option key="UAgr" value='UAgr'>Agricultural University of Athens</option>
+                   </select>
+                   <label>University</label>
+                </div>
+            </div>
+          </Row>
+          <Row>
+              <Button onClick={this.sendPubrequest}>Submit</Button>
+          </Row>
 
 
+        </div>
+        <RequestSupplementModal/>
       </div>
-      <RequestSupplementModal/>
-    </div>
-    );
+      );
+    }
+
+    return <Redirect from="/app/request" to={"/app} push />
   }
 }

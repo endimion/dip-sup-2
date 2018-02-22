@@ -58,17 +58,24 @@ export default class Supplements extends React.Component {
           </div>
           );
     }else{
-        let supCards = sups.map(sup =>{
+
+      let supCards = sups.map(sup =>{
                   return <SupplementCard key={sup.Id} sup={sup}
                             openShareByMail={this.openShareByMail}
                             openShareByQR ={this.openShareByQR}
                            />
                 });
-        return (  <div className="main container" style={{marginTop: "3%"}}>
-                   {supCards}
-            </div>
-            );
+        if (sups.length > 0){
+          return (  <div className="main container" style={{marginTop: "3%"}}>
+                     {supCards}
+                    </div>
+                 );
+        }else{
+           return ( <div className="main container" style={{marginTop: "3%"}}>
+                        No matching accademic records found
+                    </div>
+                  );
+        }
     }
-
   }
 }
