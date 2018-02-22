@@ -74,7 +74,7 @@ export default class RequestSupplementCard extends React.Component {
 
 
   render(){
-    if(!fullfiled){
+    if(!this.props.fullfiled){
       return (
         <div>
           <div className="container" style={{marginTop:"2em"}}>
