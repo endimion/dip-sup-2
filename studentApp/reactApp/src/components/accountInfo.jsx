@@ -23,6 +23,7 @@ export default class  AccountInfo extends React.Component {
   }
 
  render(){
+     const  user = this.props.user;
       return (  <div className="main container" style={{marginTop: "3%"}}>
                   <div className="row">
                     <div className="col s12">
