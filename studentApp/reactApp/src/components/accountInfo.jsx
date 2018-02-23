@@ -33,23 +33,23 @@ export default class  AccountInfo extends React.Component {
                     <form className="col s12">
                       <div className="row">
                         <div className="input-field col s12">
-                          <input id="userName" type="text" >
+                          <input id="userName" type="text" />
                           <label for="userName" value={user.userName}   data-success="right">User Name</label>
                         </div>
                         <div className="input-field col s12">
-                          <input id="currentFamilyName" type="text" >
+                          <input id="currentFamilyName" type="text" />
                             <label for="currentFamilyName" value={user.currentFamilyName}  data-success="right">Family Name</label>
                         </div>
                         <div className="input-field col s12">
-                          <input id="currentGivenName" type="text" >
+                          <input id="currentGivenName" type="text" />
                             <label for="currentGivenName" value={user.currentGivenName}  data-success="right">Given Name</label>
                         </div>
                         <div className="input-field col s12">
-                          <input id="dateOfBirth" type="text" >
+                          <input id="dateOfBirth" type="text" />
                             <label for="dateOfBirth" value={user.dateOfBirth}  data-success="right">Date of Birth</label>
                         </div>
                         <div className="input-field col s12">
-                          <input id="personIdentifier" type="text" >
+                          <input id="personIdentifier" type="text" />
                             <label for="personIdentifier" value={user.personIdentifier}  data-success="right">Person Identifier</label>
                         </div>
                       </div>
