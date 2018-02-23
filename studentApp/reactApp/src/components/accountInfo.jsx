@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {Card  , CardPanel, ProgressBar, Row, Col} from 'react-materialize'
 import {Link} from 'react-router-dom'
 
-import {logout } from '../actions/supplementActions'
+import {logout} from '../actions/userActions'
 
 import SupplementCard from './supplementCard.jsx'
 
@@ -17,9 +17,11 @@ export default class  AccountInfo extends React.Component {
 
   constructor(props) {
       super(props);
+      this.logoutUser = this.logoutUser.bind(this);
   }
 
-  componentDidMount(){
+  logoutUser(){
+    this.props.dispatch(logout);
   }
 
  render(){
@@ -34,25 +36,30 @@ export default class  AccountInfo extends React.Component {
                     <form className="col s12">
                       <div className="row">
                         <div className="input-field col s12">
-                          <input id="userName" type="text" />
-                          <label for="userName" value={user.userName}   data-success="right">User Name</label>
+                          <input id="userName" value={user.userName} type="text"  disabled />
+                          <label for="userName"    data-success="right">User Name</label>
                         </div>
                         <div className="input-field col s12">
-                          <input id="currentFamilyName" type="text" />
-                            <label for="currentFamilyName" value={user.currentFamilyName}  data-success="right">Family Name</label>
+                          <input id="currentFamilyName" value={user.currentFamilyName} type="text" disabled />
+                            <label for="currentFamilyName"   data-success="right">Family Name</label>
                         </div>
                         <div className="input-field col s12">
-                          <input id="currentGivenName" type="text" />
-                            <label for="currentGivenName" value={user.currentGivenName}  data-success="right">Given Name</label>
+                          <input id="currentGivenName" value={user.currentGivenName} type="text" disabled />
+                            <label for="currentGivenName"   data-success="right">Given Name</label>
                         </div>
                         <div className="input-field col s12">
-                          <input id="dateOfBirth" type="text" />
-                            <label for="dateOfBirth" value={user.dateOfBirth}  data-success="right">Date of Birth</label>
+                          <input id="dateOfBirth" type="text" value={user.dateOfBirth} disabled />
+                            <label for="dateOfBirth"   data-success="right">Date of Birth</label>
                         </div>
                         <div className="input-field col s12">
-                          <input id="personIdentifier" type="text" />
-                            <label for="personIdentifier" value={user.personIdentifier}  data-success="right">Person Identifier</label>
+                          <input id="personIdentifier" type="text"  value={user.personIdentifier} disabled />
+                            <label for="personIdentifier" data-success="right">Person Identifier</label>
                         </div>
+                      </div>
+                      <div className="row">
+                          <div className="col s12">
+                              <a class="waves-effect waves-teal btn-flat" onClick={e =>this.logoutUser()}>Log out</a>
+                          </div>
                       </div>
                     </form>
                   </div>
