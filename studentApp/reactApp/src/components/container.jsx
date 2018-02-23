@@ -23,6 +23,7 @@ import Supplements from "./supplements.jsx"
 import EditSup from "./editSupplement.jsx"
 import RequestSupplementCard from "./requestSupplementCard.jsx"
 import InviteView from "./viewByInvite.jsx"
+import AccountInfo from "./accountInfo.jsx"
 
 @connect( (store)=>{
   return { user: store.user.user,
@@ -74,6 +75,7 @@ export default class Container extends React.Component {
                     return <div><NavigationBar user={user}/><InviteView inviteId={match.params.id}/></div>;
                   }
       };
+      let account = () =>  <div><NavigationBar user={user}/><AccountInfo  /></div>;
 
       return  <Router>
                   <Switch>
@@ -84,6 +86,7 @@ export default class Container extends React.Component {
                     <Route path="/app/request" exact component={request} />
                     <Route path="/app/edit/:id" component={edit}/>
                     <Route path="/app/invite/:id" component={inviteView}/>
+                      <Route path="/app/account" component={account}/>
                   </Switch>
                 </Router>
 
