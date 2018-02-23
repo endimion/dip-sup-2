@@ -22,7 +22,7 @@ function genPdf(ds,res){
   // const stream = doc.pipe(fs.createWriteStream('test.pdf') ) ;
   const doc = new PDFDocument();
   const stream = doc.pipe(res);
-
+  doc.registerFont('NotoSans', 'fonts/NotoSans-Thin.ttf');
 
   // let ds = {"Owner":"GRGRCph445859_",
   // "Name":"","Surname":"","University":"UAgean","Authorized":["n","k"],
@@ -127,18 +127,18 @@ let accessToFurtherStudy = "5.1 Access to further study: ";
 let profStatus = "5.2 Professional Status: ";
 
   doc.fill("black").text('UNIVERSITY OF THE AEGEAN', 140, 200)
-     .font('Times-Roman', 13)
+     .font('NotoSans', 13)
      .moveDown()
      .text('DEPARTMENT OF FINANCIAL AND MANAGEMENT ENGINEERING', 120, 225)
-     .font('Times-Roman', 11)
+     .font('NotoSans', 11)
      .moveDown()
      .text(personalDsc, style)
     .moveDown()
 
-     .font('fonts/AttikaU.ttf')
+     // .font('fonts/AttikaU.ttf')
      .text(personalName, style)
      .text(givenName, style)
-     .font('Times-Roman', 11)
+     .font('NotoSans', 11)
 
      .text(date, style)
      .text(stdId, style)
@@ -233,7 +233,7 @@ function addTableRow(mod,doc){
   let examPer = "Exam Period: "+ mod.ExamPeriod;
   let grade = "Grade: "+mod.Grade;
   let writting = "In Writting: "+ mod.InWriting;
-  doc.font('Times-Roman', 11)
+  doc.font('NotoSans', 11)
     .moveDown(0.5)
     .text(modCode)
     .text(modName)
