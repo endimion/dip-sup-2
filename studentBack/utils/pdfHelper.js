@@ -134,8 +134,12 @@ let profStatus = "5.2 Professional Status: ";
      .moveDown()
      .text(personalDsc, style)
     .moveDown()
+
+     .font('../fonts/AttikaU.ttf')
      .text(personalName, style)
      .text(givenName, style)
+     .font('Times-Roman', 11)
+     
      .text(date, style)
      .text(stdId, style)
      .moveDown()
