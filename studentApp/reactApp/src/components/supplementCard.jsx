@@ -84,7 +84,7 @@ export default class SupplementCard extends React.Component {
               // return null;
           });
           // console.log(innerContents);
-          return  <li >
+          return  <li key={key}>
                   <div class="collapsible-header" data-collapsible="accordion" style={headerCss}>
                           {key}
                           <i class="material-icons">expand_more</i>
