@@ -91,8 +91,8 @@ function genPdf(ds,res){
      };
 
   let personalDsc = "1. INFORMATION IDENTIFYING THE HOLDER OF THE QUALIFICATION";
-  let fName = utf8.decode(ds.Holder_Info.Name.split(" ")[0]);
-  let gName = utf8.decode(ds.Holder_Info.Name.split(" ")[1]);
+  let fName = ds.Holder_Info.Name.split(" ")[0];
+  let gName = ds.Holder_Info.Name.split(" ")[1];
   let personalName = "1.1 Family Name: " + fName;
   let givenName = "1.2 Given Name: " + gName;
   let date = "1.3 Date of birth (day/month/year) - Place, Country of birth: " +
