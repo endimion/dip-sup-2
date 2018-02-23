@@ -59,7 +59,7 @@ export default class SupplementCard extends React.Component {
                   });
 
                 return (
-                      <div class="collapsible-body" style={{color:"black"}}>
+                      <div class="collapsible-body" style={{color:"black"}} key={k}>
                         <Collection>
                         	<CollectionItem  key={k}><span>{k}</span></CollectionItem>
                         	<CollectionItem key={"Description"}><span>Description :{details.Description}</span></CollectionItem>
