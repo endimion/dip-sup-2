@@ -31,6 +31,7 @@ import Supplements from "./supplements.jsx"
 import EditSup from "./editSupplement.jsx"
 import RequestSupplementCard from "./requestSupplementCard.jsx"
 import ServerLoading from "./serverLoading.jsx"
+import AccountInfo from "./accountInfo.jsx"
 
 @connect( (store)=>{
   return { user: store.user.user,
@@ -85,6 +86,7 @@ export default class Container extends React.Component {
       let inviteView = ({match}) => {
                     return <div><NavigationBar user={user}/></div>;
       };
+        let account = () =>  <div><NavigationBar user={user}/><AccountInfo/></div>;
 
 
       return  <StaticRouter location={this.props.location} context={this.props.context}>
