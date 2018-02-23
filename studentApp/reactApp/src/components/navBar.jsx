@@ -15,7 +15,7 @@ export default class NavigationBar extends React.Component {
 
 
         const account = <li><NavLink to="/">Account</NavLink></li>;
-        return   <Navbar style={style} brand='DS Service' right fixed={true}>
+        return   <Navbar style={style} to="/app/" brand='DS Service' right fixed={true}>
                  <li><NavLink to="/app/home">Home</NavLink></li>
 	               <li><NavLink to="/app/manage">Manage Supplements</NavLink></li>
                  <li><NavLink to="/app/request">Request new Supplement</NavLink></li>

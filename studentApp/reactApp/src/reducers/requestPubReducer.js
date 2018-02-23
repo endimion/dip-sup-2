@@ -21,7 +21,7 @@ export default function reducer(state={
       return {...state,modal:true}
     }
     case "PUBLISH_MODAL_CLOSE":{
-      return {...state,modal:false}
+      return {...state,modal:false,requestFullfiled:false}
     }
     case "UPDATE_UNIVID":{
       return {...state,univId:action.payload}
