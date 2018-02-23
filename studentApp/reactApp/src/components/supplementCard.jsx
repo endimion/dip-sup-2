@@ -43,7 +43,7 @@ export default class SupplementCard extends React.Component {
                   let details = entry[k];
                   let modules =[];
                   details.Modules.map( (mod) =>{
-                    modules.push( <Row>
+                    modules.push( <Row key={mod.ModuleCode}>
                             <Col m={12} s={12}>
                               <Card>
                                 <Collection>
