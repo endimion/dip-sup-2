@@ -45,7 +45,7 @@ export default class SupplementCard extends React.Component {
                   details.Modules.map( (mod) =>{
                     modules.push( <Row key={mod.ModuleCode}>
                             <Col m={12} s={12}>
-                              <Card>
+                              <Card >
                                 <Collection>
                                   <CollectionItem key={"ModuleCode"}><span>ModuleCode: {mod.ModuleCode}</span></CollectionItem>
                                   <CollectionItem key={"NameOfTheModule"}><span>NameOfTheModule: {mod.NameOfTheModule}</span></CollectionItem>
@@ -66,7 +66,7 @@ export default class SupplementCard extends React.Component {
                         	<CollectionItem key={"Legend"}><span>Legend :{details.Legend}</span></CollectionItem>
                         	<CollectionItem key={"Modules"}>
                             <Collapsible>
-                              	<CollapsibleItem key={"Mods"} header='Modules' icon="expand_more" style={headerCss}>
+                              	<CollapsibleItem className="modulesCard" key={"Mods"} header='Modules' icon="expand_more" style={headerCss}>
                               		{modules}
                               	</CollapsibleItem>
                           	</Collapsible>
