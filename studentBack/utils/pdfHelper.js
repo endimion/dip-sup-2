@@ -22,7 +22,7 @@ function genPdf(ds,res){
   // const stream = doc.pipe(fs.createWriteStream('test.pdf') ) ;
   const doc = new PDFDocument();
   const stream = doc.pipe(res);
-  doc.registerFont('NotoSans', __dirname +'/../fonts/NotoSans-Thin.ttf');
+  doc.registerFont('NotoSans', __dirname +'/../fonts/NotoSans-Regular.ttf');
 
   // let ds = {"Owner":"GRGRCph445859_",
   // "Name":"","Surname":"","University":"UAgean","Authorized":["n","k"],

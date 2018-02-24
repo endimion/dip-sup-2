@@ -47,11 +47,11 @@ router.get('/view',authorizeAll,(req,res) =>{
         // console.log(resp);
         try{
           JSON.parse(resp);
+          res.status(200).json(resp);
         }catch(err){
           console.log("supplementRoutes:: response not a json!");
           res.status(500).send(err);
         }
-        res.status(200).json(resp);
       }).catch(err =>{
           console.log(err);
           res.status(500).send(err);
@@ -75,12 +75,13 @@ router.get('/pdf/:supId',authorizeAll,(req,res) =>{
         }
         try{
           JSON.parse(resp);
+          let ds = JSON.parse(resp);
+          pdfHelper.genPdf(ds,res);
         }catch(err){
           console.log("supplementRoutes:: response not a json!");
           res.status(500).send(err);
         }
-        let ds = JSON.parse(resp);
-        pdfHelper.genPdf(ds,res);
+
       }).catch(err =>{
           console.log("ERROR::");
           console.log(err);
@@ -103,6 +104,7 @@ router.get('/view/:supId',authorizeAll,(req,res) =>{
       .then( resp =>{
         try{
           JSON.parse(resp);
+          res.status(200).json(resp);
         }catch(err){
           console.log("supplementRoutes:: response not a json!");
           res.status(500).send(err);
@@ -110,7 +112,6 @@ router.get('/view/:supId',authorizeAll,(req,res) =>{
         if(resp.indexOf("error") != -1){
           res.status(401).json(resp);
         }
-        res.status(200).json(resp);
       }).catch(err =>{
           console.log("ERROR::");
           console.log(err);
@@ -139,11 +140,11 @@ router.get('/download/:supId',authorizeAll,(req,res) =>{
         }
         try{
           JSON.parse(resp);
+          res.status(200).json(resp);
         }catch(err){
           console.log("supplementRoutes:: response not a json!");
           res.status(500).send(err);
         }
-        res.status(200).json(resp);
       }).catch(err =>{
           console.log("ERROR::");
           console.log(err);
@@ -168,11 +169,11 @@ router.get('/invite/:invHash',authorizeAll,(req,res) =>{
       .then( resp =>{
         try{
           JSON.parse(resp);
+          res.status(200).json(resp);
         }catch(err){
           console.log("supplementRoutes:: response not a json!");
           res.status(500).send(err);
         }
-        res.status(200).json(resp);
       }).catch(err =>{
           console.log(err);
           res.status(500).send(err);
