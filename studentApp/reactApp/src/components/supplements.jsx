@@ -24,6 +24,7 @@ export default class Supplements extends React.Component {
   }
 
   componentDidMount(){
+     $('.button-collapse').sideNav('hide');
      this.fetchSupplements();
   }
 

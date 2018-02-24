@@ -13,6 +13,11 @@ import EditSupplementCard from "./editSupplementCard.jsx"
         };
 })
 export default class EditSup extends React.Component {
+
+    componentDidMount(){
+      $('.button-collapse').sideNav('hide');
+    }
+
     render(){
       // console.log(this.props.match.params.id);
       const id = this.props.match.params.id;

@@ -20,6 +20,10 @@ export default class  AccountInfo extends React.Component {
       this.logoutUser = this.logoutUser.bind(this);
   }
 
+  componentDidMount(){
+    $('.button-collapse').sideNav('hide');
+  }
+  
   logoutUser(){
     this.props.dispatch(logout);
   }

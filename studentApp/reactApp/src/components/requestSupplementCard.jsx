@@ -40,6 +40,10 @@ export default class RequestSupplementCard extends React.Component {
     this.updateUniversityId = this.updateUniversityId.bind(this);
   }
 
+  componentDidMount(){
+    $('.button-collapse').sideNav('hide');
+  }
+
   sendPubrequest(){
     let university = this.props.university;
     // let userName = this.props.userName;
