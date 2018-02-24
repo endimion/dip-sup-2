@@ -4,6 +4,6 @@
     z-index: 998;
 }
 
-/*.nav-wrapper{
-  background-color: darkslategray;
-}*/
+.modulesCard.collapsible-body{
+  padding: 0.5rem!important;
+}
