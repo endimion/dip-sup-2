@@ -4,6 +4,10 @@
     z-index: 998;
 }
 
-.modulesCard.collapsible-body{
+.modulesCard.collapsible-body {
   padding: 0.5rem!important;
+}
+
+#modulesCollection {
+  padding: 10px 0 10px 0;
 }

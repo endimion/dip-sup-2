@@ -64,7 +64,7 @@ export default class SupplementCard extends React.Component {
                         	<CollectionItem  key={k}><span>{k}</span></CollectionItem>
                         	<CollectionItem key={"Description"}><span>Description :{details.Description}</span></CollectionItem>
                         	<CollectionItem key={"Legend"}><span>Legend :{details.Legend}</span></CollectionItem>
-                        	<CollectionItem key={"Modules"}>
+                        	<CollectionItem id="modulesCollection" key={"Modules"}>
                             <Collapsible>
                               	<CollapsibleItem className="modulesCard" key={"Mods"} header='Modules' icon="expand_more" style={headerCss}>
                               		{modules}
