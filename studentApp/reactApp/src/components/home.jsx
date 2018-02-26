@@ -13,6 +13,9 @@ import manageImg from '../static/img/manage-user.png';
 
 export default class HomePage extends React.Component {
 
+      componentDidMount(){
+        $('.button-collapse').sideNav('hide');
+      }
 
       render(){
 
