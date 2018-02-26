@@ -5,7 +5,11 @@ import axios from "axios"
 // ES6
 import axiosRetry from 'axios-retry';
 
-axiosRetry(axios, { retries: 3 });
+
+axiosRetry(axios, { retries: 3, retryDelay: (retryCount) => {
+  console.log("retrying!!!");
+  return retryCount * 1000;
+} });
 
 export function  getSupplementsByEid(userEid) {
   return  function(dispatch){
