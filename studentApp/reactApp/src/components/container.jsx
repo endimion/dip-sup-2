@@ -40,7 +40,7 @@ export default class Container extends React.Component {
 
 
   static propTypes = {
-   location: React.PropTypes.object.isRequired
+   // location: React.PropTypes.object.isRequired
  }
   // static propTypes = {
   //   cookies: instanceOf(Cookies).isRequired
