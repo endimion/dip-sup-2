@@ -29,7 +29,6 @@ import AccountInfo from "./accountInfo.jsx"
   return { user: store.user.user,
         };
 })
-@withRouter
 export default class Container extends React.Component {
 
   constructor(props) {
