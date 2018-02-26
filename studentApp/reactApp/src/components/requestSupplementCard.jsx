@@ -44,6 +44,11 @@ export default class RequestSupplementCard extends React.Component {
     $('.button-collapse').sideNav('hide');
   }
 
+  componentWillReceiveProps(nextProps){
+    $('.button-collapse').sideNav('hide');
+  }
+
+
   sendPubrequest(){
     let university = this.props.university;
     // let userName = this.props.userName;
