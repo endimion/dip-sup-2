@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import {Card  , CardPanel, ProgressBar, Row, Col} from 'react-materialize'
 import {Link} from 'react-router-dom'
-
+import PropTypes from 'prop-types'
 import {getSupplementsByEid,openShareByMail,openShareByQR } from '../actions/supplementActions'
 
 import SupplementCard from './supplementCard.jsx'
