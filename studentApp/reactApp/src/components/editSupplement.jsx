@@ -18,6 +18,11 @@ export default class EditSup extends React.Component {
       $('.button-collapse').sideNav('hide');
     }
 
+    componentWillReceiveProps(){
+      $('.button-collapse').sideNav('hide');
+    }
+
+
     render(){
       // console.log(this.props.match.params.id);
       const id = this.props.match.params.id;

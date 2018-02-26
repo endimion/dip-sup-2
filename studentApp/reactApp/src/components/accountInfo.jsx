@@ -23,7 +23,12 @@ export default class  AccountInfo extends React.Component {
   componentDidMount(){
     $('.button-collapse').sideNav('hide');
   }
-  
+
+  componentWillReceiveProps(){
+    $('.button-collapse').sideNav('hide');
+  }
+
+
   logoutUser(){
     this.props.dispatch(logout);
   }

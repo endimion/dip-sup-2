@@ -28,6 +28,11 @@ export default class Supplements extends React.Component {
      this.fetchSupplements();
   }
 
+  componentWillReceiveProps(){
+    $('.button-collapse').sideNav('hide');
+    this.fetchSupplements();
+  }
+
  fetchSupplements(){
    console.log("will fetch with eid" + this.props.user.eid);
    this.props.dispatch(getSupplementsByEid(this.props.user.eid));

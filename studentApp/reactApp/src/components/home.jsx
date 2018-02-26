@@ -17,6 +17,10 @@ export default class HomePage extends React.Component {
         $('.button-collapse').sideNav('hide');
       }
 
+      componentWillReceiveProps(){
+        $('.button-collapse').sideNav('hide');
+      }
+
       render(){
 
         const imgStyle = {margin: "0 auto", display: "block"};
