@@ -10,6 +10,9 @@ import {
   Redirect
 } from 'react-router-dom'
 
+import PropTypes from 'prop-types'
+import { withRouter } from 'react-router'
+
 import {sideBarOnOff} from '../actions/sideBarActions'
 import {setUser } from '../actions/userActions'
 import Cookies from 'universal-cookie';
