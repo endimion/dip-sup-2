@@ -30,7 +30,7 @@ export default class Supplements extends React.Component {
 
   componentWillReceiveProps(nextProps){
     $('.button-collapse').sideNav('hide');
-    if(nextProps.location.pathname !== this.props.location.pathname){
+    if(nextProps.location !== this.props.location){
             this.fetchSupplements();
     }
   }

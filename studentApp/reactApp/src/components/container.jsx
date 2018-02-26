@@ -29,12 +29,17 @@ import AccountInfo from "./accountInfo.jsx"
   return { user: store.user.user,
         };
 })
+@withRouter
 export default class Container extends React.Component {
 
   constructor(props) {
     super(props);
   }
 
+
+  static propTypes = {
+   location: React.PropTypes.object.isRequired
+ }
   // static propTypes = {
   //   cookies: instanceOf(Cookies).isRequired
   // };
