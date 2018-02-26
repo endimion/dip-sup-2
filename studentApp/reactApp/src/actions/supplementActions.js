@@ -11,22 +11,33 @@ axiosRetry(axios, { retries: 3, retryDelay: (retryCount) => {
   return retryCount * 1000;
 } });
 
-export function  getSupplementsByEid(userEid) {
-  return  function(dispatch){
-    // console.log(userEid);
-       dispatch({type: "GET_SUP"} );
-       //here we should make an Ajax call with axios
-      // on success it should return GET_SUP_FULLFILED else GET_SUP_REJECTED
-        // axios.get("http://rest.learncode.academy/api/test123/tweets")
-        axios.get("/back/supplement/rest/view")
-         .then(response =>{
-           // dispatch({type: "GET_SUP_FULLFILED",payload:DS})
-            dispatch({type: "GET_SUP_FULLFILED",payload:JSON.parse(response.data)})
-         })
-         .catch(err=>{
-           dispatch({type:"GET_SUP_REJECTED",payload:err})
-         });
-  }
+export function  getSupplementsByEid(userEid, counter) {
+ if(!counter ){
+   counter = 0;
+ }
+ if(counter < 3){
+   counter ++;
+   return  function(dispatch){
+     // console.log(userEid);
+        dispatch({type: "GET_SUP"} );
+        //here we should make an Ajax call with axios
+       // on success it should return GET_SUP_FULLFILED else GET_SUP_REJECTED
+         // axios.get("http://rest.learncode.academy/api/test123/tweets")
+         axios.get("/back/supplement/rest/view")
+          .then(response =>{
+            // dispatch({type: "GET_SUP_FULLFILED",payload:DS})
+             dispatch({type: "GET_SUP_FULLFILED",payload:JSON.parse(response.data)})
+          })
+          .catch(err=>{
+            // dispatch({type:"GET_SUP_REJECTED",payload:err})
+            console.log("will try again");
+            return getSupplementsByEid(userEid, counter);
+          });
+   }
+ }else{
+   dispatch({type:"GET_SUP_REJECTED",payload:err});
+ }
+
 }
 
 export function  openShareByMail(supId) {
