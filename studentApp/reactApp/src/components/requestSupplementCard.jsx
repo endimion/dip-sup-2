@@ -90,23 +90,23 @@ export default class RequestSupplementCard extends React.Component {
         <div>
           <div className="container" style={{marginTop:"2em"}}>
           <Row>
-            <div className="input-field col s6">
+            <div className="input-field col s12 l6">
               <i className="material-icons prefix">account_circle</i>
               <input id="universityId" type="text" class="validate" onChange={e =>this.updateUniversityId(e.target.value)}/>
               <label for="universityId">UniversityId</label>
             </div>
           </Row>
           <Row>
-            <div className="input-field col s6">
+            <div className="input-field col s12 l6">
               <i className="material-icons prefix">email</i>
               <input id="email" type="email" class="validate" onChange={e =>this.updateMail(e.target.value)}/>
               <label for="email">Email</label>
             </div>
           </Row>
           <Row>
-            <div>
-              <span style={{float:"left", marginLeft:"1.1em"}}><Icon >account_balance</Icon></span>
-                <div className="input-field col s6">
+            <div className="col s12 l6">
+              <span style={{float:"left"}}><Icon >account_balance</Icon></span>
+                <div className="input-field col s11" style={{    marginLeft: "0.5em"}}>
                   <select ref="mySelectBox">
                     <option key="UAegean" value='UAegean'>University of the Aegean</option>
                     <option key="UAgr" value='UAgr'>Agricultural University of Athens</option>
@@ -116,7 +116,7 @@ export default class RequestSupplementCard extends React.Component {
             </div>
           </Row>
           <Row>
-              <Button onClick={this.sendPubrequest}>Submit</Button>
+              <Button style={{marginLeft: "0.5em"}} onClick={this.sendPubrequest}>Request</Button>
           </Row>
 
 
