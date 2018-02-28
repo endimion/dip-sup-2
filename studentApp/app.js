@@ -53,14 +53,14 @@ app.use('/dist/build/',express.static('dist/build'));
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 app.use(cookieParser());
-app.use(session({
-  store: new FileStore,
-  name: 'clientAppCookie',
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: false }
-})); //set up middleware for session handling
+// app.use(session({
+//   store: new FileStore,
+//   name: 'clientAppCookie',
+//   secret: 'keyboard cat',
+//   resave: false,
+//   saveUninitialized: true,
+//   cookie: { secure: false }
+// })); //set up middleware for session handling
 app.use(morgan('tiny')); //http request logger
 app.use(timeout(120000));
 app.use('/', [loginViewRoutes,loginRoutes]);
