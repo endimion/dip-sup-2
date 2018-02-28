@@ -43,11 +43,11 @@ function retryAxiosNtimes(times, counter, url){
               counter++;
               console.log("will try again " + counter);
               resolve(retryAxiosNtimes(times,counter,url));
-            
+
           }else{
             console.log(`tried ${counter} times`);
             reject(err);
-          });
+          }
     });
 
 
