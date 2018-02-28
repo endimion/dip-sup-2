@@ -105,13 +105,13 @@ export default class RequestSupplementCard extends React.Component {
           </Row>
           <Row>
             <div className="col s12 l6">
-              <span style={{float:"left"}}><Icon >account_balance</Icon></span>
-                <div className="input-field col s11" style={{    marginLeft: "0.5em"}}>
+              <span style={{float:"left", paddingLeft:"0"}} className="col s1"><Icon >account_balance</Icon></span>
+                <div className="input-field col s11" style={{    marginLeft: "0" , paddingLeft:"0"}}>
                   <select ref="mySelectBox">
                     <option key="UAegean" value='UAegean'>University of the Aegean</option>
                     <option key="UAgr" value='UAgr'>Agricultural University of Athens</option>
                    </select>
-                   <label>University</label>
+                   <label style={{left:"0"}}>University</label>
                 </div>
             </div>
           </Row>
