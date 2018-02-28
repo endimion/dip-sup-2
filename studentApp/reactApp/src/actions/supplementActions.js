@@ -32,7 +32,7 @@ export function  getSupplementsByEid(userEid, counter) {
 }
 
 //
-function retryAxiosNtimes(times, counter, url){
+export function retryAxiosNtimes(times, counter, url){
     return new Promise( (resolve,reject) => {
       axios.get(url)
       .then(response =>{
@@ -49,8 +49,7 @@ function retryAxiosNtimes(times, counter, url){
             reject(err);
           }
     });
-
-
+  }
 }
 
 
