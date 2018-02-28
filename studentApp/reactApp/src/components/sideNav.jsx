@@ -37,6 +37,11 @@ export default class SideNavigation extends React.Component {
 
                 		}}
                 	/>
+                  <SideNavItem subheader>Information</SideNavItem>
+                  <SideNavItem >{user.firstName}</SideNavItem>
+                  <SideNavItem >{user.lastName}</SideNavItem>
+                  <SideNavItem >{user.userName}</SideNavItem>
+                  <SideNavItem subheader>Actions</SideNavItem>
                 	<SideNavItem divider />
                 	<SideNavItem> <div onClick={e =>this.logoutUser()}>Logout</div></SideNavItem>
                 </SideNav>
