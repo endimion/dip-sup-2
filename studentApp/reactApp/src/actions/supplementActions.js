@@ -49,7 +49,7 @@ export function retryAxiosNtimes(times, counter, url){
             reject(err);
           }
     });
-  }
+  });
 }
 
 
