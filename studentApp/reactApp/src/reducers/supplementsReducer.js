@@ -22,7 +22,7 @@ export default function reducer(state={
     }
 
     case "REMOVE_SUP_VIEW":{
-      return {...statem,isUpdated:false}
+      return {...state,isUpdated:false}
     }
 
     case "SHARE_SUP_FULLFILED":{
