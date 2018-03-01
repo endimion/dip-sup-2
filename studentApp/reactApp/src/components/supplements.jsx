@@ -28,13 +28,16 @@ export default class Supplements extends React.Component {
   componentDidMount(){
      $('.button-collapse').sideNav('hide');
      // this.fetchSupplements();
+       if(!this.props.isUpdated && !this.props.fetching){
+         this.fetchSupplements();
+       }
   }
 
   componentWillReceiveProps(nextProps){
     $('.button-collapse').sideNav('hide');
-    if(!this.props.isUpdated && !this.props.fetching){
-      this.fetchSupplements();
-    }
+    // if(!this.props.isUpdated && !this.props.fetching){
+    //   this.fetchSupplements();
+    // }
   }
 
   componentWillUnmount(){
