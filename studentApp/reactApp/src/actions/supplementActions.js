@@ -42,7 +42,9 @@ export function retryAxiosNtimes(times, counter, url){
           if(counter < times){
               counter++;
               console.log("will try again " + counter);
-              resolve(retryAxiosNtimes(times,counter,url));
+              sleep(1000)
+              .then( () => {resolve(retryAxiosNtimes(times,counter,url));
+                    });
 
           }else{
             console.log(`tried ${counter} times`);
@@ -50,6 +52,11 @@ export function retryAxiosNtimes(times, counter, url){
           }
     });
   });
+}
+
+
+function sleep (time) {
+  return new Promise((resolve) => setTimeout(resolve, time));
 }
 
 
