@@ -31,7 +31,6 @@ export function  getSupplementsByEid(userEid, counter) {
    }
 }
 
-//
 export function retryAxiosNtimes(times, counter, url){
     return new Promise( (resolve,reject) => {
       axios.get(url)
@@ -58,6 +57,16 @@ export function retryAxiosNtimes(times, counter, url){
 function sleep (time) {
   return new Promise((resolve) => setTimeout(resolve, time));
 }
+
+
+
+
+export function  removeSupplements() {
+   return  function(dispatch){
+         dispatch({type: "GET_SUP"} );
+   }
+}
+
 
 
 export function  openShareByMail(supId) {

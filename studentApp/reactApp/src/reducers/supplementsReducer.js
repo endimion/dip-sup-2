@@ -6,7 +6,8 @@ export default function reducer(state={
   shareError:null,
   sharingQR:false,
   shareErrorQR:null,
-  QR:null
+  QR:null,
+  isUpdated:false
 },action){
 
   switch(action.type){
@@ -17,8 +18,13 @@ export default function reducer(state={
       return {...state, supError:action.payload,fetching: false}
     }
     case "GET_SUP":{
-        return {...state, fetching:true}
+        return {...state, fetching:true, isUpdated:true}
     }
+
+    case "REMOVE_SUP_VIEW":{
+      return {...statem,isUpdated:false}
+    }
+
     case "SHARE_SUP_FULLFILED":{
         return {...state,sharing:false,shareError:null}
     }

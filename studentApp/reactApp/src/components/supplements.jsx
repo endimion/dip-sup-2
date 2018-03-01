@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {Card  , CardPanel, ProgressBar, Row, Col} from 'react-materialize'
 import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {getSupplementsByEid,openShareByMail,openShareByQR } from '../actions/supplementActions'
+import {getSupplementsByEid,openShareByMail,openShareByQR,removeSupplements } from '../actions/supplementActions'
 
 import SupplementCard from './supplementCard.jsx'
 
@@ -13,6 +13,7 @@ import SupplementCard from './supplementCard.jsx'
   return {  sups : store.sups.supplements ,
             supError:store.sups.supError,
             fetching:store.sups.fetching,
+            isUpdated:store.sups.isUpdated
         };
 })
 export default class Supplements extends React.Component {
@@ -21,6 +22,7 @@ export default class Supplements extends React.Component {
       super(props);
       this.openShareByMail = this.openShareByMail.bind(this);
       this.openShareByQR = this.openShareByQR.bind(this);
+      this.cleanUp = this.cleanUp.bind(this);
   }
 
   componentDidMount(){
@@ -30,10 +32,15 @@ export default class Supplements extends React.Component {
 
   componentWillReceiveProps(nextProps){
     $('.button-collapse').sideNav('hide');
-    // if(nextProps.location !== this.props.location){
-    //         this.fetchSupplements();
-    // }
   }
+
+  componentWillUnmount(){
+    this.cleanUp();
+  }
+
+ cleanUp(){
+   this.props.dispatch(removeSupplements());
+ }
 
  fetchSupplements(){
    console.log("will fetch with eid" + this.props.user.eid);
