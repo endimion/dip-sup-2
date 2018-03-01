@@ -32,8 +32,13 @@ export function  getSupplementsByEid(userEid, counter) {
 }
 
 export function retryAxiosNtimes(times, counter, url){
+  const config = {
+    headers: { Pragma: 'no-cache'},
+    // params: { id: this.state.taskID }
+  }
+
     return new Promise( (resolve,reject) => {
-      axios.get(url)
+      axios.get(url,config)
       .then(response =>{
         resolve(response);
       })
