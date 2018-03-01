@@ -63,7 +63,7 @@ function sleep (time) {
 
 export function  removeSupplements() {
    return  function(dispatch){
-         dispatch({type: "GET_SUP"} );
+         dispatch({type: "REMOVE_SUP_VIEW"} );
    }
 }
 
