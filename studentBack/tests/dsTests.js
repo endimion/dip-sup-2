@@ -73,7 +73,7 @@ let evHelper = require('../utils/eventHelper.js');
 
 
 
-// basic.installChaincode(["localhost:7051"],"dipSup_cc14","github.com/dipSup_cc","0.1", "nikos", "org1");
+// basic.installChaincode(["172.17.0.1:7051"],"dipSup_cc14","github.com/dipSup_cc","0.1", "nikos", "org1");
 
   basic.instantiateChaincode("mychannel", "dipSup_cc14", "0.1", "init", [],"nikos", "org1");
 

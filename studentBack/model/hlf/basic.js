@@ -86,11 +86,11 @@ exports.createChannel = function(){
 };
 
 exports.joinAllOrgsOnChannel = function(chanelName){
-  join.joinChannel(chanelName, ["localhost:7051"],  "nikos2", "org1").then(resp =>{
+  join.joinChannel(chanelName, ["172.17.0.1:7051"],  "nikos2", "org1").then(resp =>{
     console.log("=============Peer localhost:7051 JOINED===================");
   })
   .then(resp =>{
-      join.joinChannel(chanelName, ["localhost:8051"],  "nikos2", "org2");
+      join.joinChannel(chanelName, ["172.17.0.1:8051"],  "nikos2", "org2");
         console.log("=============Peer localhost:8051 JOINED===================");
   }).catch(err =>{
       console.log(err);
