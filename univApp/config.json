@@ -16,6 +16,6 @@
    "peer": "peer1",
    "chaincode": "dipSup_cc14",
     "org":"org1",
-    "peerAddress":"localhost:7051"
+    "peerAddress":"172.17.0.1:7051"
 
 }
