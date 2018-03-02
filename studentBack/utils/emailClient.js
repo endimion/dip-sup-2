@@ -48,7 +48,7 @@ function sendEmail(receiverAddress,body){
       };
         transporter.sendMail(mailOptions)
         .then(result => {
-                console.log("mail sent");
+                console.log(`mail sent ${result}`);
                 resolve(result);
         })
         .catch(err => {

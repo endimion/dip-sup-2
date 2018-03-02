@@ -9,7 +9,7 @@
                                       "BASE_URL":"/",
                                        "LOGIN_ADDR":"http://195.251.134.246:9080/login"},
     "env_production": {"ENV_VARIABLE":123,
-                        "SRV_ADDR":"http://138.68.103.237",
+                        "SRV_ADDR":"http://195.251.134.246",
                         "NODE_ENV": "production",
                         "BASE_URL":"/","LOGIN_ADDR":"http://195.251.134.246:9080/login"}
   },
@@ -21,7 +21,7 @@
                                       "NODE_ENV": "development",
                                       "BASE_URL":"/back","LOGIN_ADDR":"http://195.251.134.246:9080/login"},
     "env_production": {"ENV_VARIABLE":123,
-                        "SRV_ADDR":"http://138.68.103.237",
+                        "SRV_ADDR":"http://195.251.134.246",
                         "NODE_ENV": "production",
                         "BASE_URL":"/","LOGIN_ADDR":"http://195.251.134.246:9080/login"}
   },
@@ -33,7 +33,7 @@
                                       "NODE_ENV": "development",
                                     "BASE_URL":"/","LOGIN_ADDR":"http://195.251.134.246:9080/login"},
     "env_production": {"UNIVERSITY_NAME":"UAegean",
-                        "SRV_ADDR":"http://138.68.103.237",
+                        "SRV_ADDR":"http://195.251.134.246",
                         "NODE_ENV": "production",
                         "BASE_URL":"/univ/","LOGIN_ADDR":"http://195.251.134.246:9080/login"}
   },
@@ -45,7 +45,7 @@
                                       "NODE_ENV": "development",
                                     "BASE_URL":"/","LOGIN_ADDR":"http://195.251.134.246:9080/login"},
     "env_production": {"UNIVERSITY_NAME":"UAegean",
-                        "SRV_ADDR":"http://138.68.103.237",
+                        "SRV_ADDR":"http://195.251.134.246",
                         "NODE_ENV": "production",
                         "BASE_URL":"/univ/","LOGIN_ADDR":"http://195.251.134.246:9080/login"}
   }
