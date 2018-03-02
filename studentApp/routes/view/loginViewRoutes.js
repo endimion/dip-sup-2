@@ -38,6 +38,6 @@ router.get('/landing', (req,res) =>{
 router.get('/eIDAS', function (req, res) {
   // if(!req.session.userType  && !req.session.eID){
     // res.redirect(303, "http://84.205.248.180/ISSPlus/ValidateToken?t="+ uuid()+"&sp=sp1&cc=CA&saml=eIDAS");
-    res.redirect(303, "http://138.68.103.237:8090/login");
+    res.redirect(303, process.env.LOGIN_ADDR);
   // }
 });
