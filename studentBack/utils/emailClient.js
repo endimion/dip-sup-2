@@ -31,7 +31,7 @@ function sendEmail(receiverAddress,body){
         auth: {
           //user: 'triantafyllou.ni@gmail.com',
           //pass: _pass
-          user: 'user@mail.example.com',
+          user: 'user@dss.aegean.gr',
           pass: 'pwd'
         }
       });
