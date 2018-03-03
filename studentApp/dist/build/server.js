@@ -61,7 +61,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 31);
+/******/ 	return __webpack_require__(__webpack_require__.s = 32);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -80,13 +80,13 @@ module.exports = require("react-materialize");
 /* 2 */
 /***/ (function(module, exports) {
 
-module.exports = require("path");
+module.exports = require("react-redux");
 
 /***/ }),
 /* 3 */
 /***/ (function(module, exports) {
 
-module.exports = require("react-redux");
+module.exports = require("path");
 
 /***/ }),
 /* 4 */
@@ -103,11 +103,11 @@ module.exports = require("fs");
 
 
 var bcrypt = __webpack_require__(22);
-var jwt = __webpack_require__(15);
+var jwt = __webpack_require__(14);
 var secretKey = process.env.SECRET_KEY ? process.env.SECRET_KEY : "secret"; //the secret comes from an enviroment variable
-var stripchar = __webpack_require__(28).StripChar;
+var stripchar = __webpack_require__(29).StripChar;
 var fs = __webpack_require__(4);
-var path = __webpack_require__(2);
+var path = __webpack_require__(3);
 var nJwt = __webpack_require__(81);
 /**
   check if a user eID exists on teh session,
@@ -240,7 +240,7 @@ var log4js = __webpack_require__(86);
 var logger = log4js.getLogger('Helper');
 // logger.setLevel('DEBUG');
 
-var path = __webpack_require__(2);
+var path = __webpack_require__(3);
 var util = __webpack_require__(6);
 var fs = __webpack_require__(87);
 var User = __webpack_require__(88);
@@ -248,7 +248,7 @@ var crypto = __webpack_require__(89);
 var copService = __webpack_require__(90);
 var config = __webpack_require__(7);
 
-var hfc = __webpack_require__(16);
+var hfc = __webpack_require__(15);
 hfc.addConfigFile(path.join(__dirname, '../network-config.json'));
 hfc.setLogger(logger);
 var ORGS = hfc.getConfigSetting('network-config');
@@ -587,12 +587,6 @@ exports.getOrgAdmin = getOrgAdmin;
 
 /***/ }),
 /* 9 */
-/***/ (function(module, exports) {
-
-module.exports = require("react-router-dom");
-
-/***/ }),
-/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -698,7 +692,7 @@ var SupFab = function (_React$Component) {
 exports.default = SupFab;
 
 /***/ }),
-/* 11 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -717,7 +711,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactMaterialize = __webpack_require__(1);
 
-var _reactRouterDom = __webpack_require__(9);
+var _reactRouterDom = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"react-router-dom\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -741,8 +735,8 @@ var SupBtns = function (_React$Component) {
     value: function render() {
 
       var download = _react2.default.createElement(
-        'a',
-        { className: 'btn-floating btn-medium waves-effect waves-light blue darken-3' },
+        _reactRouterDom.Link,
+        { to: "/back/supplement/rest/pdf/" + this.props.id, className: 'btn-floating btn-medium waves-effect waves-light blue darken-3', target: '_blank' },
         _react2.default.createElement(
           'i',
           { className: 'material-icons' },
@@ -782,7 +776,7 @@ var SupBtns = function (_React$Component) {
 exports.default = SupBtns;
 
 /***/ }),
-/* 12 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -838,7 +832,7 @@ function remUsers(supplementId, users) {
 }
 
 /***/ }),
-/* 13 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -851,17 +845,23 @@ exports.default = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _dec, _class;
+
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRedux = __webpack_require__(2);
+
 var _reactMaterialize = __webpack_require__(1);
 
-var _office = __webpack_require__(38);
+var _userActions = __webpack_require__(18);
+
+var _office = __webpack_require__(37);
 
 var _office2 = _interopRequireDefault(_office);
 
-var _user = __webpack_require__(39);
+var _user = __webpack_require__(38);
 
 var _user2 = _interopRequireDefault(_user);
 
@@ -873,18 +873,30 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var SideNavigation = function (_React$Component) {
+var SideNavigation = (_dec = (0, _reactRedux.connect)(function (store) {
+  return {};
+}), _dec(_class = function (_React$Component) {
   _inherits(SideNavigation, _React$Component);
 
-  function SideNavigation() {
+  function SideNavigation(props) {
     _classCallCheck(this, SideNavigation);
 
-    return _possibleConstructorReturn(this, (SideNavigation.__proto__ || Object.getPrototypeOf(SideNavigation)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (SideNavigation.__proto__ || Object.getPrototypeOf(SideNavigation)).call(this, props));
+
+    _this.logoutUser = _this.logoutUser.bind(_this);
+    return _this;
   }
 
   _createClass(SideNavigation, [{
+    key: 'logoutUser',
+    value: function logoutUser() {
+      this.props.dispatch(_userActions.logout);
+    }
+  }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       var user = this.props.user;
       return _react2.default.createElement(
         _reactMaterialize.SideNav,
@@ -903,50 +915,130 @@ var SideNavigation = function (_React$Component) {
 
           }
         }),
+        _react2.default.createElement(
+          _reactMaterialize.SideNavItem,
+          { subheader: true },
+          ' Information '
+        ),
         _react2.default.createElement(_reactMaterialize.SideNavItem, { divider: true }),
         _react2.default.createElement(
           _reactMaterialize.SideNavItem,
           null,
-          'Logout'
+          ' ',
+          "First Name:" + user.firstName
+        ),
+        _react2.default.createElement(
+          _reactMaterialize.SideNavItem,
+          null,
+          '  ',
+          "Last Name:" + user.lastName
+        ),
+        _react2.default.createElement(
+          _reactMaterialize.SideNavItem,
+          null,
+          '  ',
+          "UserName:" + user.userName
+        ),
+        _react2.default.createElement(
+          _reactMaterialize.SideNavItem,
+          { subheader: true },
+          'Actions'
+        ),
+        _react2.default.createElement(_reactMaterialize.SideNavItem, { divider: true }),
+        _react2.default.createElement(
+          _reactMaterialize.SideNavItem,
+          null,
+          ' ',
+          _react2.default.createElement(
+            'div',
+            { onClick: function onClick(e) {
+                return _this2.logoutUser();
+              } },
+            'Logout'
+          )
         )
       );
     }
   }]);
 
   return SideNavigation;
-}(_react2.default.Component);
-
+}(_react2.default.Component)) || _class);
 exports.default = SideNavigation;
 
 /***/ }),
-/* 14 */
+/* 13 */
 /***/ (function(module, exports) {
 
 module.exports = require("express");
 
 /***/ }),
-/* 15 */
+/* 14 */
 /***/ (function(module, exports) {
 
 module.exports = require("jsonwebtoken");
 
 /***/ }),
-/* 16 */
+/* 15 */
 /***/ (function(module, exports) {
 
 module.exports = require("fabric-client");
 
 /***/ }),
-/* 17 */
+/* 16 */
 /***/ (function(module, exports) {
 
 module.exports = require("fabric-client/lib/Peer.js");
 
 /***/ }),
-/* 18 */
+/* 17 */
 /***/ (function(module, exports) {
 
 module.exports = require("fabric-client/lib/EventHub.js");
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.fetchUser = fetchUser;
+exports.setUserName = setUserName;
+exports.setUser = setUser;
+exports.logout = logout;
+function fetchUser() {
+  return {
+    type: "FETCH_USER_FULLFILED",
+    payload: {
+      name: "Nikos",
+      age: "34"
+    }
+  };
+}
+
+function setUserName(name) {
+  return {
+    type: "SET_USER_NAME",
+    payload: name
+  };
+}
+
+function setUser(user) {
+  return {
+    type: "SET_USER",
+    payload: user
+  };
+}
+
+function logout() {
+  document.cookie = 'access_token=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+  window.location = "/app/";
+  return { type: "LOG_OUT"
+  };
+}
 
 /***/ }),
 /* 19 */
@@ -959,6 +1051,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.getSupplementsByEid = getSupplementsByEid;
+exports.retryAxiosNtimes = retryAxiosNtimes;
+exports.removeSupplements = removeSupplements;
 exports.openShareByMail = openShareByMail;
 exports.shareByMail = shareByMail;
 exports.openShareByQR = openShareByQR;
@@ -980,37 +1074,78 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 (0, _axiosRetry2.default)(_axios2.default, { retries: 3 });
 // ES6
-function getSupplementsByEid(userEid) {
+function getSupplementsByEid(userEid, counter) {
+
   return function (dispatch) {
-    console.log(userEid);
     dispatch({ type: "GET_SUP" });
-    //here we should make an Ajax call with axios
-    // on success it should return GET_SUP_FULLFILED else GET_SUP_REJECTED
-    // axios.get("http://rest.learncode.academy/api/test123/tweets")
-    _axios2.default.get("/back/supplement/rest/view").then(function (response) {
-      // dispatch({type: "GET_SUP_FULLFILED",payload:DS})
+    retryAxiosNtimes(4, 0, "/back/supplement/rest/view").then(function (response) {
       dispatch({ type: "GET_SUP_FULLFILED", payload: JSON.parse(response.data) });
     }).catch(function (err) {
       dispatch({ type: "GET_SUP_REJECTED", payload: err });
     });
+    // axios.get("/back/supplement/rest/view")
+    //  .then(response =>{
+    //     dispatch({type: "GET_SUP_FULLFILED",payload:JSON.parse(response.data)})
+    //  })
+    //  .catch(err=>{
+    //    console.log("will try again");
+    //    dispatch({type:"GET_SUP_REJECTED",payload:err});
+    //
+    //  });
+  };
+}
+
+function retryAxiosNtimes(times, counter, url) {
+  var config = {
+    headers: { Pragma: 'no-cache' }
+    // params: { id: this.state.taskID }
+  };
+
+  return new Promise(function (resolve, reject) {
+    _axios2.default.get(url, config).then(function (response) {
+      resolve(response);
+    }).catch(function (err) {
+      if (counter < times) {
+        counter++;
+        console.log("will try again " + counter);
+        sleep(1000).then(function () {
+          resolve(retryAxiosNtimes(times, counter, url));
+        });
+      } else {
+        console.log("tried " + counter + " times");
+        reject(err);
+      }
+    });
+  });
+}
+
+function sleep(time) {
+  return new Promise(function (resolve) {
+    return setTimeout(resolve, time);
+  });
+}
+
+function removeSupplements() {
+  return function (dispatch) {
+    dispatch({ type: "REMOVE_SUP_VIEW" });
   };
 }
 
 function openShareByMail(supId) {
   return function (dispatch) {
     dispatch({ type: "OPEN_SHARE_BY_MAIL" });
-    console.log(supId);
+    // console.log(supId)  ;
     $('#mailModal' + supId).modal('open');
   };
 }
 
 function shareByMail(_supId, _email) {
   return function (dispatch) {
-    dispatch({ type: "SHARE_SUP" });
+    dispatch({ type: "SHARE_SUP_STARTED" });
     var data = { email: _email, supId: _supId };
     _axios2.default.post("/back/supplement/rest/inviteByMail", data).then(function (response) {
       dispatch({ type: "SHARE_SUP_FULLFILED" });
-      console.log('#modal' + _supId);
+      // console.log('#modal'+_supId);
       $('#mailModal' + _supId).modal('close');
     }).catch(function (err) {
       dispatch({ type: "SHARE_SUP_REJECTED", payload: err.toString() });
@@ -1091,9 +1226,9 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactMaterialize = __webpack_require__(1);
 
-var _reactRouterDom = __webpack_require__(9);
+var _reactRouterDom = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"react-router-dom\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
-var _sideNav = __webpack_require__(13);
+var _sideNav = __webpack_require__(12);
 
 var _sideNav2 = _interopRequireDefault(_sideNav);
 
@@ -1134,7 +1269,7 @@ var NavigationBar = function (_React$Component) {
       );
       return _react2.default.createElement(
         _reactMaterialize.Navbar,
-        { style: style, brand: 'DS Service', right: true, fixed: true },
+        { style: style, href: '/app/', brand: 'DS Service', right: true, fixed: true },
         _react2.default.createElement(
           'li',
           null,
@@ -1177,8 +1312,8 @@ exports.default = NavigationBar;
 /***/ (function(module, exports, __webpack_require__) {
 
 
-    var content = __webpack_require__(40);
-    var insertCss = __webpack_require__(42);
+    var content = __webpack_require__(39);
+    var insertCss = __webpack_require__(41);
 
     if (typeof content === 'string') {
       content = [[module.i, content, '']];
@@ -1209,24 +1344,328 @@ exports.default = NavigationBar;
 
 /***/ }),
 /* 27 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-module.exports = require("redux");
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(2);
+
+var _reactMaterialize = __webpack_require__(1);
+
+var _supplementFab = __webpack_require__(9);
+
+var _supplementFab2 = _interopRequireDefault(_supplementFab);
+
+var _supplementBtns = __webpack_require__(10);
+
+var _supplementBtns2 = _interopRequireDefault(_supplementBtns);
+
+var _shareSupMailModal = __webpack_require__(52);
+
+var _shareSupMailModal2 = _interopRequireDefault(_shareSupMailModal);
+
+var _shareSupQRModal = __webpack_require__(53);
+
+var _shareSupQRModal2 = _interopRequireDefault(_shareSupQRModal);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var SupplementCard = function (_React$Component) {
+  _inherits(SupplementCard, _React$Component);
+
+  function SupplementCard(props) {
+    _classCallCheck(this, SupplementCard);
+
+    return _possibleConstructorReturn(this, (SupplementCard.__proto__ || Object.getPrototypeOf(SupplementCard)).call(this, props));
+  }
+
+  _createClass(SupplementCard, [{
+    key: 'render',
+    value: function render() {
+      var sup = this.props.sup;
+
+      var headerCss = { backgroundColor: "aliceblue", color: "black" };
+      // const over = {overflow:"hidden"};
+
+      var contents = Object.keys(sup).filter(function (key) {
+        return key !== "Name" && key !== "Surname" && key !== "Authorized";
+      }).map(function (key) {
+        if (typeof sup[key] === "string") {
+          return _react2.default.createElement(
+            'li',
+            { key: key },
+            _react2.default.createElement(
+              'div',
+              { className: 'collapsible-header', style: { color: "black", overflow: "hidden" }, key: key },
+              _react2.default.createElement(
+                'b',
+                null,
+                key
+              ),
+              ' : ',
+              sup[key]
+            )
+          );
+        } else {
+          var entry = sup[key];
+          var innerContents = Object.keys(entry).map(function (k) {
+            if (k !== "ProgrammeDetails") {
+              return _react2.default.createElement(
+                'div',
+                { className: 'collapsible-body', style: { color: "black" }, key: k },
+                _react2.default.createElement(
+                  'span',
+                  null,
+                  k,
+                  ' : ',
+                  entry[k]
+                )
+              );
+            } else {
+              // console.log(k,entry[k]);
+              var details = entry[k];
+              var modules = [];
+              details.Modules.map(function (mod) {
+                modules.push(_react2.default.createElement(
+                  _reactMaterialize.Row,
+                  { key: mod.ModuleCode },
+                  _react2.default.createElement(
+                    _reactMaterialize.Col,
+                    { m: 12, s: 12 },
+                    _react2.default.createElement(
+                      _reactMaterialize.Card,
+                      null,
+                      _react2.default.createElement(
+                        _reactMaterialize.Collection,
+                        null,
+                        _react2.default.createElement(
+                          _reactMaterialize.CollectionItem,
+                          { key: "ModuleCode" },
+                          _react2.default.createElement(
+                            'span',
+                            null,
+                            'ModuleCode: ',
+                            mod.ModuleCode
+                          )
+                        ),
+                        _react2.default.createElement(
+                          _reactMaterialize.CollectionItem,
+                          { key: "NameOfTheModule" },
+                          _react2.default.createElement(
+                            'span',
+                            null,
+                            'NameOfTheModule: ',
+                            mod.NameOfTheModule
+                          )
+                        ),
+                        _react2.default.createElement(
+                          _reactMaterialize.CollectionItem,
+                          { key: "TypeOfModule" },
+                          _react2.default.createElement(
+                            'span',
+                            null,
+                            'TypeOfModule: ',
+                            mod.TypeOfModule
+                          )
+                        ),
+                        _react2.default.createElement(
+                          _reactMaterialize.CollectionItem,
+                          { key: "ExamPeriod" },
+                          _react2.default.createElement(
+                            'span',
+                            null,
+                            'ExamPeriod: ',
+                            mod.ExamPeriod
+                          )
+                        ),
+                        _react2.default.createElement(
+                          _reactMaterialize.CollectionItem,
+                          { key: "Grade" },
+                          _react2.default.createElement(
+                            'span',
+                            null,
+                            'Grade: ',
+                            mod.Grade
+                          )
+                        ),
+                        _react2.default.createElement(
+                          _reactMaterialize.CollectionItem,
+                          { key: "InWriting" },
+                          _react2.default.createElement(
+                            'span',
+                            null,
+                            'InWriting: ',
+                            mod.InWriting
+                          )
+                        )
+                      )
+                    )
+                  )
+                ));
+              });
+
+              return _react2.default.createElement(
+                'div',
+                { className: 'collapsible-body', style: { color: "black" }, key: k },
+                _react2.default.createElement(
+                  _reactMaterialize.Collection,
+                  null,
+                  _react2.default.createElement(
+                    _reactMaterialize.CollectionItem,
+                    { key: k },
+                    _react2.default.createElement(
+                      'span',
+                      null,
+                      k
+                    )
+                  ),
+                  _react2.default.createElement(
+                    _reactMaterialize.CollectionItem,
+                    { key: "Description" },
+                    _react2.default.createElement(
+                      'span',
+                      null,
+                      'Description :',
+                      details.Description
+                    )
+                  ),
+                  _react2.default.createElement(
+                    _reactMaterialize.CollectionItem,
+                    { key: "Legend" },
+                    _react2.default.createElement(
+                      'span',
+                      null,
+                      'Legend :',
+                      details.Legend
+                    )
+                  ),
+                  _react2.default.createElement(
+                    _reactMaterialize.CollectionItem,
+                    { id: 'modulesCollection', key: "Modules" },
+                    _react2.default.createElement(
+                      _reactMaterialize.Collapsible,
+                      null,
+                      _react2.default.createElement(
+                        _reactMaterialize.CollapsibleItem,
+                        { className: 'modulesCard', key: "Mods", header: 'Modules', icon: 'expand_more', style: headerCss },
+                        modules
+                      )
+                    )
+                  )
+                )
+              );
+
+              // <div class="collapsible-body" style={{color:"black"}}><span>Modules :{modules}</span></div>,
+
+            }
+
+            // return null;
+          });
+          // console.log(innerContents);
+          return _react2.default.createElement(
+            'li',
+            { key: key },
+            _react2.default.createElement(
+              'div',
+              { className: 'collapsible-header', 'data-collapsible': 'accordion', style: headerCss },
+              key,
+              _react2.default.createElement(
+                'i',
+                { className: 'material-icons' },
+                'expand_more'
+              )
+            ),
+            innerContents
+          );
+        }
+        return key;
+      });
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'row' },
+        _react2.default.createElement(
+          'div',
+          { className: 'col s12 m6' },
+          _react2.default.createElement(
+            'div',
+            { className: 'card ' },
+            _react2.default.createElement(
+              'div',
+              { className: 'card-content white-text' },
+              _react2.default.createElement(_reactMaterialize.Input, { name: sup.Id, type: 'checkbox', value: 'red', label: 'Select' }),
+              _react2.default.createElement(
+                'span',
+                { className: 'card-title' },
+                'Card Title'
+              ),
+              _react2.default.createElement(
+                _reactMaterialize.Collapsible,
+                { accordion: true },
+                contents
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'card-action' },
+              _react2.default.createElement(_supplementBtns2.default, { isOwner: !this.props.restricted, id: sup.Id }),
+              _react2.default.createElement(_supplementFab2.default, { isOwner: !this.props.restricted,
+                mailModal: this.props.openShareByMail,
+                qrModal: this.props.openShareByQR,
+                supId: sup.Id
+              }),
+              _react2.default.createElement(_shareSupMailModal2.default, { sup: sup }),
+              _react2.default.createElement(_shareSupQRModal2.default, { sup: sup })
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return SupplementCard;
+}(_react2.default.Component);
+
+exports.default = SupplementCard;
 
 /***/ }),
 /* 28 */
 /***/ (function(module, exports) {
 
-module.exports = require("stripchar");
+module.exports = require("redux");
 
 /***/ }),
 /* 29 */
 /***/ (function(module, exports) {
 
-module.exports = require("uuid/v1");
+module.exports = require("stripchar");
 
 /***/ }),
 /* 30 */
+/***/ (function(module, exports) {
+
+module.exports = require("uuid/v1");
+
+/***/ }),
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1235,7 +1674,7 @@ module.exports = require("uuid/v1");
 
 var helper = __webpack_require__(8);
 var fs = __webpack_require__(4);
-var path = __webpack_require__(2);
+var path = __webpack_require__(3);
 var util = __webpack_require__(6);
 
 /**
@@ -1303,7 +1742,7 @@ exports.txDetectionEvent = function (reject, resolve, payload, ehub, listenerHan
 };
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1316,9 +1755,9 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _server = __webpack_require__(32);
+var _server = __webpack_require__(33);
 
-var _containerServer = __webpack_require__(33);
+var _containerServer = __webpack_require__(34);
 
 var _containerServer2 = _interopRequireDefault(_containerServer);
 
@@ -1328,7 +1767,7 @@ var _template2 = _interopRequireDefault(_template);
 
 var _reactCookie = __webpack_require__(24);
 
-var _reactRedux = __webpack_require__(3);
+var _reactRedux = __webpack_require__(2);
 
 var _store = __webpack_require__(64);
 
@@ -1339,10 +1778,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // let renderReact = require('./reactApp/src/renderReact.js');
 
 
-var express = __webpack_require__(14);
+var express = __webpack_require__(13);
 var app = express();
 var port = 8000;
-var path = __webpack_require__(2);
+var path = __webpack_require__(3);
 var bodyParser = __webpack_require__(74);
 var session = __webpack_require__(75); //warning The default server-side session storage, MemoryStore, is purposely not designed for a production environment.
 //compatible session stores https://github.com/expressjs/session#compatible-session-stores
@@ -1376,14 +1815,14 @@ app.use('/dist/build/', express.static('dist/build'));
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 app.use(cookieParser());
-app.use(session({
-  store: new FileStore(),
-  name: 'clientAppCookie',
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: false }
-})); //set up middleware for session handling
+// app.use(session({
+//   store: new FileStore,
+//   name: 'clientAppCookie',
+//   secret: 'keyboard cat',
+//   resave: false,
+//   saveUninitialized: true,
+//   cookie: { secure: false }
+// })); //set up middleware for session handling
 app.use(morgan('tiny')); //http request logger
 app.use(timeout(120000));
 app.use('/', [loginViewRoutes, loginRoutes]);
@@ -1480,13 +1919,13 @@ function haltOnTimedout(req, res, next) {
 }
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports) {
 
 module.exports = require("react-dom/server");
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1505,23 +1944,23 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(3);
+var _reactRedux = __webpack_require__(2);
 
-var _reactRouterDom = __webpack_require__(9);
+var _reactRouterDom = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"react-router-dom\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
-var _StaticRouter = __webpack_require__(34);
+var _StaticRouter = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"react-router-dom/StaticRouter\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 var _StaticRouter2 = _interopRequireDefault(_StaticRouter);
 
 var _sideBarActions = __webpack_require__(35);
 
-var _userActions = __webpack_require__(36);
+var _userActions = __webpack_require__(18);
 
 var _reactCookie = __webpack_require__(24);
 
 var _reactMaterialize = __webpack_require__(1);
 
-var _tweetList = __webpack_require__(37);
+var _tweetList = __webpack_require__(36);
 
 var _tweetList2 = _interopRequireDefault(_tweetList);
 
@@ -1529,33 +1968,37 @@ var _navBar = __webpack_require__(25);
 
 var _navBar2 = _interopRequireDefault(_navBar);
 
-var _sideNav = __webpack_require__(13);
+var _sideNav = __webpack_require__(12);
 
 var _sideNav2 = _interopRequireDefault(_sideNav);
 
-var _dummy = __webpack_require__(45);
+var _dummy = __webpack_require__(44);
 
 var _dummy2 = _interopRequireDefault(_dummy);
 
-var _home = __webpack_require__(46);
+var _home = __webpack_require__(45);
 
 var _home2 = _interopRequireDefault(_home);
 
-var _supplements = __webpack_require__(50);
+var _supplements = __webpack_require__(49);
 
 var _supplements2 = _interopRequireDefault(_supplements);
 
-var _editSupplement = __webpack_require__(56);
+var _editSupplement = __webpack_require__(55);
 
 var _editSupplement2 = _interopRequireDefault(_editSupplement);
 
-var _requestSupplementCard = __webpack_require__(59);
+var _requestSupplementCard = __webpack_require__(58);
 
 var _requestSupplementCard2 = _interopRequireDefault(_requestSupplementCard);
 
-var _serverLoading = __webpack_require__(62);
+var _serverLoading = __webpack_require__(61);
 
 var _serverLoading2 = _interopRequireDefault(_serverLoading);
+
+var _accountInfo = __webpack_require__(62);
+
+var _accountInfo2 = _interopRequireDefault(_accountInfo);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1659,6 +2102,14 @@ var Container = (_dec = (0, _reactRedux.connect)(function (store) {
           _react2.default.createElement(_navBar2.default, { user: user })
         );
       };
+      var account = function account() {
+        return _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(_navBar2.default, { user: user }),
+          _react2.default.createElement(_accountInfo2.default, null)
+        );
+      };
 
       return _react2.default.createElement(
         _StaticRouter2.default,
@@ -1682,12 +2133,6 @@ var Container = (_dec = (0, _reactRedux.connect)(function (store) {
   return Container;
 }(_react2.default.Component)) || _class);
 exports.default = Container;
-
-/***/ }),
-/* 34 */
-/***/ (function(module, exports) {
-
-module.exports = require("react-router-dom/StaticRouter");
 
 /***/ }),
 /* 35 */
@@ -1730,43 +2175,6 @@ function sideBarOnOff(status, nav) {
 
 /***/ }),
 /* 36 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.fetchUser = fetchUser;
-exports.setUserName = setUserName;
-exports.setUser = setUser;
-function fetchUser() {
-  return {
-    type: "FETCH_USER_FULLFILED",
-    payload: {
-      name: "Nikos",
-      age: "34"
-    }
-  };
-}
-
-function setUserName(name) {
-  return {
-    type: "SET_USER_NAME",
-    payload: name
-  };
-}
-
-function setUser(user) {
-  return {
-    type: "SET_USER",
-    payload: user
-  };
-}
-
-/***/ }),
-/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1827,33 +2235,33 @@ var TweetList = function (_React$Component) {
 exports.default = TweetList;
 
 /***/ }),
-/* 38 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "e60095e669fadeeb6c225bb4a575b383.jpg";
 
 /***/ }),
-/* 39 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "21f505892075a5f20c11b47a368c7630.png";
 
 /***/ }),
-/* 40 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(41)(undefined);
+exports = module.exports = __webpack_require__(40)(false);
 // imports
 
 
 // module
-exports.push([module.i, ".navbar-fixed {\n    position: relative;\n    height: 56px;\n    z-index: 998;\n}\n", ""]);
+exports.push([module.i, ".navbar-fixed {\n    position: relative;\n    height: 56px;\n    z-index: 998;\n}\n\n.modulesCard.collapsible-body{\n  padding: 0.5rem!important;\n}\n\n/*\n this is not rendered look for the navbar.css inside the dist folder\n */\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 41 */
+/* 40 */
 /***/ (function(module, exports) {
 
 /*
@@ -1935,17 +2343,17 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 42 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _stringify = __webpack_require__(43);
+var _stringify = __webpack_require__(42);
 
 var _stringify2 = _interopRequireDefault(_stringify);
 
-var _slicedToArray2 = __webpack_require__(44);
+var _slicedToArray2 = __webpack_require__(43);
 
 var _slicedToArray3 = _interopRequireDefault(_slicedToArray2);
 
@@ -2065,19 +2473,19 @@ function insertCss(styles) {
 module.exports = insertCss;
 
 /***/ }),
-/* 43 */
+/* 42 */
 /***/ (function(module, exports) {
 
 module.exports = require("babel-runtime/core-js/json/stringify");
 
 /***/ }),
-/* 44 */
+/* 43 */
 /***/ (function(module, exports) {
 
 module.exports = require("babel-runtime/helpers/slicedToArray");
 
 /***/ }),
-/* 45 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2131,7 +2539,7 @@ var Dummy = function (_React$Component) {
 exports.default = Dummy;
 
 /***/ }),
-/* 46 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2150,23 +2558,23 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactMaterialize = __webpack_require__(1);
 
-var _reactRouterDom = __webpack_require__(9);
+var _reactRouterDom = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"react-router-dom\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
-var _sideNav = __webpack_require__(13);
+var _sideNav = __webpack_require__(12);
 
 var _sideNav2 = _interopRequireDefault(_sideNav);
 
 __webpack_require__(26);
 
-var _manageDocuments = __webpack_require__(47);
+var _manageDocuments = __webpack_require__(46);
 
 var _manageDocuments2 = _interopRequireDefault(_manageDocuments);
 
-var _publishDocument = __webpack_require__(48);
+var _publishDocument = __webpack_require__(47);
 
 var _publishDocument2 = _interopRequireDefault(_publishDocument);
 
-var _manageUser = __webpack_require__(49);
+var _manageUser = __webpack_require__(48);
 
 var _manageUser2 = _interopRequireDefault(_manageUser);
 
@@ -2188,6 +2596,16 @@ var HomePage = function (_React$Component) {
   }
 
   _createClass(HomePage, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      $('.button-collapse').sideNav('hide');
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps() {
+      $('.button-collapse').sideNav('hide');
+    }
+  }, {
     key: 'render',
     value: function render() {
 
@@ -2330,25 +2748,25 @@ var HomePage = function (_React$Component) {
 exports.default = HomePage;
 
 /***/ }),
-/* 47 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "e460414865f573e4fbec7cb297e5f358.png";
 
 /***/ }),
-/* 48 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "e5c3c53e1943d3dc0d2c2ffb3b385eee.png";
 
 /***/ }),
-/* 49 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "16d4a26c8de8ae7db43040ae1095ff86.png";
 
 /***/ }),
-/* 50 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2367,15 +2785,19 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(3);
+var _reactRedux = __webpack_require__(2);
 
 var _reactMaterialize = __webpack_require__(1);
 
-var _reactRouterDom = __webpack_require__(9);
+var _reactRouterDom = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"react-router-dom\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+
+var _propTypes = __webpack_require__(50);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _supplementActions = __webpack_require__(19);
 
-var _supplementCard = __webpack_require__(52);
+var _supplementCard = __webpack_require__(27);
 
 var _supplementCard2 = _interopRequireDefault(_supplementCard);
 
@@ -2390,7 +2812,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Supplements = (_dec = (0, _reactRedux.connect)(function (store) {
   return { sups: store.sups.supplements,
     supError: store.sups.supError,
-    fetching: store.sups.fetching
+    fetching: store.sups.fetching,
+    isUpdated: store.sups.isUpdated
   };
 }), _dec(_class = function (_React$Component) {
   _inherits(Supplements, _React$Component);
@@ -2402,13 +2825,36 @@ var Supplements = (_dec = (0, _reactRedux.connect)(function (store) {
 
     _this.openShareByMail = _this.openShareByMail.bind(_this);
     _this.openShareByQR = _this.openShareByQR.bind(_this);
+    _this.cleanUp = _this.cleanUp.bind(_this);
     return _this;
   }
 
   _createClass(Supplements, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.fetchSupplements();
+      $('.button-collapse').sideNav('hide');
+      // this.fetchSupplements();
+      if (!this.props.isUpdated && !this.props.fetching) {
+        this.fetchSupplements();
+      }
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      $('.button-collapse').sideNav('hide');
+      // if(!this.props.isUpdated && !this.props.fetching){
+      //   this.fetchSupplements();
+      // }
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      this.cleanUp();
+    }
+  }, {
+    key: 'cleanUp',
+    value: function cleanUp() {
+      this.props.dispatch((0, _supplementActions.removeSupplements)());
     }
   }, {
     key: 'fetchSupplements',
@@ -2460,17 +2906,26 @@ var Supplements = (_dec = (0, _reactRedux.connect)(function (store) {
           )
         );
       } else {
+
         var supCards = sups.map(function (sup) {
           return _react2.default.createElement(_supplementCard2.default, { key: sup.Id, sup: sup,
             openShareByMail: _this2.openShareByMail,
             openShareByQR: _this2.openShareByQR
           });
         });
-        return _react2.default.createElement(
-          'div',
-          { className: 'main container', style: { marginTop: "3%" } },
-          supCards
-        );
+        if (sups.length > 0) {
+          return _react2.default.createElement(
+            'div',
+            { className: 'main container', style: { marginTop: "3%" } },
+            supCards
+          );
+        } else {
+          return _react2.default.createElement(
+            'div',
+            { className: 'main container', style: { marginTop: "3%" } },
+            'No matching accademic records found'
+          );
+        }
       }
     }
   }]);
@@ -2478,6 +2933,12 @@ var Supplements = (_dec = (0, _reactRedux.connect)(function (store) {
   return Supplements;
 }(_react2.default.Component)) || _class);
 exports.default = Supplements;
+
+/***/ }),
+/* 50 */
+/***/ (function(module, exports) {
+
+module.exports = require("prop-types");
 
 /***/ }),
 /* 51 */
@@ -2508,328 +2969,25 @@ exports.default = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRedux = __webpack_require__(3);
-
-var _reactMaterialize = __webpack_require__(1);
-
-var _supplementFab = __webpack_require__(10);
-
-var _supplementFab2 = _interopRequireDefault(_supplementFab);
-
-var _supplementBtns = __webpack_require__(11);
-
-var _supplementBtns2 = _interopRequireDefault(_supplementBtns);
-
-var _shareSupMailModal = __webpack_require__(53);
-
-var _shareSupMailModal2 = _interopRequireDefault(_shareSupMailModal);
-
-var _shareSupQRModal = __webpack_require__(54);
-
-var _shareSupQRModal2 = _interopRequireDefault(_shareSupQRModal);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var SupplementCard = function (_React$Component) {
-  _inherits(SupplementCard, _React$Component);
-
-  function SupplementCard(props) {
-    _classCallCheck(this, SupplementCard);
-
-    return _possibleConstructorReturn(this, (SupplementCard.__proto__ || Object.getPrototypeOf(SupplementCard)).call(this, props));
-  }
-
-  _createClass(SupplementCard, [{
-    key: 'render',
-    value: function render() {
-      var sup = this.props.sup;
-
-      var headerCss = { backgroundColor: "aliceblue", color: "black" };
-      // const over = {overflow:"hidden"};
-
-      var contents = Object.keys(sup).filter(function (key) {
-        return key !== "Name" && key !== "Surname" && key !== "Authorized";
-      }).map(function (key) {
-        if (typeof sup[key] === "string") {
-          return _react2.default.createElement(
-            'li',
-            { key: key },
-            _react2.default.createElement(
-              'div',
-              { className: 'collapsible-header', style: { color: "black", overflow: "hidden" }, key: key },
-              _react2.default.createElement(
-                'b',
-                null,
-                key
-              ),
-              ' : ',
-              sup[key]
-            )
-          );
-        } else {
-          var entry = sup[key];
-          var innerContents = Object.keys(entry).map(function (k) {
-            if (k !== "Programme_Details") {
-              return _react2.default.createElement(
-                'div',
-                { className: 'collapsible-body', style: { color: "black" }, key: k },
-                _react2.default.createElement(
-                  'span',
-                  null,
-                  k,
-                  ' : ',
-                  entry[k]
-                )
-              );
-            } else {
-              // console.log(k,entry[k]);
-              var details = entry[k];
-              var modules = details.Modules.map(function (mod) {
-                return _react2.default.createElement(
-                  _reactMaterialize.Row,
-                  null,
-                  _react2.default.createElement(
-                    _reactMaterialize.Col,
-                    { m: 12, s: 12 },
-                    _react2.default.createElement(
-                      _reactMaterialize.Card,
-                      null,
-                      _react2.default.createElement(
-                        _reactMaterialize.Collection,
-                        null,
-                        _react2.default.createElement(
-                          _reactMaterialize.CollectionItem,
-                          { key: "ModuleCode" },
-                          _react2.default.createElement(
-                            'span',
-                            null,
-                            'ModuleCode: ',
-                            mod.ModuleCode
-                          )
-                        ),
-                        _react2.default.createElement(
-                          _reactMaterialize.CollectionItem,
-                          { key: "NameOfTheModule" },
-                          _react2.default.createElement(
-                            'span',
-                            null,
-                            'NameOfTheModule: ',
-                            mod.NameOfTheModule
-                          )
-                        ),
-                        _react2.default.createElement(
-                          _reactMaterialize.CollectionItem,
-                          { key: "TypeOfModule" },
-                          _react2.default.createElement(
-                            'span',
-                            null,
-                            'TypeOfModule: ',
-                            mod.TypeOfModule
-                          )
-                        ),
-                        _react2.default.createElement(
-                          _reactMaterialize.CollectionItem,
-                          { key: "ExamPeriod" },
-                          _react2.default.createElement(
-                            'span',
-                            null,
-                            'ExamPeriod: ',
-                            mod.ExamPeriod
-                          )
-                        ),
-                        _react2.default.createElement(
-                          _reactMaterialize.CollectionItem,
-                          { key: "Grade" },
-                          _react2.default.createElement(
-                            'span',
-                            null,
-                            'Grade: ',
-                            mod.Grade
-                          )
-                        ),
-                        _react2.default.createElement(
-                          _reactMaterialize.CollectionItem,
-                          { key: "InWriting" },
-                          _react2.default.createElement(
-                            'span',
-                            null,
-                            'InWriting: ',
-                            mod.InWriting
-                          )
-                        )
-                      )
-                    )
-                  )
-                );
-              });
-
-              return _react2.default.createElement(
-                'div',
-                { className: 'collapsible-body', style: { color: "black" } },
-                _react2.default.createElement(
-                  _reactMaterialize.Collection,
-                  null,
-                  _react2.default.createElement(
-                    _reactMaterialize.CollectionItem,
-                    { key: k },
-                    _react2.default.createElement(
-                      'span',
-                      null,
-                      k
-                    )
-                  ),
-                  _react2.default.createElement(
-                    _reactMaterialize.CollectionItem,
-                    { key: "Description" },
-                    _react2.default.createElement(
-                      'span',
-                      null,
-                      'Description :',
-                      details.Description
-                    )
-                  ),
-                  _react2.default.createElement(
-                    _reactMaterialize.CollectionItem,
-                    { key: "Legend" },
-                    _react2.default.createElement(
-                      'span',
-                      null,
-                      'Legend :',
-                      details.Legend
-                    )
-                  ),
-                  _react2.default.createElement(
-                    _reactMaterialize.CollectionItem,
-                    { key: "Modules" },
-                    _react2.default.createElement(
-                      _reactMaterialize.Collapsible,
-                      null,
-                      _react2.default.createElement(
-                        _reactMaterialize.CollapsibleItem,
-                        { key: "Mods", header: 'Modules', icon: 'expand_more', style: headerCss },
-                        modules
-                      )
-                    )
-                  )
-                )
-              );
-
-              // <div class="collapsible-body" style={{color:"black"}}><span>Modules :{modules}</span></div>,
-
-            }
-
-            // return null;
-          });
-          // console.log(innerContents);
-          return _react2.default.createElement(
-            'li',
-            { key: key },
-            _react2.default.createElement(
-              'div',
-              { className: 'collapsible-header', 'data-collapsible': 'accordion', style: headerCss },
-              key,
-              _react2.default.createElement(
-                'i',
-                { className: 'material-icons' },
-                'expand_more'
-              )
-            ),
-            innerContents
-          );
-        }
-        return key;
-      });
-
-      return _react2.default.createElement(
-        'div',
-        { className: 'row' },
-        _react2.default.createElement(
-          'div',
-          { className: 'col s12 m6' },
-          _react2.default.createElement(
-            'div',
-            { className: 'card ' },
-            _react2.default.createElement(
-              'div',
-              { className: 'card-content white-text' },
-              _react2.default.createElement(_reactMaterialize.Input, { name: sup.Id, type: 'checkbox', value: 'red', label: 'Select' }),
-              _react2.default.createElement(
-                'span',
-                { className: 'card-title' },
-                'Card Title'
-              ),
-              _react2.default.createElement(
-                _reactMaterialize.Collapsible,
-                { accordion: true },
-                contents
-              )
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'card-action' },
-              _react2.default.createElement(_supplementBtns2.default, { isOwner: !this.props.restricted, id: sup.Id }),
-              _react2.default.createElement(_supplementFab2.default, { isOwner: !this.props.restricted,
-                mailModal: this.props.openShareByMail,
-                qrModal: this.props.openShareByQR,
-                supId: sup.Id
-              }),
-              _react2.default.createElement(_shareSupMailModal2.default, { sup: sup }),
-              _react2.default.createElement(_shareSupQRModal2.default, { sup: sup })
-            )
-          )
-        )
-      );
-    }
-  }]);
-
-  return SupplementCard;
-}(_react2.default.Component);
-
-exports.default = SupplementCard;
-
-/***/ }),
-/* 53 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _dec, _class;
 
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(3);
+var _reactRedux = __webpack_require__(2);
 
 var _reactMaterialize = __webpack_require__(1);
 
-var _supplementFab = __webpack_require__(10);
+var _supplementFab = __webpack_require__(9);
 
 var _supplementFab2 = _interopRequireDefault(_supplementFab);
 
-var _supplementBtns = __webpack_require__(11);
+var _supplementBtns = __webpack_require__(10);
 
 var _supplementBtns2 = _interopRequireDefault(_supplementBtns);
 
-var _editSupplementActions = __webpack_require__(12);
+var _editSupplementActions = __webpack_require__(11);
 
 var _supplementActions = __webpack_require__(19);
 
@@ -2868,6 +3026,7 @@ var ShareByMailModal = (_dec = (0, _reactRedux.connect)(function (store) {
   }, {
     key: 'share',
     value: function share(mail) {
+      console.log("shareSupMailModala:: share fnct called");
       this.props.dispatch((0, _supplementActions.shareByMail)(this.props.sup.Id, mail));
     }
   }, {
@@ -2943,7 +3102,7 @@ var ShareByMailModal = (_dec = (0, _reactRedux.connect)(function (store) {
 exports.default = ShareByMailModal;
 
 /***/ }),
-/* 54 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2962,23 +3121,23 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(3);
+var _reactRedux = __webpack_require__(2);
 
-var _svgInlineReact = __webpack_require__(55);
+var _svgInlineReact = __webpack_require__(54);
 
 var _svgInlineReact2 = _interopRequireDefault(_svgInlineReact);
 
 var _reactMaterialize = __webpack_require__(1);
 
-var _supplementFab = __webpack_require__(10);
+var _supplementFab = __webpack_require__(9);
 
 var _supplementFab2 = _interopRequireDefault(_supplementFab);
 
-var _supplementBtns = __webpack_require__(11);
+var _supplementBtns = __webpack_require__(10);
 
 var _supplementBtns2 = _interopRequireDefault(_supplementBtns);
 
-var _editSupplementActions = __webpack_require__(12);
+var _editSupplementActions = __webpack_require__(11);
 
 var _supplementActions = __webpack_require__(19);
 
@@ -3126,13 +3285,13 @@ var ShareByQRModal = (_dec = (0, _reactRedux.connect)(function (store) {
 exports.default = ShareByQRModal;
 
 /***/ }),
-/* 55 */
+/* 54 */
 /***/ (function(module, exports) {
 
 module.exports = require("svg-inline-react");
 
 /***/ }),
-/* 56 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3153,9 +3312,9 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactMaterialize = __webpack_require__(1);
 
-var _reactRedux = __webpack_require__(3);
+var _reactRedux = __webpack_require__(2);
 
-var _editSupplementCard = __webpack_require__(57);
+var _editSupplementCard = __webpack_require__(56);
 
 var _editSupplementCard2 = _interopRequireDefault(_editSupplementCard);
 
@@ -3182,6 +3341,16 @@ var EditSup = (_dec = (0, _reactRedux.connect)(function (store) {
   }
 
   _createClass(EditSup, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      $('.button-collapse').sideNav('hide');
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps() {
+      $('.button-collapse').sideNav('hide');
+    }
+  }, {
     key: 'render',
     value: function render() {
       // console.log(this.props.match.params.id);
@@ -3212,7 +3381,7 @@ var EditSup = (_dec = (0, _reactRedux.connect)(function (store) {
 exports.default = EditSup;
 
 /***/ }),
-/* 57 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3231,23 +3400,23 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(3);
+var _reactRedux = __webpack_require__(2);
 
 var _reactMaterialize = __webpack_require__(1);
 
-var _supplementFab = __webpack_require__(10);
+var _supplementFab = __webpack_require__(9);
 
 var _supplementFab2 = _interopRequireDefault(_supplementFab);
 
-var _supplementBtns = __webpack_require__(11);
+var _supplementBtns = __webpack_require__(10);
 
 var _supplementBtns2 = _interopRequireDefault(_supplementBtns);
 
-var _supplementModal = __webpack_require__(58);
+var _supplementModal = __webpack_require__(57);
 
 var _supplementModal2 = _interopRequireDefault(_supplementModal);
 
-var _editSupplementActions = __webpack_require__(12);
+var _editSupplementActions = __webpack_require__(11);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3449,7 +3618,7 @@ var EditSupplementCard = (_dec = (0, _reactRedux.connect)(function (store) {
 exports.default = EditSupplementCard;
 
 /***/ }),
-/* 58 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3468,19 +3637,19 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(3);
+var _reactRedux = __webpack_require__(2);
 
 var _reactMaterialize = __webpack_require__(1);
 
-var _supplementFab = __webpack_require__(10);
+var _supplementFab = __webpack_require__(9);
 
 var _supplementFab2 = _interopRequireDefault(_supplementFab);
 
-var _supplementBtns = __webpack_require__(11);
+var _supplementBtns = __webpack_require__(10);
 
 var _supplementBtns2 = _interopRequireDefault(_supplementBtns);
 
-var _editSupplementActions = __webpack_require__(12);
+var _editSupplementActions = __webpack_require__(11);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3539,7 +3708,7 @@ var EditSupplementModal = (_dec = (0, _reactRedux.connect)(function (store) {
 exports.default = EditSupplementModal;
 
 /***/ }),
-/* 59 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3558,15 +3727,17 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(3);
+var _reactRedux = __webpack_require__(2);
 
 var _reactMaterialize = __webpack_require__(1);
 
-var _requestSupplementModal = __webpack_require__(60);
+var _reactRouterDom = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"react-router-dom\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+
+var _requestSupplementModal = __webpack_require__(59);
 
 var _requestSupplementModal2 = _interopRequireDefault(_requestSupplementModal);
 
-var _requestSupplementActions = __webpack_require__(61);
+var _requestSupplementActions = __webpack_require__(60);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3581,6 +3752,7 @@ var RequestSupplementCard = (_dec = (0, _reactRedux.connect)(function (store) {
     univId: store.publish.univId,
     email: store.publish.email,
     modal: store.publish.modal,
+    fullfiled: store.publish.requestFullfiled,
     eId: store.user.user.eid,
     userName: store.user.user.firstName + " " + store.user.user.lastName,
     dateOfBirth: store.user.user.dateOfBirth
@@ -3601,6 +3773,21 @@ var RequestSupplementCard = (_dec = (0, _reactRedux.connect)(function (store) {
   }
 
   _createClass(RequestSupplementCard, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      $('.button-collapse').sideNav('hide');
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      $('.button-collapse').sideNav('hide');
+    }
+  }, {
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      $('.button-collapse').sideNav('hide');
+    }
+  }, {
     key: 'sendPubrequest',
     value: function sendPubrequest() {
       var university = this.props.university;
@@ -3641,106 +3828,110 @@ var RequestSupplementCard = (_dec = (0, _reactRedux.connect)(function (store) {
     value: function render() {
       var _this2 = this;
 
-      return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(
+      if (!this.props.fullfiled) {
+        return _react2.default.createElement(
           'div',
-          { className: 'container', style: { marginTop: "2em" } },
+          null,
           _react2.default.createElement(
-            _reactMaterialize.Row,
-            null,
+            'div',
+            { className: 'container', style: { marginTop: "2em" } },
             _react2.default.createElement(
-              'div',
-              { className: 'input-field col s6' },
-              _react2.default.createElement(
-                'i',
-                { className: 'material-icons prefix' },
-                'account_circle'
-              ),
-              _react2.default.createElement('input', { id: 'universityId', type: 'text', className: 'validate', onChange: function onChange(e) {
-                  return _this2.updateUniversityId(e.target.value);
-                } }),
-              _react2.default.createElement(
-                'label',
-                { htmlFor: 'universityId' },
-                'UniversityId'
-              )
-            )
-          ),
-          _react2.default.createElement(
-            _reactMaterialize.Row,
-            null,
-            _react2.default.createElement(
-              'div',
-              { className: 'input-field col s6' },
-              _react2.default.createElement(
-                'i',
-                { className: 'material-icons prefix' },
-                'email'
-              ),
-              _react2.default.createElement('input', { id: 'email', type: 'email', className: 'validate', onChange: function onChange(e) {
-                  return _this2.updateMail(e.target.value);
-                } }),
-              _react2.default.createElement(
-                'label',
-                { htmlFor: 'email' },
-                'Email'
-              )
-            )
-          ),
-          _react2.default.createElement(
-            _reactMaterialize.Row,
-            null,
-            _react2.default.createElement(
-              'div',
+              _reactMaterialize.Row,
               null,
               _react2.default.createElement(
-                'span',
-                { style: { float: "left", marginLeft: "1.1em" } },
+                'div',
+                { className: 'input-field col s12 l6' },
                 _react2.default.createElement(
-                  _reactMaterialize.Icon,
-                  null,
-                  'account_balance'
+                  'i',
+                  { className: 'material-icons prefix' },
+                  'account_circle'
+                ),
+                _react2.default.createElement('input', { id: 'universityId', type: 'text', className: 'validate', onChange: function onChange(e) {
+                    return _this2.updateUniversityId(e.target.value);
+                  } }),
+                _react2.default.createElement(
+                  'label',
+                  { htmlFor: 'universityId' },
+                  'UniversityId'
                 )
-              ),
+              )
+            ),
+            _react2.default.createElement(
+              _reactMaterialize.Row,
+              null,
               _react2.default.createElement(
                 'div',
-                { className: 'input-field col s6' },
+                { className: 'input-field col s12 l6' },
                 _react2.default.createElement(
-                  'select',
-                  { ref: 'mySelectBox' },
+                  'i',
+                  { className: 'material-icons prefix' },
+                  'email'
+                ),
+                _react2.default.createElement('input', { id: 'email', type: 'email', className: 'validate', onChange: function onChange(e) {
+                    return _this2.updateMail(e.target.value);
+                  } }),
+                _react2.default.createElement(
+                  'label',
+                  { htmlFor: 'email' },
+                  'Email'
+                )
+              )
+            ),
+            _react2.default.createElement(
+              _reactMaterialize.Row,
+              null,
+              _react2.default.createElement(
+                'div',
+                { className: 'col s12 l6' },
+                _react2.default.createElement(
+                  'span',
+                  { style: { float: "left", paddingLeft: "0" }, className: 'col s1' },
                   _react2.default.createElement(
-                    'option',
-                    { key: 'UAegean', value: 'UAegean' },
-                    'University of the Aegean'
-                  ),
-                  _react2.default.createElement(
-                    'option',
-                    { key: 'UAgr', value: 'UAgr' },
-                    'Agricultural University of Athens'
+                    _reactMaterialize.Icon,
+                    null,
+                    'account_balance'
                   )
                 ),
                 _react2.default.createElement(
-                  'label',
-                  null,
-                  'University'
+                  'div',
+                  { className: 'input-field col s11', style: { marginLeft: "0", paddingLeft: "0" } },
+                  _react2.default.createElement(
+                    'select',
+                    { ref: 'mySelectBox' },
+                    _react2.default.createElement(
+                      'option',
+                      { key: 'UAegean', value: 'UAegean' },
+                      'University of the Aegean'
+                    ),
+                    _react2.default.createElement(
+                      'option',
+                      { key: 'UAgr', value: 'UAgr' },
+                      'Agricultural University of Athens'
+                    )
+                  ),
+                  _react2.default.createElement(
+                    'label',
+                    { style: { left: "0" } },
+                    'University'
+                  )
                 )
+              )
+            ),
+            _react2.default.createElement(
+              _reactMaterialize.Row,
+              null,
+              _react2.default.createElement(
+                _reactMaterialize.Button,
+                { style: { marginLeft: "0.5em" }, onClick: this.sendPubrequest },
+                'Request'
               )
             )
           ),
-          _react2.default.createElement(
-            _reactMaterialize.Row,
-            null,
-            _react2.default.createElement(
-              _reactMaterialize.Button,
-              { onClick: this.sendPubrequest },
-              'Submit'
-            )
-          )
-        ),
-        _react2.default.createElement(_requestSupplementModal2.default, null)
-      );
+          _react2.default.createElement(_requestSupplementModal2.default, null)
+        );
+      }
+
+      return _react2.default.createElement(_reactRouterDom.Redirect, { from: '/app/request', to: "/app", push: true });
     }
   }]);
 
@@ -3749,7 +3940,7 @@ var RequestSupplementCard = (_dec = (0, _reactRedux.connect)(function (store) {
 exports.default = RequestSupplementCard;
 
 /***/ }),
-/* 60 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3768,19 +3959,19 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(3);
+var _reactRedux = __webpack_require__(2);
 
 var _reactMaterialize = __webpack_require__(1);
 
-var _supplementFab = __webpack_require__(10);
+var _supplementFab = __webpack_require__(9);
 
 var _supplementFab2 = _interopRequireDefault(_supplementFab);
 
-var _supplementBtns = __webpack_require__(11);
+var _supplementBtns = __webpack_require__(10);
 
 var _supplementBtns2 = _interopRequireDefault(_supplementBtns);
 
-var _editSupplementActions = __webpack_require__(12);
+var _editSupplementActions = __webpack_require__(11);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3839,14 +4030,14 @@ var RequestSupplementModal = (_dec = (0, _reactRedux.connect)(function (store) {
 exports.default = RequestSupplementModal;
 
 /***/ }),
-/* 61 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 Object.defineProperty(exports, "__esModule", {
-     value: true
+  value: true
 });
 exports.requestPublication = requestPublication;
 exports.updateUnivId = updateUnivId;
@@ -3863,45 +4054,48 @@ var _axiosRetry2 = _interopRequireDefault(_axiosRetry);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-(0, _axiosRetry2.default)(_axios2.default, { retries: 3 });
+(0, _axiosRetry2.default)(_axios2.default, { retries: 3, retryDelay: function retryDelay(retryCount) {
+    console.log("retrying!!!");
+    return retryCount * 1000;
+  } });
 // ES6
 function requestPublication(university, universityId, email) {
-     /*
-     let universityName = req.body.uniName;
-     let universityId = req.body.univId; //user univesrity ID (e.g. ge01117)
-     let userEmail = req.body.email;
-      */
+  /*
+  let universityName = req.body.uniName;
+  let universityId = req.body.univId; //user univesrity ID (e.g. ge01117)
+  let userEmail = req.body.email;
+   */
 
-     return function (dispatch) {
-          console.log("wil dispatch");
-          dispatch({ type: "PUBLISH_MODAL_OPEN" });
-          dispatch({ type: "REQUEST_PUBLISH_SENT" });
-          $('#modal1').modal('open');
-          _axios2.default.post("/back/supplement/rest/request", { uniName: university, email: email,
-               univId: universityId }).then(function (response) {
-               dispatch({ type: "REQUEST_PUBLISH_FULLFILED", payload: response.data });
-               dispatch({ type: "PUBLISH_MODAL_CLOSE" });
-               $('#modal1').modal('close');
-          }).catch(function (err) {
-               dispatch({ type: "REQUEST_PUBLISH_REJECTED", payload: err });
-          });
-     };
+  return function (dispatch) {
+    console.log("wil dispatch");
+    dispatch({ type: "PUBLISH_MODAL_OPEN" });
+    dispatch({ type: "REQUEST_PUBLISH_SENT" });
+    $('#modal1').modal('open');
+    _axios2.default.post("/back/supplement/rest/request", { uniName: university, email: email,
+      univId: universityId }).then(function (response) {
+      $('#modal1').modal('close');
+      dispatch({ type: "REQUEST_PUBLISH_FULLFILED", payload: response.data });
+      dispatch({ type: "PUBLISH_MODAL_CLOSE" });
+    }).catch(function (err) {
+      dispatch({ type: "REQUEST_PUBLISH_REJECTED", payload: err });
+    });
+  };
 }
 
 function updateUnivId(universityId) {
-     return { type: "UPDATE_UNIVID", payload: universityId };
+  return { type: "UPDATE_UNIVID", payload: universityId };
 }
 
 function updateUniversity(university) {
-     return { type: "UPDATE_UNINIVERSITY", payload: university };
+  return { type: "UPDATE_UNINIVERSITY", payload: university };
 }
 
 function updateEmail(mail) {
-     return { type: "UPDATE_EMAIL", payload: mail };
+  return { type: "UPDATE_EMAIL", payload: mail };
 }
 
 /***/ }),
-/* 62 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3920,9 +4114,9 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactMaterialize = __webpack_require__(1);
 
-var _reactRouterDom = __webpack_require__(9);
+var _reactRouterDom = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"react-router-dom\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
-var _sideNav = __webpack_require__(13);
+var _sideNav = __webpack_require__(12);
 
 var _sideNav2 = _interopRequireDefault(_sideNav);
 
@@ -3972,6 +4166,179 @@ var ServerLoading = function (_React$Component) {
 exports.default = ServerLoading;
 
 /***/ }),
+/* 62 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _dec, _class;
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(2);
+
+var _reactMaterialize = __webpack_require__(1);
+
+var _reactRouterDom = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"react-router-dom\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+
+var _userActions = __webpack_require__(18);
+
+var _supplementCard = __webpack_require__(27);
+
+var _supplementCard2 = _interopRequireDefault(_supplementCard);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var AccountInfo = (_dec = (0, _reactRedux.connect)(function (store) {
+  return { user: store.user.user
+  };
+}), _dec(_class = function (_React$Component) {
+  _inherits(AccountInfo, _React$Component);
+
+  function AccountInfo(props) {
+    _classCallCheck(this, AccountInfo);
+
+    var _this = _possibleConstructorReturn(this, (AccountInfo.__proto__ || Object.getPrototypeOf(AccountInfo)).call(this, props));
+
+    _this.logoutUser = _this.logoutUser.bind(_this);
+    return _this;
+  }
+
+  _createClass(AccountInfo, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      $('.button-collapse').sideNav('hide');
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps() {
+      $('.button-collapse').sideNav('hide');
+    }
+  }, {
+    key: 'logoutUser',
+    value: function logoutUser() {
+      this.props.dispatch(_userActions.logout);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      var user = this.props.user;
+      return _react2.default.createElement(
+        'div',
+        { className: 'main container', style: { marginTop: "3%" } },
+        _react2.default.createElement(
+          'div',
+          { className: 'row' },
+          _react2.default.createElement(
+            'h5',
+            { className: 'col s12' },
+            'Your Personal Information'
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'row' },
+          _react2.default.createElement(
+            'form',
+            { className: 'col s12' },
+            _react2.default.createElement(
+              'div',
+              { className: 'row' },
+              _react2.default.createElement(
+                'div',
+                { className: 'input-field col s12' },
+                _react2.default.createElement('input', { id: 'userName', style: { marginTop: "3em", color: "black" }, value: user.userName, type: 'text', disabled: true }),
+                _react2.default.createElement(
+                  'label',
+                  { htmlFor: 'userName', 'data-success': 'right' },
+                  'User Name'
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'input-field col s12' },
+                _react2.default.createElement('input', { id: 'currentFamilyName', style: { marginTop: "3em", color: "black" }, value: user.currentFamilyName, type: 'text', disabled: true }),
+                _react2.default.createElement(
+                  'label',
+                  { htmlFor: 'currentFamilyName', 'data-success': 'right' },
+                  'Family Name'
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'input-field col s12' },
+                _react2.default.createElement('input', { id: 'currentGivenName', style: { marginTop: "3em", color: "black" }, value: user.currentGivenName, type: 'text', disabled: true }),
+                _react2.default.createElement(
+                  'label',
+                  { htmlFor: 'currentGivenName', 'data-success': 'right' },
+                  'Given Name'
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'input-field col s12' },
+                _react2.default.createElement('input', { id: 'dateOfBirth', type: 'text', style: { marginTop: "3em", color: "black" }, value: user.dateOfBirth, disabled: true }),
+                _react2.default.createElement(
+                  'label',
+                  { htmlFor: 'dateOfBirth', 'data-success': 'right' },
+                  'Date of Birth'
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'input-field col s12' },
+                _react2.default.createElement('input', { id: 'personIdentifier', type: 'text', style: { marginTop: "3em", color: "black" }, value: user.personIdentifier, disabled: true }),
+                _react2.default.createElement(
+                  'label',
+                  { htmlFor: 'personIdentifier', 'data-success': 'right' },
+                  'Person Identifier'
+                )
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'row' },
+              _react2.default.createElement(
+                'div',
+                { className: 'col s12' },
+                _react2.default.createElement(
+                  'a',
+                  { className: 'waves-effect waves-teal btn-flat', onClick: function onClick(e) {
+                      return _this2.logoutUser();
+                    } },
+                  'Log out'
+                )
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return AccountInfo;
+}(_react2.default.Component)) || _class);
+exports.default = AccountInfo;
+
+/***/ }),
 /* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4005,7 +4372,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _redux = __webpack_require__(27);
+var _redux = __webpack_require__(28);
 
 var _reduxLogger = __webpack_require__(65);
 
@@ -4056,7 +4423,7 @@ Object.defineProperty(exports, "__esModule", {
                   value: true
 });
 
-var _redux = __webpack_require__(27);
+var _redux = __webpack_require__(28);
 
 var _userReducer = __webpack_require__(69);
 
@@ -4174,7 +4541,8 @@ function reducer() {
         shareError: null,
         sharingQR: false,
         shareErrorQR: null,
-        QR: null
+        QR: null,
+        isUpdated: false
     };
     var action = arguments[1];
 
@@ -4190,8 +4558,14 @@ function reducer() {
             }
         case "GET_SUP":
             {
-                return _extends({}, state, { fetching: true });
+                return _extends({}, state, { fetching: true, isUpdated: true });
             }
+
+        case "REMOVE_SUP_VIEW":
+            {
+                return _extends({}, state, { isUpdated: false });
+            }
+
         case "SHARE_SUP_FULLFILED":
             {
                 return _extends({}, state, { sharing: false, shareError: null });
@@ -4200,7 +4574,7 @@ function reducer() {
             {
                 return _extends({}, state, { sharing: false, shareError: action.payload });
             }
-        case "SHARE_SUP":
+        case "SHARE_SUP_STARTED":
             {
                 return _extends({}, state, { sharing: true, shareError: null });
             }
@@ -4308,7 +4682,8 @@ function reducer() {
     univId: "",
     email: "",
     univsersity: "UAegean",
-    sendingRequest: false
+    sendingRequest: false,
+    requestFullfiled: false
   };
   var action = arguments[1];
 
@@ -4320,7 +4695,7 @@ function reducer() {
       }
     case "REQUEST_PUBLISH_FULLFILED":
       {
-        return _extends({}, state, { sendingRequest: false, removedUser: true, usersToRem: [] });
+        return _extends({}, state, { sendingRequest: false, requestFullfiled: true, removedUser: true, usersToRem: [] });
       }
     case "REQUEST_PUBLISH_REJECTED":
       {
@@ -4332,7 +4707,7 @@ function reducer() {
       }
     case "PUBLISH_MODAL_CLOSE":
       {
-        return _extends({}, state, { modal: false });
+        return _extends({}, state, { modal: false, requestFullfiled: false });
       }
     case "UPDATE_UNIVID":
       {
@@ -4478,17 +4853,17 @@ module.exports = require("njwt");
 /*jslint es6,  node:true */
 
 
-var express = __webpack_require__(14);
+var express = __webpack_require__(13);
 var router = express.Router();
 var bcrypt = __webpack_require__(22);
-var jwt = __webpack_require__(15);
+var jwt = __webpack_require__(14);
 var secretKey = process.env.SECRET_KEY ? process.env.SECRET_KEY : "testSecret"; //the secret comes from an enviroment variable
 var request = __webpack_require__(23);
 var authorizeAll = __webpack_require__(5).authorizeAll;
 var authorizeAdmin = __webpack_require__(5).authorizeAdmin;
 var getUserDetails = __webpack_require__(5).userDetailsFromToken;
 var fs = __webpack_require__(4);
-var path = __webpack_require__(2);
+var path = __webpack_require__(3);
 
 module.exports = router;
 
@@ -4602,16 +4977,16 @@ router.get('/logout', function (req, res) {
 /*jslint es6,  node:true */
 
 
-var express = __webpack_require__(14);
+var express = __webpack_require__(13);
 var router = express.Router();
 var bcrypt = __webpack_require__(22);
-var jwt = __webpack_require__(15);
+var jwt = __webpack_require__(14);
 var secretKey = process.env.SECRET_KEY ? process.env.SECRET_KEY : "testSecret"; //the secret comes from an enviroment variable
 var request = __webpack_require__(23);
 var authorizeAll = __webpack_require__(5).authorizeAll;
 var authorizeAdmin = __webpack_require__(5).authorizeAdmin;
 var getUserDetails = __webpack_require__(5).userDetailsFromToken;
-var uuid = __webpack_require__(29);
+var uuid = __webpack_require__(30);
 
 module.exports = router;
 
@@ -4633,10 +5008,10 @@ router.get('/landing', function (req, res) {
 });
 
 router.get('/eIDAS', function (req, res) {
-  if (!req.session.userType && !req.session.eID) {
-    // res.redirect(303, "http://84.205.248.180/ISSPlus/ValidateToken?t="+ uuid()+"&sp=sp1&cc=CA&saml=eIDAS");
-    res.redirect(303, "http://138.68.103.237:8090/login");
-  }
+  // if(!req.session.userType  && !req.session.eID){
+  // res.redirect(303, "http://84.205.248.180/ISSPlus/ValidateToken?t="+ uuid()+"&sp=sp1&cc=CA&saml=eIDAS");
+  res.redirect(303, process.env.LOGIN_ADDR);
+  // }
 });
 
 /***/ }),
@@ -4647,7 +5022,7 @@ router.get('/eIDAS', function (req, res) {
 /*jslint es6,  node:true */
 
 
-var express = __webpack_require__(14);
+var express = __webpack_require__(13);
 var router = express.Router();
 var request = __webpack_require__(23);
 var authorizeAll = __webpack_require__(5).authorizeAll;
@@ -4657,10 +5032,10 @@ var basic = __webpack_require__(85);
 var supUtils = __webpack_require__(96);
 var emailUtil = __webpack_require__(99);
 var randomstring = __webpack_require__(103);
-var jwt = __webpack_require__(15);
+var jwt = __webpack_require__(14);
 var secretKey = process.env.SECRET_KEY ? process.env.SECRET_KEY : "testSecret"; //the secret comes from an enviroment variable
-var stripchar = __webpack_require__(28).StripChar;
-var uuid = __webpack_require__(29);
+var stripchar = __webpack_require__(29).StripChar;
+var uuid = __webpack_require__(30);
 
 /* configuration */
 var config = __webpack_require__(7);
@@ -4777,7 +5152,7 @@ router.get('/request', authorizeAll, function (req, res) {
 /*jslint es6,  node:true */
 
 
-var path = __webpack_require__(2);
+var path = __webpack_require__(3);
 var fs = __webpack_require__(4);
 var util = __webpack_require__(6);
 var config = __webpack_require__(7);
@@ -4790,7 +5165,7 @@ var createChannel = __webpack_require__(92);
 var instantiate = __webpack_require__(93);
 var query = __webpack_require__(94);
 var invoke = __webpack_require__(95);
-var evHelper = __webpack_require__(30);
+var evHelper = __webpack_require__(31);
 
 exports.installChaincode = function (peers, chaincodeName, chaincodePath, chaincodeVersion, username, org) {
   console.log('\n============ Install chaincode on organizations ============\n');
@@ -4926,11 +5301,11 @@ module.exports = require("fabric-ca-client");
  *  limitations under the License.
  */
 var util = __webpack_require__(6);
-var path = __webpack_require__(2);
+var path = __webpack_require__(3);
 var fs = __webpack_require__(4);
 
-var Peer = __webpack_require__(17);
-var EventHub = __webpack_require__(18);
+var Peer = __webpack_require__(16);
+var EventHub = __webpack_require__(17);
 var tx_id = null;
 var nonce = null;
 var config = __webpack_require__(7);
@@ -5072,7 +5447,7 @@ exports.joinChannel = joinChannel;
  */
 var util = __webpack_require__(6);
 var fs = __webpack_require__(4);
-var path = __webpack_require__(2);
+var path = __webpack_require__(3);
 var config = __webpack_require__(7);
 var helper = __webpack_require__(8);
 var logger = helper.getLogger('Create-Channel');
@@ -5150,12 +5525,12 @@ exports.createChannel = createChannel;
  */
 
 
-var path = __webpack_require__(2);
+var path = __webpack_require__(3);
 var fs = __webpack_require__(4);
 var util = __webpack_require__(6);
-var hfc = __webpack_require__(16);
-var Peer = __webpack_require__(17);
-var EventHub = __webpack_require__(18);
+var hfc = __webpack_require__(15);
+var Peer = __webpack_require__(16);
+var EventHub = __webpack_require__(17);
 var config = __webpack_require__(7);
 var helper = __webpack_require__(8);
 var logger = helper.getLogger('instantiate-chaincode');
@@ -5299,12 +5674,12 @@ exports.instantiateChaincode = instantiateChaincode;
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-var path = __webpack_require__(2);
+var path = __webpack_require__(3);
 var fs = __webpack_require__(4);
 var util = __webpack_require__(6);
-var hfc = __webpack_require__(16);
-var Peer = __webpack_require__(17);
-var EventHub = __webpack_require__(18);
+var hfc = __webpack_require__(15);
+var Peer = __webpack_require__(16);
+var EventHub = __webpack_require__(17);
 var config = __webpack_require__(7);
 var helper = __webpack_require__(8);
 var logger = helper.getLogger('Query');
@@ -5570,18 +5945,18 @@ exports.getChannels = getChannels;
  */
 
 
-var path = __webpack_require__(2);
+var path = __webpack_require__(3);
 var fs = __webpack_require__(4);
 var util = __webpack_require__(6);
-var hfc = __webpack_require__(16);
-var Peer = __webpack_require__(17);
+var hfc = __webpack_require__(15);
+var Peer = __webpack_require__(16);
 var config = __webpack_require__(7);
 var helper = __webpack_require__(8);
 var logger = helper.getLogger('invoke-chaincode');
-var EventHub = __webpack_require__(18);
+var EventHub = __webpack_require__(17);
 hfc.addConfigFile(path.join(__dirname, 'network-config.json'));
 var ORGS = hfc.getConfigSetting('network-config');
-var evHelper = __webpack_require__(30);
+var evHelper = __webpack_require__(31);
 
 /**
 	@param  eventHandler, an OPTIONAL function, that handles the custom events
@@ -5752,7 +6127,7 @@ module.exports = require("hash.js");
 "use strict";
 
 
-var path = __webpack_require__(2);
+var path = __webpack_require__(3);
 
 var nodemailer = __webpack_require__(100);
 var fileUtils = __webpack_require__(101);

@@ -63,13 +63,7 @@ module.exports = [{
         exclude: /(node_modules)/,
         loaders: "babel-loader",
         query: {
-          plugins: ['transform-decorators-legacy',"react-html-attrs", 'transform-class-properties',
-            new webpack.DefinePlugin({
-               'process.env': {
-                 'NODE_ENV': JSON.stringify('production')
-               }
-             })
-        ],
+          plugins: ['transform-decorators-legacy',"react-html-attrs", 'transform-class-properties'],
           presets: ['es2015', 'stage-0', 'react']
         }//,
       }
