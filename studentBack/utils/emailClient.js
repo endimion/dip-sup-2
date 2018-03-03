@@ -41,7 +41,7 @@ function sendEmail(receiverAddress,body){
       console.log( 'Email Body ' + body );
       // setup email data with unicode symbols
       let mailOptions = {
-        from: '"Diploma Supplement Service" <dss@aegean.gr>', // sender address
+        from: '"Diploma Supplement Service" <supplements@ds.service.aegean.gr>', // sender address
         to: receiverAddress,// list of receivers
         subject: 'A Diploma Supplement has been shared with you ', // Subject line
         text: body,//'Hello world ?', // plain text body
