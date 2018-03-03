@@ -34,6 +34,7 @@ export default class ShareByMailModal extends React.Component {
 
 
   share(mail){
+    console.log("shareSupMailModala:: share fnct called");
     this.props.dispatch(shareByMail(this.props.sup.Id,mail));
   }
 
@@ -49,7 +50,7 @@ export default class ShareByMailModal extends React.Component {
             <Row>
              <Input id={"email"} type="email" label="Email" s={12} ><Icon>account_circle</Icon></Input>
             </Row>
-            <Button onClick={(e)=>{
+            <Button onClick={ (e) =>{
                 let mail= document.getElementById("email").value;
                 this.share(mail);
               }}>Share</Button>
