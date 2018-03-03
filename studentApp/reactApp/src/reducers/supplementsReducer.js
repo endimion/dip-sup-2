@@ -31,7 +31,7 @@ export default function reducer(state={
     case "SHARE_SUP_REJECTED":{
         return {...state,sharing:false,shareError:action.payload}
     }
-    case "SHARE_SUP":{
+    case "SHARE_SUP_STARTED":{
         return {...state,sharing:true,shareError:null}
     }
     case "OPEN_SHARE_BY_MAIL":{
