@@ -36,7 +36,8 @@ function sendEmail(receiverAddress,body){
         }
       });
 
-
+      console.log("transporter");
+      console.log(transporter);
       console.log( 'Email Body ' + body );
       // setup email data with unicode symbols
       let mailOptions = {
@@ -49,6 +50,7 @@ function sendEmail(receiverAddress,body){
         transporter.sendMail(mailOptions)
         .then(result => {
                 console.log(`mail sent ${result}`);
+                console.log(result);
                 resolve(result);
         })
         .catch(err => {
