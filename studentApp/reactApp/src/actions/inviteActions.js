@@ -79,6 +79,7 @@ export function  openShareByMail(supId) {
 
 export function  shareByMail(_supId,_email) {
   return  function(dispatch){
+      console.log("dispatching SHARE_SUP_STARTED");
       dispatch({type: "SHARE_SUP_STARTED"});
       let data = {email: _email, supId: _supId };
        axios.post("/back/supplement/rest/inviteByMail",data)
