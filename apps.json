@@ -7,11 +7,11 @@
     "env": {"ENV_VARIABLE":123, "SRV_ADDR":"127.0.0.1:8000",
                                       "NODE_ENV": "development",
                                       "BASE_URL":"/",
-                                       "LOGIN_ADDR":"http://dss.aegean.gr:9080/login"},
+                                       "LOGIN_ADDR":"http://dss.aegean.gr:8080/login"},
     "env_production": {"ENV_VARIABLE":123,
                         "SRV_ADDR":"http://dss.aegean.gr",
                         "NODE_ENV": "production",
-                        "BASE_URL":"/","LOGIN_ADDR":"http://dss.aegean.gr:9080/login"}
+                        "BASE_URL":"/","LOGIN_ADDR":"http://dss.aegean.gr:8080/login"}
   },
   {
     "name": "studentBack",
@@ -19,11 +19,11 @@
     "cwd":"./studentBack",
     "env": {"ENV_VARIABLE":123, "SRV_ADDR":"127.0.0.1:8002",
                                       "NODE_ENV": "development",
-                                      "BASE_URL":"/back","LOGIN_ADDR":"http://dss.aegean.gr:9080/login"},
+                                      "BASE_URL":"/back","LOGIN_ADDR":"http://dss.aegean.gr:8080/login"},
     "env_production": {"ENV_VARIABLE":123,
                         "SRV_ADDR":"http://dss.aegean.gr",
                         "NODE_ENV": "production",
-                        "BASE_URL":"/","LOGIN_ADDR":"http://dss.aegean.gr:9080/login"}
+                        "BASE_URL":"/","LOGIN_ADDR":"http://dss.aegean.gr:8080/login"}
   },
   {
     "name": "univMonitor",
@@ -31,11 +31,11 @@
     "cwd": "./univApp",
     "env": {"UNIVERSITY_NAME":"UAegean", "SRV_ADDR":"127.0.0.1:8001",
                                       "NODE_ENV": "development",
-                                    "BASE_URL":"/","LOGIN_ADDR":"http://dss.aegean.gr:9080/login"},
+                                    "BASE_URL":"/","LOGIN_ADDR":"http://dss.aegean.gr:8080/login"},
     "env_production": {"UNIVERSITY_NAME":"UAegean",
                         "SRV_ADDR":"http://dss.aegean.gr",
                         "NODE_ENV": "production",
-                        "BASE_URL":"/univ/","LOGIN_ADDR":"http://dss.aegean.gr:9080/login"}
+                        "BASE_URL":"/univ/","LOGIN_ADDR":"http://dss.aegean.gr:8080/login"}
   },
 
   {"name": "univBackend",
@@ -43,10 +43,10 @@
     "cwd": "./univBackEnd",
     "env": {"UNIVERSITY_NAME":"UAegean", "SRV_ADDR":"127.0.0.1:8001",
                                       "NODE_ENV": "development",
-                                    "BASE_URL":"/","LOGIN_ADDR":"http://dss.aegean.gr:9080/login"},
+                                    "BASE_URL":"/","LOGIN_ADDR":"http://dss.aegean.gr:8080/login"},
     "env_production": {"UNIVERSITY_NAME":"UAegean",
                         "SRV_ADDR":"http://dss.aegean.gr",
                         "NODE_ENV": "production",
-                        "BASE_URL":"/univ/","LOGIN_ADDR":"http://dss.aegean.gr:9080/login"}
+                        "BASE_URL":"/univ/","LOGIN_ADDR":"http://dss.aegean.gr:8080/login"}
   }
 ]}
