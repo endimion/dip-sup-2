@@ -21,18 +21,18 @@ function sendEmail(receiverAddress,body){
       // console.log("pass" + pass);
       // create reusable transporter object using the default SMTP transport
       let transporter = nodemailer.createTransport({
-       service: 'gmail',
-        // host: '172.17.0.1',
-        // port: '25',
+       // service: 'gmail',
+        host: 'mail.your-server.de',
+        port: '25',
 //      secure: false,
         // tls:{
           // rejectUnauthorized: false
         // },
         auth: {
-          user: 'triantafyllou.ni@gmail.com',
-          pass: _pass
+          user: 'dsservice@programmerdiaries.com',
+          // pass: _pass
           // user: 'user@dss.aegean.gr',
-          // pass: 'pwd'
+          pass: 'D$d1pl0m@'
         }
       });
 
