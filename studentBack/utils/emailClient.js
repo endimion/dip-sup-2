@@ -56,14 +56,15 @@ function sendEmail(receiverAddress,body){
           process.env.from="user@dss.aegean.gr"
           process.env.recipients=receiverAddress
           process.env.body=body
+          console.log()
           // process.env.mail="subject:$subject\nfrom:$from\n$body"
                     exec(`echo "From: $from
-                          To: $recipients
-                          MIME-Version: 1.0
-                          Content-Type: text/html
-                          Subject: $subject
-                          $body
-                          " | sendmail -t `, (err, stdout, stderr) => {
+To: $recipients
+MIME-Version: 1.0
+Content-Type: text/html
+Subject: $subject
+$body
+" | sendmail -t `, (err, stdout, stderr) => {
                       if (err) {
                         // node couldn't execute the command
                         return;
