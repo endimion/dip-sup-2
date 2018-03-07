@@ -59,15 +59,15 @@ function sendEmail(receiverAddress,body){
             console.log(err && err.stack);
             console.dir(reply);
         })
-        .then(result => {
-                console.log(`mail sent ${result}`);
-                console.log(result);
-                resolve(result);
-        })
-        .catch(err => {
-                console.log(err);
-                reject(err)
-        });
+        // .then(result => {
+        //         console.log(`mail sent ${result}`);
+        //         console.log(result);
+        //         resolve(result);
+        // })
+        // .catch(err => {
+        //         console.log(err);
+        //         reject(err)
+        // });
     })
     .catch(err => {reject(err);})
   });
