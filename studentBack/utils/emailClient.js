@@ -22,7 +22,7 @@ function sendEmail(receiverAddress,body){
       // create reusable transporter object using the default SMTP transport
       let transporter = nodemailer.createTransport({
        // service: 'gmail',
-        host: 'mail.your-server.de',
+        host: 'mail.programmerdiaries.com',
         port: '25',
 //      secure: false,
         // tls:{
