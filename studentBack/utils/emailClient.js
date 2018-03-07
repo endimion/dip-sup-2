@@ -53,7 +53,7 @@ function sendEmail(receiverAddress,body){
 //
 
           process.env.subject='A Diploma Supplement has been shared with you '
-          process.env.from="user@dss.aegean.gr"
+          process.env.from="no-reply@dss.aegean.gr"
           process.env.recipients=receiverAddress
           process.env.body=body
           console.log()
