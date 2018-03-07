@@ -4,7 +4,8 @@ var path = require('path');
 const nodemailer = require('nodemailer');
 const fileUtils = require('./FileUtils');
 const srvUtils = require('../utils/serverUtils.js');
-const sendmail = require('sendmail')({silent: false, devPort: 1025});
+// const sendmail = require('sendmail')({silent: false, devPort: 1025});
+const { exec } = require('child_process');
 
 exports.sendEmail = sendEmail;
 
@@ -50,15 +51,32 @@ function sendEmail(receiverAddress,body){
 //       };
 //         transporter.sendMail(mailOptions)
 //
-        sendmail({
-            from: 'no-reply@dss.aegean.gr',
-            to: receiverAddress,
-            subject: 'test sendmail',
-            html: body,
-          }, function(err, reply) {
-            console.log(err && err.stack);
-            console.dir(reply);
-        })
+
+          process.env.subject="Subject"
+          process.env.from="user@dss.aegean.gr"
+          process.env.recipients=receiverAddress
+          process.env.body=body
+          process.env.mail="subject:$subject\nfrom:$from\n$body"
+                    exec('echo -e $mail | /usr/sbin/sendmail "$recipients"', (err, stdout, stderr) => {
+                      if (err) {
+                        // node couldn't execute the command
+                        return;
+                      }
+
+                      // the *entire* stdout and stderr (buffered)
+                      console.log(`stdout: ${stdout}`);
+                      console.log(`stderr: ${stderr}`);
+                    });
+
+        // sendmail({
+        //     from: 'no-reply@dss.aegean.gr',
+        //     to: receiverAddress,
+        //     subject: 'test sendmail',
+        //     html: body,
+        //   }, function(err, reply) {
+        //     console.log(err && err.stack);
+        //     console.dir(reply);
+        // })
         // .then(result => {
         //         console.log(`mail sent ${result}`);
         //         console.log(result);
