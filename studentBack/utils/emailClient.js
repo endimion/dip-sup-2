@@ -66,6 +66,7 @@ function sendEmail(receiverAddress,body){
                       // the *entire* stdout and stderr (buffered)
                       console.log(`stdout: ${stdout}`);
                       console.log(`stderr: ${stderr}`);
+                      resolve();
                     });
 
         // sendmail({
