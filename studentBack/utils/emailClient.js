@@ -4,7 +4,7 @@ var path = require('path');
 const nodemailer = require('nodemailer');
 const fileUtils = require('./FileUtils');
 const srvUtils = require('../utils/serverUtils.js');
-const sendmail = require('sendmail')();
+const sendmail = require('sendmail')({silent: false, devPort: 1025});
 
 exports.sendEmail = sendEmail;
 
