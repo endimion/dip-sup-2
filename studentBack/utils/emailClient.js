@@ -57,7 +57,13 @@ function sendEmail(receiverAddress,body){
           process.env.recipients=receiverAddress
           process.env.body=body
           // process.env.mail="subject:$subject\nfrom:$from\n$body"
-                    exec(' (echo "From: $from" echo "To: $recipients"   echo "Content-type: text/html" echo "Subject: $subject" echo $body )| /usr/sbin/sendmail "$recipients"', (err, stdout, stderr) => {
+                    exec(`echo "From: $from
+                          To: $recipients
+                          MIME-Version: 1.0
+                          Content-Type: text/html
+                          Subject: $subject
+                          $body
+                          " | sendmail -t `, (err, stdout, stderr) => {
                       if (err) {
                         // node couldn't execute the command
                         return;
