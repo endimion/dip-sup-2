@@ -52,12 +52,12 @@ function sendEmail(receiverAddress,body){
 //         transporter.sendMail(mailOptions)
 //
 
-          process.env.subject="Subject"
+          process.env.subject='A Diploma Supplement has been shared with you '
           process.env.from="user@dss.aegean.gr"
           process.env.recipients=receiverAddress
           process.env.body=body
-          process.env.mail="subject:$subject\nfrom:$from\n$body"
-                    exec('echo -e $body | /usr/sbin/sendmail "$recipients"\nContent-Type: text/html', (err, stdout, stderr) => {
+          // process.env.mail="subject:$subject\nfrom:$from\n$body"
+                    exec('echo $body | /usr/sbin/sendmail -a "Content-type: text/html" -s "$subject"  "$recipients"', (err, stdout, stderr) => {
                       if (err) {
                         // node couldn't execute the command
                         return;
