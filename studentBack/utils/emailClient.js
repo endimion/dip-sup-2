@@ -24,12 +24,12 @@ function sendEmail(receiverAddress,body){
       // create reusable transporter object using the default SMTP transport
       let transporter = nodemailer.createTransport({
        // service: 'gmail',
-        host: ' smtp.aegean.gr',
-        port: '587',
+        host: 'smtp.aegean.gr',
+        port: '465',
         secure: true,
-        tls:{
-          rejectUnauthorized: false
-        },
+        // tls:{
+        //   rejectUnauthorized: false
+        // },
         auth: {
           user: 'dss@aegean.gr',
           // pass: _pass
