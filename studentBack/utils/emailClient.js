@@ -25,11 +25,13 @@ function sendEmail(receiverAddress,body){
       let transporter = nodemailer.createTransport({
        // service: 'gmail',
         host: 'smtp.aegean.gr',
-        port: '465',
-        secure: true,
+        port: '587',
+        // secure: true,
         // tls:{
         //   rejectUnauthorized: false
         // },
+        secure: false,
+        requireTLS: true, // only use if the server really does support TLS
         auth: {
           user: 'dss@aegean.gr',
           // pass: _pass
