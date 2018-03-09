@@ -23,7 +23,11 @@
     "env_production": {"ENV_VARIABLE":123,
                         "SRV_ADDR":"http://dss.aegean.gr",
                         "NODE_ENV": "production",
-                        "BASE_URL":"/","LOGIN_ADDR":"http://dss.aegean.gr:8080/login"}
+                        "BASE_URL":"/","LOGIN_ADDR":"http://dss.aegean.gr:8080/login",
+                        "EMAIL_USER":"dss@aegean.gr",
+                        "EMAIL_PASS":"ddd111!!!",
+                        "EMAIL_SERVER":"smtp.aegean.gr",
+                        "EMAIL_SERVER_PORT":"587"}
   },
   {
     "name": "univMonitor",

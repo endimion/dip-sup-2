@@ -24,8 +24,8 @@ function sendEmail(receiverAddress,body){
       // create reusable transporter object using the default SMTP transport
       let transporter = nodemailer.createTransport({
        // service: 'gmail',
-        host: 'smtp.aegean.gr',
-        port: '587',
+        host: process.env.EMAIL_SERVER,
+        port: process.env.EMAIL_SERVER_PORT,
         // secure: true,
         // tls:{
         //   rejectUnauthorized: false
@@ -33,10 +33,10 @@ function sendEmail(receiverAddress,body){
         secure: false,
         requireTLS: true, // only use if the server really does support TLS
         auth: {
-          user: 'dss@aegean.gr',
+          user: process.env.EMAIL_USER,
           // pass: _pass
           // user: 'user@dss.aegean.gr',
-          pass: 'ddd111!!!'
+          pass: process.env.EMAIL_PASS
         }
       });
 //
