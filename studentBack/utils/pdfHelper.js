@@ -75,13 +75,17 @@ function genPdf(ds,res){
 
   // doc.circle(280, 200, 50)
   //    .fill("#6600FF");
+  let uniName="";
   if(ds.Qualification_Info.InstitutionName.indexOf("Aegean") >= 0){
     doc.image(__dirname +'/../public/img/uAegeanLogo.png', 270, 110, {width: 80});
+    uniName = "UNIVERSITY OF THE AEGEAN";
   }else{
     if(ds.Qualification_Info.InstitutionName.indexOf("Agri") >= 0){
       doc.image(__dirname +'/../public/img/AgriLogo.png', 270, 110, {width: 80});
+      uniName = "AGRICULTURAL UNIVERSITY OF ATHENS";
     }else{
       doc.image(__dirname +'/../public/img/PirLogo.png', 270, 110, {width: 80});
+      uniName= "UNIVERSITY OF PIREAUS";
     }
   }
      // .text('Proportional to width', 0, 0)
@@ -133,10 +137,10 @@ let fuctionOfQual ="5. INFORMATION ABOUT THE FUNCTION OF THE QUALIFICATION";
 let accessToFurtherStudy = "5.1 Access to further study: ";
 let profStatus = "5.2 Professional Status: ";
 
-  doc.fill("black").text('UNIVERSITY OF THE AEGEAN', 140, 200)
+  doc.fill("black").text(uniName, 140, 200)
      .font('NotoSans', 13)
      .moveDown()
-     .text('DEPARTMENT OF FINANCIAL AND MANAGEMENT ENGINEERING', 120, 225)
+     .text(ds.Qualification_Info.Name, 120, 225)
      .font('NotoSans', 11)
      .moveDown()
      .text(personalDsc, style)
