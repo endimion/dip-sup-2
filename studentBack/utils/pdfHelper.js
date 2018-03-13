@@ -75,8 +75,15 @@ function genPdf(ds,res){
 
   // doc.circle(280, 200, 50)
   //    .fill("#6600FF");
-
-  doc.image(__dirname +'/../public/img/uAegeanLogo.png', 270, 110, {width: 80});
+  if(ds.Qualification_Info.InstitutionName.indexOf("Aegean") >= 0){
+    doc.image(__dirname +'/../public/img/uAegeanLogo.png', 270, 110, {width: 80});
+  }else{
+    if(ds.Qualification_Info.InstitutionName.indexOf("Agri") >= 0){
+      doc.image(__dirname +'/../public/img/AgriLogo.png', 270, 110, {width: 80});
+    }else{
+      doc.image(__dirname +'/../public/img/PirLogo.png', 270, 110, {width: 80});
+    }
+  }
      // .text('Proportional to width', 0, 0)
 
   // and some justified text wrapped into columns
