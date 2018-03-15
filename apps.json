@@ -15,7 +15,7 @@
   {
     "name": "studentClientAgr",
     "script": "./dist/build/server.js",
-    "cwd":"./studentApp",
+    "cwd":"./studentAppAgri",
     "env": {"ENV_VARIABLE":123, "SRV_ADDR":"127.0.0.1:8004",
                                       "NODE_ENV": "development",
                                       "BASE_URL":"/",
@@ -49,7 +49,7 @@
   {
     "name": "studentBackAgr",
     "script": "appOld.js",
-    "cwd":"./studentBack",
+    "cwd":"./studentBackAgri",
     "env": {"ENV_VARIABLE":123, "SRV_ADDR":"127.0.0.1:8004",
                                       "NODE_ENV": "development",
                                       "BASE_URL":"/back","LOGIN_ADDR":"http://dss.aegean.gr:8080/login"},
