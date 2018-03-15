@@ -31,37 +31,6 @@ export function  getSupplementsByEid(userEid, counter) {
    }
 }
 
-export function retryAxiosNtimes(times, counter, url){
-  const config = {
-    headers: { Pragma: 'no-cache'},
-    // params: { id: this.state.taskID }
-  }
-
-    return new Promise( (resolve,reject) => {
-      axios.get(url,config)
-      .then(response =>{
-        resolve(response);
-      })
-      .catch(err => {
-          if(counter < times){
-              counter++;
-              console.log("will try again " + counter);
-              sleep(1000)
-              .then( () => {resolve(retryAxiosNtimes(times,counter,url));
-                    });
-
-          }else{
-            console.log(`tried ${counter} times`);
-            reject(err);
-          }
-    });
-  });
-}
-
-
-function sleep (time) {
-  return new Promise((resolve) => setTimeout(resolve, time));
-}
 
 
 
