@@ -59,7 +59,8 @@ export function  getInvAndGenValCode(inviteId) {
                 //$.get("/supplement/rest/view/"+invite.DSId).done(resp=>{
                 dispatch({type: "GET_INV_SUP"});
                 retryAxiosNtimes(4,0,"/back/supplement/rest/view/"+id)
-                // axios.get("/back/supplement/rest/view/"+id).then( resp =>{
+                // axios.get("/back/supplement/rest/view/"+id)
+                .then( resp =>{
                   dispatch({type: "GET_INV_SUP_FULLFILED", payload:JSON.parse(resp.data)});
                 });
             }else{
