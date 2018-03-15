@@ -3,12 +3,12 @@ import axios from "axios"
 import axiosRetry from 'axios-retry';
 
 
+axiosRetry(axios, { retries: 3 });
+
 export function retryAxiosNtimes(times, counter, url){
   const config = {
     headers: { Pragma: 'no-cache'},
-    // params: { id: this.state.taskID }
   }
-
     return new Promise( (resolve,reject) => {
       axios.get(url,config)
       .then(response =>{
