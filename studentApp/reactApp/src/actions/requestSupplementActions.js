@@ -25,7 +25,7 @@ export function requestPublication(university,universityId,email) {
      dispatch({type:"PUBLISH_MODAL_OPEN"});
      dispatch({type:"REQUEST_PUBLISH_SENT"});
     $('#modal1').modal('open');
-    retryAxiosNtimesPost(4,0,"/back/supplement/rest/request",uniName:university,email:email,
+    retryAxiosNtimesPost(4,0,"/back/supplement/rest/request",{uniName:university,email:email,
                                          univId:universityId})
      // axios.post("/back/supplement/rest/request",{uniName:university,email:email,
      //                                      univId:universityId})
