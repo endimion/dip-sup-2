@@ -66,7 +66,8 @@ export function  getInvAndGenValCode(inviteId) {
             }else{
                 dispatch({type: "SEND_VAL_CODE"});
                 retryAxiosNtimesPost(4,0,"/back/supplement/rest/invite/"+inviteId+"/sendMail")
-                // axios.post("/back/supplement/rest/invite/"+inviteId+"/sendMail").then(resp =>{
+                // axios.post("/back/supplement/rest/invite/"+inviteId+"/sendMail")
+                .then(resp =>{
                   dispatch({type: "SEND_VAL_CODE_FULLFILED"});
                 })
             }
