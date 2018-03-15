@@ -4,7 +4,7 @@
 
 const express = require('express');
 const app = express();
-const port = 8003;
+const port = 8000;
 const path = require('path');
 const bodyParser = require('body-parser');
 const session = require('express-session'); //warning The default server-side session storage, MemoryStore, is purposely not designed for a production environment.
@@ -46,10 +46,10 @@ app.use(session({
 app.use(morgan('tiny')); //http request logger
 app.use(timeout(120000));
 app.use('/',[loginRoutes,loginViewRoutes]);
-app.use('/back/login',[loginRoutes,loginViewRoutes]);
-app.use('/back/supplement/rest',supplementRoutes);
-app.use('/back/supplement/',supViewRoutes);
-app.use('/back/qr',qr);
+app.use('/login',[loginRoutes,loginViewRoutes]);
+app.use('/supplement/rest',supplementRoutes);
+app.use('/supplement/',supViewRoutes);
+app.use('/qr',qr);
 
 app.use(haltOnTimedout);//the following timeout middleware has to be the last middleware
 
@@ -63,7 +63,7 @@ let options = {
 }
 
 //start https server
-https.createServer(options, app).listen(8445);
+https.createServer(options, app).listen(8443);
 
 
 
