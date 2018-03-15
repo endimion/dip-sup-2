@@ -1,4 +1,3 @@
-import DS from "../assets/fakeDS"
 import axios from "axios"
 import axiosRetry from 'axios-retry';
 
@@ -21,7 +20,6 @@ export function retryAxiosNtimes(times, counter, url){
               sleep(1000)
               .then( () => {resolve(retryAxiosNtimes(times,counter,url));
                     });
-
           }else{
             console.log(`tried ${counter} times`);
             reject(err);
