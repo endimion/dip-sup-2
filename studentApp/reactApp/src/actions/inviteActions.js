@@ -7,6 +7,10 @@ import axiosRetry from 'axios-retry';
 
 axiosRetry(axios, { retries: 3 });
 
+
+import {retryAxiosNtimes,retryAxiosNtimesPost} from './utils'
+
+
 export function  updateCode(code) {
   return  function(dispatch){
       dispatch({type: "UPDATE_CODE",payload:code} );
@@ -16,10 +20,13 @@ export function  updateCode(code) {
 export function sendValidation(_code,invHash){
   return function(dispatch){
     dispatch({type: "SEND_UPDATE_CODE",payload:code} );
-    axios.post("/back/supplement/rest/invite/"+invHash+"/authorize",
-                    { validationCode:_code,
-                      inviteHash: invHash
-              }).then(res =>{
+
+    // axios.post("/back/supplement/rest/invite/"+invHash+"/authorize",
+    //                 { validationCode:_code,
+    //                   inviteHash: invHash
+    //           })
+              retryAxiosNtimesPost(4,0,"/back/supplement/rest/invite/"+invHash+"/authorize", { validationCode:_code,inviteHash: invHash})
+              .then(res =>{
                   dispatch({type: "GET_INV_SUP_FULLFILED", payload:JSON.parse(res.data)});
     }).catch(err =>{
       dispatch({type:"GET_INV_REJECTED",payload:err});
@@ -34,7 +41,8 @@ export function  getInvAndGenValCode(inviteId) {
   return  function(dispatch){
       dispatch({type: "GET_INV"} );
       console.log("the id is "+ inviteId);
-      axios.get("/back/supplement/rest/invite/"+inviteId)
+      retryAxiosNtimes(4,0,"/back/supplement/rest/invite/"+inviteId)
+      // axios.get("/back/supplement/rest/invite/"+inviteId)
          .then(response =>{
            let invite = JSON.parse(response.data);
            // console.log(invite)  ;
@@ -50,12 +58,14 @@ export function  getInvAndGenValCode(inviteId) {
             if(recipient!== ""){
                 //$.get("/supplement/rest/view/"+invite.DSId).done(resp=>{
                 dispatch({type: "GET_INV_SUP"});
-                axios.get("/back/supplement/rest/view/"+id).then( resp =>{
+                retryAxiosNtimes(4,0,"/back/supplement/rest/view/"+id)
+                // axios.get("/back/supplement/rest/view/"+id).then( resp =>{
                   dispatch({type: "GET_INV_SUP_FULLFILED", payload:JSON.parse(resp.data)});
                 });
             }else{
                 dispatch({type: "SEND_VAL_CODE"});
-                axios.post("/back/supplement/rest/invite/"+inviteId+"/sendMail").then(resp =>{
+                retryAxiosNtimesPost(4,0,"/back/supplement/rest/invite/"+inviteId+"/sendMail")
+                // axios.post("/back/supplement/rest/invite/"+inviteId+"/sendMail").then(resp =>{
                   dispatch({type: "SEND_VAL_CODE_FULLFILED"});
                 })
             }
@@ -82,7 +92,8 @@ export function  shareByMail(_supId,_email) {
       console.log("dispatching SHARE_SUP_STARTED");
       dispatch({type: "SHARE_SUP_STARTED"});
       let data = {email: _email, supId: _supId };
-       axios.post("/back/supplement/rest/inviteByMail",data)
+      retryAxiosNtimesPost(4,0,"/back/supplement/rest/inviteByMail",data)
+       // axios.post("/back/supplement/rest/inviteByMail",data)
         .then(response =>{
           dispatch({type: "SHARE_SUP_FULLFILED"});
           console.log('#modal'+_supId);
@@ -108,7 +119,8 @@ export function  openShareByQR(supId) {
 export function  shareByQR(_supId,_email) {
   return  function(dispatch){
   dispatch({type: "SHARE_SUP_QR"});
-       axios.post("/back/supplement/rest/inviteByQR",{"supId":_supId, "email":_email})
+      retryAxiosNtimesPost(4,0,"/back/supplement/rest/inviteByQR",{"supId":_supId, "email":_email})
+       // axios.post("/back/supplement/rest/inviteByQR",{"supId":_supId, "email":_email})
         .then(response =>{
           // console.log(response);
           dispatch({type: "SHARE_SUP_QR_FULLFILED",

@@ -7,6 +7,11 @@ axiosRetry(axios, { retries: 3, retryDelay: (retryCount) => {
   return retryCount * 1000;
 } });
 
+
+
+import {retryAxiosNtimes,retryAxiosNtimesPost} from './utils'
+
+
 export function requestPublication(university,universityId,email) {
     /*
     let universityName = req.body.uniName;
@@ -20,8 +25,10 @@ export function requestPublication(university,universityId,email) {
      dispatch({type:"PUBLISH_MODAL_OPEN"});
      dispatch({type:"REQUEST_PUBLISH_SENT"});
     $('#modal1').modal('open');
-     axios.post("/back/supplement/rest/request",{uniName:university,email:email,
-                                          univId:universityId})
+    retryAxiosNtimesPost(4,0,"/back/supplement/rest/request",uniName:university,email:email,
+                                         univId:universityId})
+     // axios.post("/back/supplement/rest/request",{uniName:university,email:email,
+     //                                      univId:universityId})
     .then(response =>{
        $('#modal1').modal('close');
        dispatch({type:"REQUEST_PUBLISH_FULLFILED",payload:response.data})

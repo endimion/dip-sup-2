@@ -4,7 +4,7 @@ import DS from "../assets/fakeDS"
 import axios from "axios"
 // ES6
 import axiosRetry from 'axios-retry';
-import {retryAxiosNtimes} from './utils'
+import {retryAxiosNtimes,retryAxiosNtimesPost} from './utils'
 
 
 axiosRetry(axios, { retries: 3 });
@@ -56,7 +56,8 @@ export function  shareByMail(_supId,_email) {
   return  function(dispatch){
   dispatch({type: "SHARE_SUP_STARTED"});
   let data = {email: _email, supId: _supId };
-     axios.post("/back/supplement/rest/inviteByMail",data)
+  retryAxiosNtimesPost(4,0,"/back/supplement/rest/inviteByMail",data)
+     // axios.post("/back/supplement/rest/inviteByMail",data)
         .then(response =>{
           dispatch({type: "SHARE_SUP_FULLFILED"});
           // console.log('#modal'+_supId);
@@ -82,7 +83,8 @@ export function  openShareByQR(supId) {
 export function  shareByQR(_supId,_email) {
   return  function(dispatch){
   dispatch({type: "SHARE_SUP_QR"});
-       axios.post("/back/supplement/rest/inviteByQR",{"supId":_supId, "email":_email})
+      retryAxiosNtimesPost(4,0,"/back/supplement/rest/inviteByQR",{"supId":_supId, "email":_email})
+       // axios.post("/back/supplement/rest/inviteByQR",{"supId":_supId, "email":_email})
         .then(response =>{
           // console.log(response);
           dispatch({type: "SHARE_SUP_QR_FULLFILED",

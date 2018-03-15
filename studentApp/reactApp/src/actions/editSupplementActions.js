@@ -4,6 +4,10 @@ import axiosRetry from 'axios-retry';
 
 axiosRetry(axios, { retries: 3 });
 
+
+import {retryAxiosNtimes,retryAxiosNtimesPost} from './utils'
+
+
 export function addUserToRem(userEmail) {
     return {
         type: "ADD_USER_REM",
@@ -25,7 +29,8 @@ export function remUsers(supplementId,users) {
     console.log(users);
 
     $('#modal1').modal('open');
-     axios.post("/back/supplement/rest/removeInvites",data)
+    retryAxiosNtimesPost(4,0,"/back/supplement/rest/removeInvites",data)
+     // axios.post("/back/supplement/rest/removeInvites",data)
      .then(response =>{
        dispatch({type:"REM_USERS_FULLFILED",payload:response.data})
        dispatch({type:"MODAL_CLOSE"});
