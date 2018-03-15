@@ -4,7 +4,7 @@ import DS from "../assets/fakeDS"
 import axios from "axios"
 // ES6
 import axiosRetry from 'axios-retry';
-import retryAxiosNtimes from 'util'
+import retryAxiosNtimes from 'utils.js'
 
 
 axiosRetry(axios, { retries: 3 });
