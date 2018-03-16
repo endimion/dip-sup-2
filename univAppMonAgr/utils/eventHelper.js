@@ -24,7 +24,7 @@ exports.registerEventHubForOrg = function(org,chaincodeName,eventName, successCa
   		"../artifacts/channel/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt"));
   	// console.log(data);
   	let eh = client.newEventHub();
-  	eh.setPeerAddr("grpcs://172.17.0.1:7053", {
+  	eh.setPeerAddr("grpcs://172.17.0.1:8053", {
   		 pem: Buffer.from(caCert).toString(),
   		'ssl-target-name-override': "peer0.org1.example.com"
   	});
