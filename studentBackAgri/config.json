@@ -13,7 +13,7 @@
          "secret":"adminpw"
       }
    ],
-   "peer": "peer2",
+   "peer": "peer1",
    "chaincode": "dipSup_cc14",
     "org":"org2",
     "peerAddress":"172.17.0.1:8051"
