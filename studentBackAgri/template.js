@@ -24,7 +24,7 @@ export default ({ body, title,preloadedState,css}) => {
            // http://redux.js.org/docs/recipes/ServerRendering.html#security-considerations
            window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
          </script>
-        <script src="/main.bundle.js"></script>
+        <script src="/agr/main.bundle.js"></script>
         <link href="/public/navbar.css" rel="stylesheet">
       </body>
     </html>
