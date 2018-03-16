@@ -1,0 +1,107 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.dsbackend";
+option java_outer_classname = "DsBackendProto";
+option objc_class_prefix = "DS";
+
+package dsbackend;
+
+
+// Interface exported by the server.
+service DsBackend {
+  rpc GetDiplomaSupplements(DSCriteria) returns (stream DiplomaSupplement){}
+}
+
+// The criteria by which to search for a diplomaSupplement in the
+// university DataBase
+message DSCriteria {
+  string Name = 1;
+  string Eid = 2;
+  string Email = 3;
+  string UniId =4;
+  string EidHash = 5;
+  string University = 6;
+  string DateOfBirth = 7;
+}
+
+// The Diploma Supplement received from
+// the University Backend
+message DiplomaSupplement{
+  string university = 1;
+  HolderInfo  Holder_Info =2;
+  QualificationInfo Qualification_Info=3;
+  QualificationLevel Qualification_Level=4;
+  ContentInfo Content_Info=5;
+  QualificationFunction Qualification_Function=6;
+  AdditionalInfo Additional_Info=7;
+  SupplementCertification Supplement_Certification=8;
+  HigherEducationSystemInfo HigherEducationSystem_Info=9;
+  string id  =10;
+}
+
+message HolderInfo{
+  string StudentId = 1;
+  string DateOfBirth = 2;
+  string Name =3;
+}
+
+message QualificationInfo{
+  string InstructionLanguage=1;
+  string InstitutionStatus=2;
+  string InstitutionName=3;
+  string FieldsOfStudy=4;
+  string Name=5;
+}
+
+message QualificationLevel{
+  string Level =3;
+  string ProgrammeLength =2;
+  string AccecssRequirements=1;
+}
+
+message ContentInfo{
+  string ModeOfStudy=5;
+  string ProgrammeRequirements=4;
+  ProgrammeDetail ProgrammeDetails=3;
+  string GradingScheme=2;
+  string OverallClassificationOfQualification=1;
+
+}
+
+message ProgrammeDetail{
+  string Description =1;
+  repeated ModuleType Modules =2;
+  string Legend=3;
+}
+
+message ModuleType{
+  string ModuleCode =1;
+  string NameOfTheModule=2;
+  string TypeOfModule =3;
+  string ExamPeriod =4;
+  string Grade =5;
+  string InWriting =6;
+}
+
+message QualificationFunction{
+  string AccessToFurtherStudy=2;
+  string ProfessionalStatus=1;
+}
+
+message AdditionalInfo{
+  string AdditionalInfo=2;
+  string InfoSources=1;
+}
+
+message SupplementCertification{
+  string Date=5;
+  string Name =4;
+  string Capacity=3;
+  string Signature=2;
+  string Stamp=1;
+}
+
+message HigherEducationSystemInfo{
+  string HigherEducationSystem_Info=1;
+}
