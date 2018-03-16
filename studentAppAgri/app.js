@@ -133,12 +133,12 @@ const server = app.listen(port,"127.0.0.1", (err,res) => {
     console.log("error!!", err);
   }else{
     var host = server.address().address
-    var port = server.address().port
+    // var port = server.address().port
 
     console.log("Example app listening at http://%s:%s", host, port)
-    console.log("server started");
+    console.log("server started at " + port);
     //initialize the blocokchain configuration
-    console.log("SRV address"+ process.env.SRV_ADDR);
+    // console.log("SRV address"+ process.env.SRV_ADDR);
 
     // basic.init();
   }
