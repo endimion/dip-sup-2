@@ -18,12 +18,13 @@ module.exports = router;
 
 router.get(['/','/home'],authorizeAll,(req,res) =>{
   getUserDetails(req,res).then( details =>{
-      res.render('stdMainView',{ title: 'Publish a new Diploma Supplement',
-      message: 'Welcome user: ' + details.eid ,
-      eID: details.eid,
-      userName: details.userName,
-      firstName: details.firstName,
-      lastName: details.familyName});
+      // res.render('stdMainView',{ title: 'Publish a new Diploma Supplement',
+      // message: 'Welcome user: ' + details.eid ,
+      // eID: details.eid,
+      // userName: details.userName,
+      // firstName: details.firstName,
+      // lastName: details.familyName});
+      res.redirect("/app");
   }).catch(err =>{
     res.render('landing',{ title: 'Login', message: 'Login to the DiplomaSupplement WebApp' });
   });
