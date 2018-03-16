@@ -118,7 +118,7 @@ app.get('/agr/app*', (req, res) => {
 
   }).catch(err=>{
     console.log(err);
-    res.redirect("/login/landing");
+    res.redirect("/agr/login/landing");
   });
 
 });

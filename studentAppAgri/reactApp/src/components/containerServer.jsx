@@ -91,12 +91,12 @@ export default class Container extends React.Component {
 
       return  <StaticRouter location={this.props.location} context={this.props.context}>
                   <Switch>
-                    <Route path="/app/" exact component={home} />
-                    <Route path="/app/home" exact component={home} />
-                    <Route path="/app/manage" exact component={manage} />
-                    <Route path="/app/request" exact component={request} />
-                    <Route path="/app/edit/:id" component={edit}/>
-                    <Route path="/app/invite/:id" component={inviteView}/>
+                    <Route path="/agr/app/" exact component={home} />
+                    <Route path="/agr/app/home" exact component={home} />
+                    <Route path="/agr/app/manage" exact component={manage} />
+                    <Route path="/agr/app/request" exact component={request} />
+                    <Route path="/agr/app/edit/:id" component={edit}/>
+                    <Route path="/agr/app/invite/:id" component={inviteView}/>
                   </Switch>
                 </StaticRouter>
 

@@ -8,7 +8,6 @@ import { hydrate } from 'react-dom';
 // import Store from './store.js'
 
 import Container from './src/components/container.jsx'
-import TweetList from './src/components/tweetList.jsx'
 
 
 import {applyMiddleware, createStore } from "redux"
