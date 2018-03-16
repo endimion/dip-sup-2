@@ -26,7 +26,7 @@ exports.registerEventHubForOrg = function(org,chaincodeName,eventName, successCa
   	let eh = client.newEventHub();
   	eh.setPeerAddr("grpcs://172.17.0.1:8053", {
   		 pem: Buffer.from(caCert).toString(),
-  		'ssl-target-name-override': "peer0.org1.example.com"
+  		'ssl-target-name-override': "peer0.org2.example.com"
   	});
 
   	let eventObj = eh.registerChaincodeEvent(chaincodeName, eventName,
