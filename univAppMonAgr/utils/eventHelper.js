@@ -21,7 +21,7 @@ exports.registerEventHubForOrg = function(org,chaincodeName,eventName, successCa
   let client = helper.getClientForOrg(org);
   helper.getOrgAdmin(org).then((admin) => { //this is required to add a user to the client object
   	let caCert = fs.readFileSync(path.join(__dirname,
-  		"../artifacts/channel/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt"));
+  		"../artifacts/channel/crypto-config/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt"));
   	// console.log(data);
   	let eh = client.newEventHub();
   	eh.setPeerAddr("grpcs://172.17.0.1:8053", {
