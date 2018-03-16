@@ -94,7 +94,7 @@ module.exports = [{
      __dirname: false
    },
    externals: nodeExternals(),
-   plugins: productionPluginDefine,
+   // plugins: productionPluginDefine,
    module: {
 
     loaders: [

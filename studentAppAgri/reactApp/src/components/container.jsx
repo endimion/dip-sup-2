@@ -84,6 +84,7 @@ export default class Container extends React.Component {
       };
       let account = () =>  <div><NavigationBar user={user}/><AccountInfo  /></div>;
 
+
       return  <Router>
                   <Switch>
                     <Route path="/agr/app/" exact component={home} />
