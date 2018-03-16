@@ -94,7 +94,16 @@ export default class Container extends React.Component {
                     <Route path="/agr/app/request" exact component={request} />
                     <Route path="/agr/app/edit/:id" component={edit}/>
                     <Route path="/agr/app/invite/:id" component={inviteView}/>
-                      <Route path="/agr/app/account" component={account}/>
+
+                      <Route path="/app/account" component={account}/>
+                      <Route path="/app/" exact component={home} />
+                      <Route path="/app/test" exact component={home} />
+                      <Route path="/app/home" exact component={home} />
+                      <Route path="/app/manage" exact component={manage} />
+                      <Route path="/app/request" exact component={request} />
+                      <Route path="/app/edit/:id" component={edit}/>
+                      <Route path="/app/invite/:id" component={inviteView}/>
+                      <Route path="/app/account" component={account}/>
                   </Switch>
                 </Router>
 
