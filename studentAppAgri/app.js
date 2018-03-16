@@ -63,10 +63,10 @@ app.use(cookieParser());
 // })); //set up middleware for session handling
 app.use(morgan('tiny')); //http request logger
 app.use(timeout(120000));
-app.use('/', [loginViewRoutes,loginRoutes]);
-app.use('/login', loginViewRoutes);
+app.use('/agr', [loginViewRoutes,loginRoutes]);
+app.use('/agr/login', loginViewRoutes);
 // app.use('/supplement/rest',supplementRoutes);
-app.use('/supplement/',supViewRoutes);
+app.use('/agr/supplement/',supViewRoutes);
 // app.use('/qr',qr);
 
 app.use(haltOnTimedout);//the following timeout middleware has to be the last middleware
@@ -84,7 +84,7 @@ let options = {
 // https.createServer(options, app).listen(8443);
 
 
-app.get('/app*', (req, res) => {
+app.get('/agr/app*', (req, res) => {
   let url = req.url;
   if(url.indexOf("invite") > -1 ){
     let parts = url.split("/");
