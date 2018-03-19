@@ -33,7 +33,8 @@
 			"admin": {
 				"key": "../artifacts/channel/crypto-config/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/keystore",
 				"cert": "../artifacts/channel/crypto-config/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/signcerts"
-			},
+			}
+		},
 			"org3": {
 				"name": "peerOrg3",
 				"mspid": "Org3MSP",
