@@ -38,82 +38,6 @@ type DiplomaSupplement struct {
 	Authorized []AuthorizedUser
 	Id string
 	Signature string
-	Holder_Info HolderInfo
-	Qualification_Info QualificationInfo
-	Qualification_Level QualificationLevel
-	Content_Info ContentInfo
-	Qualification_Function QualificationFunction
-	Additional_Info AdditionalInfo
-	Supplement_Certification SupplementCertification
-	HigherEducationSystem_Info HigherEducationSystemInfo
-}
-
-
-type HolderInfo struct{
-	Name string
-	DateOfBirth string
-	StudentId string
-}
-
-
-type QualificationInfo struct{
-	Name string
-	FieldsOfStudy string
-	InstitutionName string
-	InstitutionStatus string
-	InstructionLanguage string
-}
-
-type QualificationLevel struct{
-	Level string
-	ProgrammeLength string
-	AccecssRequirements string
-}
-
-type ContentInfo struct{
-	ModeOfStudy string
-	ProgrammeRequirements string
-	ProgrammeDetails  Programme_Details
-	GradingScheme string
-	OverallClassificationOfQualification string
-}
-
-type Programme_Details struct{
-	Description string
-	Modules []ModuleType
-	Legend string
-}
-
-
-type ModuleType struct{
-  ModuleCode string
-  NameOfTheModule string
-  TypeOfModule string
-  ExamPeriod string
-  Grade string
-  InWriting string
-}
-
-type QualificationFunction struct{
-	AccessToFurtherStudy string
-	ProfessionalStatus string
-}
-
-type AdditionalInfo struct{
-	AdditionalInfo string
-	InfoSources string
-}
-
-type SupplementCertification struct{
-	Date string
-	Name string
-	Capacity string
-	Signature string
-	Stamp string
-}
-
-type HigherEducationSystemInfo struct{
-	HigherEductaionSystemInfo string
 }
 
 
@@ -122,8 +46,13 @@ type SupplementsAsset struct{
 	Supplements []DiplomaSupplement
 }
 
+type EmployersAsset struct{
+	Employers []string
+}
 
-
+type UniversitiesAsset struct{
+	Universities []string
+}
 
 type DiplomaSupplementInvitesAsset struct{
 	DiplomaSupplementInvites map[string]DiplomaSupplementInvite
@@ -140,9 +69,11 @@ type DiplomaSupplementInvite struct {
 
 // Structure that holds all the assets of the app
 type Assets struct{
-	// Supplements []DiplomaSupplement
-	// DiplomaSupplementInvite map[string]DiplomaSupplementInvite
-	//PublishRequests []PublishRequest
+	Supplements []DiplomaSupplement
+	Employers []string
+	Universities []string
+	DiplomaSupplementInvite map[string]DiplomaSupplementInvite
+	PublishRequests []PublishRequest
 }
 
 type AuthorizedUser struct{
@@ -157,7 +88,6 @@ type PublishRequest struct{  //name,eid,uniId,email,userEid
 	UniId string
 	EidHash string
 	University string
-	DateOfBirth string
 }
 
 type PubRequestsAsset struct{
@@ -186,14 +116,21 @@ func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface) pb.Response  {
 	// _, args := stub.GetFunctionAndParameters()
 
 	// "list", slice in golang, that will hold the DiplomaSupplements as strings
-	// var supplements = make([]DiplomaSupplement,0)
-
+	var supplements = make([]DiplomaSupplement,0)
+	// slice, that will hold the eIDs of the employers as strings
+	var employers = make([]string,0)
+	// slice, that will hold the eIDs of the universities as strings
+	var universities = make([]string,0)
+	// slice, that will hold the publication Requests of the users
+	var pubRequests = make([]PublishRequest,0)
 	//map that will hold the diplomasupplmet-hash-recipient map
-	// var diplomaSupplementInvites = make(map[string]DiplomaSupplementInvite)
+	var diplomaSupplementInvites = make(map[string]DiplomaSupplementInvite)
 
-//  DiplomaSupplementInvite:diplomaSupplementInvites,
-	assets := Assets{}
-		//  Supplements:supplements}
+
+	assets := Assets{ Universities: universities,
+		Employers:employers, Supplements:supplements,
+		DiplomaSupplementInvite:diplomaSupplementInvites,
+		PublishRequests : pubRequests	}
 	encodedAssets,err  := json.Marshal(assets)
 	err = stub.PutState("assets", []byte(encodedAssets))
 	if err != nil {
@@ -212,9 +149,9 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
 		return t.Publish(stub, args)
 	}
 
-	// if function == "addAuthorizedUser"{
-	// 	return t.AddAuthorizedUser(stub, args)
-	// }
+	if function == "addAuthorizedUser"{
+		return t.AddAuthorizedUser(stub, args)
+	}
 
 	if function == "addDiplomaSupplementInvite"{
 		return t.AddDiplomaSupplementInvite(stub,args)
@@ -249,7 +186,9 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
 		return t.GetDiplomaSupplementInvitesByHash(stub,args)
 	}
 
-
+	if function == "getPendingRequestByUniv" {
+		return t.GetPendingRequestByUniv(stub,args)
+	}
 
 	return shim.Error(fmt.Sprintf("Unknown action. Got: %v", args[0]))
 }

@@ -28,44 +28,20 @@ func (t *SimpleChaincode) GetSupplements(stub shim.ChaincodeStubInterface, args 
   res := Assets{}
   json.Unmarshal([]byte(assetBytes), &res)
 
-
+  supps:= SupplementsAsset{Supplements:res.Supplements}
   matchingSupplements := make([]DiplomaSupplement,0)
 
-	// Query the "Owner~Id" index by Owner
-	// This will execute a key range query on all keys starting with 'Owner'
-	supplementsResultsIterator, err := stub.GetStateByPartialCompositeKey("Owner~Id", []string{userEid})
-	if err != nil{
-		return shim.Error(err.Error())
-	}
-	defer supplementsResultsIterator.Close()
+  // v1.0 has not ABAC so we have to resolve to Identity based acecss control
+  // invokerId,_ := stub.GetCreator() // this  returns the cerificate of the invoker
+                                      // NOT usefull i think
+                                      //TODO maybe add this as an extra security meassure
 
-
-	for  supplementsResultsIterator.HasNext() {
-		responseRange, err := supplementsResultsIterator.Next()
-		if err != nil {
-			return shim.Error(err.Error())
-		}
-		// get the Id and Owner from Owner~Id composite key
-		_, compositeKeyParts, err := stub.SplitCompositeKey(responseRange.Key)
-		if err != nil {
-			return shim.Error(err.Error())
-		}
-		returnedId := compositeKeyParts[1] //the supplementID
-		// returnedOwner := compositeKeyParts[0]
-
+  for _,element := range supps.Supplements {
     // element is the element from someSlice for where we are
-		supBytes, err := stub.GetState(returnedId)
-		if err != nil {
-			return shim.Error("{\"Error\":\"Failed to get state for key \""+returnedId+"\"}")
-		}
-		element := DiplomaSupplement{}
-		json.Unmarshal([]byte(supBytes), &element)
-    // if element.University == userEid  || element.Owner == userEid {
-    matchingSupplements = append(matchingSupplements,element)
-    // }
-
-	}
-
+    if element.University == userEid  || element.Owner == userEid {
+      matchingSupplements = append(matchingSupplements,element)
+    }
+  }
   encodedSupps,_ := json.Marshal(matchingSupplements)
   return shim.Success([]byte(encodedSupps))
 }
@@ -82,17 +58,22 @@ func (t *SimpleChaincode) GetSupplements(stub shim.ChaincodeStubInterface, args 
 			return shim.Error("Incorrect number of arguments. Expecting the hash of the diplomaSupplement")
 		}
 		dsHash := args[0]
-		inviteBytes, err := stub.GetState(dsHash)
+		assetBytes, err := stub.GetState("assets")
 		if err != nil {
-			return shim.Error("{\"Error\":\"Failed to get state for key \""+dsHash+"\"}")
+			return shim.Error("{\"Error\":\"Failed to get state for key \"assets\"}")
 		}
-		res := DiplomaSupplementInvite{}
-		json.Unmarshal([]byte(inviteBytes), &res)
+		res := Assets{}
+		json.Unmarshal([]byte(assetBytes), &res)
 
-		encodedRes,_ := json.Marshal(res)
-		return shim.Success([]byte(encodedRes))
-
-}
+		diplomaSupplementInvites:=res.DiplomaSupplementInvite
+		result,ok := diplomaSupplementInvites[dsHash]
+		if ok {
+			encodedRes,_ := json.Marshal(result)
+			return shim.Success([]byte(encodedRes))
+			}else{
+				return shim.Error("Could not find the requested ds hash")
+			}
+		}
 
 
 
@@ -110,16 +91,26 @@ func (t *SimpleChaincode) GetSupplements(stub shim.ChaincodeStubInterface, args 
       suplementId := args[0]
       userEid := args[1]
 
-      supplementBytes, err := stub.GetState(suplementId)
+      assetBytes, err := stub.GetState("assets")
       if err != nil {
-        return shim.Error("{\"Error\":\"Failed to get state for key \""+suplementId+"\"}")
+        return shim.Error("{\"Error\":\"Failed to get state for key \"assets\"}")
       }
-      supplement := DiplomaSupplement{}
-      json.Unmarshal([]byte(supplementBytes), &supplement)
+      assets := Assets{}
+      json.Unmarshal([]byte(assetBytes), &assets)
+
+      supplement, position := FindSupplementInSlice(assets.Supplements, suplementId)
+      if position == -1{
+        return shim.Error("No Supplement Found with the given ID")
+      }
+
       authorizedUsers   := supplement.Authorized
       isAllowed := false
 
-      if userEid == supplement.Owner || userEid == supplement.University{
+      // v1.0 has not ABAC so we have to resolve to Identity based acecss control
+      // eid, err := stub.GetCreator()
+      // eidString := string(eid)
+
+      if userEid == supplement.Owner{
         isAllowed = true
         }	else{
           for _,element := range authorizedUsers {
@@ -140,3 +131,39 @@ func (t *SimpleChaincode) GetSupplements(stub shim.ChaincodeStubInterface, args 
             return shim.Error("User not Authorized to see this supplement")
           }
         }
+
+
+
+
+
+  	/**
+  			Get all the pendingn supplment request that are submitted to the
+  			user eid invoking the transaction.
+  		@Deprecated
+  	**/
+  	func (t *SimpleChaincode) GetPendingRequestByUniv(stub shim.ChaincodeStubInterface, args []string) pb.Response{
+  		if len(args) != 1 {
+  			return shim.Error("Incorrect number of arguments. Expecting 1, the userEid")
+  		}
+  		userEid := args[0]
+  		// eid, err := stub.GetCreator()
+  		// universityEid := string(eid)
+
+  		assetBytes, err := stub.GetState("assets")
+  		if err != nil {
+  			return shim.Error("{\"Error\":\"Failed to get state for key \"assets\"}")
+  		}
+  		assets := Assets{}
+  		json.Unmarshal([]byte(assetBytes), &assets)
+
+  		matchingPendingRequests := make([]PublishRequest,0)
+  		pendingReq := assets.PublishRequests
+  		//fill the matching Requests
+  		for _,request := range pendingReq {
+  			if request.UniId == userEid {
+  				matchingPendingRequests = append(matchingPendingRequests,request)
+  			}
+  		}
+  		encodedRes,_ := json.Marshal(matchingPendingRequests)
+  		return shim.Success([]byte(encodedRes))
+    }
