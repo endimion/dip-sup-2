@@ -37,7 +37,7 @@ evHelper.registerEventHubForOrg(org,chaincode,'evtsender', event => {
       bkService = agriBkService;
     }
 
-    if(bkService){
+    if(pubReq.University === "UAegean"){
       bkService.findAllDiplomaByCriterria(pubReq).then(result =>{
           return result.map(dbDipSup =>{
              //map the supplement from the grpc call to a full DiplomaSupplement Structure
@@ -102,6 +102,9 @@ evHelper.registerEventHubForOrg(org,chaincode,'evtsender', event => {
         });
      }) ;
 
-    }
+   }else{
+     console.log("This request is not about me");
+
+   }
 
 });
