@@ -19,7 +19,7 @@ import {  requestPublication,
 
 
 @connect( (store)=>{
-  return {  university: store.publish.univsersity ,
+  return {  university: store.publish.university ,
             univId:store.publish.univId,
             email: store.publish.email,
             modal:store.publish.modal,
