@@ -2,7 +2,7 @@ export default function reducer(state={
   modal:false,
   univId:"",
   email:"",
-  univsersity:"UAegean",
+  university:"UAegean",
   sendingRequest:false,
   requestFullfiled:false
 },action){
