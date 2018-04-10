@@ -10,7 +10,7 @@ let client = new dsBackend.DsBackend(BACK_END+":"+BACK_END_PORT,
 
 
 module.exports.findAllDiplomaByCriterria = function(criteria){
-  console.log("Sending query to backend");
+  console.log("Sending query to backend of AGR");
   console.log(criteria);
   let results = [];
   return new Promise((resolve, reject) => {

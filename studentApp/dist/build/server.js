@@ -61,7 +61,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 32);
+/******/ 	return __webpack_require__(__webpack_require__.s = 34);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -102,13 +102,13 @@ module.exports = require("fs");
 /*jslint es6,  node:true */
 
 
-var bcrypt = __webpack_require__(22);
-var jwt = __webpack_require__(14);
+var bcrypt = __webpack_require__(24);
+var jwt = __webpack_require__(17);
 var secretKey = process.env.SECRET_KEY ? process.env.SECRET_KEY : "secret"; //the secret comes from an enviroment variable
-var stripchar = __webpack_require__(29).StripChar;
+var stripchar = __webpack_require__(31).StripChar;
 var fs = __webpack_require__(4);
 var path = __webpack_require__(3);
-var nJwt = __webpack_require__(81);
+var nJwt = __webpack_require__(84);
 /**
   check if a user eID exists on teh session,
   if not verify the existance of a jwt token and its validity
@@ -203,10 +203,16 @@ exports.userDetailsFromToken = function (req, res) {
 /* 6 */
 /***/ (function(module, exports) {
 
-module.exports = require("util");
+module.exports = require("react-router-dom");
 
 /***/ }),
 /* 7 */
+/***/ (function(module, exports) {
+
+module.exports = require("util");
+
+/***/ }),
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -215,7 +221,7 @@ module.exports = require("util");
 module.exports = { "host": "172.17.0.1", "port": "4000", "jwt_expiretime": "36000", "channelName": "mychannel", "GOPATH": "artifacts", "keyValueStore": "/tmp/fabric-client-kvs", "eventWaitTime": "90000", "orderer": "grpcs://172.17.0.1:7050", "users": [{ "username": "admin", "secret": "adminpw" }], "peer": "peer1", "chaincode": "dipSup_cc13", "org": "org1", "peerAddress": "localhost:7051" };
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -236,19 +242,19 @@ module.exports = { "host": "172.17.0.1", "port": "4000", "jwt_expiretime": "3600
  */
 
 
-var log4js = __webpack_require__(86);
+var log4js = __webpack_require__(89);
 var logger = log4js.getLogger('Helper');
 // logger.setLevel('DEBUG');
 
 var path = __webpack_require__(3);
-var util = __webpack_require__(6);
-var fs = __webpack_require__(87);
-var User = __webpack_require__(88);
-var crypto = __webpack_require__(89);
-var copService = __webpack_require__(90);
-var config = __webpack_require__(7);
+var util = __webpack_require__(7);
+var fs = __webpack_require__(90);
+var User = __webpack_require__(91);
+var crypto = __webpack_require__(92);
+var copService = __webpack_require__(93);
+var config = __webpack_require__(8);
 
-var hfc = __webpack_require__(15);
+var hfc = __webpack_require__(18);
 hfc.addConfigFile(path.join(__dirname, '../network-config.json'));
 hfc.setLogger(logger);
 var ORGS = hfc.getConfigSetting('network-config');
@@ -586,7 +592,7 @@ exports.getRegisteredUsers = getRegisteredUsers;
 exports.getOrgAdmin = getOrgAdmin;
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -692,7 +698,7 @@ var SupFab = function (_React$Component) {
 exports.default = SupFab;
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -711,7 +717,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactMaterialize = __webpack_require__(1);
 
-var _reactRouterDom = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"react-router-dom\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+var _reactRouterDom = __webpack_require__(6);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -776,7 +782,7 @@ var SupBtns = function (_React$Component) {
 exports.default = SupBtns;
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -788,13 +794,15 @@ Object.defineProperty(exports, "__esModule", {
 exports.addUserToRem = addUserToRem;
 exports.remUsers = remUsers;
 
-var _axios = __webpack_require__(20);
+var _axios = __webpack_require__(14);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _axiosRetry = __webpack_require__(21);
+var _axiosRetry = __webpack_require__(15);
 
 var _axiosRetry2 = _interopRequireDefault(_axiosRetry);
+
+var _utils = __webpack_require__(23);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -821,7 +829,9 @@ function remUsers(supplementId, users) {
     console.log(users);
 
     $('#modal1').modal('open');
-    _axios2.default.post("/back/supplement/rest/removeInvites", data).then(function (response) {
+    (0, _utils.retryAxiosNtimesPost)(4, 0, "/back/supplement/rest/removeInvites", data)
+    // axios.post("/back/supplement/rest/removeInvites",data)
+    .then(function (response) {
       dispatch({ type: "REM_USERS_FULLFILED", payload: response.data });
       dispatch({ type: "MODAL_CLOSE" });
       $('#modal1').modal('close');
@@ -832,7 +842,7 @@ function remUsers(supplementId, users) {
 }
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -855,13 +865,13 @@ var _reactRedux = __webpack_require__(2);
 
 var _reactMaterialize = __webpack_require__(1);
 
-var _userActions = __webpack_require__(18);
+var _userActions = __webpack_require__(21);
 
-var _office = __webpack_require__(37);
+var _office = __webpack_require__(40);
 
 var _office2 = _interopRequireDefault(_office);
 
-var _user = __webpack_require__(38);
+var _user = __webpack_require__(41);
 
 var _user2 = _interopRequireDefault(_user);
 
@@ -966,37 +976,49 @@ var SideNavigation = (_dec = (0, _reactRedux.connect)(function (store) {
 exports.default = SideNavigation;
 
 /***/ }),
-/* 13 */
-/***/ (function(module, exports) {
-
-module.exports = require("express");
-
-/***/ }),
 /* 14 */
 /***/ (function(module, exports) {
 
-module.exports = require("jsonwebtoken");
+module.exports = require("axios");
 
 /***/ }),
 /* 15 */
 /***/ (function(module, exports) {
 
-module.exports = require("fabric-client");
+module.exports = require("axios-retry");
 
 /***/ }),
 /* 16 */
 /***/ (function(module, exports) {
 
-module.exports = require("fabric-client/lib/Peer.js");
+module.exports = require("express");
 
 /***/ }),
 /* 17 */
 /***/ (function(module, exports) {
 
-module.exports = require("fabric-client/lib/EventHub.js");
+module.exports = require("jsonwebtoken");
 
 /***/ }),
 /* 18 */
+/***/ (function(module, exports) {
+
+module.exports = require("fabric-client");
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports) {
+
+module.exports = require("fabric-client/lib/Peer.js");
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports) {
+
+module.exports = require("fabric-client/lib/EventHub.js");
+
+/***/ }),
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1041,7 +1063,7 @@ function logout() {
 }
 
 /***/ }),
-/* 19 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1051,34 +1073,36 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.getSupplementsByEid = getSupplementsByEid;
-exports.retryAxiosNtimes = retryAxiosNtimes;
 exports.removeSupplements = removeSupplements;
 exports.openShareByMail = openShareByMail;
 exports.shareByMail = shareByMail;
 exports.openShareByQR = openShareByQR;
 exports.shareByQR = shareByQR;
 
-var _fakeDS = __webpack_require__(51);
+var _fakeDS = __webpack_require__(54);
 
 var _fakeDS2 = _interopRequireDefault(_fakeDS);
 
-var _axios = __webpack_require__(20);
+var _axios = __webpack_require__(14);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _axiosRetry = __webpack_require__(21);
+var _axiosRetry = __webpack_require__(15);
 
 var _axiosRetry2 = _interopRequireDefault(_axiosRetry);
 
+var _utils = __webpack_require__(23);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-(0, _axiosRetry2.default)(_axios2.default, { retries: 3 });
 // ES6
+(0, _axiosRetry2.default)(_axios2.default, { retries: 3 });
+
 function getSupplementsByEid(userEid, counter) {
 
   return function (dispatch) {
     dispatch({ type: "GET_SUP" });
-    retryAxiosNtimes(4, 0, "/back/supplement/rest/view").then(function (response) {
+    (0, _utils.retryAxiosNtimes)(4, 0, "/back/supplement/rest/view").then(function (response) {
       dispatch({ type: "GET_SUP_FULLFILED", payload: JSON.parse(response.data) });
     }).catch(function (err) {
       dispatch({ type: "GET_SUP_REJECTED", payload: err });
@@ -1093,36 +1117,6 @@ function getSupplementsByEid(userEid, counter) {
     //
     //  });
   };
-}
-
-function retryAxiosNtimes(times, counter, url) {
-  var config = {
-    headers: { Pragma: 'no-cache' }
-    // params: { id: this.state.taskID }
-  };
-
-  return new Promise(function (resolve, reject) {
-    _axios2.default.get(url, config).then(function (response) {
-      resolve(response);
-    }).catch(function (err) {
-      if (counter < times) {
-        counter++;
-        console.log("will try again " + counter);
-        sleep(1000).then(function () {
-          resolve(retryAxiosNtimes(times, counter, url));
-        });
-      } else {
-        console.log("tried " + counter + " times");
-        reject(err);
-      }
-    });
-  });
-}
-
-function sleep(time) {
-  return new Promise(function (resolve) {
-    return setTimeout(resolve, time);
-  });
 }
 
 function removeSupplements() {
@@ -1143,7 +1137,9 @@ function shareByMail(_supId, _email) {
   return function (dispatch) {
     dispatch({ type: "SHARE_SUP_STARTED" });
     var data = { email: _email, supId: _supId };
-    _axios2.default.post("/back/supplement/rest/inviteByMail", data).then(function (response) {
+    (0, _utils.retryAxiosNtimesPost)(4, 0, "/back/supplement/rest/inviteByMail", data)
+    // axios.post("/back/supplement/rest/inviteByMail",data)
+    .then(function (response) {
       dispatch({ type: "SHARE_SUP_FULLFILED" });
       // console.log('#modal'+_supId);
       $('#mailModal' + _supId).modal('close');
@@ -1164,7 +1160,9 @@ function openShareByQR(supId) {
 function shareByQR(_supId, _email) {
   return function (dispatch) {
     dispatch({ type: "SHARE_SUP_QR" });
-    _axios2.default.post("/back/supplement/rest/inviteByQR", { "supId": _supId, "email": _email }).then(function (response) {
+    (0, _utils.retryAxiosNtimesPost)(4, 0, "/back/supplement/rest/inviteByQR", { "supId": _supId, "email": _email })
+    // axios.post("/back/supplement/rest/inviteByQR",{"supId":_supId, "email":_email})
+    .then(function (response) {
       // console.log(response);
       dispatch({ type: "SHARE_SUP_QR_FULLFILED",
         //payload:'<svg width="100" height="100"><circle cx="50" cy="50" r="40" stroke="green" stroke-width="4" fill="yellow" /></svg>'
@@ -1177,37 +1175,100 @@ function shareByQR(_supId, _email) {
 }
 
 /***/ }),
-/* 20 */
-/***/ (function(module, exports) {
-
-module.exports = require("axios");
-
-/***/ }),
-/* 21 */
-/***/ (function(module, exports) {
-
-module.exports = require("axios-retry");
-
-/***/ }),
-/* 22 */
-/***/ (function(module, exports) {
-
-module.exports = require("bcrypt");
-
-/***/ }),
 /* 23 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-module.exports = require("request");
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.retryAxiosNtimes = retryAxiosNtimes;
+exports.retryAxiosNtimesPost = retryAxiosNtimesPost;
+
+var _axios = __webpack_require__(14);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _axiosRetry = __webpack_require__(15);
+
+var _axiosRetry2 = _interopRequireDefault(_axiosRetry);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+(0, _axiosRetry2.default)(_axios2.default, { retries: 3 });
+
+function retryAxiosNtimes(times, counter, url) {
+  var config = {
+    headers: { Pragma: 'no-cache' }
+  };
+  return new Promise(function (resolve, reject) {
+    _axios2.default.get(url, config).then(function (response) {
+      resolve(response);
+    }).catch(function (err) {
+      if (counter < times) {
+        counter++;
+        console.log("will try again " + counter);
+        sleep(1000).then(function () {
+          resolve(retryAxiosNtimes(times, counter, url));
+        });
+      } else {
+        console.log('tried ' + counter + ' times');
+        reject(err);
+      }
+    });
+  });
+}
+
+function retryAxiosNtimesPost(times, counter, url, data) {
+  var config = {
+    headers: { Pragma: 'no-cache' }
+  };
+  return new Promise(function (resolve, reject) {
+    _axios2.default.post(url, data, config).then(function (response) {
+      resolve(response);
+    }).catch(function (err) {
+      if (counter < times) {
+        counter++;
+        console.log("will try again " + counter);
+        sleep(1000).then(function () {
+          resolve(retryAxiosNtimes(times, counter, url));
+        });
+      } else {
+        console.log('tried ' + counter + ' times');
+        reject(err);
+      }
+    });
+  });
+}
+
+function sleep(time) {
+  return new Promise(function (resolve) {
+    return setTimeout(resolve, time);
+  });
+}
 
 /***/ }),
 /* 24 */
 /***/ (function(module, exports) {
 
-module.exports = require("react-cookie");
+module.exports = require("bcrypt");
 
 /***/ }),
 /* 25 */
+/***/ (function(module, exports) {
+
+module.exports = require("request");
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports) {
+
+module.exports = require("react-cookie");
+
+/***/ }),
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1226,13 +1287,13 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactMaterialize = __webpack_require__(1);
 
-var _reactRouterDom = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"react-router-dom\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+var _reactRouterDom = __webpack_require__(6);
 
-var _sideNav = __webpack_require__(12);
+var _sideNav = __webpack_require__(13);
 
 var _sideNav2 = _interopRequireDefault(_sideNav);
 
-__webpack_require__(26);
+__webpack_require__(28);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1308,12 +1369,12 @@ var NavigationBar = function (_React$Component) {
 exports.default = NavigationBar;
 
 /***/ }),
-/* 26 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-    var content = __webpack_require__(39);
-    var insertCss = __webpack_require__(41);
+    var content = __webpack_require__(42);
+    var insertCss = __webpack_require__(44);
 
     if (typeof content === 'string') {
       content = [[module.i, content, '']];
@@ -1343,7 +1404,7 @@ exports.default = NavigationBar;
   
 
 /***/ }),
-/* 27 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1364,19 +1425,19 @@ var _reactRedux = __webpack_require__(2);
 
 var _reactMaterialize = __webpack_require__(1);
 
-var _supplementFab = __webpack_require__(9);
+var _supplementFab = __webpack_require__(10);
 
 var _supplementFab2 = _interopRequireDefault(_supplementFab);
 
-var _supplementBtns = __webpack_require__(10);
+var _supplementBtns = __webpack_require__(11);
 
 var _supplementBtns2 = _interopRequireDefault(_supplementBtns);
 
-var _shareSupMailModal = __webpack_require__(52);
+var _shareSupMailModal = __webpack_require__(55);
 
 var _shareSupMailModal2 = _interopRequireDefault(_shareSupMailModal);
 
-var _shareSupQRModal = __webpack_require__(53);
+var _shareSupQRModal = __webpack_require__(56);
 
 var _shareSupQRModal2 = _interopRequireDefault(_shareSupQRModal);
 
@@ -1647,35 +1708,35 @@ var SupplementCard = function (_React$Component) {
 exports.default = SupplementCard;
 
 /***/ }),
-/* 28 */
+/* 30 */
 /***/ (function(module, exports) {
 
 module.exports = require("redux");
 
 /***/ }),
-/* 29 */
+/* 31 */
 /***/ (function(module, exports) {
 
 module.exports = require("stripchar");
 
 /***/ }),
-/* 30 */
+/* 32 */
 /***/ (function(module, exports) {
 
 module.exports = require("uuid/v1");
 
 /***/ }),
-/* 31 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /*jslint es6,  node:true */
 
 
-var helper = __webpack_require__(8);
+var helper = __webpack_require__(9);
 var fs = __webpack_require__(4);
 var path = __webpack_require__(3);
-var util = __webpack_require__(6);
+var util = __webpack_require__(7);
 
 /**
   registers an event hub for the given organisation
@@ -1742,7 +1803,7 @@ exports.txDetectionEvent = function (reject, resolve, payload, ehub, listenerHan
 };
 
 /***/ }),
-/* 32 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1755,21 +1816,21 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _server = __webpack_require__(33);
+var _server = __webpack_require__(35);
 
-var _containerServer = __webpack_require__(34);
+var _containerServer = __webpack_require__(36);
 
 var _containerServer2 = _interopRequireDefault(_containerServer);
 
-var _template = __webpack_require__(63);
+var _template = __webpack_require__(66);
 
 var _template2 = _interopRequireDefault(_template);
 
-var _reactCookie = __webpack_require__(24);
+var _reactCookie = __webpack_require__(26);
 
 var _reactRedux = __webpack_require__(2);
 
-var _store = __webpack_require__(64);
+var _store = __webpack_require__(67);
 
 var _store2 = _interopRequireDefault(_store);
 
@@ -1778,28 +1839,28 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // let renderReact = require('./reactApp/src/renderReact.js');
 
 
-var express = __webpack_require__(13);
+var express = __webpack_require__(16);
 var app = express();
 var port = 8000;
 var path = __webpack_require__(3);
-var bodyParser = __webpack_require__(74);
-var session = __webpack_require__(75); //warning The default server-side session storage, MemoryStore, is purposely not designed for a production environment.
+var bodyParser = __webpack_require__(77);
+var session = __webpack_require__(78); //warning The default server-side session storage, MemoryStore, is purposely not designed for a production environment.
 //compatible session stores https://github.com/expressjs/session#compatible-session-stores
-var FileStore = __webpack_require__(76)(session);
+var FileStore = __webpack_require__(79)(session);
 // const basic = require('./model/hlf/basic');
-var timeout = __webpack_require__(77);
-var cookieParser = __webpack_require__(78);
-var morgan = __webpack_require__(79);
-var https = __webpack_require__(80);
+var timeout = __webpack_require__(80);
+var cookieParser = __webpack_require__(81);
+var morgan = __webpack_require__(82);
+var https = __webpack_require__(83);
 var fs = __webpack_require__(4);
 
 var util = __webpack_require__(5);
 
 /**** routes **/
-var loginRoutes = __webpack_require__(82);
-var loginViewRoutes = __webpack_require__(83);
+var loginRoutes = __webpack_require__(85);
+var loginViewRoutes = __webpack_require__(86);
 // let supplementRoutes = require('./routes/rest/supplementRoutes');
-var supViewRoutes = __webpack_require__(84);
+var supViewRoutes = __webpack_require__(87);
 // let qr = require('./routes/rest/qrCodeRoutes');
 
 // view engine setup
@@ -1841,14 +1902,15 @@ var options = {
   cert: cert
 
   //start https server
-};https.createServer(options, app).listen(8443);
+  // https.createServer(options, app).listen(8443);
 
-app.get('/app*', function (req, res) {
+
+};app.get('/app*', function (req, res) {
   var url = req.url;
   if (url.indexOf("invite") > -1) {
     var parts = url.split("/");
     var invId = parts[parts.length - 1];
-    res.cookie('inviteHash', invId, { httpOnly: true });
+    res.cookie('inviteHash', invId, { maxAge: 5000, httpOnly: true });
   }
 
   util.userDetailsFromToken(req, res).then(function (usr) {
@@ -1919,13 +1981,13 @@ function haltOnTimedout(req, res, next) {
 }
 
 /***/ }),
-/* 33 */
+/* 35 */
 /***/ (function(module, exports) {
 
 module.exports = require("react-dom/server");
 
 /***/ }),
-/* 34 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1946,57 +2008,57 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(2);
 
-var _reactRouterDom = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"react-router-dom\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+var _reactRouterDom = __webpack_require__(6);
 
-var _StaticRouter = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"react-router-dom/StaticRouter\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+var _StaticRouter = __webpack_require__(37);
 
 var _StaticRouter2 = _interopRequireDefault(_StaticRouter);
 
-var _sideBarActions = __webpack_require__(35);
+var _sideBarActions = __webpack_require__(38);
 
-var _userActions = __webpack_require__(18);
+var _userActions = __webpack_require__(21);
 
-var _reactCookie = __webpack_require__(24);
+var _reactCookie = __webpack_require__(26);
 
 var _reactMaterialize = __webpack_require__(1);
 
-var _tweetList = __webpack_require__(36);
+var _tweetList = __webpack_require__(39);
 
 var _tweetList2 = _interopRequireDefault(_tweetList);
 
-var _navBar = __webpack_require__(25);
+var _navBar = __webpack_require__(27);
 
 var _navBar2 = _interopRequireDefault(_navBar);
 
-var _sideNav = __webpack_require__(12);
+var _sideNav = __webpack_require__(13);
 
 var _sideNav2 = _interopRequireDefault(_sideNav);
 
-var _dummy = __webpack_require__(44);
+var _dummy = __webpack_require__(47);
 
 var _dummy2 = _interopRequireDefault(_dummy);
 
-var _home = __webpack_require__(45);
+var _home = __webpack_require__(48);
 
 var _home2 = _interopRequireDefault(_home);
 
-var _supplements = __webpack_require__(49);
+var _supplements = __webpack_require__(52);
 
 var _supplements2 = _interopRequireDefault(_supplements);
 
-var _editSupplement = __webpack_require__(55);
+var _editSupplement = __webpack_require__(58);
 
 var _editSupplement2 = _interopRequireDefault(_editSupplement);
 
-var _requestSupplementCard = __webpack_require__(58);
+var _requestSupplementCard = __webpack_require__(61);
 
 var _requestSupplementCard2 = _interopRequireDefault(_requestSupplementCard);
 
-var _serverLoading = __webpack_require__(61);
+var _serverLoading = __webpack_require__(64);
 
 var _serverLoading2 = _interopRequireDefault(_serverLoading);
 
-var _accountInfo = __webpack_require__(62);
+var _accountInfo = __webpack_require__(65);
 
 var _accountInfo2 = _interopRequireDefault(_accountInfo);
 
@@ -2135,7 +2197,13 @@ var Container = (_dec = (0, _reactRedux.connect)(function (store) {
 exports.default = Container;
 
 /***/ }),
-/* 35 */
+/* 37 */
+/***/ (function(module, exports) {
+
+module.exports = require("react-router-dom/StaticRouter");
+
+/***/ }),
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2174,7 +2242,7 @@ function sideBarOnOff(status, nav) {
 }
 
 /***/ }),
-/* 36 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2235,22 +2303,22 @@ var TweetList = function (_React$Component) {
 exports.default = TweetList;
 
 /***/ }),
-/* 37 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "e60095e669fadeeb6c225bb4a575b383.jpg";
 
 /***/ }),
-/* 38 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "21f505892075a5f20c11b47a368c7630.png";
 
 /***/ }),
-/* 39 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(40)(false);
+exports = module.exports = __webpack_require__(43)(false);
 // imports
 
 
@@ -2261,7 +2329,7 @@ exports.push([module.i, ".navbar-fixed {\n    position: relative;\n    height: 5
 
 
 /***/ }),
-/* 40 */
+/* 43 */
 /***/ (function(module, exports) {
 
 /*
@@ -2343,17 +2411,17 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 41 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _stringify = __webpack_require__(42);
+var _stringify = __webpack_require__(45);
 
 var _stringify2 = _interopRequireDefault(_stringify);
 
-var _slicedToArray2 = __webpack_require__(43);
+var _slicedToArray2 = __webpack_require__(46);
 
 var _slicedToArray3 = _interopRequireDefault(_slicedToArray2);
 
@@ -2473,19 +2541,19 @@ function insertCss(styles) {
 module.exports = insertCss;
 
 /***/ }),
-/* 42 */
+/* 45 */
 /***/ (function(module, exports) {
 
 module.exports = require("babel-runtime/core-js/json/stringify");
 
 /***/ }),
-/* 43 */
+/* 46 */
 /***/ (function(module, exports) {
 
 module.exports = require("babel-runtime/helpers/slicedToArray");
 
 /***/ }),
-/* 44 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2539,7 +2607,7 @@ var Dummy = function (_React$Component) {
 exports.default = Dummy;
 
 /***/ }),
-/* 45 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2558,23 +2626,23 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactMaterialize = __webpack_require__(1);
 
-var _reactRouterDom = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"react-router-dom\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+var _reactRouterDom = __webpack_require__(6);
 
-var _sideNav = __webpack_require__(12);
+var _sideNav = __webpack_require__(13);
 
 var _sideNav2 = _interopRequireDefault(_sideNav);
 
-__webpack_require__(26);
+__webpack_require__(28);
 
-var _manageDocuments = __webpack_require__(46);
+var _manageDocuments = __webpack_require__(49);
 
 var _manageDocuments2 = _interopRequireDefault(_manageDocuments);
 
-var _publishDocument = __webpack_require__(47);
+var _publishDocument = __webpack_require__(50);
 
 var _publishDocument2 = _interopRequireDefault(_publishDocument);
 
-var _manageUser = __webpack_require__(48);
+var _manageUser = __webpack_require__(51);
 
 var _manageUser2 = _interopRequireDefault(_manageUser);
 
@@ -2748,25 +2816,25 @@ var HomePage = function (_React$Component) {
 exports.default = HomePage;
 
 /***/ }),
-/* 46 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "e460414865f573e4fbec7cb297e5f358.png";
 
 /***/ }),
-/* 47 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "e5c3c53e1943d3dc0d2c2ffb3b385eee.png";
 
 /***/ }),
-/* 48 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "16d4a26c8de8ae7db43040ae1095ff86.png";
 
 /***/ }),
-/* 49 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2789,15 +2857,15 @@ var _reactRedux = __webpack_require__(2);
 
 var _reactMaterialize = __webpack_require__(1);
 
-var _reactRouterDom = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"react-router-dom\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+var _reactRouterDom = __webpack_require__(6);
 
-var _propTypes = __webpack_require__(50);
+var _propTypes = __webpack_require__(53);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _supplementActions = __webpack_require__(19);
+var _supplementActions = __webpack_require__(22);
 
-var _supplementCard = __webpack_require__(27);
+var _supplementCard = __webpack_require__(29);
 
 var _supplementCard2 = _interopRequireDefault(_supplementCard);
 
@@ -2935,13 +3003,13 @@ var Supplements = (_dec = (0, _reactRedux.connect)(function (store) {
 exports.default = Supplements;
 
 /***/ }),
-/* 50 */
+/* 53 */
 /***/ (function(module, exports) {
 
 module.exports = require("prop-types");
 
 /***/ }),
-/* 51 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2956,7 +3024,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 52 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2979,17 +3047,17 @@ var _reactRedux = __webpack_require__(2);
 
 var _reactMaterialize = __webpack_require__(1);
 
-var _supplementFab = __webpack_require__(9);
+var _supplementFab = __webpack_require__(10);
 
 var _supplementFab2 = _interopRequireDefault(_supplementFab);
 
-var _supplementBtns = __webpack_require__(10);
+var _supplementBtns = __webpack_require__(11);
 
 var _supplementBtns2 = _interopRequireDefault(_supplementBtns);
 
-var _editSupplementActions = __webpack_require__(11);
+var _editSupplementActions = __webpack_require__(12);
 
-var _supplementActions = __webpack_require__(19);
+var _supplementActions = __webpack_require__(22);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3102,7 +3170,7 @@ var ShareByMailModal = (_dec = (0, _reactRedux.connect)(function (store) {
 exports.default = ShareByMailModal;
 
 /***/ }),
-/* 53 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3123,23 +3191,23 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(2);
 
-var _svgInlineReact = __webpack_require__(54);
+var _svgInlineReact = __webpack_require__(57);
 
 var _svgInlineReact2 = _interopRequireDefault(_svgInlineReact);
 
 var _reactMaterialize = __webpack_require__(1);
 
-var _supplementFab = __webpack_require__(9);
+var _supplementFab = __webpack_require__(10);
 
 var _supplementFab2 = _interopRequireDefault(_supplementFab);
 
-var _supplementBtns = __webpack_require__(10);
+var _supplementBtns = __webpack_require__(11);
 
 var _supplementBtns2 = _interopRequireDefault(_supplementBtns);
 
-var _editSupplementActions = __webpack_require__(11);
+var _editSupplementActions = __webpack_require__(12);
 
-var _supplementActions = __webpack_require__(19);
+var _supplementActions = __webpack_require__(22);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3285,13 +3353,13 @@ var ShareByQRModal = (_dec = (0, _reactRedux.connect)(function (store) {
 exports.default = ShareByQRModal;
 
 /***/ }),
-/* 54 */
+/* 57 */
 /***/ (function(module, exports) {
 
 module.exports = require("svg-inline-react");
 
 /***/ }),
-/* 55 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3314,7 +3382,7 @@ var _reactMaterialize = __webpack_require__(1);
 
 var _reactRedux = __webpack_require__(2);
 
-var _editSupplementCard = __webpack_require__(56);
+var _editSupplementCard = __webpack_require__(59);
 
 var _editSupplementCard2 = _interopRequireDefault(_editSupplementCard);
 
@@ -3381,7 +3449,7 @@ var EditSup = (_dec = (0, _reactRedux.connect)(function (store) {
 exports.default = EditSup;
 
 /***/ }),
-/* 56 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3404,19 +3472,19 @@ var _reactRedux = __webpack_require__(2);
 
 var _reactMaterialize = __webpack_require__(1);
 
-var _supplementFab = __webpack_require__(9);
+var _supplementFab = __webpack_require__(10);
 
 var _supplementFab2 = _interopRequireDefault(_supplementFab);
 
-var _supplementBtns = __webpack_require__(10);
+var _supplementBtns = __webpack_require__(11);
 
 var _supplementBtns2 = _interopRequireDefault(_supplementBtns);
 
-var _supplementModal = __webpack_require__(57);
+var _supplementModal = __webpack_require__(60);
 
 var _supplementModal2 = _interopRequireDefault(_supplementModal);
 
-var _editSupplementActions = __webpack_require__(11);
+var _editSupplementActions = __webpack_require__(12);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3618,7 +3686,7 @@ var EditSupplementCard = (_dec = (0, _reactRedux.connect)(function (store) {
 exports.default = EditSupplementCard;
 
 /***/ }),
-/* 57 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3641,15 +3709,15 @@ var _reactRedux = __webpack_require__(2);
 
 var _reactMaterialize = __webpack_require__(1);
 
-var _supplementFab = __webpack_require__(9);
+var _supplementFab = __webpack_require__(10);
 
 var _supplementFab2 = _interopRequireDefault(_supplementFab);
 
-var _supplementBtns = __webpack_require__(10);
+var _supplementBtns = __webpack_require__(11);
 
 var _supplementBtns2 = _interopRequireDefault(_supplementBtns);
 
-var _editSupplementActions = __webpack_require__(11);
+var _editSupplementActions = __webpack_require__(12);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3708,7 +3776,7 @@ var EditSupplementModal = (_dec = (0, _reactRedux.connect)(function (store) {
 exports.default = EditSupplementModal;
 
 /***/ }),
-/* 58 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3731,13 +3799,13 @@ var _reactRedux = __webpack_require__(2);
 
 var _reactMaterialize = __webpack_require__(1);
 
-var _reactRouterDom = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"react-router-dom\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+var _reactRouterDom = __webpack_require__(6);
 
-var _requestSupplementModal = __webpack_require__(59);
+var _requestSupplementModal = __webpack_require__(62);
 
 var _requestSupplementModal2 = _interopRequireDefault(_requestSupplementModal);
 
-var _requestSupplementActions = __webpack_require__(60);
+var _requestSupplementActions = __webpack_require__(63);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3748,7 +3816,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var RequestSupplementCard = (_dec = (0, _reactRedux.connect)(function (store) {
-  return { university: store.publish.univsersity,
+  return { university: store.publish.university,
     univId: store.publish.univId,
     email: store.publish.email,
     modal: store.publish.modal,
@@ -3940,7 +4008,7 @@ var RequestSupplementCard = (_dec = (0, _reactRedux.connect)(function (store) {
 exports.default = RequestSupplementCard;
 
 /***/ }),
-/* 59 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3963,15 +4031,15 @@ var _reactRedux = __webpack_require__(2);
 
 var _reactMaterialize = __webpack_require__(1);
 
-var _supplementFab = __webpack_require__(9);
+var _supplementFab = __webpack_require__(10);
 
 var _supplementFab2 = _interopRequireDefault(_supplementFab);
 
-var _supplementBtns = __webpack_require__(10);
+var _supplementBtns = __webpack_require__(11);
 
 var _supplementBtns2 = _interopRequireDefault(_supplementBtns);
 
-var _editSupplementActions = __webpack_require__(11);
+var _editSupplementActions = __webpack_require__(12);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4030,7 +4098,7 @@ var RequestSupplementModal = (_dec = (0, _reactRedux.connect)(function (store) {
 exports.default = RequestSupplementModal;
 
 /***/ }),
-/* 60 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4044,13 +4112,15 @@ exports.updateUnivId = updateUnivId;
 exports.updateUniversity = updateUniversity;
 exports.updateEmail = updateEmail;
 
-var _axios = __webpack_require__(20);
+var _axios = __webpack_require__(14);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _axiosRetry = __webpack_require__(21);
+var _axiosRetry = __webpack_require__(15);
 
 var _axiosRetry2 = _interopRequireDefault(_axiosRetry);
+
+var _utils = __webpack_require__(23);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4071,8 +4141,11 @@ function requestPublication(university, universityId, email) {
     dispatch({ type: "PUBLISH_MODAL_OPEN" });
     dispatch({ type: "REQUEST_PUBLISH_SENT" });
     $('#modal1').modal('open');
-    _axios2.default.post("/back/supplement/rest/request", { uniName: university, email: email,
-      univId: universityId }).then(function (response) {
+    (0, _utils.retryAxiosNtimesPost)(4, 0, "/back/supplement/rest/request", { uniName: university, email: email,
+      univId: universityId })
+    // axios.post("/back/supplement/rest/request",{uniName:university,email:email,
+    //                                      univId:universityId})
+    .then(function (response) {
       $('#modal1').modal('close');
       dispatch({ type: "REQUEST_PUBLISH_FULLFILED", payload: response.data });
       dispatch({ type: "PUBLISH_MODAL_CLOSE" });
@@ -4095,7 +4168,7 @@ function updateEmail(mail) {
 }
 
 /***/ }),
-/* 61 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4114,13 +4187,13 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactMaterialize = __webpack_require__(1);
 
-var _reactRouterDom = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"react-router-dom\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+var _reactRouterDom = __webpack_require__(6);
 
-var _sideNav = __webpack_require__(12);
+var _sideNav = __webpack_require__(13);
 
 var _sideNav2 = _interopRequireDefault(_sideNav);
 
-var _navBar = __webpack_require__(25);
+var _navBar = __webpack_require__(27);
 
 var _navBar2 = _interopRequireDefault(_navBar);
 
@@ -4166,7 +4239,7 @@ var ServerLoading = function (_React$Component) {
 exports.default = ServerLoading;
 
 /***/ }),
-/* 62 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4189,11 +4262,11 @@ var _reactRedux = __webpack_require__(2);
 
 var _reactMaterialize = __webpack_require__(1);
 
-var _reactRouterDom = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"react-router-dom\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+var _reactRouterDom = __webpack_require__(6);
 
-var _userActions = __webpack_require__(18);
+var _userActions = __webpack_require__(21);
 
-var _supplementCard = __webpack_require__(27);
+var _supplementCard = __webpack_require__(29);
 
 var _supplementCard2 = _interopRequireDefault(_supplementCard);
 
@@ -4339,7 +4412,7 @@ var AccountInfo = (_dec = (0, _reactRedux.connect)(function (store) {
 exports.default = AccountInfo;
 
 /***/ }),
-/* 63 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4362,7 +4435,7 @@ exports.default = function (_ref) {
 };
 
 /***/ }),
-/* 64 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4372,19 +4445,19 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _redux = __webpack_require__(28);
+var _redux = __webpack_require__(30);
 
-var _reduxLogger = __webpack_require__(65);
+var _reduxLogger = __webpack_require__(68);
 
-var _reduxThunk = __webpack_require__(66);
+var _reduxThunk = __webpack_require__(69);
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-var _reduxPromiseMiddleware = __webpack_require__(67);
+var _reduxPromiseMiddleware = __webpack_require__(70);
 
 var _reduxPromiseMiddleware2 = _interopRequireDefault(_reduxPromiseMiddleware);
 
-var _reducers = __webpack_require__(68);
+var _reducers = __webpack_require__(71);
 
 var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -4395,25 +4468,25 @@ var middleware = (0, _redux.applyMiddleware)(_reduxThunk2.default, _reduxLogger.
 exports.default = (0, _redux.createStore)(_reducers2.default, middleware);
 
 /***/ }),
-/* 65 */
+/* 68 */
 /***/ (function(module, exports) {
 
 module.exports = require("redux-logger");
 
 /***/ }),
-/* 66 */
+/* 69 */
 /***/ (function(module, exports) {
 
 module.exports = require("redux-thunk");
 
 /***/ }),
-/* 67 */
+/* 70 */
 /***/ (function(module, exports) {
 
 module.exports = require("redux-promise-middleware");
 
 /***/ }),
-/* 68 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4423,25 +4496,25 @@ Object.defineProperty(exports, "__esModule", {
                   value: true
 });
 
-var _redux = __webpack_require__(28);
+var _redux = __webpack_require__(30);
 
-var _userReducer = __webpack_require__(69);
+var _userReducer = __webpack_require__(72);
 
 var _userReducer2 = _interopRequireDefault(_userReducer);
 
-var _supplementsReducer = __webpack_require__(70);
+var _supplementsReducer = __webpack_require__(73);
 
 var _supplementsReducer2 = _interopRequireDefault(_supplementsReducer);
 
-var _editSupReducer = __webpack_require__(71);
+var _editSupReducer = __webpack_require__(74);
 
 var _editSupReducer2 = _interopRequireDefault(_editSupReducer);
 
-var _requestPubReducer = __webpack_require__(72);
+var _requestPubReducer = __webpack_require__(75);
 
 var _requestPubReducer2 = _interopRequireDefault(_requestPubReducer);
 
-var _invitesReducer = __webpack_require__(73);
+var _invitesReducer = __webpack_require__(76);
 
 var _invitesReducer2 = _interopRequireDefault(_invitesReducer);
 
@@ -4459,7 +4532,7 @@ exports.default = (0, _redux.combineReducers)({
 // import tweets from "./tweetReducer"
 
 /***/ }),
-/* 69 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4519,7 +4592,7 @@ function reducer() {
 }
 
 /***/ }),
-/* 70 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4605,7 +4678,7 @@ function reducer() {
 }
 
 /***/ }),
-/* 71 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4663,7 +4736,7 @@ function reducer() {
 }
 
 /***/ }),
-/* 72 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4726,7 +4799,7 @@ function reducer() {
 }
 
 /***/ }),
-/* 73 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4798,67 +4871,67 @@ function reducer() {
 }
 
 /***/ }),
-/* 74 */
+/* 77 */
 /***/ (function(module, exports) {
 
 module.exports = require("body-parser");
 
 /***/ }),
-/* 75 */
+/* 78 */
 /***/ (function(module, exports) {
 
 module.exports = require("express-session");
 
 /***/ }),
-/* 76 */
+/* 79 */
 /***/ (function(module, exports) {
 
 module.exports = require("session-file-store");
 
 /***/ }),
-/* 77 */
+/* 80 */
 /***/ (function(module, exports) {
 
 module.exports = require("connect-timeout");
 
 /***/ }),
-/* 78 */
+/* 81 */
 /***/ (function(module, exports) {
 
 module.exports = require("cookie-parser");
 
 /***/ }),
-/* 79 */
+/* 82 */
 /***/ (function(module, exports) {
 
 module.exports = require("morgan");
 
 /***/ }),
-/* 80 */
+/* 83 */
 /***/ (function(module, exports) {
 
 module.exports = require("https");
 
 /***/ }),
-/* 81 */
+/* 84 */
 /***/ (function(module, exports) {
 
 module.exports = require("njwt");
 
 /***/ }),
-/* 82 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /*jslint es6,  node:true */
 
 
-var express = __webpack_require__(13);
+var express = __webpack_require__(16);
 var router = express.Router();
-var bcrypt = __webpack_require__(22);
-var jwt = __webpack_require__(14);
+var bcrypt = __webpack_require__(24);
+var jwt = __webpack_require__(17);
 var secretKey = process.env.SECRET_KEY ? process.env.SECRET_KEY : "testSecret"; //the secret comes from an enviroment variable
-var request = __webpack_require__(23);
+var request = __webpack_require__(25);
 var authorizeAll = __webpack_require__(5).authorizeAll;
 var authorizeAdmin = __webpack_require__(5).authorizeAdmin;
 var getUserDetails = __webpack_require__(5).userDetailsFromToken;
@@ -4970,34 +5043,35 @@ router.get('/logout', function (req, res) {
 });
 
 /***/ }),
-/* 83 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /*jslint es6,  node:true */
 
 
-var express = __webpack_require__(13);
+var express = __webpack_require__(16);
 var router = express.Router();
-var bcrypt = __webpack_require__(22);
-var jwt = __webpack_require__(14);
+var bcrypt = __webpack_require__(24);
+var jwt = __webpack_require__(17);
 var secretKey = process.env.SECRET_KEY ? process.env.SECRET_KEY : "testSecret"; //the secret comes from an enviroment variable
-var request = __webpack_require__(23);
+var request = __webpack_require__(25);
 var authorizeAll = __webpack_require__(5).authorizeAll;
 var authorizeAdmin = __webpack_require__(5).authorizeAdmin;
 var getUserDetails = __webpack_require__(5).userDetailsFromToken;
-var uuid = __webpack_require__(30);
+var uuid = __webpack_require__(32);
 
 module.exports = router;
 
 router.get(['/', '/home'], authorizeAll, function (req, res) {
   getUserDetails(req, res).then(function (details) {
-    res.render('stdMainView', { title: 'Publish a new Diploma Supplement',
-      message: 'Welcome user: ' + details.eid,
-      eID: details.eid,
-      userName: details.userName,
-      firstName: details.firstName,
-      lastName: details.familyName });
+    // res.render('stdMainView',{ title: 'Publish a new Diploma Supplement',
+    // message: 'Welcome user: ' + details.eid ,
+    // eID: details.eid,
+    // userName: details.userName,
+    // firstName: details.firstName,
+    // lastName: details.familyName});
+    res.redirect("/app");
   }).catch(function (err) {
     res.render('landing', { title: 'Login', message: 'Login to the DiplomaSupplement WebApp' });
   });
@@ -5015,30 +5089,30 @@ router.get('/eIDAS', function (req, res) {
 });
 
 /***/ }),
-/* 84 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /*jslint es6,  node:true */
 
 
-var express = __webpack_require__(13);
+var express = __webpack_require__(16);
 var router = express.Router();
-var request = __webpack_require__(23);
+var request = __webpack_require__(25);
 var authorizeAll = __webpack_require__(5).authorizeAll;
 var authorizeAdmin = __webpack_require__(5).authorizeAdmin;
 var getUserDetails = __webpack_require__(5).userDetailsFromToken;
-var basic = __webpack_require__(85);
-var supUtils = __webpack_require__(96);
-var emailUtil = __webpack_require__(99);
-var randomstring = __webpack_require__(103);
-var jwt = __webpack_require__(14);
+var basic = __webpack_require__(88);
+var supUtils = __webpack_require__(99);
+var emailUtil = __webpack_require__(102);
+var randomstring = __webpack_require__(106);
+var jwt = __webpack_require__(17);
 var secretKey = process.env.SECRET_KEY ? process.env.SECRET_KEY : "testSecret"; //the secret comes from an enviroment variable
-var stripchar = __webpack_require__(29).StripChar;
-var uuid = __webpack_require__(30);
+var stripchar = __webpack_require__(31).StripChar;
+var uuid = __webpack_require__(32);
 
 /* configuration */
-var config = __webpack_require__(7);
+var config = __webpack_require__(8);
 var peer = config.peer;
 var peerAddr = config.peerAddress;
 var channel = config.channelName;
@@ -5145,7 +5219,7 @@ router.get('/request', authorizeAll, function (req, res) {
 });
 
 /***/ }),
-/* 85 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5154,18 +5228,18 @@ router.get('/request', authorizeAll, function (req, res) {
 
 var path = __webpack_require__(3);
 var fs = __webpack_require__(4);
-var util = __webpack_require__(6);
-var config = __webpack_require__(7);
-var helper = __webpack_require__(8);
+var util = __webpack_require__(7);
+var config = __webpack_require__(8);
+var helper = __webpack_require__(9);
 var logger = helper.getLogger('install-chaincode');
 var tx_id = null;
 
-var join = __webpack_require__(91);
-var createChannel = __webpack_require__(92);
-var instantiate = __webpack_require__(93);
-var query = __webpack_require__(94);
-var invoke = __webpack_require__(95);
-var evHelper = __webpack_require__(31);
+var join = __webpack_require__(94);
+var createChannel = __webpack_require__(95);
+var instantiate = __webpack_require__(96);
+var query = __webpack_require__(97);
+var invoke = __webpack_require__(98);
+var evHelper = __webpack_require__(33);
 
 exports.installChaincode = function (peers, chaincodeName, chaincodePath, chaincodeVersion, username, org) {
   console.log('\n============ Install chaincode on organizations ============\n');
@@ -5249,37 +5323,37 @@ exports.invokeChaincode = function (peersUrls, channelName, chaincodeName, fcn, 
 };
 
 /***/ }),
-/* 86 */
+/* 89 */
 /***/ (function(module, exports) {
 
 module.exports = require("log4js");
 
 /***/ }),
-/* 87 */
+/* 90 */
 /***/ (function(module, exports) {
 
 module.exports = require("fs-extra");
 
 /***/ }),
-/* 88 */
+/* 91 */
 /***/ (function(module, exports) {
 
 module.exports = require("fabric-client/lib/User.js");
 
 /***/ }),
-/* 89 */
+/* 92 */
 /***/ (function(module, exports) {
 
 module.exports = require("crypto");
 
 /***/ }),
-/* 90 */
+/* 93 */
 /***/ (function(module, exports) {
 
 module.exports = require("fabric-ca-client");
 
 /***/ }),
-/* 91 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5300,16 +5374,16 @@ module.exports = require("fabric-ca-client");
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-var util = __webpack_require__(6);
+var util = __webpack_require__(7);
 var path = __webpack_require__(3);
 var fs = __webpack_require__(4);
 
-var Peer = __webpack_require__(16);
-var EventHub = __webpack_require__(17);
+var Peer = __webpack_require__(19);
+var EventHub = __webpack_require__(20);
 var tx_id = null;
 var nonce = null;
-var config = __webpack_require__(7);
-var helper = __webpack_require__(8);
+var config = __webpack_require__(8);
+var helper = __webpack_require__(9);
 var logger = helper.getLogger('Join-Channel');
 //helper.hfc.addConfigFile(path.join(__dirname, 'network-config.json'));
 var ORGS = helper.ORGS;
@@ -5424,7 +5498,7 @@ var joinChannel = function joinChannel(channelName, peers, username, org) {
 exports.joinChannel = joinChannel;
 
 /***/ }),
-/* 92 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5445,11 +5519,11 @@ exports.joinChannel = joinChannel;
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-var util = __webpack_require__(6);
+var util = __webpack_require__(7);
 var fs = __webpack_require__(4);
 var path = __webpack_require__(3);
-var config = __webpack_require__(7);
-var helper = __webpack_require__(8);
+var config = __webpack_require__(8);
+var helper = __webpack_require__(9);
 var logger = helper.getLogger('Create-Channel');
 //Attempt to send a request to the orderer with the sendCreateChain method
 var createChannel = function createChannel(channelName, channelConfigPath, username, orgName) {
@@ -5504,7 +5578,7 @@ var createChannel = function createChannel(channelName, channelConfigPath, usern
 exports.createChannel = createChannel;
 
 /***/ }),
-/* 93 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5527,12 +5601,12 @@ exports.createChannel = createChannel;
 
 var path = __webpack_require__(3);
 var fs = __webpack_require__(4);
-var util = __webpack_require__(6);
-var hfc = __webpack_require__(15);
-var Peer = __webpack_require__(16);
-var EventHub = __webpack_require__(17);
-var config = __webpack_require__(7);
-var helper = __webpack_require__(8);
+var util = __webpack_require__(7);
+var hfc = __webpack_require__(18);
+var Peer = __webpack_require__(19);
+var EventHub = __webpack_require__(20);
+var config = __webpack_require__(8);
+var helper = __webpack_require__(9);
 var logger = helper.getLogger('instantiate-chaincode');
 hfc.addConfigFile(path.join(__dirname, 'network-config.json'));
 var ORGS = hfc.getConfigSetting('network-config');
@@ -5653,7 +5727,7 @@ var instantiateChaincode = function instantiateChaincode(channelName, chaincodeN
 exports.instantiateChaincode = instantiateChaincode;
 
 /***/ }),
-/* 94 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5676,12 +5750,12 @@ exports.instantiateChaincode = instantiateChaincode;
  */
 var path = __webpack_require__(3);
 var fs = __webpack_require__(4);
-var util = __webpack_require__(6);
-var hfc = __webpack_require__(15);
-var Peer = __webpack_require__(16);
-var EventHub = __webpack_require__(17);
-var config = __webpack_require__(7);
-var helper = __webpack_require__(8);
+var util = __webpack_require__(7);
+var hfc = __webpack_require__(18);
+var Peer = __webpack_require__(19);
+var EventHub = __webpack_require__(20);
+var config = __webpack_require__(8);
+var helper = __webpack_require__(9);
 var logger = helper.getLogger('Query');
 
 var queryChaincode = function queryChaincode(peer, channelName, chaincodeName, args, fcn, username, org) {
@@ -5924,7 +5998,7 @@ exports.getInstalledChaincodes = getInstalledChaincodes;
 exports.getChannels = getChannels;
 
 /***/ }),
-/* 95 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5947,16 +6021,16 @@ exports.getChannels = getChannels;
 
 var path = __webpack_require__(3);
 var fs = __webpack_require__(4);
-var util = __webpack_require__(6);
-var hfc = __webpack_require__(15);
-var Peer = __webpack_require__(16);
-var config = __webpack_require__(7);
-var helper = __webpack_require__(8);
+var util = __webpack_require__(7);
+var hfc = __webpack_require__(18);
+var Peer = __webpack_require__(19);
+var config = __webpack_require__(8);
+var helper = __webpack_require__(9);
 var logger = helper.getLogger('invoke-chaincode');
-var EventHub = __webpack_require__(17);
+var EventHub = __webpack_require__(20);
 hfc.addConfigFile(path.join(__dirname, 'network-config.json'));
 var ORGS = hfc.getConfigSetting('network-config');
-var evHelper = __webpack_require__(31);
+var evHelper = __webpack_require__(33);
 
 /**
 	@param  eventHandler, an OPTIONAL function, that handles the custom events
@@ -6092,14 +6166,14 @@ var invokeChaincode = function invokeChaincode(peersUrls, channelName, chaincode
 exports.invokeChaincode = invokeChaincode;
 
 /***/ }),
-/* 96 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var n = __webpack_require__(97)();
-var hash = __webpack_require__(98);
+var n = __webpack_require__(100)();
+var hash = __webpack_require__(101);
 
 module.exports.generateSupplementHash = generateSupplementHash;
 
@@ -6109,19 +6183,19 @@ function generateSupplementHash(employerEmail, supId, userName) {
 }
 
 /***/ }),
-/* 97 */
+/* 100 */
 /***/ (function(module, exports) {
 
 module.exports = require("nonce");
 
 /***/ }),
-/* 98 */
+/* 101 */
 /***/ (function(module, exports) {
 
 module.exports = require("hash.js");
 
 /***/ }),
-/* 99 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6129,9 +6203,9 @@ module.exports = require("hash.js");
 
 var path = __webpack_require__(3);
 
-var nodemailer = __webpack_require__(100);
-var fileUtils = __webpack_require__(101);
-var srvUtils = __webpack_require__(102);
+var nodemailer = __webpack_require__(103);
+var fileUtils = __webpack_require__(104);
+var srvUtils = __webpack_require__(105);
 
 exports.sendEmail = sendEmail;
 
@@ -6184,13 +6258,13 @@ function sendEmail(receiverAddress, body) {
 };
 
 /***/ }),
-/* 100 */
+/* 103 */
 /***/ (function(module, exports) {
 
 module.exports = require("nodemailer");
 
 /***/ }),
-/* 101 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6213,7 +6287,7 @@ function readFilePromise(path) {
 }
 
 /***/ }),
-/* 102 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6224,7 +6298,7 @@ var serverInfo = {};
 module.exports = serverInfo;
 
 /***/ }),
-/* 103 */
+/* 106 */
 /***/ (function(module, exports) {
 
 module.exports = require("randomstring");

@@ -1,0 +1,15 @@
+From: 
+To: 
+Subject: 
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary=""
+
+--
+Content-Type: multipart/alternative; boundary=""
+
+--
+Content-Type: text/plain; charset=ISO-8859-1
+You need to enable HTML option for email
+--
+Content-Type: text/html; charset=ISO-8859-1
+Content-Disposition: inline
