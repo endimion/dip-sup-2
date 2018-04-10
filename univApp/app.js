@@ -37,7 +37,7 @@ evHelper.registerEventHubForOrg(org,chaincode,'evtsender', event => {
       bkService = agriBkService;
     }
 
-    if(pubReq.University === "UAegean"){
+    if(pubReq.University === UNIVERSITY){
       bkService.findAllDiplomaByCriterria(pubReq).then(result =>{
           return result.map(dbDipSup =>{
              //map the supplement from the grpc call to a full DiplomaSupplement Structure
