@@ -1,0 +1,22 @@
+From: noreply@domain.com
+To: triantafyllou.ni@gmail.com
+Subject: Test PDF for Email
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="b29d6fdf-f357-4bba-a091-b7dc1684da01"
+
+--b29d6fdf-f357-4bba-a091-b7dc1684da01
+Content-Type: multipart/alternative; boundary="f6c8670b-edbb-4a1f-b0da-916d24257aac"
+
+--f6c8670b-edbb-4a1f-b0da-916d24257aac
+Content-Type: text/plain; charset=ISO-8859-1
+You need to enable HTML option for email
+--f6c8670b-edbb-4a1f-b0da-916d24257aac
+Content-Type: text/html; charset=ISO-8859-1
+Content-Disposition: inline
+--f6c8670b-edbb-4a1f-b0da-916d24257aac--
+--b29d6fdf-f357-4bba-a091-b7dc1684da01
+Content-Type: application/pdf; name="file.pdf"
+Content-Transfer-Encoding: uuencode
+Content-Disposition: attachment; filename="file.pdf"
+
+--b29d6fdf-f357-4bba-a091-b7dc1684da01--
