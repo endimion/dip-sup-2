@@ -68,17 +68,19 @@ let evHelper = require('../utils/eventHelper.js');
 
 
 
-//  basic.createChannel();
+//basic.createChannel();
 // basic.joinAllOrgsOnChannel("mychannel");
 
 
 
 // basic.installChaincode(["172.17.0.1:7051"],"dipSup_cc15","github.com/dipSup_cc","0.1", "nikos", "org1");
 //  basic.installChaincode(["172.17.0.1:8051"],"dipSup_cc15","github.com/dipSup_cc","0.1", "nikos", "org2");
-// basic.installChaincode(["172.17.0.1:9051"],"dipSup_cc14","github.com/dipSup_cc","0.1", "nikos", "org3");
+// basic.installChaincode(["172.17.0.1:9051"],"dipSup_cc15","github.com/dipSup_cc","0.1", "nikos", "org3");
 
-// basic.instantiateChaincode("mychannel", "dipSup_cc15", "0.1", "init", [],"nikos", "org1");
-  basic.instantiateChaincode("mychannel", "dipSup_cc15", "0.1", "init", [],"nikos", "org2");
+ basic.instantiateChaincode("mychannel", "dipSup_cc15", "0.1", "init", [],"nikos", "org1");
+//  basic.instantiateChaincode("mychannel", "dipSup_cc15", "0.1", "init", [],"nikos", "org2");
+//basic.instantiateChaincode("mychannel", "dipSup_cc15", "0.1", "init", [],"nikos", "org3");
+
 
 
 // TEST INVOKES

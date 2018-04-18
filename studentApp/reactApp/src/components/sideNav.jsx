@@ -41,6 +41,8 @@ export default class SideNavigation extends React.Component {
                   <SideNavItem divider />
                   <SideNavItem> {"First Name:" + user.firstName}</SideNavItem>
                   <SideNavItem>  {"Last Name:" +user.lastName}</SideNavItem>
+                  <SideNavItem> { "International First Name:" + user.intFirstName}</SideNavItem>
+                  <SideNavItem>  {"International Last Name:" +user.intFamilyName}</SideNavItem>
                   <SideNavItem>  {"UserName:" + user.userName}</SideNavItem>
                   <SideNavItem subheader>Actions</SideNavItem>
                 	<SideNavItem divider />

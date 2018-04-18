@@ -92,12 +92,24 @@ exports.userDetailsFromToken = (req,res) =>{
         console.log(token.sub);
         let result = JSON.parse(token.sub);
         result.eid = stripchar.RSExceptUnsAlpNum(result.eid);
+        //** ISS webapp returns the values as firstName,lastName, while webapp 2.0 as currentFamilyName,currentGivenName
+        //**
         if(!result.firstName){
-          result.firstName = result.currentGivenName;
-        }
+            result.firstName = result.currentGivenName;
+                  }
         if(!result.familyName){
           result.familyName = result.currentFamilyName;
+
         }
+        if(result.firstName.indexOf(",") > 0){
+           result.intFirstName = result.firstName.split(",")[1];
+           result.firstName = result.firstName.split(",")[0];;
+        }
+        if(result.familyName.indexOf(",") > 0){
+            result.intFamilyName = result.familyName.split(",")[1];
+            result.familyName = result.familyName.split(",")[0];
+        }
+
         result.userName = result.firstName+"_"+result.familyName;
         resolve(result);
       }

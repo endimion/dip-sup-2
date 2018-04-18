@@ -86,19 +86,16 @@ exports.createChannel = function(){
 };
 
 exports.joinAllOrgsOnChannel = function(chanelName){
-  join.joinChannel(chanelName, ["172.17.0.1:7051"],  "nikos2", "org1")
-  .then(resp =>{
+  join.joinChannel(chanelName, ["172.17.0.1:7051"],  "nikos2", "org1").then(resp =>{
     console.log("=============Peer localhost:7051 JOINED===================");
   })
   .then(resp =>{
       join.joinChannel(chanelName, ["172.17.0.1:8051"],  "nikos2", "org2");
         console.log("=============Peer localhost:8051 JOINED===================");
-  })
-  .then(resp =>{
-      join.joinChannel(chanelName, ["172.17.0.1:9051"],  "nikos2", "org3");
+  }).then(resp =>{
+     // join.joinChannel(chanelName, ["172.17.0.1:9051"],  "nikos2", "org3");
         console.log("=============Peer localhost:9051 JOINED===================");
-  })
-  .catch(err =>{
+  }).catch(err =>{
       console.log(err);
   });
 };
@@ -121,4 +118,3 @@ exports.invokeChaincode = function(peersUrls, channelName, chaincodeName, fcn, a
   return invoke.invokeChaincode(peersUrls, channelName, chaincodeName, fcn, args,
                                   username, org,evHelper.txDetectionEvent) ;
 };
-
