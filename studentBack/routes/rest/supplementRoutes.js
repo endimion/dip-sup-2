@@ -14,7 +14,7 @@ const emailUtil = require('../../utils/emailClient.js');
 const pdfHelper = require('../../utils/pdfHelper.js');
 const randomstring = require("randomstring");
 const qr = require('qr-image');
-
+const fs = require('fs');
 
 
 /* configuration */
@@ -76,7 +76,20 @@ router.get('/pdf/:supId',authorizeAll,(req,res) =>{
         try{
           JSON.parse(resp);
           let ds = JSON.parse(resp);
-          pdfHelper.genPdf(ds,res);
+          pdfHelper.genPdfPromise(ds)
+          .then( path =>{
+              //get and post file to signing service
+              let postReq = request.post("localhost:8091/upload", function (err, resp, body) {
+                if (err) {
+                  console.log('Error!');
+                } else {
+                  console.log('URL: ' + body);
+                }
+              });
+              let form = postReq.form();
+              form.append('file', fs.createReadStream(path));
+
+          });
         }catch(err){
           console.log("supplementRoutes:: response not a json!");
           res.status(500).send(err);
