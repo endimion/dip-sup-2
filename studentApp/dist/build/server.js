@@ -103,12 +103,12 @@ module.exports = require("fs");
 
 
 var bcrypt = __webpack_require__(26);
-var jwt = __webpack_require__(18);
+var jwt = __webpack_require__(19);
 var secretKey = process.env.SECRET_KEY ? process.env.SECRET_KEY : "secret"; //the secret comes from an enviroment variable
 var stripchar = __webpack_require__(34).StripChar;
 var fs = __webpack_require__(4);
 var path = __webpack_require__(3);
-var nJwt = __webpack_require__(87);
+var nJwt = __webpack_require__(90);
 /**
   check if a user eID exists on teh session,
   if not verify the existance of a jwt token and its validity
@@ -253,19 +253,19 @@ module.exports = { "host": "172.17.0.1", "port": "4000", "jwt_expiretime": "3600
  */
 
 
-var log4js = __webpack_require__(92);
+var log4js = __webpack_require__(95);
 var logger = log4js.getLogger('Helper');
 // logger.setLevel('DEBUG');
 
 var path = __webpack_require__(3);
 var util = __webpack_require__(7);
-var fs = __webpack_require__(93);
-var User = __webpack_require__(94);
-var crypto = __webpack_require__(95);
-var copService = __webpack_require__(96);
+var fs = __webpack_require__(96);
+var User = __webpack_require__(97);
+var crypto = __webpack_require__(98);
+var copService = __webpack_require__(99);
 var config = __webpack_require__(8);
 
-var hfc = __webpack_require__(19);
+var hfc = __webpack_require__(20);
 hfc.addConfigFile(path.join(__dirname, '../network-config.json'));
 hfc.setLogger(logger);
 var ORGS = hfc.getConfigSetting('network-config');
@@ -654,7 +654,7 @@ var SupFab = function (_React$Component) {
                 { className: 'fixed-action-btn horizontal click-to-toggle', style: { position: "absolute", right: " 24px", bottom: "1.2em", zIndex: "997" } },
                 _react2.default.createElement(
                     'a',
-                    { className: 'btn-floating btn-medium red' },
+                    { className: 'btn tooltipped btn-floating btn-medium red', 'data-position': 'top', 'data-tooltip': 'Share' },
                     _react2.default.createElement(
                         'i',
                         { className: 'material-icons' },
@@ -669,7 +669,7 @@ var SupFab = function (_React$Component) {
                         { key: "mail" },
                         _react2.default.createElement(
                             'a',
-                            { className: 'btn-floating yellow darken-1 modal-trigger',
+                            { className: 'btn tooltipped btn-floating yellow darken-1 modal-trigger', 'data-position': 'top', 'data-tooltip': 'Share by eMail',
                                 style: { transform: "scaleY(0.4) scaleX(0.4) translateY(0px) translateX(40px)", opacity: "0" },
                                 onClick: function onClick(e) {
                                     _this2.props.mailModal(_this2.props.supId);
@@ -686,7 +686,7 @@ var SupFab = function (_React$Component) {
                         { key: "qr" },
                         _react2.default.createElement(
                             'a',
-                            { className: 'btn-floating blue darken-1 modal-trigger',
+                            { className: 'btn tooltipped btn-floating blue darken-1 modal-trigger', 'data-position': 'top', 'data-tooltip': 'Share by QR code',
                                 style: { transform: "scaleY(0.4) scaleX(0.4) translateY(0px) translateX(40px)", opacity: "0" },
                                 onClick: function onClick(e) {
                                     _this2.props.qrModal(_this2.props.supId);
@@ -748,21 +748,37 @@ var SupBtns = function (_React$Component) {
   }
 
   _createClass(SupBtns, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      $(document).ready(function () {
+        $('.tooltipped').tooltip();
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
 
       var download = _react2.default.createElement(
         _reactRouterDom.Link,
-        { to: "/back/supplement/rest/pdf/" + this.props.id, className: 'btn-floating btn-medium waves-effect waves-light blue darken-3', target: '_blank' },
+        { to: "/back/supplement/rest/pdf/" + this.props.id, className: 'btn btn-floating tooltipped btn-medium waves-effect waves-light blue darken-3', 'data-position': 'top', 'data-tooltip': 'Download pdf', target: '_blank' },
         _react2.default.createElement(
           'i',
           { className: 'material-icons' },
           'file_download'
         )
       );
+      var downloadRaw = _react2.default.createElement(
+        _reactRouterDom.Link,
+        { to: "/back/supplement/rest/raw/" + this.props.id, className: 'btn btn-floating tooltipped btn-medium waves-effect waves-light raw darken-3', 'data-position': 'top', 'data-tooltip': 'Download XML/JSON', target: '_blank' },
+        _react2.default.createElement(
+          'i',
+          { className: 'material-icons' },
+          'code'
+        )
+      );
       var edit = _react2.default.createElement(
         _reactRouterDom.Link,
-        { to: "/app/edit/" + this.props.id, className: 'btn-floating btn-medium waves-effect waves-light yellow darken-3', style: { marginLeft: "1em" } },
+        { to: "/app/edit/" + this.props.id, className: 'btn btn-floating tooltipped btn-medium waves-effect waves-light yellow darken-3', 'data-position': 'top', 'data-tooltip': 'Who has access?', style: { marginLeft: "1em" } },
         _react2.default.createElement(
           'i',
           { className: 'material-icons' },
@@ -775,13 +791,15 @@ var SupBtns = function (_React$Component) {
           'span',
           null,
           download,
+          downloadRaw,
           edit
         );
       } else {
         return _react2.default.createElement(
           'span',
           null,
-          download
+          download,
+          downloadRaw
         );
       }
     }
@@ -825,7 +843,7 @@ var _axiosRetry = __webpack_require__(13);
 
 var _axiosRetry2 = _interopRequireDefault(_axiosRetry);
 
-var _utils = __webpack_require__(16);
+var _utils = __webpack_require__(17);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -841,6 +859,7 @@ function addUserToRem(userEmail) {
 function remUsers(supplementId, users) {
   return function (dispatch) {
     console.log("wil dispatch");
+    dispatch({ type: "RESTART_CLOCK", payload: "" });
     dispatch({ type: "MODAL_OPEN" });
     dispatch({ type: "REM_USERS_SENT" });
     console.log("wil open");
@@ -874,6 +893,74 @@ function remUsers(supplementId, users) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.fetchUser = fetchUser;
+exports.setUserName = setUserName;
+exports.setUser = setUser;
+exports.logout = logout;
+exports.reduceTime = reduceTime;
+exports.restartClock = restartClock;
+function fetchUser() {
+  return {
+    type: "FETCH_USER_FULLFILED",
+    payload: {
+      name: "Nikos",
+      age: "34"
+    }
+  };
+}
+
+function setUserName(name) {
+  return {
+    type: "SET_USER_NAME",
+    payload: name
+  };
+}
+
+function setUser(user) {
+  return {
+    type: "SET_USER",
+    payload: user
+  };
+}
+
+function logout() {
+  document.cookie = 'access_token=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+  window.location = "/app/";
+  return { type: "LOG_OUT"
+  };
+}
+
+function reduceTime(minutes, seconds) {
+  console.log("reduce time called with ", minutes, seconds);
+
+  if (minutes === 0 && seconds === 0) {
+    document.cookie = "access_token" + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/;';
+    window.location = "/app/logout";
+    return { type: "LOG_OUT" };
+  } else {
+    return function (dispatch) {
+      dispatch({ type: "REDUCE_SECOND", payload: "" });
+    };
+  }
+}
+
+function restartClock() {
+  return function (dispatch) {
+    dispatch({ type: "RESTART_CLOCK",
+      payload: "" });
+  };
+}
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 exports.default = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -888,7 +975,7 @@ var _reactRedux = __webpack_require__(2);
 
 var _reactMaterialize = __webpack_require__(1);
 
-var _userActions = __webpack_require__(22);
+var _userActions = __webpack_require__(15);
 
 var _office = __webpack_require__(43);
 
@@ -931,75 +1018,135 @@ var SideNavigation = (_dec = (0, _reactRedux.connect)(function (store) {
       var _this2 = this;
 
       var user = this.props.user;
-      return _react2.default.createElement(
-        _reactMaterialize.SideNav,
-        {
-          trigger: this.props.trig,
-          options: { closeOnClick: true },
-          ref: this.props.inputRef
-        },
-        _react2.default.createElement(_reactMaterialize.SideNavItem, { userView: true,
-          user: {
-            background: _office2.default,
-            image: _user2.default,
-            name: user.firstName + " " + user.lastName,
-            email: user.email,
-            userName: user.userName
+      // console.log("user2");
+      // console.log(this.props.user);
+      // return   <SideNav
+      //           	trigger={this.props.trig}
+      //           	options={{ closeOnClick: true }}
+      //             ref={this.props.inputRef}
+      //           	>
+      //           	<SideNavItem userView
+      //           		user={{
+      //           			background: officeImg,
+      //           			image: accountImg,
+      //           			name: user.firstName + " " + user.lastName,
+      //           			email: user.email,
+      //                 userName: user.userName
+      //
+      //           		}}
+      //           	/>
+      //             <SideNavItem subheader> Information </SideNavItem>
+      //             <SideNavItem divider />
+      //             <SideNavItem> {"First Name:" + user.firstName}</SideNavItem>
+      //             <SideNavItem>  {"Last Name:" +user.lastName}</SideNavItem>
+      //             <SideNavItem> { "International First Name:" + user.intFirstName}</SideNavItem>
+      //             <SideNavItem>  {"International Last Name:" +user.intFamilyName}</SideNavItem>
+      //             <SideNavItem>  {"UserName:" + user.userName}</SideNavItem>
+      //             <SideNavItem subheader>Actions</SideNavItem>
+      //           	<SideNavItem divider />
+      //           	<SideNavItem> <div onClick={e =>this.logoutUser()}>Logout</div></SideNavItem>
+      //           </SideNav>
 
-          }
-        }),
+      // <li>
+      //  <div class="userView">
+      //    <div class="background">
+      //       <img src="/img/office.jpg">
+      //    </div>
+      //     <a href="#!user"><img class="circle" src="/img/user.png"></a>
+      //     <a href="#!name">
+      //        span.white-text.name #{firstName} #{lastName}
+      //     </a>
+      //     <a href="#!email">
+      //        span.white-text.email #{email}
+      //     </a>
+      //  </div>
+      // </li>
+      //    <a href="#!name"><span class="white-text name">{"First Name:" + user.firstName}</span></a>
+      return _react2.default.createElement(
+        'ul',
+        { id: 'slide-out', className: 'side-nav', style: this.props.style },
         _react2.default.createElement(
-          _reactMaterialize.SideNavItem,
-          { subheader: true },
-          ' Information '
-        ),
-        _react2.default.createElement(_reactMaterialize.SideNavItem, { divider: true }),
-        _react2.default.createElement(
-          _reactMaterialize.SideNavItem,
+          'li',
           null,
-          ' ',
-          "First Name:" + user.firstName
-        ),
-        _react2.default.createElement(
-          _reactMaterialize.SideNavItem,
-          null,
-          '  ',
-          "Last Name:" + user.lastName
-        ),
-        _react2.default.createElement(
-          _reactMaterialize.SideNavItem,
-          null,
-          ' ',
-          "International First Name:" + user.intFirstName
-        ),
-        _react2.default.createElement(
-          _reactMaterialize.SideNavItem,
-          null,
-          '  ',
-          "International Last Name:" + user.intFamilyName
-        ),
-        _react2.default.createElement(
-          _reactMaterialize.SideNavItem,
-          null,
-          '  ',
-          "UserName:" + user.userName
-        ),
-        _react2.default.createElement(
-          _reactMaterialize.SideNavItem,
-          { subheader: true },
-          'Actions'
-        ),
-        _react2.default.createElement(_reactMaterialize.SideNavItem, { divider: true }),
-        _react2.default.createElement(
-          _reactMaterialize.SideNavItem,
-          null,
-          ' ',
           _react2.default.createElement(
             'div',
-            { onClick: function onClick(e) {
+            { className: 'userView' },
+            _react2.default.createElement(
+              'div',
+              { className: 'background' },
+              _react2.default.createElement('img', { src: _office2.default })
+            ),
+            _react2.default.createElement(
+              'a',
+              { href: '#!user' },
+              _react2.default.createElement('img', { className: 'circle', src: _user2.default })
+            ),
+            _react2.default.createElement(
+              'a',
+              { href: '#!name' },
+              _react2.default.createElement(
+                'span',
+                { style: { color: "white" } },
+                'Profile Information'
+              )
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'a',
+          { href: '#!name' },
+          _react2.default.createElement(
+            'span',
+            null,
+            "First Name:" + this.props.user.firstName
+          )
+        ),
+        _react2.default.createElement(
+          'a',
+          { href: '#!email' },
+          _react2.default.createElement(
+            'span',
+            null,
+            ' ',
+            "Last Name:" + user.lastName
+          )
+        ),
+        _react2.default.createElement(
+          'a',
+          { href: '#!name' },
+          _react2.default.createElement(
+            'span',
+            null,
+            "International First Name:" + user.intFirstName
+          )
+        ),
+        _react2.default.createElement(
+          'a',
+          { href: '#!email' },
+          _react2.default.createElement(
+            'span',
+            null,
+            "International Last Name:" + user.intFamilyName
+          )
+        ),
+        _react2.default.createElement(
+          'li',
+          null,
+          _react2.default.createElement('div', { className: 'divider' })
+        ),
+        _react2.default.createElement(
+          'li',
+          null,
+          _react2.default.createElement(
+            'a',
+            { style: { cursor: "pointer" }, onClick: function onClick(e) {
                 return _this2.logoutUser();
               } },
-            'Logout'
+            _react2.default.createElement(
+              'span',
+              null,
+              'Logout'
+            )
           )
         )
       );
@@ -1011,7 +1158,7 @@ var SideNavigation = (_dec = (0, _reactRedux.connect)(function (store) {
 exports.default = SideNavigation;
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1086,79 +1233,34 @@ function sleep(time) {
 }
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports) {
 
 module.exports = require("express");
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports) {
 
 module.exports = require("jsonwebtoken");
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports) {
 
 module.exports = require("fabric-client");
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports) {
 
 module.exports = require("fabric-client/lib/Peer.js");
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports) {
 
 module.exports = require("fabric-client/lib/EventHub.js");
-
-/***/ }),
-/* 22 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.fetchUser = fetchUser;
-exports.setUserName = setUserName;
-exports.setUser = setUser;
-exports.logout = logout;
-function fetchUser() {
-  return {
-    type: "FETCH_USER_FULLFILED",
-    payload: {
-      name: "Nikos",
-      age: "34"
-    }
-  };
-}
-
-function setUserName(name) {
-  return {
-    type: "SET_USER_NAME",
-    payload: name
-  };
-}
-
-function setUser(user) {
-  return {
-    type: "SET_USER",
-    payload: user
-  };
-}
-
-function logout() {
-  document.cookie = 'access_token=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-  window.location = "/app/";
-  return { type: "LOG_OUT"
-  };
-}
 
 /***/ }),
 /* 23 */
@@ -1189,7 +1291,7 @@ var _axiosRetry = __webpack_require__(13);
 
 var _axiosRetry2 = _interopRequireDefault(_axiosRetry);
 
-var _utils = __webpack_require__(16);
+var _utils = __webpack_require__(17);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1302,11 +1404,11 @@ var _supplementBtns = __webpack_require__(11);
 
 var _supplementBtns2 = _interopRequireDefault(_supplementBtns);
 
-var _shareSupMailModal = __webpack_require__(57);
+var _shareSupMailModal = __webpack_require__(59);
 
 var _shareSupMailModal2 = _interopRequireDefault(_shareSupMailModal);
 
-var _shareSupQRModal = __webpack_require__(58);
+var _shareSupQRModal = __webpack_require__(60);
 
 var _shareSupQRModal2 = _interopRequireDefault(_shareSupQRModal);
 
@@ -1706,9 +1808,17 @@ var _reactMaterialize = __webpack_require__(1);
 
 var _reactRouterDom = __webpack_require__(6);
 
-var _sideNav = __webpack_require__(15);
+var _sideNav = __webpack_require__(16);
 
 var _sideNav2 = _interopRequireDefault(_sideNav);
+
+var _clock = __webpack_require__(45);
+
+var _clock2 = _interopRequireDefault(_clock);
+
+var _withStyles = __webpack_require__(46);
+
+var _withStyles2 = _interopRequireDefault(_withStyles);
 
 __webpack_require__(30);
 
@@ -1730,52 +1840,159 @@ var NavigationBar = function (_React$Component) {
   }
 
   _createClass(NavigationBar, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      $(document).ready(function () {
+        $(".button-collapse").sideNav();
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
       var style = {
-        'zIndex': '998!important'
+        // 'zIndex': '998!important',
+        'backgroundColor': '#06114e!important'
       };
+      // console.log("user");
+      // console.log(this.props.user);
 
-      var account = _react2.default.createElement(
-        'li',
-        null,
-        _react2.default.createElement(
-          _reactRouterDom.NavLink,
-          { to: '/' },
-          'Account'
-        )
-      );
+      // const account = <li><NavLink to="/">Account</NavLink></li>;
+
+      /*
+       //   return   <Navbar style={style} href="/app/" brand='e-DS Service' right fixed={true} className="blueBar">
+      //   <li><NavLink to="/app/home">Home</NavLink></li>
+      //   <li><NavLink to="/app/manage">Manage Supplements</NavLink></li>
+      //   <li><NavLink to="/app/request">Request new Supplement</NavLink></li>
+      //   <SideNavigation  trig={account} user= {this.props.user}/>
+      // </Navbar>
+      */
+      //  <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+
+      _react2.default.createElement(_sideNav2.default, { user: this.props.user, style: {} });
+
       return _react2.default.createElement(
-        _reactMaterialize.Navbar,
-        { style: style, href: '/app/', brand: 'DS Service', right: true, fixed: true },
+        'div',
+        { className: 'navbar-fixed' },
         _react2.default.createElement(
-          'li',
+          'nav',
           null,
           _react2.default.createElement(
-            _reactRouterDom.NavLink,
-            { to: '/app/home' },
-            'Home'
+            'div',
+            { className: 'nav-wrapper' },
+            _react2.default.createElement(
+              'a',
+              { href: '#!', className: 'brand-logo hide-on-large-only', style: { left: "30%" } },
+              ' ',
+              _react2.default.createElement(_clock2.default, { isMain: true })
+            ),
+            _react2.default.createElement(
+              'a',
+              { href: '#!', className: 'brand-logo hide-on-large-only', style: { marginLeft: "5rem" } },
+              ' e-DS Service'
+            ),
+            _react2.default.createElement(
+              'a',
+              { href: '#!', className: 'brand-logo hide-on-med-and-down' },
+              ' ',
+              _react2.default.createElement(_clock2.default, { isMain: false })
+            ),
+            _react2.default.createElement(
+              'a',
+              { href: '#!', className: 'brand-logo hide-on-med-and-down', style: { marginLeft: "2rem" } },
+              ' e-DS Service'
+            ),
+            _react2.default.createElement(
+              'a',
+              { href: '#', 'data-activates': 'mobile-demo', className: 'button-collapse' },
+              _react2.default.createElement(
+                'i',
+                { className: 'material-icons' },
+                'menu'
+              )
+            ),
+            _react2.default.createElement(
+              'ul',
+              { className: 'right hide-on-med-and-down' },
+              _react2.default.createElement(
+                'li',
+                null,
+                _react2.default.createElement(
+                  'a',
+                  { href: '/app/home' },
+                  'Home'
+                )
+              ),
+              _react2.default.createElement(
+                'li',
+                null,
+                _react2.default.createElement(
+                  'a',
+                  { href: '/app/manage' },
+                  'Manage Supplements'
+                )
+              ),
+              _react2.default.createElement(
+                'li',
+                null,
+                _react2.default.createElement(
+                  'a',
+                  { href: '/app/request' },
+                  'Request new Supplement'
+                )
+              ),
+              _react2.default.createElement(
+                'li',
+                null,
+                _react2.default.createElement(
+                  'a',
+                  { href: '#', 'data-activates': 'slide-out', className: 'button-collapse show-on-large' },
+                  'Account'
+                )
+              )
+            ),
+            _react2.default.createElement(
+              'ul',
+              { className: 'side-nav', id: 'mobile-demo' },
+              _react2.default.createElement(
+                'li',
+                null,
+                _react2.default.createElement(
+                  'a',
+                  { href: '/app/home' },
+                  'Home'
+                )
+              ),
+              _react2.default.createElement(
+                'li',
+                null,
+                _react2.default.createElement(
+                  'a',
+                  { href: '/app/manage' },
+                  'Manage Supplements'
+                )
+              ),
+              _react2.default.createElement(
+                'li',
+                null,
+                _react2.default.createElement(
+                  'a',
+                  { href: '/app/request' },
+                  'Request new Supplement'
+                )
+              ),
+              _react2.default.createElement(
+                'li',
+                null,
+                _react2.default.createElement(
+                  'a',
+                  { href: '#', 'data-activates': 'slide-out', className: 'button-collapse' },
+                  'Account'
+                )
+              )
+            )
           )
         ),
-        _react2.default.createElement(
-          'li',
-          null,
-          _react2.default.createElement(
-            _reactRouterDom.NavLink,
-            { to: '/app/manage' },
-            'Manage Supplements'
-          )
-        ),
-        _react2.default.createElement(
-          'li',
-          null,
-          _react2.default.createElement(
-            _reactRouterDom.NavLink,
-            { to: '/app/request' },
-            'Request new Supplement'
-          )
-        ),
-        _react2.default.createElement(_sideNav2.default, { trig: account, user: this.props.user })
+        _react2.default.createElement(_sideNav2.default, { user: this.props.user, style: { zIndex: "999" } })
       );
     }
   }]);
@@ -1790,8 +2007,8 @@ exports.default = NavigationBar;
 /***/ (function(module, exports, __webpack_require__) {
 
 
-    var content = __webpack_require__(45);
-    var insertCss = __webpack_require__(47);
+    var content = __webpack_require__(47);
+    var insertCss = __webpack_require__(49);
 
     if (typeof content === 'string') {
       content = [[module.i, content, '']];
@@ -1865,7 +2082,7 @@ var _axiosRetry = __webpack_require__(13);
 
 var _axiosRetry2 = _interopRequireDefault(_axiosRetry);
 
-var _utils = __webpack_require__(16);
+var _utils = __webpack_require__(17);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1873,12 +2090,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // ES6
 function updateCode(code) {
   return function (dispatch) {
+    dispatch({ type: "RESTART_CLOCK", payload: "" });
     dispatch({ type: "UPDATE_CODE", payload: code });
   };
 };
 
 function sendValidation(_code, invHash) {
   return function (dispatch) {
+    dispatch({ type: "RESTART_CLOCK", payload: "" });
     dispatch({ type: "SEND_UPDATE_CODE", payload: code });
 
     // axios.post("/back/supplement/rest/invite/"+invHash+"/authorize",
@@ -1895,6 +2114,7 @@ function sendValidation(_code, invHash) {
 
 function getInvAndGenValCode(inviteId) {
   return function (dispatch) {
+    dispatch({ type: "RESTART_CLOCK", payload: "" });
     dispatch({ type: "GET_INV" });
     console.log("the id is " + inviteId);
     (0, _utils.retryAxiosNtimes)(4, 0, "/back/supplement/rest/invite/" + inviteId)
@@ -1935,6 +2155,7 @@ function getInvAndGenValCode(inviteId) {
 
 function openShareByMail(supId) {
   return function (dispatch) {
+    dispatch({ type: "RESTART_CLOCK", payload: "" });
     dispatch({ type: "OPEN_SHARE_BY_MAIL" });
     console.log(supId);
     $('#mailModal' + supId).modal('open');
@@ -1944,6 +2165,7 @@ function openShareByMail(supId) {
 function shareByMail(_supId, _email) {
   return function (dispatch) {
     console.log("dispatching SHARE_SUP_STARTED");
+    dispatch({ type: "RESTART_CLOCK", payload: "" });
     dispatch({ type: "SHARE_SUP_STARTED" });
     var data = { email: _email, supId: _supId };
     (0, _utils.retryAxiosNtimesPost)(4, 0, "/back/supplement/rest/inviteByMail", data)
@@ -1961,6 +2183,7 @@ function shareByMail(_supId, _email) {
 function openShareByQR(supId) {
   return function (dispatch) {
     dispatch({ type: "OPEN_SHARE_BY_QR" });
+    dispatch({ type: "RESTART_CLOCK", payload: "" });
     console.log(supId);
     $('#qrModal' + supId).modal('open');
   };
@@ -1969,6 +2192,7 @@ function openShareByQR(supId) {
 function shareByQR(_supId, _email) {
   return function (dispatch) {
     dispatch({ type: "SHARE_SUP_QR" });
+    dispatch({ type: "RESTART_CLOCK", payload: "" });
     (0, _utils.retryAxiosNtimesPost)(4, 0, "/back/supplement/rest/inviteByQR", { "supId": _supId, "email": _email })
     // axios.post("/back/supplement/rest/inviteByQR",{"supId":_supId, "email":_email})
     .then(function (response) {
@@ -2098,7 +2322,7 @@ var _containerServer = __webpack_require__(39);
 
 var _containerServer2 = _interopRequireDefault(_containerServer);
 
-var _template = __webpack_require__(69);
+var _template = __webpack_require__(71);
 
 var _template2 = _interopRequireDefault(_template);
 
@@ -2106,7 +2330,7 @@ var _reactCookie = __webpack_require__(28);
 
 var _reactRedux = __webpack_require__(2);
 
-var _store = __webpack_require__(70);
+var _store = __webpack_require__(72);
 
 var _store2 = _interopRequireDefault(_store);
 
@@ -2115,28 +2339,28 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // let renderReact = require('./reactApp/src/renderReact.js');
 
 
-var express = __webpack_require__(17);
+var express = __webpack_require__(18);
 var app = express();
 var port = 8000;
 var path = __webpack_require__(3);
-var bodyParser = __webpack_require__(80);
-var session = __webpack_require__(81); //warning The default server-side session storage, MemoryStore, is purposely not designed for a production environment.
+var bodyParser = __webpack_require__(83);
+var session = __webpack_require__(84); //warning The default server-side session storage, MemoryStore, is purposely not designed for a production environment.
 //compatible session stores https://github.com/expressjs/session#compatible-session-stores
-var FileStore = __webpack_require__(82)(session);
+var FileStore = __webpack_require__(85)(session);
 // const basic = require('./model/hlf/basic');
-var timeout = __webpack_require__(83);
-var cookieParser = __webpack_require__(84);
-var morgan = __webpack_require__(85);
-var https = __webpack_require__(86);
+var timeout = __webpack_require__(86);
+var cookieParser = __webpack_require__(87);
+var morgan = __webpack_require__(88);
+var https = __webpack_require__(89);
 var fs = __webpack_require__(4);
 
 var util = __webpack_require__(5);
 
 /**** routes **/
-var loginRoutes = __webpack_require__(88);
-var loginViewRoutes = __webpack_require__(89);
+var loginRoutes = __webpack_require__(91);
+var loginViewRoutes = __webpack_require__(92);
 // let supplementRoutes = require('./routes/rest/supplementRoutes');
-var supViewRoutes = __webpack_require__(90);
+var supViewRoutes = __webpack_require__(93);
 // let qr = require('./routes/rest/qrCodeRoutes');
 
 // view engine setup
@@ -2183,7 +2407,8 @@ var options = {
 
 };app.get('/app*', function (req, res) {
   var url = req.url;
-  if (url.indexOf("invite") > -1) {
+  console.log(url);
+  if (url && url.indexOf("invite") > -1) {
     var parts = url.split("/");
     var invId = parts[parts.length - 1];
     res.cookie('inviteHash', invId, { maxAge: 120000, httpOnly: true });
@@ -2191,30 +2416,28 @@ var options = {
   }
 
   util.userDetailsFromToken(req, res).then(function (usr) {
-    // const staticContext = {}
+    var staticContext = {};
     var css = new Set(); // CSS for all rendered React components
-    var staticContext = { insertCss: function insertCss() {
-        for (var _len = arguments.length, styles = Array(_len), _key = 0; _key < _len; _key++) {
-          styles[_key] = arguments[_key];
-        }
-
-        return styles.forEach(function (style) {
-          return css.add(style._getCss());
-        });
-      } };
-    var theUser = usr;
+    // const staticContext = { insertCss: (...styles) => styles.forEach(style => css.add(style._getCss())) };
+    // const theUser= usr;
+    // console.log("staticConetxt" ,staticContext);
     // Grab the initial state from our Redux store
+    //
+    // console.log("USER:");
+    // console.log(usr);
+
     var preloadedState = _extends({}, _store2.default.getState(), {
       user: { user: _extends({}, usr, { lastName: usr.familyName }) } });
+
+    var props = { location: req.url, context: {}, user: _extends({}, usr, { lastName: usr.familyName }) };
+
     var appString = (0, _server.renderToString)(_react2.default.createElement(
       _reactRedux.Provider,
       { store: _store2.default },
       _react2.default.createElement(
         _reactCookie.CookiesProvider,
         null,
-        _react2.default.createElement(_containerServer2.default, { location: req.url,
-          context: staticContext,
-          usr: theUser })
+        _react2.default.createElement(_containerServer2.default, props)
       )
     ));
     res.send((0, _template2.default)({
@@ -2225,12 +2448,16 @@ var options = {
     }));
   }).catch(function (err) {
     console.log(err);
+    if (err === "no user found in jwt") {
+      res.redirect("/loginFail");
+    }
     res.redirect("/login/landing");
   });
 });
 
 //start the server
 var server = app.listen(port, "127.0.0.1", function (err, res) {
+
   if (err) {
     console.log("error!!", err);
   } else {
@@ -2293,7 +2520,7 @@ var _StaticRouter2 = _interopRequireDefault(_StaticRouter);
 
 var _sideBarActions = __webpack_require__(41);
 
-var _userActions = __webpack_require__(22);
+var _userActions = __webpack_require__(15);
 
 var _reactCookie = __webpack_require__(28);
 
@@ -2307,39 +2534,39 @@ var _navBar = __webpack_require__(29);
 
 var _navBar2 = _interopRequireDefault(_navBar);
 
-var _sideNav = __webpack_require__(15);
+var _sideNav = __webpack_require__(16);
 
 var _sideNav2 = _interopRequireDefault(_sideNav);
 
-var _dummy = __webpack_require__(50);
+var _dummy = __webpack_require__(52);
 
 var _dummy2 = _interopRequireDefault(_dummy);
 
-var _home = __webpack_require__(51);
+var _home = __webpack_require__(53);
 
 var _home2 = _interopRequireDefault(_home);
 
-var _supplements = __webpack_require__(55);
+var _supplements = __webpack_require__(57);
 
 var _supplements2 = _interopRequireDefault(_supplements);
 
-var _editSupplement = __webpack_require__(60);
+var _editSupplement = __webpack_require__(62);
 
 var _editSupplement2 = _interopRequireDefault(_editSupplement);
 
-var _requestSupplementCard = __webpack_require__(63);
+var _requestSupplementCard = __webpack_require__(65);
 
 var _requestSupplementCard2 = _interopRequireDefault(_requestSupplementCard);
 
-var _serverLoading = __webpack_require__(65);
+var _serverLoading = __webpack_require__(67);
 
 var _serverLoading2 = _interopRequireDefault(_serverLoading);
 
-var _accountInfo = __webpack_require__(66);
+var _accountInfo = __webpack_require__(68);
 
 var _accountInfo2 = _interopRequireDefault(_accountInfo);
 
-var _viewByInvite = __webpack_require__(67);
+var _viewByInvite = __webpack_require__(69);
 
 var _viewByInvite2 = _interopRequireDefault(_viewByInvite);
 
@@ -2352,8 +2579,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var Container = (_dec = (0, _reactRedux.connect)(function (store) {
-  return { user: store.user.user
-  };
+  // return { user: store.user.user,
+  //       };
 }), _dec(_class = function (_React$Component) {
   _inherits(Container, _React$Component);
 
@@ -2387,6 +2614,9 @@ var Container = (_dec = (0, _reactRedux.connect)(function (store) {
           user = _props.user,
           tweets = _props.tweets,
           sideNav = _props.sideNav;
+      // console.log("server user");
+      // // console.log(user);
+      // console.log(this.props);
 
       // let root = () => <div><NavigationBar user={user}/><Dummy user={user}/></div>;
 
@@ -2600,18 +2830,172 @@ module.exports = __webpack_require__.p + "21f505892075a5f20c11b47a368c7630.png";
 /* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(46)(false);
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _dec, _class;
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(2);
+
+var _userActions = __webpack_require__(15);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Clock = (_dec = (0, _reactRedux.connect)(function (store) {
+  return { minutes: store.clock.timeOutMinutes,
+    seconds: store.clock.timeOutSeconds
+  };
+}), _dec(_class = function (_React$Component) {
+  _inherits(Clock, _React$Component);
+
+  function Clock(props) {
+    _classCallCheck(this, Clock);
+
+    // this.validateInvite = this.validateInvite.bind(this);
+    // this.props.time="13:00"
+    var _this = _possibleConstructorReturn(this, (Clock.__proto__ || Object.getPrototypeOf(Clock)).call(this, props));
+
+    _this.reduceTimeFunc = _this.reduceTimeFunc.bind(_this);
+    _this.restartClock = _this.restartClock.bind(_this);
+    return _this;
+  }
+
+  _createClass(Clock, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      if (this.props.isMain === true) {
+        this.props.dispatch((0, _userActions.restartClock)());
+        setInterval(function () {
+          this.reduceTimeFunc();
+        }.bind(this), 1000);
+      }
+    }
+  }, {
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      // this.props.dispatch(restartClock());
+    }
+  }, {
+    key: 'reduceTimeFunc',
+    value: function reduceTimeFunc() {
+      // console.log("redcueTime");
+      // console.log(this.props.minutes);
+      // console.log(this.props.seconds);
+      this.props.dispatch((0, _userActions.reduceTime)(this.props.minutes, this.props.seconds));
+    }
+  }, {
+    key: 'restartClock',
+    value: function restartClock() {
+      this.props.dispatch((0, _userActions.restartClock)());
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var seconds = this.props.seconds;
+      var minutes = this.props.minutes;
+      if (this.props.seconds < 10) {
+        seconds = "0" + this.props.seconds;
+      }
+      if (this.props.minutes < 10) {
+        minutes = "0" + this.props.minutes;
+      }
+
+      return _react2.default.createElement(
+        'span',
+        null,
+        _react2.default.createElement(
+          'span',
+          { className: 'hide-on-large-only', style: { marginLeft: "1rem", fontSize: "0.8rem" } },
+          _react2.default.createElement(
+            'span',
+            null,
+            ' ',
+            _react2.default.createElement(
+              'i',
+              { style: { marginLeft: "1rem", marginRight: "0" }, className: 'material-icons', onClick: this.restartClock },
+              'refresh'
+            )
+          ),
+          _react2.default.createElement(
+            'span',
+            { style: { marginRight: "1rem", fontSize: "1.5rem" } },
+            _react2.default.createElement(
+              'i',
+              null,
+              minutes + ":" + seconds
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'span',
+          { className: 'hide-on-med-and-down', style: { fontSize: "1rem" } },
+          _react2.default.createElement(
+            'span',
+            null,
+            ' ',
+            _react2.default.createElement(
+              'i',
+              { style: { marginLeft: "52rem" }, className: 'material-icons', onClick: this.restartClock },
+              'refresh'
+            )
+          ),
+          _react2.default.createElement(
+            'span',
+            null,
+            _react2.default.createElement(
+              'i',
+              { style: { fontSize: "1rem" } },
+              "Session expires in: " + minutes + ":" + seconds
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return Clock;
+}(_react2.default.Component)) || _class);
+exports.default = Clock;
+
+/***/ }),
+/* 46 */
+/***/ (function(module, exports) {
+
+module.exports = require("isomorphic-style-loader/lib/withStyles");
+
+/***/ }),
+/* 47 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(48)(false);
 // imports
 
 
 // module
-exports.push([module.i, ".navbar-fixed {\n    position: relative;\n    height: 56px;\n    z-index: 998;\n}\n\n.modulesCard.collapsible-body{\n  padding: 0.5rem!important;\n}\n\n/*\n this is not rendered look for the navbar.css inside the dist folder\n */\n", ""]);
+exports.push([module.i, ".navbar-fixed {\n    position: relative;\n    height: 56px;\n    z-index: 998;\n}\n\n.modulesCard.collapsible-body{\n  padding: 0.5rem!important;\n}\n\nnav{\n  background-color: #06114e!important;\n}\n/*\n this is not rendered look for the navbar.css inside the dist folder\n */\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 46 */
+/* 48 */
 /***/ (function(module, exports) {
 
 /*
@@ -2693,17 +3077,17 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 47 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _stringify = __webpack_require__(48);
+var _stringify = __webpack_require__(50);
 
 var _stringify2 = _interopRequireDefault(_stringify);
 
-var _slicedToArray2 = __webpack_require__(49);
+var _slicedToArray2 = __webpack_require__(51);
 
 var _slicedToArray3 = _interopRequireDefault(_slicedToArray2);
 
@@ -2823,19 +3207,19 @@ function insertCss(styles) {
 module.exports = insertCss;
 
 /***/ }),
-/* 48 */
+/* 50 */
 /***/ (function(module, exports) {
 
 module.exports = require("babel-runtime/core-js/json/stringify");
 
 /***/ }),
-/* 49 */
+/* 51 */
 /***/ (function(module, exports) {
 
 module.exports = require("babel-runtime/helpers/slicedToArray");
 
 /***/ }),
-/* 50 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2889,7 +3273,7 @@ var Dummy = function (_React$Component) {
 exports.default = Dummy;
 
 /***/ }),
-/* 51 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2910,21 +3294,21 @@ var _reactMaterialize = __webpack_require__(1);
 
 var _reactRouterDom = __webpack_require__(6);
 
-var _sideNav = __webpack_require__(15);
+var _sideNav = __webpack_require__(16);
 
 var _sideNav2 = _interopRequireDefault(_sideNav);
 
 __webpack_require__(30);
 
-var _manageDocuments = __webpack_require__(52);
+var _manageDocuments = __webpack_require__(54);
 
 var _manageDocuments2 = _interopRequireDefault(_manageDocuments);
 
-var _publishDocument = __webpack_require__(53);
+var _publishDocument = __webpack_require__(55);
 
 var _publishDocument2 = _interopRequireDefault(_publishDocument);
 
-var _manageUser = __webpack_require__(54);
+var _manageUser = __webpack_require__(56);
 
 var _manageUser2 = _interopRequireDefault(_manageUser);
 
@@ -2982,7 +3366,7 @@ var HomePage = function (_React$Component) {
           _react2.default.createElement(
             'p',
             null,
-            'View published supplements, manage user access'
+            'View published Supplements on the Blockchain | Manage User Access '
           )
         ),
         _react2.default.createElement(
@@ -2990,8 +3374,8 @@ var HomePage = function (_React$Component) {
           { className: 'card-action' },
           _react2.default.createElement(
             _reactRouterDom.Link,
-            { to: '/app/manage' },
-            'View Supplements'
+            { to: '/app/manage', style: { color: "#06114e" } },
+            'VIEW SUPPLEMENTS'
           )
         )
       );
@@ -3015,7 +3399,7 @@ var HomePage = function (_React$Component) {
           _react2.default.createElement(
             'p',
             null,
-            'Request the publication of a Diploma Supplement.'
+            'Request the publication of a Diploma Supplement on the Blockchain'
           )
         ),
         _react2.default.createElement(
@@ -3023,8 +3407,8 @@ var HomePage = function (_React$Component) {
           { className: 'card-action' },
           _react2.default.createElement(
             _reactRouterDom.Link,
-            { to: '/app/request' },
-            'Request'
+            { to: '/app/request', style: { color: "#06114e" } },
+            'SUBMIT A REQUEST'
           )
         )
       );
@@ -3048,7 +3432,7 @@ var HomePage = function (_React$Component) {
           _react2.default.createElement(
             'p',
             null,
-            'Review your account details'
+            'Review Your Profile Details'
           )
         ),
         _react2.default.createElement(
@@ -3056,8 +3440,8 @@ var HomePage = function (_React$Component) {
           { className: 'card-action' },
           _react2.default.createElement(
             _reactRouterDom.Link,
-            { to: '/app/account' },
-            'Review Account'
+            { to: '/app/account', style: { color: "#06114e" } },
+            'MY PROFILE'
           )
         )
       );
@@ -3071,12 +3455,12 @@ var HomePage = function (_React$Component) {
           _react2.default.createElement(
             _reactMaterialize.Col,
             { s: 12, m: 6, className: 'grid-example' },
-            manageCard
+            requestCard
           ),
           _react2.default.createElement(
             _reactMaterialize.Col,
             { s: 12, m: 6, className: 'grid-example' },
-            requestCard
+            manageCard
           )
         ),
         _react2.default.createElement(
@@ -3098,25 +3482,25 @@ var HomePage = function (_React$Component) {
 exports.default = HomePage;
 
 /***/ }),
-/* 52 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "e460414865f573e4fbec7cb297e5f358.png";
 
 /***/ }),
-/* 53 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "e5c3c53e1943d3dc0d2c2ffb3b385eee.png";
 
 /***/ }),
-/* 54 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "16d4a26c8de8ae7db43040ae1095ff86.png";
 
 /***/ }),
-/* 55 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3141,7 +3525,7 @@ var _reactMaterialize = __webpack_require__(1);
 
 var _reactRouterDom = __webpack_require__(6);
 
-var _propTypes = __webpack_require__(56);
+var _propTypes = __webpack_require__(58);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -3285,13 +3669,13 @@ var Supplements = (_dec = (0, _reactRedux.connect)(function (store) {
 exports.default = Supplements;
 
 /***/ }),
-/* 56 */
+/* 58 */
 /***/ (function(module, exports) {
 
 module.exports = require("prop-types");
 
 /***/ }),
-/* 57 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3392,6 +3776,11 @@ var ShareByMailModal = (_dec = (0, _reactRedux.connect)(function (store) {
           _reactMaterialize.Row,
           null,
           _react2.default.createElement(
+            'div',
+            { className: 'col s12' },
+            'Add recipient email addresses separated by ";" or ","'
+          ),
+          _react2.default.createElement(
             _reactMaterialize.Input,
             { id: "email", type: 'email', label: 'Email', s: 12 },
             _react2.default.createElement(
@@ -3437,7 +3826,7 @@ var ShareByMailModal = (_dec = (0, _reactRedux.connect)(function (store) {
 exports.default = ShareByMailModal;
 
 /***/ }),
-/* 58 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3458,7 +3847,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(2);
 
-var _svgInlineReact = __webpack_require__(59);
+var _svgInlineReact = __webpack_require__(61);
 
 var _svgInlineReact2 = _interopRequireDefault(_svgInlineReact);
 
@@ -3575,6 +3964,17 @@ var ShareByQRModal = (_dec = (0, _reactRedux.connect)(function (store) {
           _reactMaterialize.Row,
           null,
           _react2.default.createElement(
+            'div',
+            { className: 'col s12' },
+            'Add a ',
+            _react2.default.createElement(
+              'b',
+              null,
+              'single'
+            ),
+            ' recipient email address'
+          ),
+          _react2.default.createElement(
             _reactMaterialize.Input,
             { id: "qremail", type: 'email', label: 'Email', s: 12 },
             _react2.default.createElement(
@@ -3620,13 +4020,13 @@ var ShareByQRModal = (_dec = (0, _reactRedux.connect)(function (store) {
 exports.default = ShareByQRModal;
 
 /***/ }),
-/* 59 */
+/* 61 */
 /***/ (function(module, exports) {
 
 module.exports = require("svg-inline-react");
 
 /***/ }),
-/* 60 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3649,7 +4049,7 @@ var _reactMaterialize = __webpack_require__(1);
 
 var _reactRedux = __webpack_require__(2);
 
-var _editSupplementCard = __webpack_require__(61);
+var _editSupplementCard = __webpack_require__(63);
 
 var _editSupplementCard2 = _interopRequireDefault(_editSupplementCard);
 
@@ -3716,7 +4116,7 @@ var EditSup = (_dec = (0, _reactRedux.connect)(function (store) {
 exports.default = EditSup;
 
 /***/ }),
-/* 61 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3747,7 +4147,7 @@ var _supplementBtns = __webpack_require__(11);
 
 var _supplementBtns2 = _interopRequireDefault(_supplementBtns);
 
-var _supplementModal = __webpack_require__(62);
+var _supplementModal = __webpack_require__(64);
 
 var _supplementModal2 = _interopRequireDefault(_supplementModal);
 
@@ -3953,7 +4353,7 @@ var EditSupplementCard = (_dec = (0, _reactRedux.connect)(function (store) {
 exports.default = EditSupplementCard;
 
 /***/ }),
-/* 62 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4043,7 +4443,7 @@ var EditSupplementModal = (_dec = (0, _reactRedux.connect)(function (store) {
 exports.default = EditSupplementModal;
 
 /***/ }),
-/* 63 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4072,7 +4472,7 @@ var _requestSupplementModal = __webpack_require__(25);
 
 var _requestSupplementModal2 = _interopRequireDefault(_requestSupplementModal);
 
-var _requestSupplementActions = __webpack_require__(64);
+var _requestSupplementActions = __webpack_require__(66);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4110,17 +4510,17 @@ var RequestSupplementCard = (_dec = (0, _reactRedux.connect)(function (store) {
   _createClass(RequestSupplementCard, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      $('.button-collapse').sideNav('hide');
+      // $('.button-collapse').sideNav('hide');
     }
   }, {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
-      $('.button-collapse').sideNav('hide');
+      // $('.button-collapse').sideNav('hide');
     }
   }, {
     key: 'componentWillMount',
     value: function componentWillMount() {
-      $('.button-collapse').sideNav('hide');
+      // $('.button-collapse').sideNav('hide');
     }
   }, {
     key: 'sendPubrequest',
@@ -4242,6 +4642,11 @@ var RequestSupplementCard = (_dec = (0, _reactRedux.connect)(function (store) {
                       'option',
                       { key: 'UAgr', value: 'UAgr' },
                       'Agricultural University of Athens'
+                    ),
+                    _react2.default.createElement(
+                      'option',
+                      { key: 'UniPi', value: 'UniPi' },
+                      'University of Piraeus'
                     )
                   ),
                   _react2.default.createElement(
@@ -4275,7 +4680,7 @@ var RequestSupplementCard = (_dec = (0, _reactRedux.connect)(function (store) {
 exports.default = RequestSupplementCard;
 
 /***/ }),
-/* 64 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4297,7 +4702,7 @@ var _axiosRetry = __webpack_require__(13);
 
 var _axiosRetry2 = _interopRequireDefault(_axiosRetry);
 
-var _utils = __webpack_require__(16);
+var _utils = __webpack_require__(17);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4315,6 +4720,7 @@ function requestPublication(university, universityId, email) {
 
   return function (dispatch) {
     console.log("wil dispatch");
+    dispatch({ type: "RESTART_CLOCK", payload: "" });
     dispatch({ type: "PUBLISH_MODAL_OPEN" });
     dispatch({ type: "REQUEST_PUBLISH_SENT" });
     $('#modal1').modal('open');
@@ -4333,19 +4739,28 @@ function requestPublication(university, universityId, email) {
 }
 
 function updateUnivId(universityId) {
-  return { type: "UPDATE_UNIVID", payload: universityId };
+  return function (dispatch) {
+    dispatch({ type: "RESTART_CLOCK", payload: "" });
+    dispatch({ type: "UPDATE_UNIVID", payload: universityId });
+  };
 }
 
 function updateUniversity(university) {
-  return { type: "UPDATE_UNINIVERSITY", payload: university };
+  return function (dispatch) {
+    dispatch({ type: "RESTART_CLOCK", payload: "" });
+    dispatch({ type: "UPDATE_UNINIVERSITY", payload: university });
+  };
 }
 
 function updateEmail(mail) {
-  return { type: "UPDATE_EMAIL", payload: mail };
+  return function (dispatch) {
+    dispatch({ type: "RESTART_CLOCK", payload: "" });
+    dispatch({ type: "UPDATE_EMAIL", payload: mail });
+  };
 }
 
 /***/ }),
-/* 65 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4366,7 +4781,7 @@ var _reactMaterialize = __webpack_require__(1);
 
 var _reactRouterDom = __webpack_require__(6);
 
-var _sideNav = __webpack_require__(15);
+var _sideNav = __webpack_require__(16);
 
 var _sideNav2 = _interopRequireDefault(_sideNav);
 
@@ -4416,7 +4831,7 @@ var ServerLoading = function (_React$Component) {
 exports.default = ServerLoading;
 
 /***/ }),
-/* 66 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4441,7 +4856,7 @@ var _reactMaterialize = __webpack_require__(1);
 
 var _reactRouterDom = __webpack_require__(6);
 
-var _userActions = __webpack_require__(22);
+var _userActions = __webpack_require__(15);
 
 var _supplementCard = __webpack_require__(24);
 
@@ -4591,7 +5006,7 @@ var AccountInfo = (_dec = (0, _reactRedux.connect)(function (store) {
                 { className: 'col s12' },
                 _react2.default.createElement(
                   'a',
-                  { className: 'waves-effect waves-teal btn-flat', onClick: function onClick(e) {
+                  { className: 'btn waves-effect waves-teal', onClick: function onClick(e) {
                       return _this2.logoutUser();
                     } },
                   'Log out'
@@ -4609,7 +5024,7 @@ var AccountInfo = (_dec = (0, _reactRedux.connect)(function (store) {
 exports.default = AccountInfo;
 
 /***/ }),
-/* 67 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4640,7 +5055,7 @@ var _supplementCard = __webpack_require__(24);
 
 var _supplementCard2 = _interopRequireDefault(_supplementCard);
 
-var _validateCard = __webpack_require__(68);
+var _validateCard = __webpack_require__(70);
 
 var _validateCard2 = _interopRequireDefault(_validateCard);
 
@@ -4749,7 +5164,7 @@ var InviteViewCard = (_dec = (0, _reactRedux.connect)(function (store) {
 exports.default = InviteViewCard;
 
 /***/ }),
-/* 68 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4869,7 +5284,7 @@ var ValidateCard = (_dec = (0, _reactRedux.connect)(function (store) {
 exports.default = ValidateCard;
 
 /***/ }),
-/* 69 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4888,11 +5303,11 @@ exports.default = function (_ref) {
       preloadedState = _ref.preloadedState,
       css = _ref.css;
 
-  return '\n    <!DOCTYPE html>\n    <html lang="en">\n    <head>\n      <meta charset="utf-8">\n      <meta http-equiv="X-UA-Compatible" content="IE=edge">\n      <meta name="viewport" content="width=device-width, initial-scale=1">\n\n    \t<!-- Import Google Icon Font -->\n    \t<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">\n    \t<!-- Import materialize.css -->\n    \t<link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css" rel="stylesheet">\n      <style type="text/css">' + [].concat(_toConsumableArray(css)).join('') + '</style>\n      <title>Diploma Supplement</title>\n    </head>\n      <body>\n        <!-- Import jQuery before materialize.js -->\n      \t<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>\n      \t<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>\n      \t<!-- And then your bundled js -->\n         <div id="root">' + body + '</div>\n         <script>\n           // WARNING: See the following for security issues around embedding JSON in HTML:\n           // http://redux.js.org/docs/recipes/ServerRendering.html#security-considerations\n           window.__PRELOADED_STATE__ = ' + JSON.stringify(preloadedState).replace(/</g, '\\u003c') + '\n         </script>\n        <script src="/main.bundle.js"></script>\n        <link href="/public/navbar.css" rel="stylesheet">\n      </body>\n    </html>\n\n  ';
+  return '\n    <!DOCTYPE html>\n    <html lang="en">\n    <head>\n      <meta charset="utf-8">\n      <meta http-equiv="X-UA-Compatible" content="IE=edge">\n      <meta name="viewport" content="width=device-width, initial-scale=1">\n\n    \t<!-- Import Google Icon Font -->\n    \t<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">\n    \t<!-- Import materialize.css -->\n    \t<link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css" rel="stylesheet">\n      <style type="text/css">' + [].concat(_toConsumableArray(css)).join('') + '</style>\n      <link href="/public/navbar.css" rel="stylesheet">\n      <title>Diploma Supplement</title>\n    </head>\n      <body>\n        <!-- Import jQuery before materialize.js -->\n      \t<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>\n      \t<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>\n      \t<!-- And then your bundled js -->\n         <div id="root">' + body + '</div>\n         <script>\n           // WARNING: See the following for security issues around embedding JSON in HTML:\n           // http://redux.js.org/docs/recipes/ServerRendering.html#security-considerations\n           window.__PRELOADED_STATE__ = ' + JSON.stringify(preloadedState).replace(/</g, '\\u003c') + '\n         </script>\n        <script src="/main.bundle.js"></script>\n      </body>\n    </html>\n\n  ';
 };
 
 /***/ }),
-/* 70 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4904,17 +5319,17 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(33);
 
-var _reduxLogger = __webpack_require__(71);
+var _reduxLogger = __webpack_require__(73);
 
-var _reduxThunk = __webpack_require__(72);
+var _reduxThunk = __webpack_require__(74);
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-var _reduxPromiseMiddleware = __webpack_require__(73);
+var _reduxPromiseMiddleware = __webpack_require__(75);
 
 var _reduxPromiseMiddleware2 = _interopRequireDefault(_reduxPromiseMiddleware);
 
-var _reducers = __webpack_require__(74);
+var _reducers = __webpack_require__(76);
 
 var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -4925,25 +5340,25 @@ var middleware = (0, _redux.applyMiddleware)(_reduxThunk2.default, _reduxLogger.
 exports.default = (0, _redux.createStore)(_reducers2.default, middleware);
 
 /***/ }),
-/* 71 */
+/* 73 */
 /***/ (function(module, exports) {
 
 module.exports = require("redux-logger");
 
 /***/ }),
-/* 72 */
+/* 74 */
 /***/ (function(module, exports) {
 
 module.exports = require("redux-thunk");
 
 /***/ }),
-/* 73 */
+/* 75 */
 /***/ (function(module, exports) {
 
 module.exports = require("redux-promise-middleware");
 
 /***/ }),
-/* 74 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4955,41 +5370,45 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(33);
 
-var _userReducer = __webpack_require__(75);
+var _userReducer = __webpack_require__(77);
 
 var _userReducer2 = _interopRequireDefault(_userReducer);
 
-var _supplementsReducer = __webpack_require__(76);
+var _supplementsReducer = __webpack_require__(78);
 
 var _supplementsReducer2 = _interopRequireDefault(_supplementsReducer);
 
-var _editSupReducer = __webpack_require__(77);
+var _editSupReducer = __webpack_require__(79);
 
 var _editSupReducer2 = _interopRequireDefault(_editSupReducer);
 
-var _requestPubReducer = __webpack_require__(78);
+var _requestPubReducer = __webpack_require__(80);
 
 var _requestPubReducer2 = _interopRequireDefault(_requestPubReducer);
 
-var _invitesReducer = __webpack_require__(79);
+var _invitesReducer = __webpack_require__(81);
 
 var _invitesReducer2 = _interopRequireDefault(_invitesReducer);
 
+var _clockReducer = __webpack_require__(82);
+
+var _clockReducer2 = _interopRequireDefault(_clockReducer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import sideNav from "./sideNavReducer"
+// import tweets from "./tweetReducer"
 exports.default = (0, _redux.combineReducers)({
                   user: _userReducer2.default,
                   sups: _supplementsReducer2.default,
                   edit: _editSupReducer2.default,
                   publish: _requestPubReducer2.default,
-                  invite: _invitesReducer2.default
+                  invite: _invitesReducer2.default,
+                  clock: _clockReducer2.default
 });
-
-// import tweets from "./tweetReducer"
+// import sideNav from "./sideNavReducer"
 
 /***/ }),
-/* 75 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5049,7 +5468,7 @@ function reducer() {
 }
 
 /***/ }),
-/* 76 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5135,7 +5554,7 @@ function reducer() {
 }
 
 /***/ }),
-/* 77 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5193,7 +5612,7 @@ function reducer() {
 }
 
 /***/ }),
-/* 78 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5256,7 +5675,7 @@ function reducer() {
 }
 
 /***/ }),
-/* 79 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5328,65 +5747,136 @@ function reducer() {
 }
 
 /***/ }),
-/* 80 */
-/***/ (function(module, exports) {
-
-module.exports = require("body-parser");
-
-/***/ }),
-/* 81 */
-/***/ (function(module, exports) {
-
-module.exports = require("express-session");
-
-/***/ }),
 /* 82 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-module.exports = require("session-file-store");
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+exports.default = reducer;
+function reducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
+    timeOutMinutes: 2,
+    timeOutSeconds: 59,
+    startHour: null, //(new Date()).getHours(),
+    startMinutes: null, //(new Date()).getMinutes(),
+    startSeconds: null //(new Date()).getSeconds()
+  };
+  var action = arguments[1];
+
+
+  var maxMinutes = process.env.SESSION_TIMEOUT | 4;
+
+  switch (action.type) {
+
+    case "REDUCE_SECOND":
+      {
+        var date = new Date();
+        var secs = date.getSeconds();
+        var mins = date.getMinutes();
+        var hours = date.getHours();
+
+        // start = 17.26:15   now = 17.28.01 ||  now= 28*360+01 = 10081, start= 26*360 +15=9375    minPassed = Math.floor(10140 -10260 ) / 360)
+        // start = 17.59:01 now 18.00.10    ||             minDiff => 60 + 00 - 59 = 1, secDiff =>
+
+        var startTimestamp = state.startHour * 3600 + state.startMinutes * 60 + state.startSeconds;
+        var nowTimestamp = hours * 3600 + mins * 60 + secs;
+
+        var timePassed = nowTimestamp - startTimestamp;
+        console.log(" -------------  ");
+        console.log("hours", Math.floor(timePassed / 3600));
+        console.log("minutes", Math.floor(timePassed / 60));
+        console.log("seconds", Math.floor(timePassed));
+        console.log(" ------**-----  ");
+        if (Math.floor(timePassed / 3600) != 0 || //if more than 0 hours have passed expired clock
+        Math.floor(timePassed / 60) > maxMinutes) {
+          //if more than MAX minutes have passed expired clock
+          return _extends({}, state, { timeOutMinutes: 0, timeOutSeconds: 0 });
+        }
+
+        if (state.timeOutSeconds == 0) {
+          return _extends({}, state, { timeOutMinutes: maxMinutes - Math.floor(timePassed / 60), timeOutSeconds: 59 //{...state, timeOutMinutes:state.timeOutMinutes-1, timeOutSeconds:59}
+          });
+        } else {
+          return _extends({}, state, { timeOutMinutes: maxMinutes - Math.floor(timePassed / 60), timeOutSeconds: state.timeOutSeconds - 1 //{...state, timeOutMinutes:state.timeOutMinutes, timeOutSeconds:state.timeOutSeconds-1}
+          });
+        }
+      }
+    case "RESTART_CLOCK":
+      {
+        return _extends({}, state, { timeOutMinutes: maxMinutes, timeOutSeconds: 59, startHour: new Date().getHours(), startMinutes: new Date().getMinutes(), startSeconds: new Date().getSeconds() });
+      }
+
+  }
+  return state;
+}
 
 /***/ }),
 /* 83 */
 /***/ (function(module, exports) {
 
-module.exports = require("connect-timeout");
+module.exports = require("body-parser");
 
 /***/ }),
 /* 84 */
 /***/ (function(module, exports) {
 
-module.exports = require("cookie-parser");
+module.exports = require("express-session");
 
 /***/ }),
 /* 85 */
 /***/ (function(module, exports) {
 
-module.exports = require("morgan");
+module.exports = require("session-file-store");
 
 /***/ }),
 /* 86 */
 /***/ (function(module, exports) {
 
-module.exports = require("https");
+module.exports = require("connect-timeout");
 
 /***/ }),
 /* 87 */
 /***/ (function(module, exports) {
 
-module.exports = require("njwt");
+module.exports = require("cookie-parser");
 
 /***/ }),
 /* 88 */
+/***/ (function(module, exports) {
+
+module.exports = require("morgan");
+
+/***/ }),
+/* 89 */
+/***/ (function(module, exports) {
+
+module.exports = require("https");
+
+/***/ }),
+/* 90 */
+/***/ (function(module, exports) {
+
+module.exports = require("njwt");
+
+/***/ }),
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /*jslint es6,  node:true */
 
 
-var express = __webpack_require__(17);
+var express = __webpack_require__(18);
 var router = express.Router();
 var bcrypt = __webpack_require__(26);
-var jwt = __webpack_require__(18);
+var jwt = __webpack_require__(19);
 var secretKey = process.env.SECRET_KEY ? process.env.SECRET_KEY : "testSecret"; //the secret comes from an enviroment variable
 var request = __webpack_require__(27);
 var authorizeAll = __webpack_require__(5).authorizeAll;
@@ -5500,17 +5990,17 @@ router.get('/logout', function (req, res) {
 });
 
 /***/ }),
-/* 89 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /*jslint es6,  node:true */
 
 
-var express = __webpack_require__(17);
+var express = __webpack_require__(18);
 var router = express.Router();
 var bcrypt = __webpack_require__(26);
-var jwt = __webpack_require__(18);
+var jwt = __webpack_require__(19);
 var secretKey = process.env.SECRET_KEY ? process.env.SECRET_KEY : "testSecret"; //the secret comes from an enviroment variable
 var request = __webpack_require__(27);
 var authorizeAll = __webpack_require__(5).authorizeAll;
@@ -5545,25 +6035,29 @@ router.get('/eIDAS', function (req, res) {
   // }
 });
 
+router.get('/loginFail', function (req, res) {
+  res.render('errorMessage', { 'message': 'Non-sucessful authentication. Please, return to the home page and re-initialize the process. If the authentication fails again, please contact your national eID provider' });
+});
+
 /***/ }),
-/* 90 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /*jslint es6,  node:true */
 
 
-var express = __webpack_require__(17);
+var express = __webpack_require__(18);
 var router = express.Router();
 var request = __webpack_require__(27);
 var authorizeAll = __webpack_require__(5).authorizeAll;
 var authorizeAdmin = __webpack_require__(5).authorizeAdmin;
 var getUserDetails = __webpack_require__(5).userDetailsFromToken;
-var basic = __webpack_require__(91);
-var supUtils = __webpack_require__(102);
-var emailUtil = __webpack_require__(105);
-var randomstring = __webpack_require__(109);
-var jwt = __webpack_require__(18);
+var basic = __webpack_require__(94);
+var supUtils = __webpack_require__(105);
+var emailUtil = __webpack_require__(108);
+var randomstring = __webpack_require__(112);
+var jwt = __webpack_require__(19);
 var secretKey = process.env.SECRET_KEY ? process.env.SECRET_KEY : "testSecret"; //the secret comes from an enviroment variable
 var stripchar = __webpack_require__(34).StripChar;
 var uuid = __webpack_require__(35);
@@ -5676,7 +6170,7 @@ router.get('/request', authorizeAll, function (req, res) {
 });
 
 /***/ }),
-/* 91 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5691,11 +6185,11 @@ var helper = __webpack_require__(9);
 var logger = helper.getLogger('install-chaincode');
 var tx_id = null;
 
-var join = __webpack_require__(97);
-var createChannel = __webpack_require__(98);
-var instantiate = __webpack_require__(99);
-var query = __webpack_require__(100);
-var invoke = __webpack_require__(101);
+var join = __webpack_require__(100);
+var createChannel = __webpack_require__(101);
+var instantiate = __webpack_require__(102);
+var query = __webpack_require__(103);
+var invoke = __webpack_require__(104);
 var evHelper = __webpack_require__(36);
 
 exports.installChaincode = function (peers, chaincodeName, chaincodePath, chaincodeVersion, username, org) {
@@ -5780,37 +6274,37 @@ exports.invokeChaincode = function (peersUrls, channelName, chaincodeName, fcn, 
 };
 
 /***/ }),
-/* 92 */
+/* 95 */
 /***/ (function(module, exports) {
 
 module.exports = require("log4js");
 
 /***/ }),
-/* 93 */
+/* 96 */
 /***/ (function(module, exports) {
 
 module.exports = require("fs-extra");
 
 /***/ }),
-/* 94 */
+/* 97 */
 /***/ (function(module, exports) {
 
 module.exports = require("fabric-client/lib/User.js");
 
 /***/ }),
-/* 95 */
+/* 98 */
 /***/ (function(module, exports) {
 
 module.exports = require("crypto");
 
 /***/ }),
-/* 96 */
+/* 99 */
 /***/ (function(module, exports) {
 
 module.exports = require("fabric-ca-client");
 
 /***/ }),
-/* 97 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5835,8 +6329,8 @@ var util = __webpack_require__(7);
 var path = __webpack_require__(3);
 var fs = __webpack_require__(4);
 
-var Peer = __webpack_require__(20);
-var EventHub = __webpack_require__(21);
+var Peer = __webpack_require__(21);
+var EventHub = __webpack_require__(22);
 var tx_id = null;
 var nonce = null;
 var config = __webpack_require__(8);
@@ -5955,7 +6449,7 @@ var joinChannel = function joinChannel(channelName, peers, username, org) {
 exports.joinChannel = joinChannel;
 
 /***/ }),
-/* 98 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6035,7 +6529,7 @@ var createChannel = function createChannel(channelName, channelConfigPath, usern
 exports.createChannel = createChannel;
 
 /***/ }),
-/* 99 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6059,9 +6553,9 @@ exports.createChannel = createChannel;
 var path = __webpack_require__(3);
 var fs = __webpack_require__(4);
 var util = __webpack_require__(7);
-var hfc = __webpack_require__(19);
-var Peer = __webpack_require__(20);
-var EventHub = __webpack_require__(21);
+var hfc = __webpack_require__(20);
+var Peer = __webpack_require__(21);
+var EventHub = __webpack_require__(22);
 var config = __webpack_require__(8);
 var helper = __webpack_require__(9);
 var logger = helper.getLogger('instantiate-chaincode');
@@ -6184,7 +6678,7 @@ var instantiateChaincode = function instantiateChaincode(channelName, chaincodeN
 exports.instantiateChaincode = instantiateChaincode;
 
 /***/ }),
-/* 100 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6208,9 +6702,9 @@ exports.instantiateChaincode = instantiateChaincode;
 var path = __webpack_require__(3);
 var fs = __webpack_require__(4);
 var util = __webpack_require__(7);
-var hfc = __webpack_require__(19);
-var Peer = __webpack_require__(20);
-var EventHub = __webpack_require__(21);
+var hfc = __webpack_require__(20);
+var Peer = __webpack_require__(21);
+var EventHub = __webpack_require__(22);
 var config = __webpack_require__(8);
 var helper = __webpack_require__(9);
 var logger = helper.getLogger('Query');
@@ -6455,7 +6949,7 @@ exports.getInstalledChaincodes = getInstalledChaincodes;
 exports.getChannels = getChannels;
 
 /***/ }),
-/* 101 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6479,12 +6973,12 @@ exports.getChannels = getChannels;
 var path = __webpack_require__(3);
 var fs = __webpack_require__(4);
 var util = __webpack_require__(7);
-var hfc = __webpack_require__(19);
-var Peer = __webpack_require__(20);
+var hfc = __webpack_require__(20);
+var Peer = __webpack_require__(21);
 var config = __webpack_require__(8);
 var helper = __webpack_require__(9);
 var logger = helper.getLogger('invoke-chaincode');
-var EventHub = __webpack_require__(21);
+var EventHub = __webpack_require__(22);
 hfc.addConfigFile(path.join(__dirname, 'network-config.json'));
 var ORGS = hfc.getConfigSetting('network-config');
 var evHelper = __webpack_require__(36);
@@ -6623,14 +7117,14 @@ var invokeChaincode = function invokeChaincode(peersUrls, channelName, chaincode
 exports.invokeChaincode = invokeChaincode;
 
 /***/ }),
-/* 102 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var n = __webpack_require__(103)();
-var hash = __webpack_require__(104);
+var n = __webpack_require__(106)();
+var hash = __webpack_require__(107);
 
 module.exports.generateSupplementHash = generateSupplementHash;
 
@@ -6640,19 +7134,19 @@ function generateSupplementHash(employerEmail, supId, userName) {
 }
 
 /***/ }),
-/* 103 */
+/* 106 */
 /***/ (function(module, exports) {
 
 module.exports = require("nonce");
 
 /***/ }),
-/* 104 */
+/* 107 */
 /***/ (function(module, exports) {
 
 module.exports = require("hash.js");
 
 /***/ }),
-/* 105 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6660,9 +7154,9 @@ module.exports = require("hash.js");
 
 var path = __webpack_require__(3);
 
-var nodemailer = __webpack_require__(106);
-var fileUtils = __webpack_require__(107);
-var srvUtils = __webpack_require__(108);
+var nodemailer = __webpack_require__(109);
+var fileUtils = __webpack_require__(110);
+var srvUtils = __webpack_require__(111);
 
 exports.sendEmail = sendEmail;
 
@@ -6715,13 +7209,13 @@ function sendEmail(receiverAddress, body) {
 };
 
 /***/ }),
-/* 106 */
+/* 109 */
 /***/ (function(module, exports) {
 
 module.exports = require("nodemailer");
 
 /***/ }),
-/* 107 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6744,7 +7238,7 @@ function readFilePromise(path) {
 }
 
 /***/ }),
-/* 108 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6755,7 +7249,7 @@ var serverInfo = {};
 module.exports = serverInfo;
 
 /***/ }),
-/* 109 */
+/* 112 */
 /***/ (function(module, exports) {
 
 module.exports = require("randomstring");

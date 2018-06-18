@@ -6,11 +6,13 @@
     "env": {"ENV_VARIABLE":123, "SRV_ADDR":"127.0.0.1:8000",
                                       "NODE_ENV": "development",
                                       "BASE_URL":"/",
-                                       "LOGIN_ADDR":"http://dss.aegean.gr:8080/login"},
+                                       "LOGIN_ADDR":"http://dss.aegean.gr:8080/login",
+                                       "SESSION_TIMEOUT":4},
     "env_production": {"ENV_VARIABLE":123,
                         "SRV_ADDR":"http://dss.aegean.gr",
                         "NODE_ENV": "production",
-                        "BASE_URL":"/","LOGIN_ADDR":"http://dss.aegean.gr:8080/login"}
+                        "BASE_URL":"/","LOGIN_ADDR":"http://dss.aegean.gr:8080/login",
+                         "SESSION_TIMEOUT":4}
   },
 
   {

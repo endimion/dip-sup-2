@@ -86,7 +86,8 @@ let options = {
 
 app.get('/app*', (req, res) => {
   let url = req.url;
-  if(url.indexOf("invite") > -1 ){
+  console.log(url);
+  if(url && url.indexOf("invite") > -1 ){
     let parts = url.split("/");
     let invId = parts[parts.length -1];
     res.cookie('inviteHash',invId, {maxAge: 120000, httpOnly: true });
@@ -94,19 +95,27 @@ app.get('/app*', (req, res) => {
   }
 
   util.userDetailsFromToken(req,res).then( (usr) => {
-    // const staticContext = {}
+    const staticContext = {}
     const css = new Set(); // CSS for all rendered React components
-    const staticContext = { insertCss: (...styles) => styles.forEach(style => css.add(style._getCss())) };
-    const theUser= usr;
+    // const staticContext = { insertCss: (...styles) => styles.forEach(style => css.add(style._getCss())) };
+    // const theUser= usr;
+    // console.log("staticConetxt" ,staticContext);
     // Grab the initial state from our Redux store
+    //
+    // console.log("USER:");
+    // console.log(usr);
+
     const preloadedState = {...Store.getState(),
                             user:{user:{...usr, lastName: usr.familyName}}}
+
+
+    let props = { location:req.url,context:{},user:{...usr, lastName: usr.familyName}};
+
+
     const appString = renderToString(
       <Provider store={Store}>
         <CookiesProvider>
-          <Container location={req.url}
-                     context={staticContext}
-                     usr={theUser}/>
+          <Container {...props} />
           </CookiesProvider>
         </Provider>
     );
@@ -119,6 +128,9 @@ app.get('/app*', (req, res) => {
 
   }).catch(err=>{
     console.log(err);
+    if(err === "no user found in jwt"){
+        res.redirect("/loginFail");
+    }
     res.redirect("/login/landing");
   });
 
@@ -130,6 +142,7 @@ app.get('/app*', (req, res) => {
 
 //start the server
 const server = app.listen(port,"127.0.0.1", (err,res) => {
+
   if(err){
     console.log("error!!", err);
   }else{

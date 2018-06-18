@@ -68,7 +68,7 @@ let evHelper = require('../utils/eventHelper.js');
 
 
 
-//basic.createChannel();
+// basic.createChannel();
 // basic.joinAllOrgsOnChannel("mychannel");
 
 
