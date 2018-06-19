@@ -79,7 +79,7 @@ router.get('/pdf/:supId',authorizeAll,(req,res) =>{
           pdfHelper.genPdfPromise(ds)
           .then( path =>{
               //get and post file to signing service
-              let postReq = request.post("http://localhost:8091/upload", function (err, response, body) {
+              let postReq = request.post("http://dss.aegean.gr:8091/upload", function (err, response, body) {
                 if (err) {
                   console.log('Error!');
                   console.log(err);
