@@ -11,6 +11,7 @@ const tmp = require('tmp');
 
 
 exports.genPdf = genPdf;
+exports.genPdfPromise= genPdfPromise;
 
 
 
