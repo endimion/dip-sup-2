@@ -5,6 +5,7 @@
 const express = require('express');
 const router = express.Router();
 const request = require('request');
+const http = require('http');
 const authorizeAll = require('../../utils/authUtils').authorizeAll;
 const authorizeAdmin = require('../../utils/authUtils').authorizeAdmin;
 const getUserDetails = require('../../utils/authUtils').userDetailsFromToken;
@@ -79,24 +80,33 @@ router.get('/pdf/:supId',authorizeAll,(req,res) =>{
           pdfHelper.genPdfPromise(ds)
           .then( path =>{
               //get and post file to signing service
-              var options = {
-                url: 'http://dss.aegean.gr:8091/upload',
-                headers: {
-                  'Content-Type': 'application/x-www-form-urlencoded'
-                }
+              // var options = {
+              //   url: 'http://dss.aegean.gr:8091/upload',
+              //   headers: {
+              //     'Content-Type': 'application/x-www-form-urlencoded'
+              //   }
+              // };
+              // let postReq = request.post(options, function (err, response, body) {
+              //   if (err) {
+              //     console.log('Error!');
+              //     console.log(err);
+              //   } else {
+              //     console.log(response.statusCode) // 200
+              //     console.log(response.headers['content-type']) // 'pdf'
+              //   }
+              // });
+              // let form = postReq.form();
+              // form.append('file', fs.createReadStream(path));
+              // // form.pipe(res);
+              var formData = {
+                  file: fs.createReadStream(path)
               };
-              let postReq = request.post(options, function (err, response, body) {
+              request.post({url:'http://dss.aegean.gr:8091/upload', formData: formData}, function optionalCallback(err, httpResponse, body) {
                 if (err) {
-                  console.log('Error!');
-                  console.log(err);
-                } else {
-                  console.log(response.statusCode) // 200
-                  console.log(response.headers['content-type']) // 'pdf'
+                  return console.error('upload failed:', err);
                 }
+                console.log('Upload successful!  Server responded with:', body);
               });
-              let form = postReq.form();
-              form.append('file', fs.createReadStream(path));
-              // form.pipe(res);
 
           });
         }catch(err){
