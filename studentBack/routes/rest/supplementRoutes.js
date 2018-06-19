@@ -78,19 +78,16 @@ router.get('/pdf/:supId',authorizeAll,(req,res) =>{
           let ds = JSON.parse(resp);
           pdfHelper.genPdfPromise(ds)
           .then( path =>{
-              let postData = {
+              let formData = {
                   file: fs.createReadStream(path)
               };
               //get and post file to signing service
-              let postReq = request.post( {url:"http://localhost:8091/upload",  formData:postData}, function (err, response, body) {
-                if (err) {
-                  console.log('Error!');
-                  console.log(err);
-                } else {
-                  console.log(response.statusCode) // 200
-                  console.log(response.headers['content-type']) // 'pdf'
-                }
-              }).pipe(res);
+              let postReq = request.post( {url:'http://localhost:8091/upload',  formData:formData}, function optionalCallback(err, httpResponse, body) {
+              if (err) {
+                return console.error('upload failed:', err);
+              }
+              console.log('Upload successful!  Server responded with:', body);
+            }).pipe(res);
               // let form = postReq.form();
               // form.append('file', fs.createReadStream(path));
 
