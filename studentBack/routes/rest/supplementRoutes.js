@@ -87,7 +87,7 @@ router.get('/pdf/:supId',authorizeAll,(req,res) =>{
                   console.log(response.statusCode) // 200
                   console.log(response.headers['content-type']) // 'pdf'
                 }
-              }).pipe(resp);
+              }).pipe(res);
               let form = postReq.form();
               form.append('file', fs.createReadStream(path));
 
