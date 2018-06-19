@@ -78,8 +78,11 @@ router.get('/pdf/:supId',authorizeAll,(req,res) =>{
           let ds = JSON.parse(resp);
           pdfHelper.genPdfPromise(ds)
           .then( path =>{
+              let postData = {
+                  file, fs.createReadStream(path)
+              };
               //get and post file to signing service
-              let postReq = request.post("http://localhost:8091/upload", function (err, response, body) {
+              let postReq = request.post( {url:"http://localhost:8091/upload",  formData:postData}, function (err, response, body) {
                 if (err) {
                   console.log('Error!');
                   console.log(err);
@@ -88,8 +91,8 @@ router.get('/pdf/:supId',authorizeAll,(req,res) =>{
                   console.log(response.headers['content-type']) // 'pdf'
                 }
               }).pipe(res);
-              let form = postReq.form();
-              form.append('file', fs.createReadStream(path));
+              // let form = postReq.form();
+              // form.append('file', fs.createReadStream(path));
 
           });
         }catch(err){
