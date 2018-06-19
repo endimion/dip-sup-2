@@ -79,12 +79,25 @@ router.get('/pdf/:supId',authorizeAll,(req,res) =>{
           pdfHelper.genPdfPromise(ds)
           .then( path =>{
               //get and post file to signing service
-              let postReq = request.post("http://localhost:8091/upload", function (err, resp, body) {
+              let postReq = request.post("http://localhost:8091/upload", function (err, response, body) {
                 if (err) {
                   console.log('Error!');
                   console.log(err);
                 } else {
-                  console.log('URL: ' + body);
+                  let chunks = [];
+                  response.on('data', function(chunk) {
+                      console.log('downloading');
+                      chunks.push(chunk);
+                  });
+                  response.on("end", function() {
+                      console.log('downloaded');
+                      var jsfile = new Buffer.concat(chunks).toString('base64');
+                      console.log('converted to base64');
+                      res.header("Access-Control-Allow-Origin", "*");
+                      res.header("Access-Control-Allow-Headers", "X-Requested-With");
+                      res.header('content-type', 'application/pdf');
+                      res.send(jsfile);
+                  });
                 }
               });
               let form = postReq.form();
