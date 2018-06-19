@@ -82,6 +82,7 @@ router.get('/pdf/:supId',authorizeAll,(req,res) =>{
               let postReq = request.post("localhost:8091/upload", function (err, resp, body) {
                 if (err) {
                   console.log('Error!');
+                  console.log(err);
                 } else {
                   console.log('URL: ' + body);
                 }
