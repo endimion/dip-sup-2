@@ -84,22 +84,10 @@ router.get('/pdf/:supId',authorizeAll,(req,res) =>{
                   console.log('Error!');
                   console.log(err);
                 } else {
-                  let chunks = [];
-                  response.on('data', function(chunk) {
-                      console.log('downloading');
-                      chunks.push(chunk);
-                  });
-                  response.on("end", function() {
-                      console.log('downloaded');
-                      var jsfile = new Buffer.concat(chunks).toString('base64');
-                      console.log('converted to base64');
-                      res.header("Access-Control-Allow-Origin", "*");
-                      res.header("Access-Control-Allow-Headers", "X-Requested-With");
-                      res.header('content-type', 'application/pdf');
-                      res.send(jsfile);
-                  });
+                  console.log(response.statusCode) // 200
+                  console.log(response.headers['content-type']) // 'pdf'
                 }
-              });
+              }).pipe(resp);
               let form = postReq.form();
               form.append('file', fs.createReadStream(path));
 
