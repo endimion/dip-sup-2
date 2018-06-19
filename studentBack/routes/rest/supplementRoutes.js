@@ -79,7 +79,7 @@ router.get('/pdf/:supId',authorizeAll,(req,res) =>{
           pdfHelper.genPdfPromise(ds)
           .then( path =>{
               let postData = {
-                  file, fs.createReadStream(path)
+                  file: fs.createReadStream(path)
               };
               //get and post file to signing service
               let postReq = request.post( {url:"http://localhost:8091/upload",  formData:postData}, function (err, response, body) {
