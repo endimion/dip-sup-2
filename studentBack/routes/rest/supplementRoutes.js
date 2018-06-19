@@ -92,6 +92,7 @@ router.get('/pdf/:supId',authorizeAll,(req,res) =>{
           });
         }catch(err){
           console.log("supplementRoutes:: response not a json!");
+          console.log(err);
           res.status(500).send(err);
         }
 
