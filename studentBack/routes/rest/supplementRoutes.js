@@ -106,7 +106,7 @@ router.get('/pdf/:supId',authorizeAll,(req,res) =>{
                   return console.error('upload failed:', err);
                 }
                 console.log('Upload successful!  Server responded with:', body);
-              });
+              }).pipe(res);
 
           });
         }catch(err){
