@@ -189,11 +189,12 @@ function genPdfPromise(ds){
        doc.end();
        stream.on('finish', function() {
          // iframe.src = stream.toBlobURL('application/pdf');
+         resolve(path);
 
        });
 
 
-       resolve(path);
+
       // If we don't need the file anymore we could manually call the cleanupCallback
       // But that is not necessary if we didn't pass the keep option because the library
       // will clean after itself.
