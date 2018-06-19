@@ -82,7 +82,7 @@ router.get('/pdf/:supId',authorizeAll,(req,res) =>{
                   file: fs.createReadStream(path)
               };
               //get and post file to signing service
-              let postReq = request.post( {url:'http://localhost:8091/upload',  formData:formData}, function optionalCallback(err, httpResponse, body) {
+              let postReq = request.post( {url:'http://dss.aegean.gr:8091/upload',  formData:formData}, function optionalCallback(err, httpResponse, body) {
               if (err) {
                 return console.error('upload failed:', err);
               }
