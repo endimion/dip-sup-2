@@ -34,7 +34,7 @@ exports.registerEventHubForOrg = function(org,chaincodeName,eventName, successCa
                             let unEncodedEvnet = String.fromCharCode.apply(null, event.payload);
                             successCallback(unEncodedEvnet,eh,eventObj);
                     },
-  									err => {console.log(("grpcs://172.17.0.1:7053",err)});
+  									err => {console.log(("grpcs://172.17.0.1:7053"); console.log(err);});
   	eh.connect();
 
 
@@ -60,7 +60,7 @@ exports.registerEventHubForOrg2 = function(org,chaincodeName,eventName, successC
                             let unEncodedEvnet = String.fromCharCode.apply(null, event.payload);
                             successCallback(unEncodedEvnet,eh,eventObj);
                     },
-  									err => {console.log(("grpcs://172.17.0.1:8053", err)});
+  									err => {console.log(("grpcs://172.17.0.1:8053"); console.log(err);});
   	eh.connect();
   });
 }
@@ -84,7 +84,7 @@ exports.registerEventHubForOrg3 = function(org,chaincodeName,eventName, successC
                             let unEncodedEvnet = String.fromCharCode.apply(null, event.payload);
                             successCallback(unEncodedEvnet,eh,eventObj);
                     },
-  									err => {console.log(("grpcs://172.17.0.1:9053",err)});
+  									err => {console.log(("grpcs://172.17.0.1:9053"); console.log(err);});
   	eh.connect();
   });
 }
