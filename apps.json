@@ -29,7 +29,8 @@
                         "EMAIL_USER":"dss@aegean.gr",
                         "EMAIL_PASS":"ddd111!!!",
                         "EMAIL_SERVER":"smtp.aegean.gr",
-                        "EMAIL_SERVER_PORT":"587"}
+                        "EMAIL_SERVER_PORT":"587",
+                        "AGENT_SECRET":"secret"}
   },
 
   {
@@ -44,7 +45,7 @@
                         "NODE_ENV": "production",
                         "BASE_URL":"/univ/","LOGIN_ADDR":"http://dss.aegean.gr:8080/login",
                          "AGR_BACK_END":"infolab.aua.gr",
-                         "AGR_BACK_END_PORT":"37171"   
+                         "AGR_BACK_END_PORT":"37171"
                       }
   },
 
