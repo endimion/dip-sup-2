@@ -11,7 +11,7 @@ export default ({ body, title,preloadedState,css}) => {
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
     	<!-- Import Google Icon Font -->
-    	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     	<!-- Import materialize.css -->
     	<link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css" rel="stylesheet">
       <style type="text/css">${[...css].join('')}</style>
