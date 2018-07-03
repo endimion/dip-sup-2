@@ -98,7 +98,7 @@ router.get('/pdf/:supId',authorizeAll,(req,res) =>{
           // let form = postReq.form();
           // form.append('file', fs.createReadStream(path));
           // // form.pipe(res);
-          let authentication_token= process.env("AGENT_SECRET");
+          let authentication_token= process.env.AGENT_SECRET;
           let formData = {
             file: fs.createReadStream(path)
           };
