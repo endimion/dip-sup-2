@@ -20,7 +20,6 @@ import {  Card  , CardPanel, Icon,
           CollectionItem, Collection,
           Row, Col,input, Preloader} from 'react-materialize'
 
-import { Cookies, CookiesProvider, CookieBannerUniversal } from 'react-cookie-banner'
 
 
 
