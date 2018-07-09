@@ -140,9 +140,7 @@ export default class HomePage extends React.Component {
                       buttonMessage='Close'
                       dismissOnScroll={false}
                       onAccept={() => {}}
-                    />;
-
-
+                      cookie="user-has-accepted-cookies" />
 
         return (  <div className="main container" style={{marginTop: "3%"}}>
               <Row key={1}>
