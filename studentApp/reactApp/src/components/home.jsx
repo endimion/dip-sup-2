@@ -84,7 +84,8 @@ export default class HomePage extends React.Component {
                 top: '4.2em',
                 left: '0',
                 zIndex: '10',
-                height: '3em'
+                // height: '3em'
+                paddingBottom: '1rem'
               },
               button: {
                 border: '1px solid white',
@@ -105,8 +106,9 @@ export default class HomePage extends React.Component {
                 padding: '9px 67px',
                 lineHeight: 1.3,
                 textAlign: 'left',
-                marginRight: 244,
-                color: 'white'
+                // marginRight: 244,
+                color: 'white',
+                width:'80%'
               },
               link: {
                 textDecoration: 'none',
