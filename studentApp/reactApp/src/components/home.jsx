@@ -74,17 +74,17 @@ export default class HomePage extends React.Component {
         const styles = {
               banner: {
                 fontFamily: 'Source Sans Pro',
-                height: 57,
                 background: 'rgba(52, 64, 81, 0.88) url(/cookie.png) 20px 50% no-repeat',
                 backgroundSize: '30px 30px',
                 backgroundColor: '',
                 fontSize: '15px',
                 fontWeight: 600,
                 clear: 'both',
-                position: 'relative',
+                position: 'fixed',
+                top: '4.2em',
+                left: '0';
                 zIndex: '10',
-                height: '3em',
-                marginTop: '-3em'
+                height: '3em'
               },
               button: {
                 border: '1px solid white',
