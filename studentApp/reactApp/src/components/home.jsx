@@ -138,7 +138,7 @@ export default class HomePage extends React.Component {
                         url: 'http://nocookielaw.com/'
                       }}
                       buttonMessage='Close'
-                      dismissOnScroll={state.dismissOnScroll}
+                      dismissOnScroll={false}
                       onAccept={() => setState({ accepted: true })}
                     />;
 
