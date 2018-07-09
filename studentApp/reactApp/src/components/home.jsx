@@ -74,7 +74,7 @@ export default class HomePage extends React.Component {
         const styles = {
               banner: {
                 fontFamily: 'Source Sans Pro',
-                background: 'rgba(52, 64, 81, 0.88) url(/cookie.png) 20px 50% no-repeat',
+                background: 'rgba(52, 64, 81, 0.88) url(/img/cookie.png) 20px 50% no-repeat',
                 backgroundSize: '30px 30px',
                 backgroundColor: '',
                 height:'',
@@ -136,7 +136,7 @@ export default class HomePage extends React.Component {
         let cookieConset = <CookiesProvider cookies={cookies}>
                             <CookieBannerUniversal
                               styles={styles}
-                              message="This site use cookies only to make user authentication more user friendly. "
+                              message="This site uses cookies only for making the user authentication process more user friendly."
                               link={<a href='https://docs.google.com/document/d/1JpXJIOfo8FodjI1MvEFVRxC846VIW2ySlTdTkQ_Ctb4/edit?usp=sharing' target='_blank'>More information on our use of cookies</a>}
                               buttonMessage='OK'
                               dismissOnScroll={false}
