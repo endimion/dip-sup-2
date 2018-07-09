@@ -119,27 +119,29 @@ export default class HomePage extends React.Component {
         //                         return <a href="https://docs.google.com/document/d/1JpXJIOfo8FodjI1MvEFVRxC846VIW2ySlTdTkQ_Ctb4/edit?usp=sharing">More information on our use of cookies</a>
         //                     }
         //                 });
-        // let cookieConset = <CookiesProvider cookies={cookies}>
-        //                     <CookieBannerUniversal
-        //                       styles={styles}
-        //                       message="This site use cookies only to make user authentication more user friendly. "
-        //                       link="https://docs.google.com/document/d/1JpXJIOfo8FodjI1MvEFVRxC846VIW2ySlTdTkQ_Ctb4/edit?usp=sharing" //<CookieLink style={styles.link} />
-        //                       buttonMessage='OK'
-        //                       dismissOnScroll={false}
-        //                       onAccept={() => {}}
-        //                       cookie="user-has-accepted-cookies" />
-        //                       </CookiesProvider>
-        //                   ;
+
         let message= "This site use cookies only to make user authentication more user friendly. ";
-        let cookieConset = <CookieBanner
+        // let cookieConset = <CookieBanner
+        //                       styles={styles}
+        //                       message={message}
+        //                       link={<a href='http://nocookielaw.com/'>More information on our use of cookies</a>}
+        //                       buttonMessage='Close'
+        //                       dismissOnScroll={false}
+        //                       dismissOnClick={true}
+        //                       onAccept={() => {}}
+        //                     />;
+        let cookieConset = <CookiesProvider cookies={cookies}>
+                            <CookieBannerUniversal
                               styles={styles}
-                              message={message}
+                              message="This site use cookies only to make user authentication more user friendly. "
                               link={<a href='http://nocookielaw.com/'>More information on our use of cookies</a>}
-                              buttonMessage='Close'
+                              buttonMessage='OK'
                               dismissOnScroll={false}
-                              dismissOnClick={true}
                               onAccept={() => {}}
-                            />;
+                              cookie="user-has-accepted-cookies" />
+                            </CookiesProvider>
+                          ;
+
 
         return (  <div className="main container" style={{marginTop: "3%"}}>
               <Row key={1}>
