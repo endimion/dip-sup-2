@@ -67,7 +67,18 @@ export default class HomePage extends React.Component {
           </div>
         </div>;
 
-
+        let cookieConset = <div>
+                            <CookieBanner
+                              message="This site use cookies only to make user authentication more user friendly. "
+                              link={{
+                                      msg: 'More information on our use of cookies',
+                                      url: 'https://docs.google.com/document/d/1JpXJIOfo8FodjI1MvEFVRxC846VIW2ySlTdTkQ_Ctb4/edit?usp=sharing'
+                                    }}
+                                    buttonMessage='OK'
+                                    dismissOnScroll={false}
+                              onAccept={() => {}}
+                              cookie="user-has-accepted-cookies" />
+                          </div>;
 
 
 
