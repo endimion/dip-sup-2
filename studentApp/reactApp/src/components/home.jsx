@@ -82,7 +82,7 @@ export default class HomePage extends React.Component {
                 clear: 'both',
                 position: 'fixed',
                 top: '4.2em',
-                left: '0';
+                left: '0',
                 zIndex: '10',
                 height: '3em'
               },
