@@ -114,16 +114,16 @@ export default class HomePage extends React.Component {
               }
             }
 
-        let CookieLink = React.createClass({
-                            render: function() {
-                                return <a href="https://docs.google.com/document/d/1JpXJIOfo8FodjI1MvEFVRxC846VIW2ySlTdTkQ_Ctb4/edit?usp=sharing">More information on our use of cookies</a>
-                            }
-                        });
+        // let CookieLink = React.createClass({
+        //                     render: function() {
+        //                         return <a href="https://docs.google.com/document/d/1JpXJIOfo8FodjI1MvEFVRxC846VIW2ySlTdTkQ_Ctb4/edit?usp=sharing">More information on our use of cookies</a>
+        //                     }
+        //                 });
         let cookieConset = <CookiesProvider cookies={cookies}>
                             <CookieBannerUniversal
                               styles={styles}
                               message="This site use cookies only to make user authentication more user friendly. "
-                              link= <CookieLink style={styles.link} />
+                              link="https://docs.google.com/document/d/1JpXJIOfo8FodjI1MvEFVRxC846VIW2ySlTdTkQ_Ctb4/edit?usp=sharing" //<CookieLink style={styles.link} />
                               buttonMessage='OK'
                               dismissOnScroll={false}
                               onAccept={() => {}}
