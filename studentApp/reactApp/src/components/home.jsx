@@ -77,6 +77,7 @@ export default class HomePage extends React.Component {
                 background: 'rgba(52, 64, 81, 0.88) url(/cookie.png) 20px 50% no-repeat',
                 backgroundSize: '30px 30px',
                 backgroundColor: '',
+                height:'',
                 fontSize: '15px',
                 fontWeight: 600,
                 clear: 'both',
