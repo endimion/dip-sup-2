@@ -9,7 +9,7 @@ import '../styles/navbar.css'
 import supImg from '../static/img/manage-documents.png';
 import accountImg from '../static/img/publish-document.png';
 import manageImg from '../static/img/manage-user.png';
-import { Cookies, CookiesProvider, CookieBannerUniversal } from 'react-cookie-banner'
+import { Cookies, CookiesProvider, CookieBannerUniversal, CookieBanner } from 'react-cookie-banner'
 
 export default class HomePage extends React.Component {
 
