@@ -67,8 +67,7 @@ export default class HomePage extends React.Component {
           </div>
         </div>;
 
-        let cookieConset = <div>
-                            <CookieBanner
+        let cookieConset = <CookieBanner
                               message="This site use cookies only to make user authentication more user friendly. "
                               link={{
                                       msg: 'More information on our use of cookies',
@@ -78,12 +77,11 @@ export default class HomePage extends React.Component {
                                     dismissOnScroll={false}
                               onAccept={() => {}}
                               cookie="user-has-accepted-cookies" />
-                          </div>;
+                          ;
 
 
 
         return (  <div className="main container" style={{marginTop: "3%"}}>
-                  {cookieConset}
               <Row key={1}>
                 <Col s={12} m={6}className='grid-example'>{requestCard}</Col>
                 <Col s={12} m={6} className='grid-example'>
@@ -94,6 +92,7 @@ export default class HomePage extends React.Component {
                 <Col s={12} m={6} className='grid-example'>
                         {accountCard}
                 </Col>
+                {cookieConset}
               </Row>
             </div>
             );
