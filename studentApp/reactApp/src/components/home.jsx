@@ -130,17 +130,16 @@ export default class HomePage extends React.Component {
         //                       cookie="user-has-accepted-cookies" />
         //                       </CookiesProvider>
         //                   ;
+        let message= "This site use cookies only to make user authentication more user friendly. ";
         let cookieConset = <CookieBanner
-                      styles={styles}
-                      message="This site use cookies only to make user authentication more user friendly. "
-                      link={{
-                        msg: 'More information on our use of cookies',
-                        url: 'https://docs.google.com/document/d/1JpXJIOfo8FodjI1MvEFVRxC846VIW2ySlTdTkQ_Ctb4/edit?usp=sharing'
-                      }}
-                      buttonMessage='Close'
-                      dismissOnScroll={false}
-                      onAccept={() => {}}
-                      cookie="user-has-accepted-cookies" />
+                              styles={styles}
+                              message={message}
+                              link={<a href='http://nocookielaw.com/'>More information on our use of cookies</a>}
+                              buttonMessage='Close'
+                              dismissOnScroll={false}
+                              dismissOnClick={true}
+                              onAccept={() => {}}
+                            />;
 
         return (  <div className="main container" style={{marginTop: "3%"}}>
               <Row key={1}>
