@@ -15,9 +15,9 @@ import { withRouter } from 'react-router'
 
 import {sideBarOnOff} from '../actions/sideBarActions'
 import {setUser } from '../actions/userActions'
-import Cookies from 'universal-cookie';
+// import Cookies from 'universal-cookie';
 import { Cookies, CookiesProvider, CookieBannerUniversal } from 'react-cookie-banner'
- 
+
 
 import NavigationBar from "./navBar.jsx"
 import SideNavigation from "./sideNav.jsx"

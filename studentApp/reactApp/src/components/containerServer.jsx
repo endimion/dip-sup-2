@@ -13,7 +13,8 @@ import StaticRouter from 'react-router-dom/StaticRouter';
 import {sideBarOnOff} from '../actions/sideBarActions'
 import {setUser } from '../actions/userActions'
 
-import { withCookies, Cookies } from 'react-cookie';
+// import { withCookies, Cookies } from 'react-cookie';
+import { withCookies} from 'react-cookie';
 
 import {  Card  , CardPanel, Icon,
           Tag, Modal, Button, ProgressBar,
