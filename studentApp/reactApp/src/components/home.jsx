@@ -135,11 +135,11 @@ export default class HomePage extends React.Component {
                       message="This site use cookies only to make user authentication more user friendly. "
                       link={{
                         msg: 'More information on our use of cookies',
-                        url: 'http://nocookielaw.com/'
+                        url: 'https://docs.google.com/document/d/1JpXJIOfo8FodjI1MvEFVRxC846VIW2ySlTdTkQ_Ctb4/edit?usp=sharing'
                       }}
                       buttonMessage='Close'
                       dismissOnScroll={false}
-                      onAccept={() => setState({ accepted: true })}
+                      onAccept={() => {}}
                     />;
 
 
