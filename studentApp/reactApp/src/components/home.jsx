@@ -134,7 +134,7 @@ export default class HomePage extends React.Component {
                             <CookieBannerUniversal
                               styles={styles}
                               message="This site use cookies only to make user authentication more user friendly. "
-                              link={<a href='http://nocookielaw.com/'>More information on our use of cookies</a>}
+                              link={<a href='https://docs.google.com/document/d/1JpXJIOfo8FodjI1MvEFVRxC846VIW2ySlTdTkQ_Ctb4/edit?usp=sharing' target='_blank'>More information on our use of cookies</a>}
                               buttonMessage='OK'
                               dismissOnScroll={false}
                               onAccept={() => {}}
