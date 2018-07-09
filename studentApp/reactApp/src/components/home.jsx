@@ -9,7 +9,7 @@ import '../styles/navbar.css'
 import supImg from '../static/img/manage-documents.png';
 import accountImg from '../static/img/publish-document.png';
 import manageImg from '../static/img/manage-user.png';
-import CookieBanner from 'react-cookie-banner';
+import { Cookies, CookiesProvider, CookieBannerUniversal } from 'react-cookie-banner'
 
 export default class HomePage extends React.Component {
 
@@ -67,7 +67,12 @@ export default class HomePage extends React.Component {
           </div>
         </div>;
 
-        let cookieConset = <CookieBanner
+
+        const cookies = new Cookies(/* Your cookie header, on browsers defaults to document.cookie */)
+
+
+        let cookieConset = <CookiesProvider cookies={cookies}>
+                            <CookieBannerUniversal
                               message="This site use cookies only to make user authentication more user friendly. "
                               link={{
                                       msg: 'More information on our use of cookies',
@@ -77,6 +82,7 @@ export default class HomePage extends React.Component {
                                     dismissOnScroll={false}
                               onAccept={() => {}}
                               cookie="user-has-accepted-cookies" />
+                              </CookiesProvider>
                           ;
 
 
