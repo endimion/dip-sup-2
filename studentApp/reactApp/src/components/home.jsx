@@ -79,7 +79,12 @@ export default class HomePage extends React.Component {
                 backgroundSize: '30px 30px',
                 backgroundColor: '',
                 fontSize: '15px',
-                fontWeight: 600
+                fontWeight: 600,
+                clear: 'both',
+                position: 'relative',
+                zIndex: '10',
+                height: '3em',
+                marginTop: '-3em'
               },
               button: {
                 border: '1px solid white',
@@ -113,10 +118,11 @@ export default class HomePage extends React.Component {
                             <CookieBannerUniversal
                               styles={styles}
                               message="This site use cookies only to make user authentication more user friendly. "
-                              // link={{
-                              //         msg: 'More information on our use of cookies',
-                              //         url: 'https://docs.google.com/document/d/1JpXJIOfo8FodjI1MvEFVRxC846VIW2ySlTdTkQ_Ctb4/edit?usp=sharing'
-                              //       }}
+                              link={{
+                                      msg: 'More information on our use of cookies',
+                                      url: 'https://docs.google.com/document/d/1JpXJIOfo8FodjI1MvEFVRxC846VIW2ySlTdTkQ_Ctb4/edit?usp=sharing',
+                                      style: style
+                                    }}
                                     buttonMessage='OK'
                                     dismissOnScroll={false}
                               onAccept={() => {}}
