@@ -119,11 +119,6 @@ export default class HomePage extends React.Component {
                                 return <a href="https://docs.google.com/document/d/1JpXJIOfo8FodjI1MvEFVRxC846VIW2ySlTdTkQ_Ctb4/edit?usp=sharing">More information on our use of cookies</a>
                             }
                         });
-
-         <a href="''"
-                            msg='More information on our use of cookies'
-                            style={styles.link}
-                            ></a>
         let cookieConset = <CookiesProvider cookies={cookies}>
                             <CookieBannerUniversal
                               styles={styles}
