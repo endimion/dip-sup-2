@@ -112,8 +112,8 @@ export default class HomePage extends React.Component {
                 width:'80%'
               },
               link: {
-                textDecoration: 'none',
-                fontWeight: 'bold'
+              /*  textDecoration: 'none',
+                fontWeight: 'bold'*/
               }
             }
 
@@ -136,8 +136,8 @@ export default class HomePage extends React.Component {
         let cookieConset = <CookiesProvider cookies={cookies}>
                             <CookieBannerUniversal
                               styles={styles}
-                              message="This site uses cookies only for making the user authentication process more user friendly."
-                              link={<a href='https://docs.google.com/document/d/1JpXJIOfo8FodjI1MvEFVRxC846VIW2ySlTdTkQ_Ctb4/edit?usp=sharing' target='_blank'>More information on our use of cookies</a>}
+                              message="Our website uses cookies only for making the authentication experience more user friendly."
+                              link={ <p>By continuing we assume your permission to deploy cookies, as detailed in our <a style={{fontWeight: 'bold'}} href='https://docs.google.com/document/d/1JpXJIOfo8FodjI1MvEFVRxC846VIW2ySlTdTkQ_Ctb4/edit?usp=sharing' target='_blank'>privacy and cookies policy</a>.</p>}
                               buttonMessage='OK'
                               dismissOnScroll={false}
                               onAccept={() => {}}
