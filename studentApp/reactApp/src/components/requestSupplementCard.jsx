@@ -93,7 +93,7 @@ export default class RequestSupplementCard extends React.Component {
         <div>
           <div className="container" style={{marginTop:"2em"}}>
           <Row>
-              <div className="col s12 l6>
+              <div className="col s12 l6">
                 GDPR stuff
               </div>
 
