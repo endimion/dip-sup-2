@@ -136,7 +136,7 @@ export default class HomePage extends React.Component {
         let cookieConset = <CookiesProvider cookies={cookies}>
                             <CookieBannerUniversal
                               styles={styles}
-                              message="Our website uses cookies only for making the authentication experience more user friendly."
+                              message="Our website uses cookies only for making the authentication experience more user friendly. "
                               link={ <span style={{textDecoration: 'none'}}>By continuing we assume your permission to deploy cookies, as detailed in our <a style={{fontWeight: 'bold', color:'white'}} href='https://docs.google.com/document/d/1JpXJIOfo8FodjI1MvEFVRxC846VIW2ySlTdTkQ_Ctb4/edit?usp=sharing' target='_blank'>privacy and cookies policy</a>.</span>}
                               buttonMessage='OK'
                               dismissOnScroll={false}
