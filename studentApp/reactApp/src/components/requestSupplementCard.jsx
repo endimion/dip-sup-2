@@ -97,7 +97,7 @@ export default class RequestSupplementCard extends React.Component {
                 GDPR stuff
               </div>
 
-              <div className="col s12 l6>
+              <div className="col s12 l6">
                 <Row>
                   <div className="input-field col s12 l12">
                     <i className="material-icons prefix">account_circle</i>
