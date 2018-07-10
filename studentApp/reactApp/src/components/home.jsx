@@ -86,7 +86,7 @@ export default class HomePage extends React.Component {
                 left: '0',
                 zIndex: '10',
                 // height: '3em'
-                paddingBottom: '1rem'
+                padding: '1rem'
               },
               button: {
                 border: '1px solid white',
