@@ -94,7 +94,14 @@ export default class RequestSupplementCard extends React.Component {
           <div className="container" style={{marginTop:"2em"}}>
           <Row>
               <div className="col s12 l6">
-                GDPR stuff
+              <p>
+                After submitting a request to transfer your accademic records (e-Diploma Supplements) to the blockchain of the system, access to these data
+                will be only permitted to you (as you are identified by eIDAS). Therefore, you (the user) will be
+                the only entity that has the rights  and the entire responsibility to manage and share these e-Diploma Supplement document  as you see fit.
+              </p>
+              <p>
+                The University only provides and maintains a trusted infrastructure that allows the user to exercise the right of managing and sharing online her own resources
+              </p>
               </div>
 
               <div className="col s12 l6">
@@ -125,11 +132,12 @@ export default class RequestSupplementCard extends React.Component {
                       </div>
                   </div>
                 </Row>
+                <Row>
+                    <Button style={{marginLeft: "0.5em"}} onClick={this.sendPubrequest}>Request</Button>
+                </Row>
+
               </div>
 
-          <Row>
-              <Button style={{marginLeft: "0.5em"}} onClick={this.sendPubrequest}>Request</Button>
-          </Row>
 
           </Row>
 
