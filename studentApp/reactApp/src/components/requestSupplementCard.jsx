@@ -102,6 +102,10 @@ export default class RequestSupplementCard extends React.Component {
               <p>
                 The University only provides and maintains a trusted infrastructure that allows the user to exercise the right of managing and sharing online her own resources
               </p>
+              <p>
+                To review our privacy and cookies policy click <a href="https://docs.google.com/document/d/1JpXJIOfo8FodjI1MvEFVRxC846VIW2ySlTdTkQ_Ctb4/edit?usp=sharing">Here</a>
+              </p>
+
               </div>
 
               <div className="col s12 l6">
