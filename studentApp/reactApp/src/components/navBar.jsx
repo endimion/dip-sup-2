@@ -4,7 +4,7 @@ import {Link,NavLink} from 'react-router-dom'
 import SideNavigation from "./sideNav.jsx"
 import Clock from "./clock.jsx";
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-
+import MediaQuery  MediaQuery from  'react-responsive';
 
 import '../styles/navbar.css'
 
@@ -51,6 +51,7 @@ export default class NavigationBar extends React.Component {
     if (typeof(window)!== 'undefined') {
       alert("hi");
       if(window.innerWidth <= 992){
+          alert("small");
         clockComponent =
                           <span>
                               <a href="#!" class="brand-logo" style={{left:"30%"}}> <Clock isMain={true}/></a>
