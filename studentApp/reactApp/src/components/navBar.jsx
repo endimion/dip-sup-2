@@ -49,6 +49,7 @@ export default class NavigationBar extends React.Component {
                       </span>;
 
     if (typeof(window)!== 'undefined') {
+      alert("hi");
       if(window.innerWidth <= 992){
         clockComponent =
                           <span>
