@@ -35,13 +35,11 @@ export default function reducer(state={
       return state
     }
 
-    case "USER_CONSENT_OK":{
-      return {...state, consent:true}
+    case "CONSENT_CHANGE":{
+      return {...state, consent: action.payload}
     }
 
-    case "USER_CONSENT_NOK":{
-      return {...state, consent:false}
-    }
+
 
   }
   return state

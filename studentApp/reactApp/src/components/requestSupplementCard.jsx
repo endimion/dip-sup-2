@@ -68,11 +68,7 @@ export default class RequestSupplementCard extends React.Component {
   }
 
   handleChange(){
-    if(this.props.consent === false){
-      this.props.dispatch(consentClick(true));
-    }else{
-      this.props.dispatch(consentClick(false));
-    }
+      this.props.dispatch(consentClick(this.props.consent));
   }
 
 

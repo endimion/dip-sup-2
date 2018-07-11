@@ -62,17 +62,9 @@ export function setUser(user) {
 
 
 
- export function consentClick(flag) {
-   if(flag === true){
+ export function consentClick(prevConsentValue) {
      return {
-          type: "USER_CONSENT_OK",
-          payload: ""
+          type: "CONSENT_CHANGE",
+          payload: !prevConsentValue
         }
-   }
-
-   return {
-     type: "USER_CONSENT_NOK",
-     payload: ""
-   }
-
  }
