@@ -48,9 +48,7 @@ export default class NavigationBar extends React.Component {
                             <a href="#!" class="brand-logo" style={{marginLeft: "5rem"}}> e-DS Service</a>
                         </span>;
 
-    if (typeof window === 'undefined') {
-        global.window = {}
-    }else{
+    if (typeof(window)!== 'undefined') {
       if(window.innerWidth <= 992){
         clockComponent = <span>
                               I am less than 760
