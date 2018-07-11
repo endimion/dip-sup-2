@@ -100,7 +100,7 @@ export default class RequestSupplementCard extends React.Component {
   render(){
 
     let consentBox = <p>
-        <input  onChange={ this.clickConsent} type="checkbox"/>
+        <input  onClick={this.clickConsent} type="checkbox"/>
         <label class="active" for="input_0">I agree to transfer my academic records to the e-Diploma Supplement Service blockchain</label>
     </p>;
 
