@@ -99,24 +99,17 @@ export default class RequestSupplementCard extends React.Component {
 
   render(){
 
-    // let consentBox = <p>
-    //   <input name="consent" onChange={this.clickConsent} type="checkbox"/>
-    //   <label for="consent"></label>
-    // </p>;
 
-  //
-  // let consentBox =  <label >
-  //            <input
-  //              type="checkbox"
-  //              onChange={this.handleChange}
-  //            />
-  //           I agree to transfer my academic records to the e-Diploma Supplement Service blockchain
-  //          </label>;
-  let consentBox = <p>
+      let consentBox = <p>
                     <input type="checkbox"
                     onChange={this.handleChange} id="test5" />
                     <label for="test5"> I agree to transfer my academic records to the e-Diploma Supplement Service blockchain</label>
                     </p>;
+
+      let reqButton = <Button style={{float:'right'}} onClick={this.sendPubrequest} disabled={true}>Request</Button>;
+      if (this.props.consent === true){
+          reqButton = <Button style={{float:'right'}} onClick={this.sendPubrequest}>Request</Button>;
+      }
 
 
     if(!this.props.fullfiled){
@@ -170,14 +163,10 @@ export default class RequestSupplementCard extends React.Component {
                   </div>
                 </Row>
                 <Row>
-                    <Button style={{float:'right'}} onClick={this.sendPubrequest}>Request</Button>
+                  {reqButton}
                 </Row>
-
               </div>
-
-
           </Row>
-
         </div>
         <RequestSupplementModal/>
       </div>
