@@ -4,7 +4,7 @@ import {Link,NavLink} from 'react-router-dom'
 import SideNavigation from "./sideNav.jsx"
 import Clock from "./clock.jsx";
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import window from 'global';
+
 
 import '../styles/navbar.css'
 
