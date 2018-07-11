@@ -38,10 +38,11 @@ export default class NavigationBar extends React.Component {
     */
   //  <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
 
+  //hide-on-large-only
+
   <SideNavigation user={this.props.user} style={{}}/>
 
     let clockComponent = <span>
-    //hide-on-large-only
                             <a href="#!" class="brand-logo" style={{left:"30%"}}> <Clock isMain={true}/></a>
                             <a href="#!" class="brand-logo" style={{marginLeft: "5rem"}}> e-DS Service</a>
                         </span>;
@@ -49,12 +50,13 @@ export default class NavigationBar extends React.Component {
     if (typeof window === 'undefined') {
         global.window = {}
     }else{
-      if(window.innerWidth <= 760){
+      if(window.innerWidth <= 992){
         clockComponent = <span>
+                              I am less than 760
                               <a href="#!" class="brand-logo" > <Clock isMain={false}/></a>
                               <a href="#!" class="brand-logo" style={{marginLeft: "2rem"}}> e-DS Service</a>
                           </span>;
-      };
+      }
     }
 
 
