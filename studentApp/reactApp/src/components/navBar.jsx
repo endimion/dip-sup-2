@@ -52,8 +52,7 @@ export default class NavigationBar extends React.Component {
       alert("hi");
       if(window.innerWidth <= 992){
           alert("small");
-        clockComponent =
-                          <span>
+        clockComponent = <span>
                               <a href="#!" class="brand-logo" style={{left:"30%"}}> <Clock isMain={true}/></a>
                               <a href="#!" class="brand-logo" style={{marginLeft: "5rem"}}> e-DS Service</a>
                           </span>;
