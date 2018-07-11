@@ -108,7 +108,6 @@ export default class RequestSupplementCard extends React.Component {
   let consentBox =  <label >
              <input
                type="checkbox"
-               ref="complete"
                onChange={this.handleChange}
              />
             I agree to transfer my academic records to the e-Diploma Supplement Service blockchain
