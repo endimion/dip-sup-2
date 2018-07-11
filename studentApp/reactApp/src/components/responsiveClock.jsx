@@ -14,11 +14,9 @@ export default class ResponsiveClock extends React.Component {
                         </span>;
 
       if (typeof(window)!== 'undefined') {
-        alert("hi");
         if(window.innerWidth <= 992){
-            alert("small");
           clockComponent = <span>
-                                <a href="#!" class="brand-logo" style={{left:"30%"}}> <Clock isMain={true}/></a>
+                                <a href="#!" class="brand-logo" style={{left:"30%"}}> <span> <Clock isMain={true}/> e-DS Service<span></a>
                             </span>;
         }
       }
