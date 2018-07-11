@@ -44,16 +44,16 @@ export default class NavigationBar extends React.Component {
   <SideNavigation user={this.props.user} style={{}}/>
 
     let clockComponent = <span>
-                            <a href="#!" class="brand-logo" style={{left:"30%"}}> <Clock isMain={true}/></a>
-                            <a href="#!" class="brand-logo" style={{marginLeft: "5rem"}}> e-DS Service</a>
-                        </span>;
+                          <a href="#!" class="brand-logo" > <Clock isMain={false}/></a>
+                          <a href="#!" class="brand-logo" style={{marginLeft: "2rem"}}> e-DS Service</a>
+                      </span>;
 
     if (typeof(window)!== 'undefined') {
       if(window.innerWidth <= 992){
-        clockComponent = <span>
-                              I am less than 760
-                              <a href="#!" class="brand-logo" > <Clock isMain={false}/></a>
-                              <a href="#!" class="brand-logo" style={{marginLeft: "2rem"}}> e-DS Service</a>
+        clockComponent =
+                          <span>
+                              <a href="#!" class="brand-logo" style={{left:"30%"}}> <Clock isMain={true}/></a>
+                              <a href="#!" class="brand-logo" style={{marginLeft: "5rem"}}> e-DS Service</a>
                           </span>;
       }
     }
