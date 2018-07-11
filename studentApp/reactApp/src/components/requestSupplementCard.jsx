@@ -68,7 +68,7 @@ export default class RequestSupplementCard extends React.Component {
   }
 
   clickConsent(){
-    if(this.props.conset === false){
+    if(this.props.consent === false){
       this.props.dispatch(consentClick(true));
     }
     this.props.dispatch(consentClick(false));
@@ -100,8 +100,8 @@ export default class RequestSupplementCard extends React.Component {
   render(){
 
     let consentBox = <p>
-        <input  onClick={this.clickConsent} type="checkbox"/>
-        <label class="active" for="input_0">I agree to transfer my academic records to the e-Diploma Supplement Service blockchain</label>
+      <input name="consent" onChange={this.clickConsent} type="checkbox"/>
+      <label for="consent">I agree to transfer my academic records to the e-Diploma Supplement Service blockchain</label>
     </p>;
 
 
