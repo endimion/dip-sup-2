@@ -59,3 +59,20 @@ export function setUser(user) {
    }
 
  }
+
+
+
+ export function consentClick(flag) {
+   if(flag === true){
+     return {
+          type: "USER_CONSENT_OK",
+          payload: ""
+        }
+   }
+
+   return {
+     type: "USER_CONSENT_NOK",
+     payload: ""
+   }
+
+ }

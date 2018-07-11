@@ -17,6 +17,7 @@ import {  requestPublication,
           updateUniversity
         } from "../actions/requestSupplementActions"
 
+import {consentClick} from "../actions/userActions"
 
 @connect( (store)=>{
   return {  university: store.publish.university ,
@@ -26,7 +27,8 @@ import {  requestPublication,
             fullfiled:store.publish.requestFullfiled,
             eId: store.user.user.eid,
             userName: store.user.user.firstName + " " + store.user.user.lastName,
-            dateOfBirth: store.user.user.dateOfBirth
+            dateOfBirth: store.user.user.dateOfBirth,
+            consent: store.user.consent
         };
 })
 
@@ -38,6 +40,7 @@ export default class RequestSupplementCard extends React.Component {
     this.updateMail = this.updateMail.bind(this);
     this.updateUnivValue = this.updateUnivValue.bind(this);
     this.updateUniversityId = this.updateUniversityId.bind(this);
+    this.clickConsent = this.clickConsent.bind(this);
   }
 
   componentDidMount(){
@@ -64,6 +67,13 @@ export default class RequestSupplementCard extends React.Component {
     this.props.dispatch(requestPublication(university,universityId,email));
   }
 
+  clickConsent(){
+    if(this.props.conset === false){
+      this.props.dispatch(consentClick(true));
+    }
+    this.props.dispatch(consentClick(false));
+  }
+
 
   updateUniversityId(univId){
     this.props.dispatch(updateUnivId(univId));
@@ -88,22 +98,32 @@ export default class RequestSupplementCard extends React.Component {
 
 
   render(){
+
+    let consentBox = <p>
+      <label>
+        <input type="checkbox" onChange={ this.clickConsent}/>
+        <span>I agree to transfer my academic records to the e-Diploma Supplement Service blockchain</span>
+      </label>
+    </p>;
+
+
     if(!this.props.fullfiled){
       return (
         <div>
           <div className="container" style={{marginTop:"2em"}}>
           <Row>
-              <div className="col s12 l6">
-              <p style={{textAlign:'justified'}}>
-                After submitting a request to transfer your accademic records (e-Diploma Supplements) to the blockchain of the system, access to these data
-                will be only permitted to you (as you are identified by eIDAS).<br/> Therefore, you (the user) will be
-                the only entity that has the rights  and the entire responsibility to manage and share these e-Diploma Supplement document  as you see fit.
+              <div className="col s12 l6" style={{textAlign:'justified'}}>
+              <p >
+                After submitting a Request for an e-Diploma Supplement, your academic records will be delivered to you, and transferred to the e-Diploma Supplement Service blockchain with your consent.
               </p>
               <p>
-                The University only provides and maintains a trusted infrastructure that allows the user to exercise the right of managing and sharing online her own resources
+                Primary access to these data will be only permitted to you (as you are identified by eIDAS). Therefore, you will have the rights and the entire responsibility to manage and share these e-Diploma Supplement document(s) as you see fit.
               </p>
               <p>
-                To review our privacy and cookies policy click <a href="https://docs.google.com/document/d/1JpXJIOfo8FodjI1MvEFVRxC846VIW2ySlTdTkQ_Ctb4/edit?usp=sharing">Here</a>
+                The University only provides and maintains a trusted infrastructure (i.e. e-Diploma Supplement Service blockchain)  that allows the User to exercise the right of managing and sharing online her own resources.
+              </p>
+              <p>
+                Read our <a href="https://docs.google.com/document/d/1JpXJIOfo8FodjI1MvEFVRxC846VIW2ySlTdTkQ_Ctb4/edit?usp=sharing">privacy and cookies policy </a>
               </p>
 
               </div>

@@ -2,7 +2,8 @@ export default function reducer(state={
   user:{},
   fetching:false,
   fetched: false,
-  error: null
+  error: null,
+  consent:false
 },action){
 
   switch(action.type){
@@ -32,7 +33,14 @@ export default function reducer(state={
         user: action.payload
       }
       return state
+    }
 
+    case "USER_CONSENT_OK":{
+      return {...state, consent:true}
+    }
+
+    case "USER_CONSENT_NOK":{
+      return {...state, consent:false}
     }
 
   }
