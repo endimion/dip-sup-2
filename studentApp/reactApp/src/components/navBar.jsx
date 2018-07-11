@@ -40,16 +40,24 @@ export default class NavigationBar extends React.Component {
 
   <SideNavigation user={this.props.user} style={{}}/>
 
+    let clockComponent = <span>
+                            <a href="#!" class="brand-logo hide-on-large-only" style={{left:"30%"}}> <Clock isMain={true}/></a>
+                            <a href="#!" class="brand-logo hide-on-large-only" style={{marginLeft: "5rem"}}> e-DS Service</a>
+                        </span>;
+
+    if(window.innerWidth <= 760){
+      clockComponent = <span>
+                            <a href="#!" class="brand-logo hide-on-med-and-down" > <Clock isMain={false}/></a>
+                            <a href="#!" class="brand-logo hide-on-med-and-down" style={{marginLeft: "2rem"}}> e-DS Service</a>
+                        </span>;
+    };
+
+
     return (
         <div class="navbar-fixed" >
           <nav>
             <div class="nav-wrapper">
-
-              <a href="#!" class="brand-logo hide-on-large-only" style={{left:"30%"}}> <Clock isMain={true}/></a>
-              <a href="#!" class="brand-logo hide-on-large-only" style={{marginLeft: "5rem"}}> e-DS Service</a>
-
-              <a href="#!" class="brand-logo hide-on-med-and-down" > <Clock isMain={false}/></a>
-              <a href="#!" class="brand-logo hide-on-med-and-down" style={{marginLeft: "2rem"}}> e-DS Service</a>
+                {clockComponent}
               <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
               <ul class="right hide-on-med-and-down">
                 {/* <li>
