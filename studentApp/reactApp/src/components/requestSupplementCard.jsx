@@ -121,6 +121,7 @@ export default class RequestSupplementCard extends React.Component {
               </p>
               <p>
                 The University only provides and maintains a trusted infrastructure (i.e. e-Diploma Supplement Service blockchain)  that allows the User to exercise the right of managing and sharing online her own resources.
+                {consentBox}
               </p>
               <p>
                 Read our <a href="https://docs.google.com/document/d/1JpXJIOfo8FodjI1MvEFVRxC846VIW2ySlTdTkQ_Ctb4/edit?usp=sharing">privacy and cookies policy </a>
