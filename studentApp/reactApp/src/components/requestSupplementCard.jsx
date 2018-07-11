@@ -104,14 +104,18 @@ export default class RequestSupplementCard extends React.Component {
     //   <label for="consent"></label>
     // </p>;
 
+  //
+  // let consentBox =  <label >
+  //            <input
+  //              type="checkbox"
+  //              onChange={this.handleChange}
+  //            />
+  //           I agree to transfer my academic records to the e-Diploma Supplement Service blockchain
+  //          </label>;
+  let consentBox = (<input type="checkbox"
+               onChange={this.handleChange} id="test5" />
+       <label for="test5"> I agree to transfer my academic records to the e-Diploma Supplement Service blockchain</label>);
 
-  let consentBox =  <label >
-             <input
-               type="checkbox"
-               onChange={this.handleChange}
-             />
-            I agree to transfer my academic records to the e-Diploma Supplement Service blockchain
-           </label>;
 
     if(!this.props.fullfiled){
       return (
