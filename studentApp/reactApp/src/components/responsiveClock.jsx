@@ -18,7 +18,7 @@ export default class ResponsiveClock extends React.Component {
             alert("small");
           clockComponent = <span>
                                 <a href="#!" class="brand-logo" style={{left:"30%"}}> <Clock isMain={true}/></a>
-                                <a href="#!" class="brand-logo" style={{marginLeft: "5rem"}}> e-DS Service</a>
+                                // <a href="#!" class="brand-logo" style={{marginLeft: "5rem"}}> e-DS Service</a>
                             </span>;
         }
       }
