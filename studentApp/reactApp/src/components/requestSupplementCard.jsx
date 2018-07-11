@@ -40,7 +40,7 @@ export default class RequestSupplementCard extends React.Component {
     this.updateMail = this.updateMail.bind(this);
     this.updateUnivValue = this.updateUnivValue.bind(this);
     this.updateUniversityId = this.updateUniversityId.bind(this);
-    this.clickConsent = this.clickConsent.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount(){
@@ -67,7 +67,7 @@ export default class RequestSupplementCard extends React.Component {
     this.props.dispatch(requestPublication(university,universityId,email));
   }
 
-  clickConsent(){
+  handleChange(){
     if(this.props.consent === false){
       this.props.dispatch(consentClick(true));
     }
@@ -99,11 +99,20 @@ export default class RequestSupplementCard extends React.Component {
 
   render(){
 
-    let consentBox = <p>
-      <input name="consent" onChange={this.clickConsent} type="checkbox"/>
-      <label for="consent">I agree to transfer my academic records to the e-Diploma Supplement Service blockchain</label>
-    </p>;
+    // let consentBox = <p>
+    //   <input name="consent" onChange={this.clickConsent} type="checkbox"/>
+    //   <label for="consent"></label>
+    // </p>;
 
+
+  let consentBox =  <label >
+             <input
+               type="checkbox"
+               ref="complete"
+               onChange={this.handleChange}
+             />
+            I agree to transfer my academic records to the e-Diploma Supplement Service blockchain
+           </label>;
 
     if(!this.props.fullfiled){
       return (
