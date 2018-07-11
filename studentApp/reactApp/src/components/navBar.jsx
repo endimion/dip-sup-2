@@ -3,6 +3,7 @@ import {Navbar, NavItem, Button, Icon} from 'react-materialize'
 import {Link,NavLink} from 'react-router-dom'
 import SideNavigation from "./sideNav.jsx"
 import Clock from "./clock.jsx";
+import ResponsiveClock from "./responsiveClock.jsx";
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 
@@ -43,29 +44,12 @@ export default class NavigationBar extends React.Component {
 
   <SideNavigation user={this.props.user} style={{}}/>
 
-    let clockComponent = <span>
-                          <a href="#!" class="brand-logo" > <Clock isMain={false}/></a>
-                          <a href="#!" class="brand-logo" style={{marginLeft: "2rem"}}> e-DS Service</a>
-                      </span>;
-
-    if (typeof(window)!== 'undefined') {
-      alert("hi");
-      if(window.innerWidth <= 992){
-          alert("small");
-        clockComponent = <span>
-                              <a href="#!" class="brand-logo" style={{left:"30%"}}> <Clock isMain={true}/></a>
-                              <a href="#!" class="brand-logo" style={{marginLeft: "5rem"}}> e-DS Service</a>
-                          </span>;
-      }
-    }
-
-
 
     return (
         <div class="navbar-fixed" >
           <nav>
             <div class="nav-wrapper">
-                {clockComponent}
+              <ResponsiveClock />
               <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
               <ul class="right hide-on-med-and-down">
                 {/* <li>
