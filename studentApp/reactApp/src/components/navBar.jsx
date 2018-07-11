@@ -45,6 +45,9 @@ export default class NavigationBar extends React.Component {
                             <a href="#!" class="brand-logo hide-on-large-only" style={{marginLeft: "5rem"}}> e-DS Service</a>
                         </span>;
 
+    if (typeof window === 'undefined') {
+        global.window = {}
+    }
     if(window.innerWidth <= 760){
       clockComponent = <span>
                             <a href="#!" class="brand-logo hide-on-med-and-down" > <Clock isMain={false}/></a>
