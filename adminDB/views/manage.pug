@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  .main.container
+    .row
+      .col.l12.m12.col-md-offset-3
+        h3.display-4.m-b-2= title
+    .row
+      .col.l12.md12.col-md-offset-3
+        div.col-m-12=message
+    .row
+      .col.l12.md12.col-md-offset-3
+        form(method='POST' action='submit' id="dipSup")
+          label(for="textarea1") Diploma Supplement JSON
+          textarea(rows="4"  id="textarea1" cols="50" class="materialize-textarea" name="dipSup" form="dipSup") Enter Diploma Supplement JSON here...
+          button.btn.btn-primary(type='submit') Submit

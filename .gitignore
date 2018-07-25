@@ -6,5 +6,6 @@ studentBack/node_modules
 studentApp/sessions
 univApp/node_modules
 univApp/sessions
+adminDB/node_modules
 #studentApp/artifacts/channel
 #univApp/artifacts/channel
